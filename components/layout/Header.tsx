@@ -18,7 +18,6 @@ export function Header() {
   const t = useTranslations('nav')
   const tCommon = useTranslations('common')
   const tFooter = useTranslations('footer')
-  const tFooter = useTranslations('footer')
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [isServicesOpen, setIsServicesOpen] = useState(false)
