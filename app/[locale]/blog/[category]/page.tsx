@@ -9,8 +9,9 @@ import { getSupabaseAdmin } from '@/lib/supabase/server'
 import { LocalizedLink } from '@/components/ui/LocalizedLink'
 import { getTranslations } from 'next-intl/server'
 
-// Revalidar cada 60 segundos (ISR)
-export const revalidate = 60
+// Forzar renderizado dinámico para siempre obtener datos frescos
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
 
 async function getCategory(slug: string, locale: string) {
   try {

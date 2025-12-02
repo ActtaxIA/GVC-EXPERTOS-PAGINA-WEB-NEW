@@ -23,7 +23,8 @@
     "callUs": "Llámanos",
     "language": "Idioma",
     "menu": "Menú",
-    "backToTop": "Volver arriba"
+    "backToTop": "Volver arriba",
+    "home": "Inicio"
   },
   "search": {
     "placeholder": "Buscar...",
@@ -113,6 +114,7 @@
   "contact": {
     "title": "Contacta con Nosotros",
     "subtitle": "Te respondemos en menos de 24 horas.",
+    "contactInfo": "Información de Contacto",
     "form": {
       "name": "Nombre completo",
       "email": "Email",

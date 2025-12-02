@@ -23,7 +23,8 @@
     "callUs": "Call us",
     "language": "Language",
     "menu": "Menu",
-    "backToTop": "Back to top"
+    "backToTop": "Back to top",
+    "home": "Home"
   },
   "search": {
     "placeholder": "Search...",
