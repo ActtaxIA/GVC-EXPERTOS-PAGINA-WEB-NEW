@@ -25,8 +25,8 @@ export function TeamSection() {
           </p>
         </div>
 
-        {/* Team Grid - 5 columns on desktop */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+        {/* Team Grid - 2 cols mobile, 5 cols desktop */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
           {teamMembers.map((member) => (
             <div
               key={member.slug}
@@ -42,13 +42,13 @@ export function TeamSection() {
                 />
               </div>
               {/* Info */}
-              <div className="p-5 text-center relative">
+              <div className="p-3 md:p-5 text-center relative">
                 {/* Gold line animation */}
                 <div className="absolute bottom-0 left-0 right-0 h-1 bg-gold transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-                <h3 className="text-base font-serif font-semibold text-charcoal mb-1 line-clamp-1">
+                <h3 className="text-sm md:text-base font-serif font-semibold text-charcoal mb-1 line-clamp-1">
                   {member.name}
                 </h3>
-                <span className="text-xs text-gold uppercase tracking-wider font-medium">
+                <span className="text-[10px] md:text-xs text-gold uppercase tracking-wider font-medium">
                   {member.position}
                 </span>
               </div>
