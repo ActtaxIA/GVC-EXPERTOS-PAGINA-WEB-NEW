@@ -459,7 +459,8 @@ export async function generateMetadata({
     'consentimiento-informado': 'informed-consent',
   }
   
-  const translationKey = isSpanish ? service.slug : (serviceSlugMap[service.slug] || service.slug)
+  // Las traducciones siempre usan el slug inglés como clave
+  const translationKey = serviceSlugMap[service.slug] || service.slug
   const serviceTitle = tServices(`${translationKey}.title`)
 
   return {
@@ -536,8 +537,8 @@ export default async function ServicioPage({
     'consentimiento-informado': 'informed-consent',
   }
   
-  // Obtener título traducido del servicio
-  const translationKey = isSpanish ? service.slug : (serviceSlugMap[service.slug] || service.slug)
+  // Obtener título traducido del servicio (las traducciones siempre usan slug inglés)
+  const translationKey = serviceSlugMap[service.slug] || service.slug
   const serviceTitle = tServices(`${translationKey}.title`)
 
   return (
@@ -743,7 +744,7 @@ export default async function ServicioPage({
                       className="flex items-center gap-3 text-gray-600 hover:text-gold transition-colors group"
                     >
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                      <span>{tServices(`${isSpanish ? s.slug : (serviceSlugMap[s.slug] || s.slug)}.title`)}</span>
+                      <span>{tServices(`${serviceSlugMap[s.slug] || s.slug}.title`)}</span>
                     </LocalizedLink>
                   ))}
                 </div>
