@@ -180,9 +180,15 @@ const nextConfig = {
         destination: '/negligencias-medicas/:slug',
         permanent: true,
       },
+      // Redirigir /blog a /publicaciones
       {
-        source: '/blog/categoria/:slug',
-        destination: '/blog',
+        source: '/blog',
+        destination: '/publicaciones',
+        permanent: true,
+      },
+      {
+        source: '/blog/:path*',
+        destination: '/publicaciones/:path*',
         permanent: true,
       },
     ]
