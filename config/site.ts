@@ -355,7 +355,7 @@ export const mainNavigation = [
   },
   { label: 'Sobre Nosotros', href: '/sobre-nosotros' },
   { label: 'Equipo', href: '/equipo' },
-  { label: 'Blog', href: '/blog' },
+  { label: 'Publicaciones', href: '/publicaciones' },
   { label: 'Contacto', href: '/contacto' },
 ]
 
@@ -370,7 +370,7 @@ export const footerNavigation = {
   empresa: [
     { label: 'Sobre Nosotros', href: '/sobre-nosotros' },
     { label: 'Equipo', href: '/equipo' },
-    { label: 'Blog', href: '/blog' },
+    { label: 'Publicaciones', href: '/publicaciones' },
     { label: 'Contacto', href: '/contacto' },
     { label: 'Preguntas Frecuentes', href: '/preguntas-frecuentes' },
   ],
@@ -389,7 +389,7 @@ export const navigationLinks = [
   { label: 'Servicios', href: '/negligencias-medicas' },
   { label: 'Sobre Nosotros', href: '/sobre-nosotros' },
   { label: 'Equipo', href: '/equipo' },
-  { label: 'Blog', href: '/blog' },
+  { label: 'Publicaciones', href: '/publicaciones' },
   { label: 'Contacto', href: '/contacto' },
 ]
 

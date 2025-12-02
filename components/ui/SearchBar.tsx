@@ -122,7 +122,7 @@ export function SearchBar({ className }: SearchBarProps) {
               {results.map((result) => (
                 <LocalizedLink
                   key={`${result.type}-${result.id}`}
-                  href={result.type === 'post' ? `/blog/${result.slug}` : `/noticias/${result.slug}`}
+                  href={result.type === 'post' ? `/publicaciones/${result.slug}` : `/noticias/${result.slug}`}
                   onClick={() => setIsOpen(false)}
                   className="flex items-start gap-3 px-4 py-3 hover:bg-gray-50 transition-colors"
                 >

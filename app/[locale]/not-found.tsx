@@ -12,7 +12,7 @@ export default function NotFound() {
   
   const popularPages = [
     { href: '/contacto', label: locale === 'es' ? 'Contacto' : 'Contact', icon: Phone },
-    { href: '/blog', label: 'Blog', icon: FileText },
+    { href: '/publicaciones', label: 'Publicaciones', icon: FileText },
     { href: '/negligencias-medicas', label: locale === 'es' ? 'Servicios' : 'Services', icon: Search },
     { href: '/abogados-negligencias-medicas-madrid', label: 'Madrid', icon: MapPin },
   ]

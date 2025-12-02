@@ -246,7 +246,7 @@ export default async function SitemapPage({
                   {posts.map((post) => (
                     <li key={post.slug}>
                       <LocalizedLink
-                        href={`/blog/${post.category_slug}/${post.slug}`}
+                        href={`/publicaciones/${post.category_slug}/${post.slug}`}
                         className="text-gray-700 hover:text-gold transition-colors"
                       >
                         {post.title}
