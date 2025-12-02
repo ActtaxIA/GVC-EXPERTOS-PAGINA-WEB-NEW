@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
 import { siteConfig, services, cities } from '@/config/site'
 import { routes, getTranslatedRoute, getTranslatedServiceRoute } from '@/lib/routes'
-import { getSupabaseAdmin } from '@/lib/supabase/admin'
+import { getSupabaseAdmin } from '@/lib/supabase/server'
 import { LocalizedLink } from '@/components/ui/LocalizedLink'
 import { getTranslations } from 'next-intl/server'
 
@@ -42,21 +42,30 @@ export default async function SitemapPage({
   const localeRoutes = routes[locale as 'es' | 'en']
 
   // Obtener posts y noticias publicados
-  let posts: Array<{ slug: string; title: string }> = []
+  let posts: Array<{ slug: string; title: string; category_slug: string }> = []
   let news: Array<{ slug: string; title: string }> = []
 
   try {
     const supabase = getSupabaseAdmin()
     
+    // Obtener posts con su categoría para construir la URL correcta
     const { data: postsData } = await supabase
       .from('posts')
-      .select('slug, title')
+      .select(`
+        slug, 
+        title,
+        category:post_categories(slug)
+      `)
       .eq('is_published', true)
       .order('published_at', { ascending: false })
       .limit(100)
 
     if (postsData) {
-      posts = postsData
+      posts = postsData.map((post: any) => ({
+        slug: post.slug,
+        title: post.title,
+        category_slug: post.category?.slug || 'articulos'
+      }))
     }
 
     const { data: newsData } = await supabase
@@ -237,7 +246,7 @@ export default async function SitemapPage({
                   {posts.map((post) => (
                     <li key={post.slug}>
                       <LocalizedLink
-                        href={`/${locale}/blog/${post.slug}`}
+                        href={`/blog/${post.category_slug}/${post.slug}`}
                         className="text-gray-700 hover:text-gold transition-colors"
                       >
                         {post.title}
