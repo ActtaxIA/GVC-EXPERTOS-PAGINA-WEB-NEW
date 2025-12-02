@@ -15,8 +15,7 @@ import {
   Users,
   FileCheck,
   TrendingUp,
-  ChevronRight,
-  Hospital
+  ChevronRight
 } from 'lucide-react'
 import { cities, services, siteConfig } from '@/config/site'
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
@@ -493,7 +492,7 @@ export default async function CiudadPage({
                 >
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 bg-gold/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Hospital className="w-6 h-6 text-gold" />
+                      <Building2 className="w-6 h-6 text-gold" />
                     </div>
                     <div className="flex-1 min-w-0">
                       <h3 className="font-semibold text-charcoal mb-1 truncate">
