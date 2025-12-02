@@ -48,7 +48,7 @@
     "title": "Abogados Especialistas en Negligencias Médicas",
     "subtitle": "Defendemos tus derechos cuando la atención sanitaria falla",
     "description": "Más de 20 años de experiencia consiguiendo las máximas indemnizaciones por errores médicos, quirúrgicos y hospitalarios.",
-    "cta": "Consulta Gratuita",
+    "cta": "Contáctanos",
     "ctaSecondary": "Ver Servicios",
     "stats": {
       "experience": "Años de Experiencia",
@@ -89,8 +89,8 @@
     "title": "Cómo Trabajamos",
     "subtitle": "Un proceso claro y transparente desde el primer contacto",
     "step1": {
-      "title": "Consulta Inicial Gratuita",
-      "description": "Analizamos tu caso sin compromiso. Te explicamos tus opciones legales y la viabilidad de la reclamación."
+      "title": "Consulta Inicial",
+      "description": "Analizamos tu caso. Te explicamos tus opciones legales y la viabilidad de la reclamación."
     },
     "step2": {
       "title": "Análisis Pericial",
@@ -112,7 +112,7 @@
   },
   "contact": {
     "title": "Contacta con Nosotros",
-    "subtitle": "Primera consulta gratuita. Te respondemos en menos de 24 horas.",
+    "subtitle": "Te respondemos en menos de 24 horas.",
     "form": {
       "name": "Nombre completo",
       "email": "Email",
@@ -149,7 +149,7 @@
       "email": "Email",
       "schedule": "Horario",
       "scheduleValue": "Lunes a Viernes: 9:00 - 19:00",
-      "freeCall": "Llamada gratuita"
+      "freeCall": "Llámanos"
     }
   },
   "cookie": {
@@ -182,7 +182,7 @@
   "cta": {
     "title": "¿Has Sufrido una Negligencia Médica?",
     "description": "No estás solo. Nuestro equipo de abogados especializados está aquí para ayudarte a conseguir la compensación que mereces.",
-    "button": "Consulta Gratuita",
+    "button": "Contáctanos",
     "phone": "O llámanos ahora"
   },
   "blog": {
@@ -214,7 +214,7 @@
     "shareArticle": "Compartir artículo",
     "aboutAuthor": "Sobre el autor",
     "needHelp": "¿Necesitas ayuda?",
-    "needHelpText": "Consulta gratuita con nuestros abogados especializados.",
+    "needHelpText": "Consulta con nuestros abogados especializados.",
     "contact": "Contactar",
     "relatedPosts": "Artículos relacionados",
     "backToBlog": "Volver al blog"
@@ -223,8 +223,8 @@
     "hero": {
       "title": "Abogados Expertos en Negligencias Médicas",
       "subtitle": "Más de 20 años de experiencia defendiendo tus derechos",
-      "description": "Somos especialistas en reclamaciones por errores médicos. Te ayudamos a obtener la compensación que mereces. Primera consulta gratuita.",
-      "ctaPrimary": "Consulta Gratuita",
+      "description": "Somos especialistas en reclamaciones por errores médicos. Te ayudamos a obtener la compensación que mereces.",
+      "ctaPrimary": "Contáctanos",
       "ctaSecondary": "Llamar Ahora",
       "statsYearsExperience": "Años de experiencia",
       "statsCasesWon": "Casos ganados",
@@ -255,8 +255,8 @@
       "title": "Nuestro Proceso de Trabajo",
       "subtitle": "Un proceso transparente y eficaz para conseguir tu indemnización",
       "step1": {
-        "title": "Consulta Gratuita",
-        "description": "Analizamos tu caso sin compromiso. Te explicamos tus derechos y posibilidades de éxito."
+        "title": "Consulta Inicial",
+        "description": "Analizamos tu caso. Te explicamos tus derechos y posibilidades de éxito."
       },
       "step2": {
         "title": "Recopilación de Pruebas",
@@ -287,8 +287,8 @@
     },
     "cta": {
       "title": "¿Has Sufrido una Negligencia Médica?",
-      "description": "No esperes más. Contacta con nosotros y te ayudaremos a conseguir la compensación que mereces. Primera consulta gratuita y sin compromiso.",
-      "button": "Solicitar Consulta Gratuita"
+      "description": "No esperes más. Contacta con nosotros y te ayudaremos a conseguir la compensación que mereces.",
+      "button": "Solicitar Consulta"
     },
     "gallery": {
       "image1": "Negligencia hospitalaria",

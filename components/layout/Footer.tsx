@@ -27,7 +27,8 @@ export function Footer() {
       'errores-medicacion': 'medication-errors',
       'consentimiento-informado': 'informed-consent',
     }
-    const translationKey = locale === 'es' ? service.slug : (serviceSlugMap[service.slug] || service.slug)
+    // Las traducciones siempre usan las claves en inglés
+    const translationKey = serviceSlugMap[service.slug] || service.slug
     return {
       label: tServices(`${translationKey}.title`),
       href: getTranslatedServiceRoute(service.slug, locale),

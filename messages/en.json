@@ -48,7 +48,7 @@
     "title": "Medical Negligence Specialist Lawyers",
     "subtitle": "Defending your rights when healthcare fails",
     "description": "Over 20 years of experience obtaining maximum compensation for medical, surgical and hospital errors.",
-    "cta": "Free Consultation",
+    "cta": "Contact Us",
     "ctaSecondary": "View Services",
     "stats": {
       "experience": "Years of Experience",
@@ -89,8 +89,8 @@
     "title": "How We Work",
     "subtitle": "A clear and transparent process from first contact",
     "step1": {
-      "title": "Free Initial Consultation",
-      "description": "We analyze your case without obligation. We explain your legal options and the viability of the claim."
+      "title": "Initial Consultation",
+      "description": "We analyze your case. We explain your legal options and the viability of the claim."
     },
     "step2": {
       "title": "Expert Analysis",
@@ -112,7 +112,7 @@
   },
   "contact": {
     "title": "Contact Us",
-    "subtitle": "First free consultation. We respond within 24 hours.",
+    "subtitle": "We respond within 24 hours.",
     "contactInfo": "Contact Information",
     "form": {
       "name": "Full name",
@@ -183,7 +183,7 @@
   "cta": {
     "title": "Have You Suffered Medical Negligence?",
     "description": "You are not alone. Our team of specialized lawyers is here to help you get the compensation you deserve.",
-    "button": "Free Consultation",
+    "button": "Contact Us",
     "phone": "Or call us now"
   },
   "blog": {
@@ -215,7 +215,7 @@
     "shareArticle": "Share article",
     "aboutAuthor": "About the author",
     "needHelp": "Need help?",
-    "needHelpText": "Free consultation with our specialized lawyers.",
+    "needHelpText": "Consultation with our specialized lawyers.",
     "contact": "Contact",
     "relatedPosts": "Related articles",
     "backToBlog": "Back to blog"
@@ -224,8 +224,8 @@
     "hero": {
       "title": "Expert Lawyers in Medical Negligence",
       "subtitle": "Over 20 years of experience defending your rights",
-      "description": "We specialize in medical error claims. We help you obtain the compensation you deserve. Free initial consultation.",
-      "ctaPrimary": "Free Consultation",
+      "description": "We specialize in medical error claims. We help you obtain the compensation you deserve.",
+      "ctaPrimary": "Contact Us",
       "ctaSecondary": "Call Now",
       "statsYearsExperience": "Years of experience",
       "statsCasesWon": "Cases won",
@@ -256,8 +256,8 @@
       "title": "Our Work Process",
       "subtitle": "A transparent and effective process to obtain your compensation",
       "step1": {
-        "title": "Free Consultation",
-        "description": "We analyze your case without obligation. We explain your rights and chances of success."
+        "title": "Initial Consultation",
+        "description": "We analyze your case. We explain your rights and chances of success."
       },
       "step2": {
         "title": "Evidence Collection",
@@ -288,8 +288,8 @@
     },
     "cta": {
       "title": "Have You Suffered Medical Negligence?",
-      "description": "Don't wait any longer. Contact us and we will help you get the compensation you deserve. Free initial consultation with no obligation.",
-      "button": "Request Free Consultation"
+      "description": "Don't wait any longer. Contact us and we will help you get the compensation you deserve.",
+      "button": "Request Consultation"
     },
     "gallery": {
       "image1": "Hospital negligence",
