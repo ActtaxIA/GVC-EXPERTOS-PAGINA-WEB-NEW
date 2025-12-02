@@ -308,6 +308,7 @@ export default async function CategoryPage({
 
       <CtaDark variant="light" />
     </>
+    )
   } catch (error) {
     console.error('Error rendering category page:', error)
     notFound()
