@@ -231,6 +231,19 @@
     "noNews": "No news published yet.",
     "viewOriginalSource": "View original source",
     "backToNews": "Back to news"
+  },
+  "cases": {
+    "title": "Success Cases",
+    "subtitle": "Discover some of our success stories in medical negligence. These are real results achieved for our clients.",
+    "metaTitle": "Success Cases | Compensation Achieved",
+    "metaDescription": "Discover some of our success stories in medical negligence. Real compensation achieved for our clients.",
+    "casesPublished": "Published cases",
+    "totalRecovered": "Total recovered",
+    "averagePerCase": "Average per case",
+    "viewCase": "View case",
+    "comingSoon": "Success cases coming soon.",
+    "note": "Note",
+    "disclaimer": "The cases presented are real but have been anonymized to protect our clients' privacy. Past results do not guarantee future results, as each case is unique and depends on its specific circumstances."
   }
 }
 

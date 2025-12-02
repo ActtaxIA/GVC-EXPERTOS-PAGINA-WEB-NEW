@@ -231,6 +231,19 @@
     "noNews": "No hay noticias publicadas todavía.",
     "viewOriginalSource": "Ver fuente original",
     "backToNews": "Volver a noticias"
+  },
+  "cases": {
+    "title": "Casos de Éxito",
+    "subtitle": "Conoce algunos de nuestros casos de éxito en negligencias médicas. Estos son resultados reales conseguidos para nuestros clientes.",
+    "metaTitle": "Casos de Éxito | Indemnizaciones Conseguidas",
+    "metaDescription": "Conoce algunos de nuestros casos de éxito en negligencias médicas. Indemnizaciones reales conseguidas para nuestros clientes.",
+    "casesPublished": "Casos publicados",
+    "totalRecovered": "Total recuperado",
+    "averagePerCase": "Media por caso",
+    "viewCase": "Ver caso",
+    "comingSoon": "Próximamente publicaremos casos de éxito.",
+    "note": "Nota",
+    "disclaimer": "Los casos presentados son reales pero han sido anonimizados para proteger la privacidad de nuestros clientes. Los resultados pasados no garantizan resultados futuros, ya que cada caso es único y depende de sus circunstancias específicas."
   }
 }
 
