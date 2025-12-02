@@ -14,7 +14,17 @@ export const revalidate = 60
 
 async function getCategory(slug: string, locale: string) {
   try {
-    const supabase = getSupabaseAdmin()
+    let supabase
+    try {
+      supabase = getSupabaseAdmin()
+    } catch (configError: any) {
+      console.error('❌ Error de configuración Supabase:', configError.message)
+      console.error('Variables disponibles:', {
+        hasUrl: !!process.env.NEXT_PUBLIC_SUPABASE_URL,
+        hasKey: !!process.env.SUPABASE_SERVICE_ROLE_KEY
+      })
+      return null
+    }
     const isSpanish = locale === 'es'
     
     const { data: category, error } = await supabase
@@ -49,7 +59,13 @@ async function getCategory(slug: string, locale: string) {
 
 async function getPostsByCategory(categoryId: string, locale: string) {
   try {
-    const supabase = getSupabaseAdmin()
+    let supabase
+    try {
+      supabase = getSupabaseAdmin()
+    } catch (configError: any) {
+      console.error('❌ Error de configuración Supabase:', configError.message)
+      return []
+    }
     const isSpanish = locale === 'es'
     
     const { data: posts, error } = await supabase
@@ -98,7 +114,13 @@ async function getPostsByCategory(categoryId: string, locale: string) {
 
 async function getAllCategories(locale: string) {
   try {
-    const supabase = getSupabaseAdmin()
+    let supabase
+    try {
+      supabase = getSupabaseAdmin()
+    } catch (configError: any) {
+      console.error('❌ Error de configuración Supabase:', configError.message)
+      return []
+    }
     const isSpanish = locale === 'es'
     
     const { data: categories, error } = await supabase
