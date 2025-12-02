@@ -28,14 +28,14 @@ async function getNewsItem(slug: string, locale: string) {
     if (!item) return null
 
     // Usar versión en inglés si existe
-    if (!isSpanish && 'title_en' in item && item.title_en) {
-      return {
-        ...item,
-        title: item.title_en || item.title,
-        excerpt: ('excerpt_en' in item ? item.excerpt_en : null) || item.excerpt,
-        content: ('content_en' in item ? item.content_en : null) || item.content,
-        meta_title: ('meta_title_en' in item ? item.meta_title_en : null) || item.meta_title,
-        meta_description: ('meta_description_en' in item ? item.meta_description_en : null) || item.meta_description,
+    if (!isSpanish) {
+      const itemAny = item as any
+      if (itemAny.title_en) {
+        itemAny.title = itemAny.title_en || itemAny.title
+        itemAny.excerpt = itemAny.excerpt_en || itemAny.excerpt
+        itemAny.content = itemAny.content_en || itemAny.content
+        itemAny.meta_title = itemAny.meta_title_en || itemAny.meta_title
+        itemAny.meta_description = itemAny.meta_description_en || itemAny.meta_description
       }
     }
 
