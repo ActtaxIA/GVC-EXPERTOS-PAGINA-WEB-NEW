@@ -15,13 +15,28 @@ export const revalidate = 60
 function getSupabase() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY
-  if (!url || !key) return null
+  
+  console.log('🔧 [ARTICLE] Supabase config:', {
+    hasUrl: !!url,
+    hasKey: !!key,
+    urlPrefix: url?.substring(0, 30),
+  })
+  
+  if (!url || !key) {
+    console.error('❌ [ARTICLE] Supabase credentials missing!')
+    return null
+  }
   return createClient(url, key)
 }
 
 async function getPost(slug: string, categorySlug: string, locale: string) {
+  console.log('📖 [ARTICLE] getPost called:', { slug, categorySlug, locale })
+  
   const supabase = getSupabase()
-  if (!supabase) return null
+  if (!supabase) {
+    console.error('❌ [ARTICLE] No Supabase client available')
+    return null
+  }
   
   const { data: post, error } = await supabase
     .from('posts')
@@ -34,8 +49,25 @@ async function getPost(slug: string, categorySlug: string, locale: string) {
     .eq('is_published', true)
     .single()
 
-  if (error || !post) return null
-  if (!post.category || post.category.slug !== categorySlug) return null
+  console.log('📖 [ARTICLE] Query result:', {
+    hasPost: !!post,
+    error: error?.message,
+    postSlug: post?.slug,
+    categorySlug: post?.category?.slug,
+  })
+
+  if (error || !post) {
+    console.error('❌ [ARTICLE] Post not found or error:', error?.message)
+    return null
+  }
+  
+  if (!post.category || post.category.slug !== categorySlug) {
+    console.error('❌ [ARTICLE] Category mismatch:', {
+      expected: categorySlug,
+      actual: post.category?.slug,
+    })
+    return null
+  }
 
   const isSpanish = locale === 'es'
   return {
@@ -113,10 +145,17 @@ export default async function ArticlePage({
 }: {
   params: { slug: string; category: string; locale: string }
 }) {
+  console.log('🚀 [ARTICLE PAGE] Rendering:', params)
+  
   const post = await getPost(params.slug, params.category, params.locale)
   const t = await getTranslations({ locale: params.locale, namespace: 'blog' })
 
-  if (!post) notFound()
+  if (!post) {
+    console.error('❌ [ARTICLE PAGE] Post not found, returning 404:', params)
+    notFound()
+  }
+  
+  console.log('✅ [ARTICLE PAGE] Post found:', post.title)
 
   const relatedPosts = post.category?.id 
     ? await getRelatedPosts(post.category.id, post.id, params.locale, params.category) 

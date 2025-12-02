@@ -15,7 +15,16 @@ export const revalidate = 60
 function getSupabase() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY
-  if (!url || !key) return null
+  
+  console.log('🔧 [CATEGORY] Supabase config:', {
+    hasUrl: !!url,
+    hasKey: !!key,
+  })
+  
+  if (!url || !key) {
+    console.error('❌ [CATEGORY] Supabase credentials missing!')
+    return null
+  }
   return createClient(url, key)
 }
 
@@ -29,8 +38,13 @@ export async function generateStaticParams() {
 }
 
 async function getCategory(slug: string, locale: string) {
+  console.log('📂 [CATEGORY] getCategory called:', { slug, locale })
+  
   const supabase = getSupabase()
-  if (!supabase) return null
+  if (!supabase) {
+    console.error('❌ [CATEGORY] No Supabase client')
+    return null
+  }
   
   const { data, error } = await supabase
     .from('post_categories')
@@ -38,7 +52,16 @@ async function getCategory(slug: string, locale: string) {
     .eq('slug', slug)
     .single()
 
-  if (error || !data) return null
+  console.log('📂 [CATEGORY] Query result:', {
+    hasData: !!data,
+    error: error?.message,
+    categoryName: data?.name,
+  })
+
+  if (error || !data) {
+    console.error('❌ [CATEGORY] Category not found:', error?.message)
+    return null
+  }
 
   const isSpanish = locale === 'es'
   return {
