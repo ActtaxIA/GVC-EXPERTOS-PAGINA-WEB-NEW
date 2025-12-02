@@ -189,28 +189,18 @@
   },
   "blog": {
     "title": "Blog",
-    "subtitle": "Artículos y guías sobre negligencias médicas",
-    "readMore": "Leer Artículo",
+    "subtitle": "Artículos, guías y noticias sobre negligencias médicas, derechos del paciente y actualidad jurídica sanitaria.",
+    "metaTitle": "Blog | Artículos sobre Negligencias Médicas",
+    "metaDescription": "Artículos, guías y noticias sobre negligencias médicas, indemnizaciones, derechos del paciente y actualidad jurídica sanitaria.",
+    "allCategories": "Todos",
     "categories": "Categorías",
     "recent": "Artículos Recientes",
     "featured": "Destacado",
     "by": "Por",
     "on": "el",
-    "minRead": "min de lectura"
-  },
-  "faq": {
-    "title": "Preguntas Frecuentes",
-    "subtitle": "Respuestas a las dudas más comunes sobre negligencias médicas"
-  },
-  "blog": {
-    "title": "Blog",
-    "subtitle": "Artículos, guías y noticias sobre negligencias médicas, derechos del paciente y actualidad jurídica sanitaria.",
-    "metaTitle": "Blog | Artículos sobre Negligencias Médicas",
-    "metaDescription": "Artículos, guías y noticias sobre negligencias médicas, indemnizaciones, derechos del paciente y actualidad jurídica sanitaria.",
-    "allCategories": "Todos",
-    "featured": "Destacado",
     "minRead": "min de lectura",
     "min": "min",
+    "readMore": "Leer Artículo",
     "noPosts": "No hay artículos publicados todavía.",
     "comeBackSoon": "Vuelve pronto para ver nuestro contenido.",
     "shareArticle": "Compartir artículo",
@@ -220,6 +210,10 @@
     "contact": "Contactar",
     "relatedPosts": "Artículos relacionados",
     "backToBlog": "Volver al blog"
+  },
+  "faq": {
+    "title": "Preguntas Frecuentes",
+    "subtitle": "Respuestas a las dudas más comunes sobre negligencias médicas"
   },
   "home": {
     "hero": {

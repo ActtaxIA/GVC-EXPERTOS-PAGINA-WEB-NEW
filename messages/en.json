@@ -189,28 +189,18 @@
   },
   "blog": {
     "title": "Blog",
-    "subtitle": "Articles and guides on medical negligence",
-    "readMore": "Read Article",
+    "subtitle": "Articles, guides and news about medical negligence, patient rights and legal healthcare updates.",
+    "metaTitle": "Blog | Articles on Medical Negligence",
+    "metaDescription": "Articles, guides and news about medical negligence, compensation, patient rights and legal healthcare updates.",
+    "allCategories": "All",
     "categories": "Categories",
     "recent": "Recent Articles",
     "featured": "Featured",
     "by": "By",
     "on": "on",
-    "minRead": "min read"
-  },
-  "faq": {
-    "title": "Frequently Asked Questions",
-    "subtitle": "Answers to the most common questions about medical negligence"
-  },
-  "blog": {
-    "title": "Blog",
-    "subtitle": "Articles, guides and news about medical negligence, patient rights and legal healthcare updates.",
-    "metaTitle": "Blog | Articles on Medical Negligence",
-    "metaDescription": "Articles, guides and news about medical negligence, compensation, patient rights and legal healthcare updates.",
-    "allCategories": "All",
-    "featured": "Featured",
     "minRead": "min read",
     "min": "min",
+    "readMore": "Read Article",
     "noPosts": "No articles published yet.",
     "comeBackSoon": "Come back soon to see our content.",
     "shareArticle": "Share article",
@@ -220,6 +210,10 @@
     "contact": "Contact",
     "relatedPosts": "Related articles",
     "backToBlog": "Back to blog"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Answers to the most common questions about medical negligence"
   },
   "home": {
     "hero": {
