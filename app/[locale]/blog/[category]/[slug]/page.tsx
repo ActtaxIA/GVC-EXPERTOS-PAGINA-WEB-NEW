@@ -4,110 +4,86 @@ import Image from 'next/image'
 import { Calendar, Clock, ArrowLeft, Linkedin, Twitter, Facebook } from 'lucide-react'
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
 import { CtaDark } from '@/components/home'
-import { JsonLdArticle, JsonLdBreadcrumbs } from '@/components/seo/JsonLd'
 import { siteConfig } from '@/config/site'
 import { LocalizedLink } from '@/components/ui/LocalizedLink'
 import { getTranslations } from 'next-intl/server'
-import { getSupabaseAdmin } from '@/lib/supabase/server'
+import { createClient } from '@supabase/supabase-js'
 
-// Forzar renderizado dinámico para siempre obtener datos frescos
+// Forzar renderizado dinámico
 export const dynamic = 'force-dynamic'
-export const revalidate = 0
+
+// Cliente Supabase
+function getSupabase() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY
+  
+  if (!url || !key) {
+    console.error('❌ Supabase env vars missing:', { url: !!url, key: !!key })
+    return null
+  }
+  
+  return createClient(url, key)
+}
 
 async function getPost(slug: string, categorySlug: string, locale: string) {
-  try {
-    let supabase
-    try {
-      supabase = getSupabaseAdmin()
-    } catch (configError: any) {
-      console.error('❌ Error de configuración Supabase:', configError.message)
-      return null
-    }
-    const isSpanish = locale === 'es'
-    
-    const { data: post, error } = await supabase
-      .from('posts')
-      .select(`
-        *,
-        category:post_categories(
-          id,
-          name,
-          name_en,
-          slug
-        ),
-        author:team_members(name, photo_url, position, bio)
-      `)
-      .eq('slug', slug)
-      .eq('is_published', true)
-      .single()
+  const supabase = getSupabase()
+  if (!supabase) return null
+  
+  const { data: post, error } = await supabase
+    .from('posts')
+    .select(`
+      *,
+      category:post_categories(id, name, name_en, slug),
+      author:team_members(name, photo_url, position, bio)
+    `)
+    .eq('slug', slug)
+    .eq('is_published', true)
+    .single()
 
-    if (error || !post) return null
+  if (error || !post) return null
 
-    // Verificar que la categoría coincide con la URL
-    const postAny = post as any
-    if (!postAny.category || postAny.category.slug !== categorySlug) {
-      return null
-    }
-    
-    // Usar versión en inglés si existe y el locale es 'en'
-    if (!isSpanish) {
-      postAny.title = postAny.title_en || postAny.title
-      postAny.excerpt = postAny.excerpt_en || postAny.excerpt
-      postAny.content = postAny.content_en || postAny.content
-      postAny.meta_title = postAny.meta_title_en || postAny.meta_title
-      postAny.meta_description = postAny.meta_description_en || postAny.meta_description
-    }
-    
-    // Mapear nombre de categoría según idioma
-    if (postAny.category) {
-      postAny.category.name = isSpanish 
-        ? postAny.category.name 
-        : (postAny.category.name_en || postAny.category.name)
-    }
-
-    return postAny
-  } catch (error) {
-    console.error('Error fetching post:', error)
+  // Verificar que la categoría coincide
+  if (!post.category || post.category.slug !== categorySlug) {
     return null
+  }
+
+  const isSpanish = locale === 'es'
+  
+  // Mapear campos según idioma
+  return {
+    ...post,
+    title: isSpanish ? post.title : (post.title_en || post.title),
+    excerpt: isSpanish ? post.excerpt : (post.excerpt_en || post.excerpt),
+    content: isSpanish ? post.content : (post.content_en || post.content),
+    meta_title: isSpanish ? post.meta_title : (post.meta_title_en || post.meta_title),
+    meta_description: isSpanish ? post.meta_description : (post.meta_description_en || post.meta_description),
+    category: {
+      ...post.category,
+      name: isSpanish ? post.category.name : (post.category.name_en || post.category.name)
+    }
   }
 }
 
 async function getRelatedPosts(categoryId: string, currentId: string, locale: string, categorySlug: string) {
-  try {
-    let supabase
-    try {
-      supabase = getSupabaseAdmin()
-    } catch (configError: any) {
-      console.error('❌ Error de configuración Supabase:', configError.message)
-      return []
-    }
-    const isSpanish = locale === 'es'
-    
-    const { data: posts, error } = await supabase
-      .from('posts')
-      .select(`
-        id,
-        slug,
-        title,
-        title_en,
-        featured_image
-      `)
-      .eq('category_id', categoryId)
-      .eq('is_published', true)
-      .neq('id', currentId)
-      .limit(3)
+  const supabase = getSupabase()
+  if (!supabase) return []
+  
+  const { data: posts, error } = await supabase
+    .from('posts')
+    .select('id, slug, title, title_en, featured_image')
+    .eq('category_id', categoryId)
+    .eq('is_published', true)
+    .neq('id', currentId)
+    .limit(3)
 
-    if (error) return []
+  if (error) return []
 
-    // Mapear título según idioma y añadir categorySlug
-    return (posts || []).map((post: any) => ({
-      ...post,
-      title: isSpanish ? post.title : (post.title_en || post.title),
-      categorySlug
-    }))
-  } catch {
-    return []
-  }
+  const isSpanish = locale === 'es'
+  return (posts || []).map((post: any) => ({
+    ...post,
+    title: isSpanish ? post.title : (post.title_en || post.title),
+    categorySlug
+  }))
 }
 
 export async function generateMetadata({
@@ -115,7 +91,7 @@ export async function generateMetadata({
 }: {
   params: { slug: string; category: string; locale: string }
 }): Promise<Metadata> {
-  const post = await getPost(params.slug, params.category, params.locale) as any
+  const post = await getPost(params.slug, params.category, params.locale)
   const t = await getTranslations({ locale: params.locale, namespace: 'blog' })
 
   if (!post) {
@@ -129,10 +105,6 @@ export async function generateMetadata({
     description: post.meta_description || post.excerpt,
     alternates: {
       canonical: articleUrl,
-      languages: {
-        'es-ES': `${siteConfig.url}/es/blog/${params.category}/${post.slug}`,
-        'en-US': `${siteConfig.url}/en/blog/${params.category}/${post.slug}`,
-      },
     },
     openGraph: {
       type: 'article',
@@ -141,8 +113,7 @@ export async function generateMetadata({
       title: post.title,
       description: post.excerpt,
       publishedTime: post.published_at,
-      authors: post.author?.name ? [post.author.name] : undefined,
-      images: post.featured_image ? [{ url: post.featured_image, width: 1200, height: 630 }] : undefined,
+      images: post.featured_image ? [{ url: post.featured_image }] : undefined,
     },
   }
 }
@@ -152,7 +123,7 @@ export default async function BlogPostPage({
 }: {
   params: { slug: string; category: string; locale: string }
 }) {
-  const post = await getPost(params.slug, params.category, params.locale) as any
+  const post = await getPost(params.slug, params.category, params.locale)
   const t = await getTranslations({ locale: params.locale, namespace: 'blog' })
 
   if (!post) {
@@ -167,24 +138,6 @@ export default async function BlogPostPage({
 
   return (
     <>
-      <JsonLdArticle
-        title={post.title}
-        description={post.excerpt}
-        image={post.featured_image}
-        url={shareUrl}
-        datePublished={post.published_at}
-        dateModified={post.updated_at}
-        author={post.author?.name || siteConfig.name}
-      />
-      <JsonLdBreadcrumbs
-        items={[
-          { name: params.locale === 'es' ? 'Inicio' : 'Home', url: `${siteConfig.url}/${params.locale}` },
-          { name: 'Blog', url: `${siteConfig.url}/${params.locale}/blog` },
-          { name: post.category?.name || params.category, url: `${siteConfig.url}/${params.locale}/blog/${params.category}` },
-          { name: post.title, url: shareUrl },
-        ]}
-      />
-
       {/* Hero */}
       <section className="bg-charcoal pt-32 pb-16">
         <div className="container-custom">
@@ -227,11 +180,10 @@ export default async function BlogPostPage({
             )}
             <div className="flex items-center gap-2">
               <Calendar className="w-4 h-4" />
-              {new Date(post.published_at).toLocaleDateString(params.locale === 'es' ? 'es-ES' : 'en-US', {
-                day: 'numeric',
-                month: 'long',
-                year: 'numeric',
-              })}
+              {new Date(post.published_at).toLocaleDateString(
+                params.locale === 'es' ? 'es-ES' : 'en-US',
+                { day: 'numeric', month: 'long', year: 'numeric' }
+              )}
             </div>
             {post.reading_time && (
               <div className="flex items-center gap-2">
@@ -281,8 +233,7 @@ export default async function BlogPostPage({
                     href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-3 bg-[#0077B5] text-white rounded-full hover:opacity-90 transition-opacity"
-                    aria-label="Compartir en LinkedIn"
+                    className="p-3 bg-[#0077B5] text-white rounded-full hover:opacity-90"
                   >
                     <Linkedin className="w-5 h-5" />
                   </a>
@@ -290,8 +241,7 @@ export default async function BlogPostPage({
                     href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(post.title)}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-3 bg-[#1DA1F2] text-white rounded-full hover:opacity-90 transition-opacity"
-                    aria-label="Compartir en Twitter"
+                    className="p-3 bg-[#1DA1F2] text-white rounded-full hover:opacity-90"
                   >
                     <Twitter className="w-5 h-5" />
                   </a>
@@ -299,8 +249,7 @@ export default async function BlogPostPage({
                     href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-3 bg-[#1877F2] text-white rounded-full hover:opacity-90 transition-opacity"
-                    aria-label="Compartir en Facebook"
+                    className="p-3 bg-[#1877F2] text-white rounded-full hover:opacity-90"
                   >
                     <Facebook className="w-5 h-5" />
                   </a>
@@ -338,20 +287,14 @@ export default async function BlogPostPage({
                       />
                     )}
                     <div>
-                      <p className="font-semibold text-charcoal">
-                        {post.author.name}
-                      </p>
+                      <p className="font-semibold text-charcoal">{post.author.name}</p>
                       {post.author.position && (
-                        <p className="text-sm text-gray-500">
-                          {post.author.position}
-                        </p>
+                        <p className="text-sm text-gray-500">{post.author.position}</p>
                       )}
                     </div>
                   </div>
                   {post.author.bio && (
-                    <p className="text-sm text-gray-600 line-clamp-4">
-                      {post.author.bio}
-                    </p>
+                    <p className="text-sm text-gray-600 line-clamp-4">{post.author.bio}</p>
                   )}
                 </div>
               )}
@@ -409,4 +352,3 @@ export default async function BlogPostPage({
     </>
   )
 }
-

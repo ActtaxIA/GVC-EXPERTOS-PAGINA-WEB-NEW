@@ -1,16 +1,28 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
-import { Calendar, Clock, User, ArrowRight } from 'lucide-react'
+import { Calendar, Clock, User } from 'lucide-react'
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
 import { CtaDark } from '@/components/home'
 import { siteConfig } from '@/config/site'
 import { LocalizedLink } from '@/components/ui/LocalizedLink'
 import { getTranslations } from 'next-intl/server'
-import { getSupabaseAdmin } from '@/lib/supabase/server'
+import { createClient } from '@supabase/supabase-js'
 
-// Forzar renderizado dinámico para siempre obtener datos frescos
+// Forzar renderizado dinámico
 export const dynamic = 'force-dynamic'
-export const revalidate = 0
+
+// Cliente Supabase
+function getSupabase() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY
+  
+  if (!url || !key) {
+    console.error('❌ Supabase env vars missing:', { url: !!url, key: !!key })
+    return null
+  }
+  
+  return createClient(url, key)
+}
 
 export async function generateMetadata({
   params: { locale }
@@ -24,112 +36,69 @@ export async function generateMetadata({
     description: t('metaDescription'),
     alternates: {
       canonical: `${siteConfig.url}/${locale}/blog`,
-      languages: {
-        'es-ES': `${siteConfig.url}/es/blog`,
-        'en-US': `${siteConfig.url}/en/blog`,
-      },
-    },
-    openGraph: {
-      type: 'website',
-      locale: locale === 'es' ? 'es_ES' : 'en_US',
-      url: `${siteConfig.url}/${locale}/blog`,
-      title: t('metaTitle'),
-      description: t('metaDescription'),
-      siteName: siteConfig.name,
     },
   }
 }
 
 async function getPosts(locale: string) {
-  try {
-    let supabase
-    try {
-      supabase = getSupabaseAdmin()
-    } catch (configError: any) {
-      console.error('❌ Error de configuración Supabase:', configError.message)
-      return []
-    }
-    const isSpanish = locale === 'es'
-    
-    const { data: posts, error } = await supabase
-      .from('posts')
-      .select(`
-        id,
-        slug,
-        title,
-        title_en,
-        excerpt,
-        excerpt_en,
-        featured_image,
-        reading_time,
-        published_at,
-        is_featured,
-        category:post_categories(
-          name,
-          name_en,
-          slug
-        ),
-        author:team_members(name, photo_url)
-      `)
-      .eq('is_published', true)
-      .order('published_at', { ascending: false })
+  const supabase = getSupabase()
+  if (!supabase) return []
+  
+  const { data: posts, error } = await supabase
+    .from('posts')
+    .select(`
+      id,
+      slug,
+      title,
+      title_en,
+      excerpt,
+      excerpt_en,
+      featured_image,
+      reading_time,
+      published_at,
+      is_featured,
+      category:post_categories(name, name_en, slug),
+      author:team_members(name, photo_url)
+    `)
+    .eq('is_published', true)
+    .order('published_at', { ascending: false })
 
-    if (error) {
-      console.error('Error fetching posts:', error)
-      return []
-    }
-
-    // Mapear los campos según el idioma
-    return (posts || []).map((post: any) => ({
-      ...post,
-      title: isSpanish ? post.title : (post.title_en || post.title),
-      excerpt: isSpanish ? post.excerpt : (post.excerpt_en || post.excerpt),
-      category: post.category ? {
-        ...post.category,
-        name: isSpanish ? post.category.name : (post.category.name_en || post.category.name)
-      } : null
-    }))
-  } catch (error) {
+  if (error) {
     console.error('Error fetching posts:', error)
     return []
   }
+
+  const isSpanish = locale === 'es'
+  return (posts || []).map((post: any) => ({
+    ...post,
+    title: isSpanish ? post.title : (post.title_en || post.title),
+    excerpt: isSpanish ? post.excerpt : (post.excerpt_en || post.excerpt),
+    category: post.category ? {
+      ...post.category,
+      name: isSpanish ? post.category.name : (post.category.name_en || post.category.name)
+    } : null
+  }))
 }
 
 async function getCategories(locale: string) {
-  try {
-    let supabase
-    try {
-      supabase = getSupabaseAdmin()
-    } catch (configError: any) {
-      console.error('❌ Error de configuración Supabase:', configError.message)
-      return []
-    }
-    const isSpanish = locale === 'es'
-    
-    const { data: categories, error } = await supabase
-      .from('post_categories')
-      .select(`
-        id,
-        slug,
-        name,
-        name_en
-      `)
-      .order('order')
+  const supabase = getSupabase()
+  if (!supabase) return []
+  
+  const { data: categories, error } = await supabase
+    .from('post_categories')
+    .select('id, slug, name, name_en')
+    .order('order')
 
-    if (error) {
-      console.error('Error fetching categories:', error)
-      return []
-    }
-
-    // Mapear los campos según el idioma
-    return (categories || []).map((cat: any) => ({
-      ...cat,
-      name: isSpanish ? cat.name : (cat.name_en || cat.name)
-    }))
-  } catch (error) {
+  if (error) {
     console.error('Error fetching categories:', error)
     return []
   }
+
+  const isSpanish = locale === 'es'
+  return (categories || []).map((cat: any) => ({
+    ...cat,
+    name: isSpanish ? cat.name : (cat.name_en || cat.name)
+  }))
 }
 
 export default async function BlogPage({
@@ -137,12 +106,12 @@ export default async function BlogPage({
 }: {
   params: { locale: string }
 }) {
-  const posts = await getPosts(locale) as any[]
-  const categories = await getCategories(locale) as any[]
+  const posts = await getPosts(locale)
+  const categories = await getCategories(locale)
   const t = await getTranslations({ locale, namespace: 'blog' })
   
-  const featuredPost = posts.find(p => p.is_featured) || posts[0]
-  const regularPosts = posts.filter(p => p.id !== featuredPost?.id)
+  const featuredPost = posts.find((p: any) => p.is_featured) || posts[0]
+  const regularPosts = posts.filter((p: any) => p.id !== featuredPost?.id)
 
   return (
     <>
@@ -191,7 +160,10 @@ export default async function BlogPage({
       {featuredPost && (
         <section className="section-padding bg-cream">
           <div className="container-custom">
-            <LocalizedLink href={`/blog/${featuredPost.category?.slug || 'articulos'}/${featuredPost.slug}`} className="group">
+            <LocalizedLink 
+              href={`/blog/${featuredPost.category?.slug || 'articulos'}/${featuredPost.slug}`} 
+              className="group"
+            >
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                 <div className="relative aspect-video lg:aspect-[4/3] overflow-hidden rounded-sm">
                   <Image
@@ -209,7 +181,7 @@ export default async function BlogPage({
                 <div>
                   {featuredPost.category && (
                     <span className="text-gold text-sm font-semibold uppercase tracking-widest">
-                      {featuredPost.category?.name}
+                      {featuredPost.category.name}
                     </span>
                   )}
                   <h2 className="text-2xl md:text-3xl font-serif font-bold text-charcoal mt-2 mb-4 group-hover:text-gold transition-colors">
@@ -222,16 +194,15 @@ export default async function BlogPage({
                     {featuredPost.author && (
                       <div className="flex items-center gap-2">
                         <User className="w-4 h-4" />
-                        {featuredPost.author?.name}
+                        {featuredPost.author.name}
                       </div>
                     )}
                     <div className="flex items-center gap-2">
                       <Calendar className="w-4 h-4" />
-                      {new Date(featuredPost.published_at).toLocaleDateString(locale === 'es' ? 'es-ES' : 'en-US', {
-                        day: 'numeric',
-                        month: 'long',
-                        year: 'numeric',
-                      })}
+                      {new Date(featuredPost.published_at).toLocaleDateString(
+                        locale === 'es' ? 'es-ES' : 'en-US',
+                        { day: 'numeric', month: 'long', year: 'numeric' }
+                      )}
                     </div>
                     {featuredPost.reading_time && (
                       <div className="flex items-center gap-2">
@@ -270,7 +241,7 @@ export default async function BlogPage({
                     <div className="p-6">
                       {post.category && (
                         <span className="text-gold text-xs font-semibold uppercase tracking-widest">
-                          {post.category?.name}
+                          {post.category.name}
                         </span>
                       )}
                       <h3 className="text-lg font-serif font-bold text-charcoal mt-2 mb-3 group-hover:text-gold transition-colors line-clamp-2">
@@ -282,7 +253,9 @@ export default async function BlogPage({
                       <div className="flex items-center justify-between text-xs text-gray-500">
                         <div className="flex items-center gap-1">
                           <Calendar className="w-3 h-3" />
-                          {new Date(post.published_at).toLocaleDateString(locale === 'es' ? 'es-ES' : 'en-US')}
+                          {new Date(post.published_at).toLocaleDateString(
+                            locale === 'es' ? 'es-ES' : 'en-US'
+                          )}
                         </div>
                         {post.reading_time && (
                           <div className="flex items-center gap-1">
@@ -309,4 +282,3 @@ export default async function BlogPage({
     </>
   )
 }
-
