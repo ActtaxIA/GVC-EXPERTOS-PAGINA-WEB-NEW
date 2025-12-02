@@ -126,20 +126,16 @@ export default async function PublicacionesPage({
         <section className="bg-cream py-6 border-b">
           <div className="container-custom">
             <div className="flex flex-wrap gap-3">
-              <LocalizedLink
-                href="/publicaciones"
-                className="px-4 py-2 bg-gold text-white text-sm font-medium rounded-full"
-              >
+              <span className="px-4 py-2 bg-gold text-white text-sm font-medium rounded-full">
                 {t('allCategories')}
-              </LocalizedLink>
+              </span>
               {categories.map((cat: any) => (
-                <LocalizedLink
+                <span
                   key={cat.id}
-                  href={`/publicaciones/${cat.slug}`}
-                  className="px-4 py-2 bg-white text-gray-600 text-sm font-medium rounded-full hover:bg-gold hover:text-white transition-colors"
+                  className="px-4 py-2 bg-white text-gray-600 text-sm font-medium rounded-full cursor-default"
                 >
                   {cat.name}
-                </LocalizedLink>
+                </span>
               ))}
             </div>
           </div>
@@ -150,7 +146,7 @@ export default async function PublicacionesPage({
         <section className="section-padding bg-cream">
           <div className="container-custom">
             <LocalizedLink 
-              href={`/publicaciones/${featuredPost.category?.slug || 'articulos'}/${featuredPost.slug}`} 
+              href={`/publicaciones/${featuredPost.slug}`} 
               className="group"
             >
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
@@ -214,7 +210,7 @@ export default async function PublicacionesPage({
               {regularPosts.map((post: any) => (
                 <LocalizedLink
                   key={post.id}
-                  href={`/publicaciones/${post.category?.slug || 'articulos'}/${post.slug}`}
+                  href={`/publicaciones/${post.slug}`}
                   className="group"
                 >
                   <article className="bg-cream rounded-sm overflow-hidden hover:shadow-lg transition-shadow">
