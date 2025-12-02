@@ -1,6 +1,9 @@
 import { Resend } from 'resend'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+// Inicializar Resend solo si hay API key
+const resend = process.env.RESEND_API_KEY 
+  ? new Resend(process.env.RESEND_API_KEY)
+  : null
 
 interface SendEmailOptions {
   to: string | string[]
@@ -11,6 +14,15 @@ interface SendEmailOptions {
 
 export async function sendEmail({ to, subject, html, replyTo }: SendEmailOptions) {
   try {
+    // Si no hay cliente de Resend configurado, retornar error
+    if (!resend) {
+      console.warn('Resend API key not configured. Email not sent.')
+      return { 
+        success: false, 
+        error: 'Email service not configured. Please add RESEND_API_KEY environment variable.' 
+      }
+    }
+
     const { data, error } = await resend.emails.send({
       from: process.env.EMAIL_FROM || 'GVC Expertos <noreply@gvcexpertos.es>',
       to: Array.isArray(to) ? to : [to],
