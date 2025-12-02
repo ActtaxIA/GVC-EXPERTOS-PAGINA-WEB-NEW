@@ -9,7 +9,8 @@ import { LocalizedLink } from '@/components/ui/LocalizedLink'
 import { getTranslations } from 'next-intl/server'
 import { createClient } from '@supabase/supabase-js'
 
-export const dynamic = 'force-dynamic'
+// Revalidar cada 60 segundos
+export const revalidate = 60
 
 function getSupabase() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL
