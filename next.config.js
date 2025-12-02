@@ -5,9 +5,6 @@ const withNextIntl = require('next-intl/plugin')(
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Habilitar output standalone para mejor compatibilidad con AWS Amplify
-  output: 'standalone',
-  
   images: {
     remotePatterns: [
       {

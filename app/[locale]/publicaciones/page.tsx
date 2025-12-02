@@ -8,14 +8,21 @@ import { LocalizedLink } from '@/components/ui/LocalizedLink'
 import { getTranslations } from 'next-intl/server'
 import { createClient } from '@supabase/supabase-js'
 
-// Revalidar cada 60 segundos
-export const revalidate = 60
+// Forzar renderizado dinámico en cada request (SSR)
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
 
 function getSupabase() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY
+  
+  console.log('🔧 [PUBLICACIONES] Supabase config:', {
+    hasUrl: !!url,
+    hasKey: !!key,
+  })
+  
   if (!url || !key) {
-    console.error('Supabase env vars missing')
+    console.error('❌ [PUBLICACIONES] Supabase env vars missing')
     return null
   }
   return createClient(url, key)
