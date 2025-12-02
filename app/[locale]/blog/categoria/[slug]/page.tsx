@@ -5,20 +5,16 @@ import { Calendar, Clock, ArrowRight } from 'lucide-react'
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
 import { CtaDark } from '@/components/home'
 import { siteConfig } from '@/config/site'
-import { createClient } from '@supabase/supabase-js'
+import { getSupabaseAdmin } from '@/lib/supabase/server'
 import { LocalizedLink } from '@/components/ui/LocalizedLink'
 import { getTranslations } from 'next-intl/server'
 
 // Revalidar cada 60 segundos (ISR)
 export const revalidate = 60
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL || '',
-  process.env.SUPABASE_SERVICE_ROLE_KEY || ''
-)
-
 async function getCategory(slug: string, locale: string) {
   try {
+    const supabase = getSupabaseAdmin()
     const isSpanish = locale === 'es'
     
     const { data: category, error } = await supabase
@@ -34,7 +30,10 @@ async function getCategory(slug: string, locale: string) {
       .eq('slug', slug)
       .single()
 
-    if (error || !category) return null
+    if (error || !category) {
+      console.error('Error fetching category:', error)
+      return null
+    }
 
     // Mapear campos según idioma
     return {
@@ -50,6 +49,7 @@ async function getCategory(slug: string, locale: string) {
 
 async function getPostsByCategory(categoryId: string, locale: string) {
   try {
+    const supabase = getSupabaseAdmin()
     const isSpanish = locale === 'es'
     
     const { data: posts, error } = await supabase
@@ -75,7 +75,10 @@ async function getPostsByCategory(categoryId: string, locale: string) {
       .eq('is_published', true)
       .order('published_at', { ascending: false })
 
-    if (error) return []
+    if (error) {
+      console.error('Error fetching posts by category:', error)
+      return []
+    }
 
     // Mapear campos según idioma
     return (posts || []).map((post: any) => ({
@@ -95,6 +98,7 @@ async function getPostsByCategory(categoryId: string, locale: string) {
 
 async function getAllCategories(locale: string) {
   try {
+    const supabase = getSupabaseAdmin()
     const isSpanish = locale === 'es'
     
     const { data: categories, error } = await supabase
@@ -107,7 +111,10 @@ async function getAllCategories(locale: string) {
       `)
       .order('order', { ascending: true })
 
-    if (error) return []
+    if (error) {
+      console.error('Error fetching all categories:', error)
+      return []
+    }
 
     // Mapear campos según idioma
     return (categories || []).map((cat: any) => ({
@@ -160,15 +167,16 @@ export default async function CategoryPage({
 }: {
   params: { slug: string; locale: string }
 }) {
-  const category = await getCategory(slug, locale) as any
-  const t = await getTranslations({ locale, namespace: 'blog' })
-  
-  if (!category) {
-    notFound()
-  }
+  try {
+    const category = await getCategory(slug, locale) as any
+    const t = await getTranslations({ locale, namespace: 'blog' })
+    
+    if (!category) {
+      notFound()
+    }
 
-  const posts = await getPostsByCategory(category.id, locale) as any[]
-  const allCategories = await getAllCategories(locale) as any[]
+    const posts = await getPostsByCategory(category.id, locale) as any[]
+    const allCategories = await getAllCategories(locale) as any[]
 
   return (
     <>
@@ -300,6 +308,9 @@ export default async function CategoryPage({
 
       <CtaDark variant="light" />
     </>
-  )
+  } catch (error) {
+    console.error('Error rendering category page:', error)
+    notFound()
+  }
 }
 
