@@ -17,10 +17,22 @@
 
   html {
     scroll-behavior: smooth;
+    height: 100%;
+    overflow-x: hidden;
   }
 
   body {
     @apply font-sans text-charcoal bg-white antialiased;
+    min-height: 100%;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Fix para header fixed en móvil (iOS/Android) */
+  header[class*="fixed"] {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    will-change: transform;
   }
 
   h1, h2, h3, h4, h5, h6 {
