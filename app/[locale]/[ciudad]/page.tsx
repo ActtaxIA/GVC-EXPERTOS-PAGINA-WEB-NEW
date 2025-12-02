@@ -24,6 +24,7 @@ import { CtaFinal } from '@/components/home'
 import { JsonLdLocalBusinessCity, JsonLdBreadcrumbs, JsonLdFAQ } from '@/components/seo/JsonLd'
 import { getSupabaseAdmin } from '@/lib/supabase/admin'
 import { CITY_COORDINATES } from '@/lib/google-places'
+import { getTranslations } from 'next-intl/server'
 
 // Generar rutas estáticas para todas las ciudades y locales
 export function generateStaticParams() {
@@ -140,6 +141,19 @@ export default async function CiudadPage({
   const coords = getCityCoordinates(city.slug)
 
   const isSpanish = params.locale === 'es'
+  
+  // Traducciones para servicios
+  const tServices = await getTranslations({ locale: params.locale, namespace: 'services' })
+  
+  // Mapeo de slugs español a inglés para traducciones
+  const serviceSlugMap: Record<string, string> = {
+    'errores-quirurgicos': 'surgical-errors',
+    'errores-diagnostico': 'diagnostic-errors',
+    'negligencia-hospitalaria': 'hospital-negligence',
+    'negligencia-obstetrica': 'obstetric-negligence',
+    'errores-medicacion': 'medication-errors',
+    'consentimiento-informado': 'informed-consent',
+  }
   
   const benefits = isSpanish
     ? [
@@ -439,27 +453,30 @@ export default async function CiudadPage({
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service) => (
-              <Link
-                key={service.slug}
-                href={`/${params.locale}/negligencias-medicas/${service.slug}`}
-                className="group p-8 bg-cream hover:bg-white rounded-lg transition-all duration-300 hover:shadow-lg border border-transparent hover:border-gold/20"
-              >
-                <div className="w-14 h-14 bg-gold/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-gold/20 transition-colors">
-                  <ServiceIcon name={service.icon} className="w-7 h-7 text-gold" />
-                </div>
-                <h3 className="text-xl font-serif font-bold text-charcoal mb-3 group-hover:text-gold transition-colors">
-                  {service.title}
-                </h3>
-                <p className="text-gray-600 text-sm mb-4 line-clamp-3">
-                  {service.shortDescription}
-                </p>
-                <div className="flex items-center text-gold font-semibold text-sm group-hover:gap-2 transition-all">
-                  {isSpanish ? 'Más información' : 'Learn more'}
-                  <ChevronRight className="w-4 h-4 ml-1 group-hover:ml-0 transition-all" />
-                </div>
-              </Link>
-            ))}
+            {services.map((service) => {
+              const translationKey = serviceSlugMap[service.slug] || service.slug
+              return (
+                <Link
+                  key={service.slug}
+                  href={`/${params.locale}/negligencias-medicas/${service.slug}`}
+                  className="group p-8 bg-cream hover:bg-white rounded-lg transition-all duration-300 hover:shadow-lg border border-transparent hover:border-gold/20"
+                >
+                  <div className="w-14 h-14 bg-gold/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-gold/20 transition-colors">
+                    <ServiceIcon name={service.icon} className="w-7 h-7 text-gold" />
+                  </div>
+                  <h3 className="text-xl font-serif font-bold text-charcoal mb-3 group-hover:text-gold transition-colors">
+                    {tServices(`${translationKey}.title`)}
+                  </h3>
+                  <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+                    {tServices(`${translationKey}.description`)}
+                  </p>
+                  <div className="flex items-center text-gold font-semibold text-sm group-hover:gap-2 transition-all">
+                    {isSpanish ? 'Más información' : 'Learn more'}
+                    <ChevronRight className="w-4 h-4 ml-1 group-hover:ml-0 transition-all" />
+                  </div>
+                </Link>
+              )
+            })}
           </div>
         </div>
       </section>
