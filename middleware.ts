@@ -8,7 +8,10 @@ export default createMiddleware({
   defaultLocale: 'es',
   
   // Siempre mostrar prefijo de idioma en la URL
-  localePrefix: 'always'
+  localePrefix: 'always',
+  
+  // Forzar detección de locale desde la URL siempre
+  localeDetection: false
 })
 
 export const config = {
@@ -17,5 +20,9 @@ export const config = {
   // - Archivos estáticos (_next/static)
   // - Archivos en public (imágenes, fonts, etc)
   // - Rutas de admin (mantenemos sin i18n por ahora)
-  matcher: ['/((?!api|admin|_next/static|_next/image|images|favicon.ico|sw.js|manifest.json).*)']
+  matcher: [
+    '/',
+    '/(es|en)/:path*',
+    '/((?!api|admin|_next/static|_next/image|images|favicon.ico|sw.js|manifest.json|robots.txt).*)'
+  ]
 }

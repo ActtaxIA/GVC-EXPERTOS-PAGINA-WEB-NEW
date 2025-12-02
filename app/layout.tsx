@@ -1,14 +1,11 @@
-// Este layout se usa solo para redirects
-// El layout real está en app/[locale]/layout.tsx
+// Este layout envuelve toda la aplicación
+// El layout específico de locale está en app/[locale]/layout.tsx
+import type { ReactNode } from 'react'
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  return (
-    <html suppressHydrationWarning>
-      <body>{children}</body>
-    </html>
-  )
+type Props = {
+  children: ReactNode
+}
+
+export default function RootLayout({ children }: Props) {
+  return children
 }

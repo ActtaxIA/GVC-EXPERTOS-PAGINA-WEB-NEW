@@ -1,12 +1,19 @@
-import Link from 'next/link'
-import { Home, ArrowLeft, Search, Phone, FileText, MapPin } from 'lucide-react'
+'use client'
+
+import { useParams } from 'next/navigation'
+import { Home, Phone, FileText, MapPin, Search } from 'lucide-react'
 import { siteConfig } from '@/config/site'
+import { getLocalizedPath } from '@/lib/i18n-utils'
+import Link from 'next/link'
 
 export default function NotFound() {
+  const params = useParams()
+  const locale = (params?.locale as string) || 'es'
+  
   const popularPages = [
-    { href: '/contacto', label: 'Contacto', icon: Phone },
+    { href: '/contacto', label: locale === 'es' ? 'Contacto' : 'Contact', icon: Phone },
     { href: '/blog', label: 'Blog', icon: FileText },
-    { href: '/negligencias-medicas', label: 'Servicios', icon: Search },
+    { href: '/negligencias-medicas', label: locale === 'es' ? 'Servicios' : 'Services', icon: Search },
     { href: '/abogados-negligencias-medicas-madrid', label: 'Madrid', icon: MapPin },
   ]
 
@@ -19,36 +26,44 @@ export default function NotFound() {
         </h1>
         
         <h2 className="text-2xl md:text-3xl font-serif font-semibold text-charcoal mb-4">
-          Página no encontrada
+          {locale === 'es' ? 'Página no encontrada' : 'Page not found'}
         </h2>
         
         <p className="text-gray-600 mb-8 max-w-md mx-auto">
-          Lo sentimos, la página que buscas no existe o ha sido movida. 
-          Pero no te preocupes, podemos ayudarte.
+          {locale === 'es' 
+            ? 'Lo sentimos, la página que buscas no existe o ha sido movida. Pero no te preocupes, podemos ayudarte.'
+            : 'Sorry, the page you are looking for does not exist or has been moved. But don\'t worry, we can help you.'
+          }
         </p>
 
         {/* Botones principales */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-          <Link href="/" className="btn-primary inline-flex items-center justify-center">
+          <Link 
+            href={getLocalizedPath('/', locale as 'es' | 'en')} 
+            className="btn-primary inline-flex items-center justify-center"
+          >
             <Home className="w-4 h-4 mr-2" />
-            Ir al inicio
+            {locale === 'es' ? 'Ir al inicio' : 'Go to home'}
           </Link>
-          <Link href="/contacto" className="btn-outline inline-flex items-center justify-center">
+          <Link 
+            href={getLocalizedPath('/contacto', locale as 'es' | 'en')} 
+            className="btn-outline inline-flex items-center justify-center"
+          >
             <Phone className="w-4 h-4 mr-2" />
-            Contactar
+            {locale === 'es' ? 'Contactar' : 'Contact'}
           </Link>
         </div>
 
         {/* Páginas populares */}
         <div className="max-w-2xl mx-auto">
           <p className="text-sm text-gray-500 uppercase tracking-wider mb-4">
-            Páginas populares
+            {locale === 'es' ? 'Páginas populares' : 'Popular pages'}
           </p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {popularPages.map((page) => (
               <Link
                 key={page.href}
-                href={page.href}
+                href={getLocalizedPath(page.href, locale as 'es' | 'en')}
                 className="flex flex-col items-center gap-2 p-4 bg-white rounded-lg hover:shadow-md transition-shadow group"
               >
                 <page.icon className="w-6 h-6 text-gold group-hover:scale-110 transition-transform" />
@@ -60,16 +75,21 @@ export default function NotFound() {
 
         {/* Teléfono de contacto */}
         <div className="mt-12 p-6 bg-charcoal rounded-lg max-w-md mx-auto">
-          <p className="text-gray-300 text-sm mb-2">¿Necesitas ayuda urgente?</p>
+          <p className="text-gray-300 text-sm mb-2">
+            {locale === 'es' ? '¿Necesitas ayuda urgente?' : 'Need urgent help?'}
+          </p>
           <a 
             href={siteConfig.contact.phoneHref}
             className="text-gold text-2xl font-semibold hover:underline"
           >
             {siteConfig.contact.phone}
           </a>
-          <p className="text-gray-400 text-xs mt-2">Llamada gratuita</p>
+          <p className="text-gray-400 text-xs mt-2">
+            {locale === 'es' ? 'Llamada gratuita' : 'Free call'}
+          </p>
         </div>
       </div>
     </div>
   )
 }
+

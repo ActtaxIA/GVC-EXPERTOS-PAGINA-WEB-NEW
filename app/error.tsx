@@ -2,8 +2,10 @@
 
 import { useEffect } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { Home, RefreshCw, AlertTriangle, Phone } from 'lucide-react'
 import { siteConfig } from '@/config/site'
+import { getLocaleFromPath } from '@/lib/i18n-utils'
 
 export default function Error({
   error,
@@ -12,6 +14,9 @@ export default function Error({
   error: Error & { digest?: string }
   reset: () => void
 }) {
+  const pathname = usePathname()
+  const locale = getLocaleFromPath(pathname || '/')
+  
   useEffect(() => {
     // Log del error para debugging
     console.error('Error capturado:', error)
@@ -29,12 +34,14 @@ export default function Error({
         </div>
         
         <h1 className="text-3xl md:text-4xl font-serif font-bold text-charcoal mb-4">
-          Algo ha salido mal
+          {locale === 'es' ? 'Algo ha salido mal' : 'Something went wrong'}
         </h1>
         
         <p className="text-gray-600 mb-8 max-w-md mx-auto">
-          Ha ocurrido un error inesperado. Por favor, inténtalo de nuevo. 
-          Si el problema persiste, contacta con nosotros.
+          {locale === 'es' 
+            ? 'Ha ocurrido un error inesperado. Por favor, inténtalo de nuevo. Si el problema persiste, contacta con nosotros.'
+            : 'An unexpected error has occurred. Please try again. If the problem persists, contact us.'
+          }
         </p>
 
         {/* Código de error (solo en desarrollo) */}
@@ -51,18 +58,18 @@ export default function Error({
             className="btn-primary inline-flex items-center justify-center"
           >
             <RefreshCw className="w-4 h-4 mr-2" />
-            Intentar de nuevo
+            {locale === 'es' ? 'Intentar de nuevo' : 'Try again'}
           </button>
-          <Link href="/" className="btn-outline inline-flex items-center justify-center">
+          <Link href={`/${locale}`} className="btn-outline inline-flex items-center justify-center">
             <Home className="w-4 h-4 mr-2" />
-            Ir al inicio
+            {locale === 'es' ? 'Ir al inicio' : 'Go to home'}
           </Link>
         </div>
 
         {/* Contacto de emergencia */}
         <div className="p-6 bg-white rounded-lg shadow-sm max-w-sm mx-auto">
           <p className="text-sm text-gray-500 mb-2">
-            ¿Necesitas ayuda urgente?
+            {locale === 'es' ? '¿Necesitas ayuda urgente?' : 'Need urgent help?'}
           </p>
           <a 
             href={siteConfig.contact.phoneHref}
