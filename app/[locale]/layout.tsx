@@ -65,6 +65,11 @@ export async function generateMetadata({
         'en-US': '/en',
       },
     },
+    icons: {
+      icon: '/images/favicon.png',
+      apple: '/images/favicon.png',
+      shortcut: '/images/favicon.png',
+    },
     openGraph: {
       type: 'website',
       locale: locale === 'es' ? 'es_ES' : 'en_US',
