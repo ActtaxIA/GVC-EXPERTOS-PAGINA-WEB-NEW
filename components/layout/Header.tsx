@@ -5,14 +5,17 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useParams, usePathname } from 'next/navigation'
 import { Menu, X, Phone, ChevronDown, Languages } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/utils'
-import { siteConfig, navigationLinks } from '@/config/site'
+import { siteConfig } from '@/config/site'
 import { getLocalizedPath } from '@/lib/i18n-utils'
 
 export function Header() {
   const params = useParams()
   const pathname = usePathname()
   const locale = (params?.locale as string) || 'es'
+  const t = useTranslations('nav')
+  const tCommon = useTranslations('common')
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [isServicesOpen, setIsServicesOpen] = useState(false)
@@ -21,6 +24,16 @@ export function Header() {
   
   // Obtener path sin locale para cambiar idioma manteniendo la página
   const pathWithoutLocale = pathname?.replace(/^\/(es|en)/, '') || '/'
+  
+  // Navegación con traducciones
+  const navigationLinks = [
+    { label: t('home'), href: '/' },
+    { label: t('services'), href: '/negligencias-medicas' },
+    { label: t('about'), href: '/sobre-nosotros' },
+    { label: t('team'), href: '/equipo' },
+    { label: t('blog'), href: '/blog' },
+    { label: t('contact'), href: '/contacto' },
+  ]
 
   useEffect(() => {
     const handleScroll = () => {
@@ -80,7 +93,7 @@ export function Header() {
           <nav className="hidden lg:flex items-center gap-8">
             {navigationLinks.map((link) => {
               // Menú especial para Servicios con dropdown
-              if (link.label === 'Servicios') {
+              if (link.href === '/negligencias-medicas') {
                 return (
                   <div
                     key={link.href}
@@ -190,7 +203,7 @@ export function Header() {
               <span>{siteConfig.contact.phone}</span>
             </a>
             <Link href={getLocalizedPath('/contacto', locale as 'es' | 'en')} className="btn-primary">
-              {locale === 'es' ? 'Consulta Gratis' : 'Free Consultation'}
+              {tCommon('contactUs')}
             </Link>
           </div>
 
@@ -198,7 +211,7 @@ export function Header() {
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="lg:hidden relative z-50 p-2 text-charcoal hover:text-gold transition-colors"
-            aria-label={isMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
+            aria-label={isMenuOpen ? tCommon('close') : tCommon('menu')}
           >
             {isMenuOpen ? (
               <X className="w-6 h-6" />
@@ -229,7 +242,7 @@ export function Header() {
           <nav className="flex flex-col gap-1">
             {navigationLinks.map((link) => {
               // Menú especial para Servicios con dropdown en móvil
-              if (link.label === 'Servicios') {
+              if (link.href === '/negligencias-medicas') {
                 return (
                   <div key={link.href} className="flex flex-col">
                     <button
@@ -290,7 +303,7 @@ export function Header() {
           <div className="mb-4">
             <div className="flex items-center gap-2 px-4 py-2 text-gray-600">
               <Languages className="w-5 h-5" />
-              <span className="font-medium">{locale === 'es' ? 'Idioma' : 'Language'}</span>
+              <span className="font-medium">{tCommon('language')}</span>
             </div>
             <div className="pl-4 space-y-1">
               <Link
@@ -336,7 +349,7 @@ export function Header() {
               onClick={() => setIsMenuOpen(false)}
               className="btn-primary w-full text-center"
             >
-              {locale === 'es' ? 'Consulta Gratuita' : 'Free Consultation'}
+              {tCommon('contactUs')}
             </Link>
           </div>
 

@@ -9,6 +9,7 @@ import { Accordion } from '@/components/ui/Accordion'
 import { CtaFinal } from '@/components/home'
 import { JsonLdService, JsonLdFAQ, JsonLdBreadcrumbs } from '@/components/seo/JsonLd'
 import { LocalizedLink } from '@/components/ui/LocalizedLink'
+import { getTranslations } from 'next-intl/server'
 
 // Contenido detallado de cada servicio - ESPAÑOL
 const serviceContentEs: Record<string, {
@@ -440,6 +441,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const service = services.find((s) => s.slug === params.servicio)
   const isSpanish = params.locale === 'es'
+  const tServices = await getTranslations({ locale: params.locale, namespace: 'services' })
   
   if (!service) {
     return {
@@ -447,13 +449,26 @@ export async function generateMetadata({
     }
   }
 
+  // Mapeo de slugs para traducciones
+  const serviceSlugMap: Record<string, string> = {
+    'errores-quirurgicos': 'surgical-errors',
+    'errores-diagnostico': 'diagnostic-errors',
+    'negligencia-hospitalaria': 'hospital-negligence',
+    'negligencia-obstetrica': 'obstetric-negligence',
+    'errores-medicacion': 'medication-errors',
+    'consentimiento-informado': 'informed-consent',
+  }
+  
+  const translationKey = isSpanish ? service.slug : (serviceSlugMap[service.slug] || service.slug)
+  const serviceTitle = tServices(`${translationKey}.title`)
+
   return {
     title: isSpanish
-      ? `${service.title} | Abogados Especialistas`
-      : `${service.title} | Specialist Lawyers`,
+      ? `${serviceTitle} | Abogados Especialistas`
+      : `${serviceTitle} | Specialist Lawyers`,
     description: isSpanish
-      ? `Abogados especializados en ${service.title.toLowerCase()}. ${service.shortDescription} Consulta gratuita.`
-      : `Specialized lawyers in ${service.title.toLowerCase()}. ${service.shortDescription} Free consultation.`,
+      ? `Abogados especializados en ${serviceTitle.toLowerCase()}. ${service.shortDescription} Consulta gratuita.`
+      : `Specialized lawyers in ${serviceTitle.toLowerCase()}. ${service.shortDescription} Free consultation.`,
     alternates: {
       canonical: `${siteConfig.url}/${params.locale}/negligencias-medicas/${service.slug}`,
       languages: {
@@ -466,39 +481,42 @@ export async function generateMetadata({
       locale: params.locale === 'es' ? 'es_ES' : 'en_US',
       url: `${siteConfig.url}/${params.locale}/negligencias-medicas/${service.slug}`,
       title: isSpanish
-        ? `${service.title} | Abogados Especialistas`
-        : `${service.title} | Specialist Lawyers`,
+        ? `${serviceTitle} | Abogados Especialistas`
+        : `${serviceTitle} | Specialist Lawyers`,
       description: isSpanish
-        ? `Abogados especializados en ${service.title.toLowerCase()}. ${service.shortDescription}`
-        : `Specialized lawyers in ${service.title.toLowerCase()}. ${service.shortDescription}`,
+        ? `Abogados especializados en ${serviceTitle.toLowerCase()}. ${service.shortDescription}`
+        : `Specialized lawyers in ${serviceTitle.toLowerCase()}. ${service.shortDescription}`,
       siteName: siteConfig.name,
       images: [{
         url: `${siteConfig.url}/images/og-image.jpg`,
         width: 1200,
         height: 630,
-        alt: service.title,
+        alt: serviceTitle,
       }],
     },
     twitter: {
       card: 'summary_large_image',
       title: isSpanish
-        ? `${service.title} | Abogados Especialistas`
-        : `${service.title} | Specialist Lawyers`,
+        ? `${serviceTitle} | Abogados Especialistas`
+        : `${serviceTitle} | Specialist Lawyers`,
       description: isSpanish
-        ? `Abogados especializados en ${service.title.toLowerCase()}.`
-        : `Specialized lawyers in ${service.title.toLowerCase()}.`,
+        ? `Abogados especializados en ${serviceTitle.toLowerCase()}.`
+        : `Specialized lawyers in ${serviceTitle.toLowerCase()}.`,
       images: [`${siteConfig.url}/images/og-image.jpg`],
     },
   }
 }
 
-export default function ServicioPage({
+export default async function ServicioPage({
   params,
 }: {
   params: { servicio: string; locale: string }
 }) {
   const service = services.find((s) => s.slug === params.servicio)
   const isSpanish = params.locale === 'es'
+  const t = await getTranslations({ locale: params.locale })
+  const tServices = await getTranslations({ locale: params.locale, namespace: 'services' })
+  const tNav = await getTranslations({ locale: params.locale, namespace: 'nav' })
   
   if (!service) {
     notFound()
@@ -507,6 +525,20 @@ export default function ServicioPage({
   const serviceContent = isSpanish ? serviceContentEs : serviceContentEn
   const content = serviceContent[params.servicio]
   const otherServices = services.filter((s) => s.slug !== params.servicio).slice(0, 3)
+  
+  // Mapeo de slugs en español a slugs en inglés para traducciones
+  const serviceSlugMap: Record<string, string> = {
+    'errores-quirurgicos': 'surgical-errors',
+    'errores-diagnostico': 'diagnostic-errors',
+    'negligencia-hospitalaria': 'hospital-negligence',
+    'negligencia-obstetrica': 'obstetric-negligence',
+    'errores-medicacion': 'medication-errors',
+    'consentimiento-informado': 'informed-consent',
+  }
+  
+  // Obtener título traducido del servicio
+  const translationKey = isSpanish ? service.slug : (serviceSlugMap[service.slug] || service.slug)
+  const serviceTitle = tServices(`${translationKey}.title`)
 
   return (
     <>
@@ -516,7 +548,7 @@ export default function ServicioPage({
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'Service',
-            name: service.title,
+            name: serviceTitle,
             description: service.shortDescription,
             url: `${siteConfig.url}/${params.locale}/negligencias-medicas/${service.slug}`,
             inLanguage: params.locale === 'es' ? 'es-ES' : 'en-US',
@@ -542,7 +574,7 @@ export default function ServicioPage({
             url: `${siteConfig.url}/${params.locale}/negligencias-medicas` 
           },
           { 
-            name: service.title, 
+            name: serviceTitle, 
             url: `${siteConfig.url}/${params.locale}/negligencias-medicas/${service.slug}` 
           },
         ]}
@@ -562,7 +594,7 @@ export default function ServicioPage({
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/abogados_negligencias_medicas_negligencia_2.jpg"
-            alt={service.title}
+            alt={serviceTitle}
             fill
             className="object-cover"
             priority
@@ -575,10 +607,10 @@ export default function ServicioPage({
           <Breadcrumbs
             items={[
               { 
-                label: isSpanish ? 'Negligencias Médicas' : 'Medical Negligence', 
-                href: `/${params.locale}/negligencias-medicas` 
+                label: tNav('medical-negligence'), 
+                href: `/${params.locale}${isSpanish ? '/negligencias-medicas' : '/medical-negligence'}` 
               },
-              { label: service.title },
+              { label: serviceTitle },
             ]}
             className="mb-6 text-gray-400"
           />
@@ -594,7 +626,7 @@ export default function ServicioPage({
                 </span>
               </div>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white mb-6">
-                {service.title}
+                {serviceTitle}
               </h1>
               <p className="text-gray-300 text-xl max-w-3xl leading-relaxed">
                 {content?.intro || service.shortDescription}
@@ -711,7 +743,7 @@ export default function ServicioPage({
                       className="flex items-center gap-3 text-gray-600 hover:text-gold transition-colors group"
                     >
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                      <span>{s.title}</span>
+                      <span>{tServices(`${isSpanish ? s.slug : (serviceSlugMap[s.slug] || s.slug)}.title`)}</span>
                     </LocalizedLink>
                   ))}
                 </div>
@@ -733,8 +765,8 @@ export default function ServicioPage({
             </h2>
             <p className="text-gray-600 text-lg">
               {isSpanish
-                ? `Somos especialistas en ${service.title.toLowerCase()} con un equipo multidisciplinar de abogados y peritos médicos.`
-                : `We are specialists in ${service.title.toLowerCase()} with a multidisciplinary team of lawyers and medical experts.`}
+                ? `Somos especialistas en ${serviceTitle.toLowerCase()} con un equipo multidisciplinar de abogados y peritos médicos.`
+                : `We are specialists in ${serviceTitle.toLowerCase()} with a multidisciplinary team of lawyers and medical experts.`}
             </p>
           </div>
 

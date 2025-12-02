@@ -20,7 +20,9 @@
     "readMore": "Read more",
     "learnMore": "Learn more",
     "contactUs": "Contact us",
-    "callUs": "Call us"
+    "callUs": "Call us",
+    "language": "Language",
+    "menu": "Menu"
   },
   "nav": {
     "home": "Home",
@@ -103,6 +105,7 @@
   "contact": {
     "title": "Contact Us",
     "subtitle": "First free consultation. We respond within 24 hours.",
+    "contactInfo": "Contact Information",
     "form": {
       "name": "Full name",
       "email": "Email",
@@ -120,7 +123,8 @@
       "phone": "Phone",
       "email": "Email",
       "schedule": "Schedule",
-      "scheduleValue": "Monday to Friday: 9:00 AM - 7:00 PM"
+      "scheduleValue": "Monday to Friday: 9:00 AM - 7:00 PM",
+      "freeCall": "Free call"
     }
   },
   "footer": {
@@ -208,7 +212,31 @@
     "process": {
       "badge": "How We Work",
       "title": "Our Work Process",
-      "subtitle": "A transparent and effective process to obtain your compensation"
+      "subtitle": "A transparent and effective process to obtain your compensation",
+      "step1": {
+        "title": "Free Consultation",
+        "description": "We analyze your case without obligation. We explain your rights and chances of success."
+      },
+      "step2": {
+        "title": "Evidence Collection",
+        "description": "We request medical records, expert reports and all necessary documentation."
+      },
+      "step3": {
+        "title": "Out-of-Court Claim",
+        "description": "We try to reach an agreement with the medical center or insurer before going to court."
+      },
+      "step4": {
+        "title": "Legal Action",
+        "description": "If no agreement is reached, we file a lawsuit and defend your case in court."
+      },
+      "step5": {
+        "title": "Compensation",
+        "description": "We fight to obtain the maximum compensation you deserve for the damages suffered."
+      },
+      "step6": {
+        "title": "Follow-up",
+        "description": "We accompany you throughout the entire process and keep you informed at every stage."
+      }
     },
     "team": {
       "badge": "Our Team",

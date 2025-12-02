@@ -1,23 +1,27 @@
+'use client'
+
 import Image from 'next/image'
-import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { teamMembers } from '@/config/site'
+import { LocalizedLink } from '@/components/ui/LocalizedLink'
+import { useTranslations } from 'next-intl'
 
 export function TeamSection() {
+  const t = useTranslations('home.team')
+  const tCommon = useTranslations('common')
   return (
     <section className="section-padding bg-cream">
       <div className="container-custom">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
           <span className="text-gold text-sm font-semibold uppercase tracking-widest">
-            Nuestro Equipo
+            {t('badge')}
           </span>
           <h2 className="text-3xl md:text-4xl font-serif font-bold text-charcoal mt-3 mb-5">
-            Profesionales Especializados
+            {t('title')}
           </h2>
           <p className="text-gray-600 leading-relaxed">
-            Un equipo de abogados con amplia experiencia en derecho sanitario y
-            negligencias médicas, comprometidos con la defensa de tus derechos.
+            {t('subtitle')}
           </p>
         </div>
 
@@ -54,13 +58,13 @@ export function TeamSection() {
 
         {/* CTA */}
         <div className="text-center mt-12">
-          <Link
+          <LocalizedLink
             href="/equipo"
             className="btn-outline inline-flex items-center"
           >
-            Conoce al equipo completo
+            {t('viewProfile')}
             <ArrowRight className="w-4 h-4 ml-2" />
-          </Link>
+          </LocalizedLink>
         </div>
       </div>
     </section>

@@ -7,6 +7,8 @@ import { useTranslations } from 'next-intl'
 
 export function CtaFinal() {
   const t = useTranslations('home.cta')
+  const tContact = useTranslations('contact.info')
+  const tContactTitle = useTranslations('contact')
   
   return (
     <section className="section-padding bg-gradient-to-br from-charcoal to-charcoal/95">
@@ -38,7 +40,7 @@ export function CtaFinal() {
           {/* Right Content - Contact Info */}
           <div className="bg-white/5 backdrop-blur-sm p-8 rounded-sm border border-white/10">
             <h3 className="text-xl font-serif font-semibold text-white mb-6">
-              Datos de Contacto
+              {tContactTitle('contactInfo')}
             </h3>
             <div className="space-y-4">
               <div className="flex items-start gap-4">
@@ -46,7 +48,7 @@ export function CtaFinal() {
                   <Phone className="w-5 h-5 text-gold" />
                 </div>
                 <div>
-                  <p className="text-sm text-gray-400 mb-1">Teléfono</p>
+                  <p className="text-sm text-gray-400 mb-1">{tContact('phone')}</p>
                   <a
                     href={siteConfig.contact.phoneHref}
                     className="text-white hover:text-gold transition-colors"
@@ -60,7 +62,7 @@ export function CtaFinal() {
                   <Mail className="w-5 h-5 text-gold" />
                 </div>
                 <div>
-                  <p className="text-sm text-gray-400 mb-1">Email</p>
+                  <p className="text-sm text-gray-400 mb-1">{tContact('email')}</p>
                   <a
                     href={siteConfig.contact.emailHref}
                     className="text-white hover:text-gold transition-colors"
@@ -74,7 +76,7 @@ export function CtaFinal() {
                   <MapPin className="w-5 h-5 text-gold" />
                 </div>
                 <div>
-                  <p className="text-sm text-gray-400 mb-1">Dirección</p>
+                  <p className="text-sm text-gray-400 mb-1">{tContact('address')}</p>
                   <p className="text-white">{siteConfig.contact.address}</p>
                 </div>
               </div>

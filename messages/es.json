@@ -20,7 +20,9 @@
     "readMore": "Leer más",
     "learnMore": "Saber más",
     "contactUs": "Contáctanos",
-    "callUs": "Llámanos"
+    "callUs": "Llámanos",
+    "language": "Idioma",
+    "menu": "Menú"
   },
   "nav": {
     "home": "Inicio",
@@ -120,7 +122,8 @@
       "phone": "Teléfono",
       "email": "Email",
       "schedule": "Horario",
-      "scheduleValue": "Lunes a Viernes: 9:00 - 19:00"
+      "scheduleValue": "Lunes a Viernes: 9:00 - 19:00",
+      "freeCall": "Llamada gratuita"
     }
   },
   "footer": {
@@ -208,7 +211,31 @@
     "process": {
       "badge": "Cómo Trabajamos",
       "title": "Nuestro Proceso de Trabajo",
-      "subtitle": "Un proceso transparente y eficaz para conseguir tu indemnización"
+      "subtitle": "Un proceso transparente y eficaz para conseguir tu indemnización",
+      "step1": {
+        "title": "Consulta Gratuita",
+        "description": "Analizamos tu caso sin compromiso. Te explicamos tus derechos y posibilidades de éxito."
+      },
+      "step2": {
+        "title": "Recopilación de Pruebas",
+        "description": "Solicitamos historiales médicos, informes periciales y toda la documentación necesaria."
+      },
+      "step3": {
+        "title": "Reclamación Extrajudicial",
+        "description": "Intentamos un acuerdo con el centro médico o aseguradora antes de ir a juicio."
+      },
+      "step4": {
+        "title": "Demanda Judicial",
+        "description": "Si no hay acuerdo, presentamos demanda y defendemos tu caso ante los tribunales."
+      },
+      "step5": {
+        "title": "Indemnización",
+        "description": "Luchamos por conseguir la máxima indemnización que te corresponde por los daños sufridos."
+      },
+      "step6": {
+        "title": "Seguimiento",
+        "description": "Te acompañamos durante todo el proceso y te mantenemos informado en cada fase."
+      }
     },
     "team": {
       "badge": "Nuestro Equipo",

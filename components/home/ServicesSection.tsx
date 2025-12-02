@@ -8,6 +8,8 @@ import { useTranslations } from 'next-intl'
 
 export function ServicesSection() {
   const t = useTranslations('home.services')
+  const tCommon = useTranslations('common')
+  const tServices = useTranslations('services')
   
   return (
     <section className="section-padding bg-white">
@@ -38,13 +40,13 @@ export function ServicesSection() {
                 />
               </div>
               <h3 className="text-xl font-serif font-semibold text-charcoal mb-3 group-hover:text-gold transition-colors">
-                {service.title}
+                {tServices(`${service.slug}.title`)}
               </h3>
               <p className="text-gray-600 text-sm leading-relaxed mb-4">
-                {service.shortDescription}
+                {tServices(`${service.slug}.description`)}
               </p>
               <div className="flex items-center text-gold text-sm font-medium">
-                Más información
+                {tCommon('learnMore')}
                 <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
               </div>
             </LocalizedLink>

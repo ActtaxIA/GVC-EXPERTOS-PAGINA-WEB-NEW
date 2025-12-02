@@ -1,10 +1,16 @@
+'use client'
+
 import Image from 'next/image'
 import { Phone, Mail, MapPin, Twitter, Facebook } from 'lucide-react'
 import { siteConfig, footerLinks } from '@/config/site'
 import { LocalizedLink } from '@/components/ui/LocalizedLink'
+import { useTranslations } from 'next-intl'
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
+  const t = useTranslations('footer')
+  const tNav = useTranslations('nav')
+  const tContact = useTranslations('contact.info')
 
   return (
     <footer className="bg-charcoal text-white">
@@ -23,9 +29,7 @@ export function Footer() {
               />
             </LocalizedLink>
             <p className="text-gray-400 text-sm leading-relaxed mb-6">
-              Más de 20 años defendiendo los derechos de las víctimas de
-              negligencias médicas en toda España. Primera consulta gratuita y
-              sin compromiso.
+              {t('description')}
             </p>
             {/* Social Links */}
             <div className="flex gap-4">
@@ -53,7 +57,7 @@ export function Footer() {
           {/* Services Column */}
           <div>
             <h4 className="text-lg font-serif font-semibold mb-5 text-gold">
-              Servicios
+              {t('services')}
             </h4>
             <ul className="space-y-3">
               {footerLinks.servicios.map((link) => (
@@ -72,7 +76,7 @@ export function Footer() {
           {/* Company Column */}
           <div>
             <h4 className="text-lg font-serif font-semibold mb-5 text-gold">
-              Empresa
+              {tNav('about')}
             </h4>
             <ul className="space-y-3">
               {footerLinks.empresa.map((link) => (
@@ -91,7 +95,7 @@ export function Footer() {
           {/* Contact Column */}
           <div>
             <h4 className="text-lg font-serif font-semibold mb-5 text-gold">
-              Contacto
+              {tNav('contact')}
             </h4>
             <ul className="space-y-4">
               <li>
@@ -104,7 +108,7 @@ export function Footer() {
                     <span className="block font-semibold text-white group-hover:text-gold transition-colors">
                       {siteConfig.contact.phone}
                     </span>
-                    <span className="text-xs">Llamada gratuita</span>
+                    <span className="text-xs">{tContact('freeCall')}</span>
                   </div>
                 </a>
               </li>
@@ -138,8 +142,7 @@ export function Footer() {
         <div className="container-custom py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-gray-500 text-sm text-center md:text-left">
-              © {currentYear} {siteConfig.legal.company}. Todos los derechos
-              reservados.
+              © {currentYear} {siteConfig.legal.company}. {t('copyright')}.
             </p>
             <div className="flex flex-wrap justify-center gap-6">
               {footerLinks.legal.map((link) => (
