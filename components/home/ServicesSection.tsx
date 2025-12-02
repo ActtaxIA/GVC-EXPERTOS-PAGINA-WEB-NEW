@@ -33,7 +33,7 @@ export function ServicesSection() {
             >
               <div className="w-14 h-14 bg-white rounded-sm flex items-center justify-center mb-5 group-hover:bg-gold transition-colors duration-300 shadow-sm">
                 <ServiceIcon
-                  icon={service.icon}
+                  name={service.icon}
                   className="w-7 h-7 text-gold group-hover:text-white transition-colors duration-300"
                 />
               </div>
