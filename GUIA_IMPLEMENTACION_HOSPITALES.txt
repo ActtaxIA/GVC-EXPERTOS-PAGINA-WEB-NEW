@@ -1,0 +1,465 @@
+================================================================================
+GUÍA DE IMPLEMENTACIÓN: SISTEMA DE HOSPITALES PARA LANDINGS DE CIUDADES
+================================================================================
+
+OBJETIVO
+--------
+Implementar un sistema completo de hospitales que:
+1. Muestre hospitales en las páginas de landing de cada ciudad
+2. Cree páginas individuales SEO-optimizadas para cada hospital
+3. Capture tráfico orgánico con búsquedas tipo "negligencia médica [Hospital]"
+
+FASES DE IMPLEMENTACIÓN
+========================
+
+FASE 1: PREPARACIÓN Y CONFIGURACIÓN
+------------------------------------
+
+1.1 Configurar Google Places API
+    - Obtener API Key de Google Cloud Console
+    - Habilitar "Places API" y "Places API (New)"
+    - Configurar restricciones de API Key (recomendado: por dominio/IP)
+    - Agregar GOOGLE_PLACES_API_KEY a variables de entorno (.env.local y AWS Amplify)
+
+1.2 Verificar estructura de base de datos
+    - Confirmar que existe tabla `hospitals` en Supabase
+    - Verificar campos: id, google_place_id, name, address, city, coordinates, etc.
+    - Verificar relación con tabla `cities` (city_id o city_name)
+    - Verificar índices: idx_hospitals_city, idx_hospitals_place_id
+
+1.3 Revisar código existente
+    - lib/google-places.ts: Funciones de búsqueda ya implementadas
+    - types/hospitals.ts: Tipos TypeScript definidos
+    - app/admin/hospitales/: Panel admin para gestionar hospitales
+
+
+FASE 2: FUNCIONALIDAD EN PANEL ADMIN
+-------------------------------------
+
+2.1 Búsqueda e importación de hospitales
+    - Usar Google Places API para buscar hospitales por ciudad
+    - Función: searchHospitalsByText("Murcia") o searchHospitalsNearby(lat, lng)
+    - Mostrar resultados en lista con preview de datos
+    - Permitir seleccionar y guardar hospitales en Supabase
+    - Evitar duplicados usando google_place_id como único
+
+2.2 Gestión de hospitales
+    - CRUD completo en panel admin
+    - Editar información manualmente si Google Places no tiene datos completos
+    - Asignar hospital a ciudad específica
+    - Activar/desactivar hospitales (is_active)
+    - Sincronización manual con Google Places para actualizar datos
+
+2.3 Asignación a ciudades
+    - Selector de ciudad al crear/editar hospital
+    - Vista de hospitales por ciudad en admin
+    - Bulk operations: asignar múltiples hospitales a una ciudad
+
+
+FASE 3: SECCIÓN DE HOSPITALES EN LANDINGS DE CIUDAD
+----------------------------------------------------
+
+3.1 Estructura de la sección
+    Ubicación: app/[locale]/[ciudad]/page.tsx
+    
+    Sección propuesta:
+    - Título: "Hospitales y Centros Sanitarios en [Ciudad]"
+    - Subtítulo: "Conoce los principales centros médicos donde podemos ayudarte"
+    - Grid de cards de hospitales (3-4 columnas en desktop)
+    - Cada card muestra: foto, nombre, dirección, tipo (público/privado), rating
+    - Botón "Ver detalles" que lleva a página individual del hospital
+
+3.2 Query de datos
+    Función: getHospitalsByCity(citySlug: string)
+    - Buscar en tabla hospitals donde city_name o city_id coincida
+    - Filtrar solo is_active = true
+    - Ordenar por: rating DESC, luego por nombre ASC
+    - Limitar a 6-8 hospitales principales (los más relevantes)
+
+3.3 Diseño de cards
+    Componente: <HospitalCard hospital={hospital} />
+    - Imagen: photo_url de Google Places o imagen por defecto
+    - Nombre del hospital (enlace a página individual)
+    - Dirección (formateada)
+    - Badge: "Público" o "Privado"
+    - Rating con estrellas (si disponible)
+    - Botón CTA: "Conocer más" o "Ver detalles"
+
+
+FASE 4: PÁGINAS INDIVIDUALES DE HOSPITALES
+-------------------------------------------
+
+4.1 Estructura de rutas
+    Ruta dinámica: app/[locale]/[ciudad]/hospital-[slug]/page.tsx
+    
+    Ejemplos:
+    - /es/murcia/hospital-virgen-arrixaca
+    - /es/cartagena/hospital-santa-lucia
+    - /en/murcia/hospital-virgen-arrixaca
+    
+    Slug: Generar desde nombre del hospital
+    - "Hospital Universitario Virgen de la Arrixaca" → "hospital-virgen-arrixaca"
+    - Usar función slugify() existente
+
+4.2 Contenido de la página
+    Estructura propuesta:
+    
+    a) Hero Section
+       - Nombre del hospital (H1)
+       - Dirección completa
+       - Badge público/privado
+       - Rating y número de reseñas
+    
+    b) Información del Hospital
+       - Foto principal (Google Places)
+       - Descripción breve (si existe en DB o generar)
+       - Datos de contacto: teléfono, web, Google Maps link
+       - Especialidades principales (si están en DB)
+    
+    c) Sección SEO Principal
+       - Título: "Negligencias Médicas en [Nombre Hospital]"
+       - Contenido único (500-800 palabras mínimo):
+         * Introducción sobre el hospital
+         * Tipos de negligencias más comunes en este tipo de centro
+         * Casos relacionados (si hay casos de éxito asociados)
+         * Proceso de reclamación específico
+         * FAQs específicas del hospital
+    
+    d) Casos Relacionados
+       - Mostrar casos de éxito filtrados por hospital (si existe campo hospital_id en success_cases)
+       - O mostrar casos relacionados con la ciudad
+    
+    e) Servicios Relacionados
+       - Cards de servicios más relevantes para este tipo de hospital
+       - Ejemplo: Hospital obstétrico → destacar "Negligencia Obstétrica"
+    
+    f) CTA Final
+       - "¿Sufriste una negligencia en este hospital?"
+       - Formulario de contacto con campo pre-rellenado del hospital
+
+4.3 Generación de contenido único
+    Estrategias para evitar contenido duplicado:
+    
+    a) Contenido manual (recomendado)
+       - Escribir contenido único para cada hospital
+       - Incluir datos específicos: año fundación, especialidades, capacidad
+       - Mencionar casos notables o estadísticas específicas
+    
+    b) Contenido generado con IA (alternativa)
+       - Usar OpenAI para generar contenido único basado en:
+         * Nombre del hospital
+         * Tipo (público/privado)
+         * Especialidades
+         * Ciudad
+       - Guardar en campo `content` o `description` en tabla hospitals
+       - Revisar y editar manualmente antes de publicar
+    
+    c) Contenido híbrido
+       - Plantilla base con variables
+       - Datos específicos del hospital insertados dinámicamente
+       - Secciones adicionales únicas por hospital
+
+4.4 SEO y Metadata
+    generateMetadata() para cada página:
+    - title: "Negligencias Médicas en [Hospital] | Abogados [Ciudad]"
+    - description: Descripción única del hospital y servicios
+    - canonical: URL única
+    - openGraph: Con foto del hospital
+    - JSON-LD Schema:
+      * LocalBusiness o MedicalBusiness
+      * BreadcrumbList (Ciudad > Hospital)
+      * FAQPage (si hay FAQs)
+
+4.5 Funciones necesarias
+    - getHospitalBySlug(slug: string, citySlug: string)
+    - getRelatedCases(hospitalId: string)
+    - generateHospitalSlug(name: string)
+    - getHospitalContent(hospital: Hospital) // Genera o obtiene contenido único
+
+
+FASE 5: OPTIMIZACIÓN SEO
+-------------------------
+
+5.1 Keywords objetivo
+    Por página de hospital:
+    - Primaria: "negligencia médica [nombre hospital]"
+    - Secundarias:
+      * "abogado negligencia [hospital]"
+      * "reclamación [hospital] [ciudad]"
+      * "indemnización [hospital]"
+      * "demanda [hospital]"
+
+5.2 Estructura de contenido SEO
+    - H1: Nombre del hospital + contexto
+    - H2: Secciones principales (Negligencias comunes, Casos, Proceso)
+    - H3: Subsecciones específicas
+    - Enlaces internos a:
+      * Página de ciudad
+      * Servicios relacionados
+      * Casos de éxito
+      * Página de contacto
+
+5.3 Schema.org
+    Implementar JSON-LD:
+    {
+      "@context": "https://schema.org",
+      "@type": "MedicalBusiness",
+      "name": "[Nombre Hospital]",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "[Dirección]",
+        "addressLocality": "[Ciudad]",
+        "postalCode": "[Código Postal]"
+      },
+      "telephone": "[Teléfono]",
+      "url": "[Website]",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "[Rating]",
+        "reviewCount": "[Total Reviews]"
+      }
+    }
+
+5.4 Sitemap
+    - Incluir todas las páginas de hospitales en sitemap.xml
+    - Formato: /[locale]/[ciudad]/hospital-[slug]
+    - Prioridad: 0.7 (menor que páginas principales, mayor que blog)
+    - Changefreq: monthly (los datos pueden cambiar)
+
+
+FASE 6: INTEGRACIÓN Y ENLACES INTERNOS
+---------------------------------------
+
+6.1 Desde página de ciudad
+    - Sección "Hospitales de [Ciudad]" con enlaces a páginas individuales
+    - Breadcrumbs: Inicio > [Ciudad] > [Hospital]
+
+6.2 Desde página de hospital
+    - Enlaces a:
+      * Página de ciudad
+      * Servicios relacionados
+      * Casos de éxito relacionados
+      * Formulario de contacto (con hospital pre-seleccionado)
+
+6.3 Desde otros lugares
+    - Mención de hospitales en casos de éxito (si aplica)
+    - Enlaces desde blog posts relacionados
+    - Menciones en FAQs de ciudad
+
+
+FASE 7: MANTENIMIENTO Y ACTUALIZACIÓN
+--------------------------------------
+
+7.1 Sincronización con Google Places
+    - Script periódico (cron job o manual desde admin):
+      * Verificar cambios en datos de Google Places
+      * Actualizar: nombre, dirección, teléfono, rating
+      * Alertar si hospital cerró o cambió de ubicación
+    
+    Frecuencia recomendada: Mensual o trimestral
+
+7.2 Gestión de contenido
+    - Revisar contenido único periódicamente
+    - Actualizar casos relacionados cuando haya nuevos casos
+    - Añadir FAQs basadas en consultas reales
+    - Optimizar contenido basado en métricas SEO
+
+7.3 Monitoreo
+    - Tracking de:
+      * Tráfico orgánico a páginas de hospitales
+      * Keywords que traen tráfico
+      * Conversiones desde páginas de hospitales
+      * Tiempo en página y bounce rate
+
+
+ARCHIVOS A CREAR/MODIFICAR
+===========================
+
+NUEVOS ARCHIVOS:
+---------------
+1. app/[locale]/[ciudad]/hospital-[slug]/page.tsx
+   - Página individual de hospital
+   - generateMetadata()
+   - getHospitalBySlug()
+   - Componente principal
+
+2. components/hospitals/HospitalCard.tsx
+   - Card para mostrar hospital en lista
+   - Props: hospital, showDetails, linkToPage
+
+3. components/hospitals/HospitalSection.tsx
+   - Sección completa de hospitales para landing de ciudad
+   - Props: citySlug, locale, limit
+
+4. lib/queries/hospitals.ts
+   - getHospitalsByCity(citySlug)
+   - getHospitalBySlug(slug, citySlug)
+   - getRelatedCases(hospitalId)
+   - generateHospitalSlug(name)
+
+ARCHIVOS A MODIFICAR:
+--------------------
+1. app/[locale]/[ciudad]/page.tsx
+   - Agregar sección <HospitalSection />
+   - Importar y usar componente
+
+2. app/[locale]/sitemap.ts
+   - Agregar rutas de hospitales al sitemap dinámico
+   - Función para generar rutas de hospitales
+
+3. app/admin/hospitales/page.tsx (si existe)
+   - Mejorar UI de búsqueda e importación
+   - Agregar funcionalidad de asignación a ciudades
+
+4. types/database.ts
+   - Verificar tipos de tabla hospitals
+   - Agregar relaciones si faltan
+
+
+ESTRUCTURA DE DATOS
+===================
+
+TABLA: hospitals
+----------------
+Campos existentes (verificar en Supabase):
+- id (UUID)
+- google_place_id (VARCHAR, UNIQUE)
+- name (VARCHAR)
+- name_en (VARCHAR, nullable) - Para traducción
+- address (TEXT)
+- city_id (UUID, nullable) - FK a cities
+- city_name (VARCHAR) - Nombre de ciudad (redundante pero útil)
+- province (VARCHAR)
+- postal_code (VARCHAR)
+- latitude (DECIMAL)
+- longitude (DECIMAL)
+- coordinates (JSONB) - Alternativa a lat/lng
+- phone (VARCHAR)
+- website (VARCHAR)
+- rating (DECIMAL)
+- total_reviews (INTEGER)
+- google_maps_url (VARCHAR)
+- photo_url (VARCHAR)
+- description (TEXT) - Contenido único del hospital
+- description_en (TEXT) - Traducción
+- is_active (BOOLEAN)
+- created_at (TIMESTAMPTZ)
+- updated_at (TIMESTAMPTZ)
+
+CAMPOS ADICIONALES RECOMENDADOS:
+- slug (VARCHAR, UNIQUE) - Para URLs amigables
+- content (TEXT) - Contenido SEO completo
+- content_en (TEXT) - Traducción
+- specialties (JSONB) - Array de especialidades
+- hospital_type (VARCHAR) - 'public', 'private', 'mixed'
+- capacity (INTEGER) - Número de camas (opcional)
+- founded_year (INTEGER) - Año de fundación (opcional)
+
+
+FUNCIONES DE GOOGLE PLACES API
+==============================
+
+Ya implementadas en lib/google-places.ts:
+- searchHospitalsNearby(lat, lng, radius)
+- searchHospitalsByText(query)
+- getPlaceDetails(placeId)
+- getPlacePhotoUrl(photoReference)
+- getCityCoordinates(slug)
+- calculateDistance(lat1, lng1, lat2, lng2)
+- formatHospitalType(types)
+- isPublicHospital(name)
+
+USO:
+----
+1. Buscar hospitales por ciudad:
+   const coords = getCityCoordinates('murcia')
+   const results = await searchHospitalsNearby(coords.lat, coords.lng, 20000)
+
+2. Obtener detalles completos:
+   const details = await getPlaceDetails(placeId)
+
+3. Guardar en Supabase:
+   await supabase.from('hospitals').insert({
+     google_place_id: details.result.place_id,
+     name: details.result.name,
+     address: details.result.formatted_address,
+     // ... otros campos
+   })
+
+
+CONSIDERACIONES TÉCNICAS
+========================
+
+1. RENDIMIENTO
+   - Cachear resultados de Google Places API en Supabase
+   - Usar ISR (Incremental Static Regeneration) para páginas de hospitales
+   - revalidate: 86400 (24 horas) o más
+   - Pre-generar páginas de hospitales más importantes
+
+2. LÍMITES DE API
+   - Google Places API tiene límites de uso
+   - Implementar rate limiting
+   - Cachear resultados agresivamente
+   - Considerar plan de pago si hay mucho tráfico
+
+3. ERROR HANDLING
+   - Manejar errores de Google Places API gracefully
+   - Fallback si API no responde
+   - Validar datos antes de guardar en DB
+   - Logging de errores para debugging
+
+4. SEO Y CONTENIDO
+   - Evitar contenido duplicado a toda costa
+   - Cada página debe tener mínimo 500 palabras únicas
+   - Usar variaciones en copy pero mantener calidad
+   - Incluir datos específicos del hospital siempre que sea posible
+
+5. ACCESIBILIDAD
+   - Alt text en imágenes de hospitales
+   - Estructura semántica correcta (header, main, section)
+   - Navegación por teclado funcional
+   - Contraste de colores adecuado
+
+
+MÉTRICAS DE ÉXITO
+=================
+
+KPIs a monitorear:
+1. Tráfico orgánico a páginas de hospitales
+2. Posicionamiento en búsquedas tipo "negligencia [hospital]"
+3. Tasa de conversión desde páginas de hospitales
+4. Tiempo en página y engagement
+5. Número de páginas indexadas por Google
+6. Backlinks naturales a páginas de hospitales
+
+HERRAMIENTAS:
+- Google Search Console: Monitorear indexación y keywords
+- Google Analytics: Tráfico y comportamiento
+- Ahrefs/SEMrush: Posicionamiento y backlinks
+
+
+PRÓXIMOS PASOS
+==============
+
+1. Revisar y validar estructura de base de datos
+2. Configurar Google Places API Key
+3. Implementar Fase 1 y 2 (Admin)
+4. Crear componente HospitalSection para landings
+5. Implementar página individual de hospital (Fase 4)
+6. Optimizar SEO y contenido
+7. Monitorear y ajustar basado en métricas
+
+
+NOTAS FINALES
+=============
+
+- Esta implementación es escalable y mantenible
+- El contenido único es crítico para SEO
+- La sincronización periódica con Google Places mantiene datos actualizados
+- Las páginas de hospitales son una excelente oportunidad de captación de leads
+- Considerar A/B testing de CTAs y contenido
+
+================================================================================
+FIN DE LA GUÍA
+================================================================================
+
