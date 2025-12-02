@@ -47,9 +47,12 @@ async function getCategory(slug: string, locale: string) {
 
     // Mapear campos según idioma
     return {
-      ...category,
+      id: category.id,
+      slug: category.slug,
       name: isSpanish ? category.name : (category.name_en || category.name),
-      description: isSpanish ? category.description : (category.description_en || category.description)
+      description: isSpanish ? category.description : (category.description_en || category.description),
+      name_en: category.name_en,
+      description_en: category.description_en
     }
   } catch (error) {
     console.error('Error fetching category:', error)
