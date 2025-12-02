@@ -268,19 +268,19 @@ export default async function BlogPostPage({
               <div 
                 className="prose prose-lg max-w-none
                   prose-headings:font-serif prose-headings:text-charcoal
-                  prose-h1:text-4xl prose-h1:font-bold prose-h1:mt-10 prose-h1:mb-6 prose-h1:leading-tight
-                  prose-h2:text-2xl prose-h2:font-semibold prose-h2:mt-10 prose-h2:mb-5 prose-h2:border-b prose-h2:border-gray-200 prose-h2:pb-3
-                  prose-h3:text-xl prose-h3:font-bold prose-h3:mt-8 prose-h3:mb-4
-                  prose-h4:text-lg prose-h4:font-semibold prose-h4:mt-6 prose-h4:mb-3
-                  prose-p:text-gray-700 prose-p:leading-relaxed prose-p:mb-5 prose-p:text-base
+                  [&>h1]:text-4xl [&>h1]:font-bold [&>h1]:mt-12 [&>h1]:mb-6 [&>h1]:leading-tight [&>h1]:text-charcoal
+                  [&>h2]:text-3xl [&>h2]:font-bold [&>h2]:mt-12 [&>h2]:mb-6 [&>h2]:border-b-2 [&>h2]:border-gold [&>h2]:pb-3 [&>h2]:text-charcoal
+                  [&>h3]:text-2xl [&>h3]:font-semibold [&>h3]:mt-10 [&>h3]:mb-4 [&>h3]:text-charcoal
+                  [&>h4]:text-xl [&>h4]:font-semibold [&>h4]:mt-8 [&>h4]:mb-3 [&>h4]:text-charcoal
+                  [&>p]:text-gray-700 [&>p]:leading-relaxed [&>p]:mb-5 [&>p]:text-base
                   prose-a:text-gold prose-a:font-medium prose-a:no-underline hover:prose-a:underline
-                  prose-strong:text-charcoal prose-strong:font-semibold
-                  prose-ul:text-gray-700 prose-ul:my-5 prose-ul:list-disc prose-ul:pl-6
-                  prose-ol:text-gray-700 prose-ol:my-5 prose-ol:list-decimal prose-ol:pl-6
-                  prose-li:mb-3 prose-li:leading-relaxed
-                  prose-blockquote:border-l-4 prose-blockquote:border-gold prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-gray-600 prose-blockquote:my-6
+                  prose-strong:text-charcoal prose-strong:font-bold
+                  [&>ul]:text-gray-700 [&>ul]:my-5 [&>ul]:list-disc [&>ul]:pl-6 [&>ul]:space-y-2
+                  [&>ol]:text-gray-700 [&>ol]:my-5 [&>ol]:list-decimal [&>ol]:pl-6 [&>ol]:space-y-2
+                  [&_li]:mb-2 [&_li]:leading-relaxed
+                  [&>blockquote]:border-l-4 [&>blockquote]:border-gold [&>blockquote]:pl-6 [&>blockquote]:italic [&>blockquote]:text-gray-600 [&>blockquote]:my-8 [&>blockquote]:bg-cream [&>blockquote]:py-4 [&>blockquote]:pr-4
                   prose-img:rounded-sm prose-img:shadow-md prose-img:my-6
-                  prose-hr:border-gray-200 prose-hr:my-10"
+                  [&>hr]:border-gray-300 [&>hr]:my-10"
                 dangerouslySetInnerHTML={{ __html: post.content }}
               />
 
