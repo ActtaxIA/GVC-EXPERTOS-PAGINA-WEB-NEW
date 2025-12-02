@@ -5,6 +5,16 @@ Todos los cambios notables de este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.1] - 2025-12-02
+
+### 🐛 Bug Fixes
+
+- **Estilos**: Corregida clase `hover:bg-charcoal-light` a `hover:bg-charcoal-700` en `globals.css` y `Button.tsx`.
+- **TypeScript**: Corregidos errores de tipado en objetos complejos de Supabase con relaciones (`posts`, `news`, `success_cases`) usando `as any` en `app/[locale]/blog/[slug]/page.tsx`, `app/[locale]/noticias/[slug]/page.tsx` y `app/[locale]/blog/page.tsx`.
+- **Componentes**: Corregida prop `icon` a `name` en `ServiceIcon` dentro de `ServicesSection.tsx`.
+- **Utilidades**: Corregido error de indexación genérica en `lib/translation-utils.ts`.
+- **Runtime**: Convertido `app/offline/page.tsx` a Client Component (`'use client'`) para permitir interactividad (`onClick`).
+
 ## [1.0.0] - 2024-12-02
 
 ### 🎉 Release Inicial

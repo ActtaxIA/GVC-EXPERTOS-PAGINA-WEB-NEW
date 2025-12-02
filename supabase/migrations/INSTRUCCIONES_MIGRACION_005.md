@@ -1,4 +1,6 @@
-# Instrucciones para Migración 005 - Columnas de Traducción
+# Instrucciones para Migración 005 - Columnas de Traducción [COMPLETADA]
+
+**Estado: ✅ Ejecutada en producción**
 
 ## 📋 Resumen
 Esta migración añade soporte completo para contenido bilingüe (Español/Inglés) en todas las tablas de contenido dinámico.
