@@ -1,12 +1,7 @@
 import { MetadataRoute } from 'next'
 import { siteConfig, services, cities } from '@/config/site'
 import { routes, getTranslatedServiceRoute } from '@/lib/routes'
-import { createClient } from '@supabase/supabase-js'
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL || '',
-  process.env.SUPABASE_SERVICE_ROLE_KEY || ''
-)
+import { getSupabaseAdmin } from '@/lib/supabase/admin'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const locales = ['es', 'en'] as const
@@ -14,19 +9,37 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   
   const routesList: MetadataRoute.Sitemap = []
 
-  // Obtener posts del blog publicados
-  const { data: posts } = await supabase
-    .from('posts')
-    .select('slug, updated_at, published_at')
-    .eq('is_published', true)
-    .order('published_at', { ascending: false })
+  // Obtener posts del blog publicados (solo si las variables de entorno están disponibles)
+  let posts: Array<{ slug: string; updated_at: string | null; published_at: string | null }> = []
+  let news: Array<{ slug: string; updated_at: string | null; published_at: string | null }> = []
 
-  // Obtener noticias publicadas
-  const { data: news } = await supabase
-    .from('news')
-    .select('slug, updated_at, published_at')
-    .eq('is_published', true)
-    .order('published_at', { ascending: false })
+  try {
+    const supabase = getSupabaseAdmin()
+    
+    const { data: postsData } = await supabase
+      .from('posts')
+      .select('slug, updated_at, published_at')
+      .eq('is_published', true)
+      .order('published_at', { ascending: false })
+
+    if (postsData) {
+      posts = postsData
+    }
+
+    // Obtener noticias publicadas
+    const { data: newsData } = await supabase
+      .from('news')
+      .select('slug, updated_at, published_at')
+      .eq('is_published', true)
+      .order('published_at', { ascending: false })
+
+    if (newsData) {
+      news = newsData
+    }
+  } catch (error) {
+    // Si falla la conexión a Supabase durante el build, continuar sin datos dinámicos
+    console.warn('No se pudieron obtener posts/noticias para el sitemap:', error)
+  }
 
   for (const locale of locales) {
     const localeRoutes = routes[locale]

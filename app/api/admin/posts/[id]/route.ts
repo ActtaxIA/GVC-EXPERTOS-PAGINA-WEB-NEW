@@ -1,11 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@supabase/supabase-js'
 import { requireAuth } from '@/lib/auth'
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
+import { getSupabaseAdmin } from '@/lib/supabase/admin'
 
 // GET - Obtener post por ID
 export async function GET(
@@ -14,6 +9,7 @@ export async function GET(
 ) {
   try {
     await requireAuth()
+    const supabase = getSupabaseAdmin()
 
     const { data: post, error } = await supabase
       .from('posts')
@@ -52,6 +48,7 @@ export async function PATCH(
 ) {
   try {
     await requireAuth()
+    const supabase = getSupabaseAdmin()
     const body = await request.json()
 
     // Si se está publicando, añadir fecha de publicación
@@ -102,6 +99,7 @@ export async function DELETE(
 ) {
   try {
     await requireAuth()
+    const supabase = getSupabaseAdmin()
 
     const { error } = await supabase
       .from('posts')

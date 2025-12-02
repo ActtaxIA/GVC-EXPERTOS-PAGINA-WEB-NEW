@@ -1,5 +1,4 @@
 import { createClient } from '@supabase/supabase-js'
-import type { Database } from '@/types/database'
 
 /**
  * Helper para crear cliente de Supabase admin de forma lazy
@@ -13,10 +12,11 @@ export function getSupabaseAdmin() {
     throw new Error('Supabase configuration is missing. Please check your environment variables.')
   }
 
-  return createClient<Database>(supabaseUrl, supabaseServiceKey, {
+  return createClient(supabaseUrl, supabaseServiceKey, {
     auth: {
       autoRefreshToken: false,
       persistSession: false,
     },
   })
 }
+

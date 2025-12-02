@@ -1,11 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@supabase/supabase-js'
 import { requireAuth } from '@/lib/auth'
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
+import { getSupabaseAdmin } from '@/lib/supabase/admin'
 
 // PATCH - Actualizar contacto
 export async function PATCH(
@@ -14,6 +9,7 @@ export async function PATCH(
 ) {
   try {
     await requireAuth()
+    const supabase = getSupabaseAdmin()
     const body = await request.json()
 
     const { data: contact, error } = await supabase
@@ -45,6 +41,7 @@ export async function DELETE(
 ) {
   try {
     await requireAuth()
+    const supabase = getSupabaseAdmin()
 
     const { error } = await supabase
       .from('contact_submissions')
