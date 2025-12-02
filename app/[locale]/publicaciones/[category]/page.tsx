@@ -9,8 +9,9 @@ import { LocalizedLink } from '@/components/ui/LocalizedLink'
 import { getTranslations } from 'next-intl/server'
 import { createClient } from '@supabase/supabase-js'
 
-// Revalidar cada 60 segundos
-export const revalidate = 60
+// Forzar renderizado dinámico en cada request (SSR)
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
 
 function getSupabase() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL
@@ -28,14 +29,8 @@ function getSupabase() {
   return createClient(url, key)
 }
 
-// Todas las rutas son dinámicas - se generan bajo demanda
+// Permitir cualquier ruta dinámica
 export const dynamicParams = true
-
-// No pre-generamos rutas estáticas - las páginas se crean dinámicamente
-export async function generateStaticParams() {
-  // Devolver array vacío - las páginas se generarán dinámicamente cuando se visiten
-  return []
-}
 
 async function getCategory(slug: string, locale: string) {
   console.log('📂 [CATEGORY] getCategory called:', { slug, locale })

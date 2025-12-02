@@ -6,12 +6,24 @@ frontend:
         - npm ci --cache .npm --prefer-offline
     build:
       commands:
-        - echo "Building Next.js app..."
+        - echo "Environment variables check:"
+        - echo "NEXT_PUBLIC_SUPABASE_URL exists:" && test -n "$NEXT_PUBLIC_SUPABASE_URL" && echo "YES" || echo "NO"
+        - echo "SUPABASE_SERVICE_ROLE_KEY exists:" && test -n "$SUPABASE_SERVICE_ROLE_KEY" && echo "YES" || echo "NO"
         - npm run build
   artifacts:
     baseDirectory: .next
     files:
       - '**/*'
+    # Incluir archivos necesarios para standalone
+    secondaryArtifacts:
+      static:
+        baseDirectory: public
+        files:
+          - '**/*'
+      standalone:
+        baseDirectory: .next/standalone
+        files:
+          - '**/*'
   cache:
     paths:
       - .next/cache/**/*
