@@ -125,7 +125,7 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} className={`${inter.variable} ${playfair.variable}`}>
-      <body className="min-h-screen bg-white antialiased">
+      <body className="min-h-screen bg-white antialiased flex flex-col">
         <NextIntlClientProvider messages={messages}>
           <Header />
           <main className="flex-1">{children}</main>

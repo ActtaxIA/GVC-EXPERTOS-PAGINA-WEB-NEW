@@ -24,8 +24,8 @@ export function IntroSection() {
     },
     {
       icon: Award,
-      title: 'Máxima Indemnización',
-      description: 'Luchamos por conseguir la indemnización más alta posible',
+      title: t('feature4Title'),
+      description: t('feature4Description'),
     },
   ]
 
