@@ -11,6 +11,7 @@
     "lint:fix": "next lint --fix",
     "create-admin": "npx ts-node scripts/create-admin.ts",
     "check": "node scripts/check-project.js",
+    "check:api": "node scripts/check-api-connections.js",
     "test": "playwright test",
     "test:ui": "playwright test --ui",
     "test:headed": "playwright test --headed",
