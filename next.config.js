@@ -1,4 +1,7 @@
-const withNextIntl = require('next-intl/plugin')()
+const withNextIntl = require('next-intl/plugin')(
+  // Especificar el archivo de configuración i18n
+  './i18n/request.ts'
+)
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
