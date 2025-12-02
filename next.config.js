@@ -31,10 +31,10 @@ const nextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
   
-  // Optimizaciones de compilación
-  compiler: {
-    removeConsole: process.env.NODE_ENV === 'production',
-  },
+  // Optimizaciones de compilación - NO eliminar console en producción para debugging
+  // compiler: {
+  //   removeConsole: process.env.NODE_ENV === 'production',
+  // },
   
   // Powered by header deshabilitado por seguridad
   poweredByHeader: false,
