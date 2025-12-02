@@ -298,7 +298,7 @@ export default async function CategoryPage({
         </div>
       </section>
 
-      <CtaDark />
+      <CtaDark variant="light" />
     </>
   )
 }

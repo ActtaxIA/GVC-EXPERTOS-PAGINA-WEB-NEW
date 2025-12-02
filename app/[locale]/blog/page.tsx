@@ -297,7 +297,7 @@ export default async function BlogPage({
         </div>
       </section>
 
-      <CtaDark />
+      <CtaDark variant="light" />
     </>
   )
 }

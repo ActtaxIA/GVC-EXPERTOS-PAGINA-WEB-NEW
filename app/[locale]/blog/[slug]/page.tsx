@@ -387,7 +387,7 @@ export default async function BlogPostPage({
         </div>
       </section>
 
-      <CtaDark />
+      <CtaDark variant="light" />
     </>
   )
 }

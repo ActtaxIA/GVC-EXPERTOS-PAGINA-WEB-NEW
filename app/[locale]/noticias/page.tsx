@@ -158,7 +158,7 @@ export default async function NoticiasPage({
         </div>
       </section>
 
-      <CtaDark />
+      <CtaDark variant="light" />
     </>
   )
 }

@@ -4,18 +4,33 @@ import { Phone, ArrowRight } from 'lucide-react'
 import { LocalizedLink } from '@/components/ui/LocalizedLink'
 import { siteConfig } from '@/config/site'
 import { useTranslations } from 'next-intl'
+import { cn } from '@/lib/utils'
 
-export function CtaDark() {
+interface CtaDarkProps {
+  variant?: 'dark' | 'light'
+}
+
+export function CtaDark({ variant = 'dark' }: CtaDarkProps) {
   const t = useTranslations('home.cta')
+  const isLight = variant === 'light'
   
   return (
-    <section className="section-padding bg-charcoal">
+    <section className={cn(
+      "section-padding",
+      isLight ? "bg-cream" : "bg-charcoal"
+    )}>
       <div className="container-custom">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-6">
+          <h2 className={cn(
+            "text-3xl md:text-4xl font-serif font-bold mb-6",
+            isLight ? "text-charcoal" : "text-white"
+          )}>
             {t('title')}
           </h2>
-          <p className="text-lg text-gray-300 mb-10 leading-relaxed">
+          <p className={cn(
+            "text-lg mb-10 leading-relaxed",
+            isLight ? "text-gray-600" : "text-gray-300"
+          )}>
             {t('description')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -25,7 +40,9 @@ export function CtaDark() {
             </LocalizedLink>
             <a
               href={siteConfig.contact.phoneHref}
-              className="btn-outline-white"
+              className={cn(
+                isLight ? "btn-outline" : "btn-outline-white"
+              )}
             >
               <Phone className="w-4 h-4 mr-2" />
               {siteConfig.contact.phone}
