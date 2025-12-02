@@ -106,11 +106,6 @@ export async function generateMetadata({
         'max-snippet': -1,
       },
     },
-    icons: {
-      icon: '/images/favicon.png',
-      apple: '/images/favicon.png',
-      shortcut: '/images/favicon.png',
-    },
     manifest: '/manifest.json',
   }
 }
