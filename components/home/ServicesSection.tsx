@@ -11,6 +11,16 @@ export function ServicesSection() {
   const tCommon = useTranslations('common')
   const tServices = useTranslations('services')
   
+  // Mapeo de slugs en español a claves de traducción en inglés
+  const serviceSlugMap: Record<string, string> = {
+    'errores-quirurgicos': 'surgical-errors',
+    'errores-diagnostico': 'diagnostic-errors',
+    'negligencia-hospitalaria': 'hospital-negligence',
+    'negligencia-obstetrica': 'obstetric-negligence',
+    'errores-medicacion': 'medication-errors',
+    'consentimiento-informado': 'informed-consent',
+  }
+  
   return (
     <section className="section-padding bg-white">
       <div className="container-custom">
@@ -27,30 +37,32 @@ export function ServicesSection() {
 
         {/* Services Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-          {services.map((service) => (
-            <LocalizedLink
-              key={service.slug}
-              href={`/negligencias-medicas/${service.slug}`}
-              className="group bg-cream p-8 rounded-sm hover:shadow-xl transition-all duration-300 border border-transparent hover:border-gold/20"
-            >
-              <div className="w-14 h-14 bg-white rounded-sm flex items-center justify-center mb-5 group-hover:bg-gold transition-colors duration-300 shadow-sm">
-                <ServiceIcon
-                  name={service.icon}
-                  className="w-7 h-7 text-gold group-hover:text-white transition-colors duration-300"
-                />
-              </div>
-              <h3 className="text-xl font-serif font-semibold text-charcoal mb-3 group-hover:text-gold transition-colors">
-                {tServices(`${service.slug}.title`)}
-              </h3>
-              <p className="text-gray-600 text-sm leading-relaxed mb-4">
-                {tServices(`${service.slug}.description`)}
-              </p>
+          {services.map((service) => {
+            const translationKey = serviceSlugMap[service.slug] || service.slug
+            return (
+              <LocalizedLink
+                key={service.slug}
+                href={`/negligencias-medicas/${service.slug}`}
+                className="group bg-cream p-8 rounded-sm hover:shadow-xl transition-all duration-300 border border-transparent hover:border-gold/20"
+              >
+                <div className="w-14 h-14 bg-white rounded-sm flex items-center justify-center mb-5 group-hover:bg-gold transition-colors duration-300 shadow-sm">
+                  <ServiceIcon
+                    name={service.icon}
+                    className="w-7 h-7 text-gold group-hover:text-white transition-colors duration-300"
+                  />
+                </div>
+                <h3 className="text-xl font-serif font-semibold text-charcoal mb-3 group-hover:text-gold transition-colors">
+                  {tServices(`${translationKey}.title`)}
+                </h3>
+                <p className="text-gray-600 text-sm leading-relaxed mb-4">
+                  {tServices(`${translationKey}.description`)}
+                </p>
               <div className="flex items-center text-gold text-sm font-medium">
                 {tCommon('learnMore')}
                 <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
               </div>
             </LocalizedLink>
-          ))}
+          )})}
         </div>
 
         {/* CTA */}
