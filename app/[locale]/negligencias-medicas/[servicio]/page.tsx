@@ -462,14 +462,15 @@ export async function generateMetadata({
   // Las traducciones siempre usan el slug inglés como clave
   const translationKey = serviceSlugMap[service.slug] || service.slug
   const serviceTitle = tServices(`${translationKey}.title`)
+  const serviceDescription = tServices(`${translationKey}.description`)
 
   return {
     title: isSpanish
       ? `${serviceTitle} | Abogados Especialistas`
       : `${serviceTitle} | Specialist Lawyers`,
     description: isSpanish
-      ? `Abogados especializados en ${serviceTitle.toLowerCase()}. ${service.shortDescription} Consulta gratuita.`
-      : `Specialized lawyers in ${serviceTitle.toLowerCase()}. ${service.shortDescription} Free consultation.`,
+      ? `Abogados especializados en ${serviceTitle.toLowerCase()}. ${serviceDescription} Consulta gratuita.`
+      : `Specialized lawyers in ${serviceTitle.toLowerCase()}. ${serviceDescription} Free consultation.`,
     alternates: {
       canonical: `${siteConfig.url}/${params.locale}/negligencias-medicas/${service.slug}`,
       languages: {
@@ -485,8 +486,8 @@ export async function generateMetadata({
         ? `${serviceTitle} | Abogados Especialistas`
         : `${serviceTitle} | Specialist Lawyers`,
       description: isSpanish
-        ? `Abogados especializados en ${serviceTitle.toLowerCase()}. ${service.shortDescription}`
-        : `Specialized lawyers in ${serviceTitle.toLowerCase()}. ${service.shortDescription}`,
+        ? `Abogados especializados en ${serviceTitle.toLowerCase()}. ${serviceDescription}`
+        : `Specialized lawyers in ${serviceTitle.toLowerCase()}. ${serviceDescription}`,
       siteName: siteConfig.name,
       images: [{
         url: `${siteConfig.url}/images/og-image.jpg`,
@@ -537,9 +538,10 @@ export default async function ServicioPage({
     'consentimiento-informado': 'informed-consent',
   }
   
-  // Obtener título traducido del servicio (las traducciones siempre usan slug inglés)
+  // Obtener título y descripción traducidos del servicio (las traducciones siempre usan slug inglés)
   const translationKey = serviceSlugMap[service.slug] || service.slug
   const serviceTitle = tServices(`${translationKey}.title`)
+  const serviceDescription = tServices(`${translationKey}.description`)
 
   return (
     <>
@@ -550,7 +552,7 @@ export default async function ServicioPage({
             '@context': 'https://schema.org',
             '@type': 'Service',
             name: serviceTitle,
-            description: service.shortDescription,
+            description: serviceDescription,
             url: `${siteConfig.url}/${params.locale}/negligencias-medicas/${service.slug}`,
             inLanguage: params.locale === 'es' ? 'es-ES' : 'en-US',
             provider: {
@@ -630,7 +632,7 @@ export default async function ServicioPage({
                 {serviceTitle}
               </h1>
               <p className="text-gray-300 text-xl max-w-3xl leading-relaxed">
-                {content?.intro || service.shortDescription}
+                {content?.intro || serviceDescription}
               </p>
             </div>
           </div>

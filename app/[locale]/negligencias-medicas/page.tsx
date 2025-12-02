@@ -52,6 +52,17 @@ export default async function NegligenciasMedicasPage({
   params: { locale: string }
 }) {
   const isSpanish = locale === 'es'
+  const tServices = await getTranslations({ locale, namespace: 'services' })
+  
+  // Mapeo de slugs español a inglés para traducciones
+  const serviceSlugMap: Record<string, string> = {
+    'errores-quirurgicos': 'surgical-errors',
+    'errores-diagnostico': 'diagnostic-errors',
+    'negligencia-hospitalaria': 'hospital-negligence',
+    'negligencia-obstetrica': 'obstetric-negligence',
+    'errores-medicacion': 'medication-errors',
+    'consentimiento-informado': 'informed-consent',
+  }
   
   return (
     <>
@@ -95,27 +106,30 @@ export default async function NegligenciasMedicasPage({
       <section className="section-padding bg-cream">
         <div className="container-custom">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {services.map((service) => (
-              <Link
-                key={service.slug}
-                href={`/${locale}/negligencias-medicas/${service.slug}`}
-                className="bg-white p-8 rounded-sm shadow-sm hover:shadow-lg transition-all group"
-              >
-                <div className="text-gold mb-4">
-                  <ServiceIcon name={service.icon} className="w-12 h-12" />
-                </div>
-                <h3 className="text-xl font-serif font-bold text-charcoal mb-3 group-hover:text-gold transition-colors">
-                  {service.title}
-                </h3>
-                <p className="text-gray-600 mb-4">
-                  {service.shortDescription}
-                </p>
-                <span className="inline-flex items-center text-gold font-semibold text-sm group-hover:gap-2 transition-all">
-                  {isSpanish ? 'Saber más' : 'Learn more'}
-                  <ArrowRight className="w-4 h-4 ml-1" />
-                </span>
-              </Link>
-            ))}
+            {services.map((service) => {
+              const translationKey = serviceSlugMap[service.slug] || service.slug
+              return (
+                <Link
+                  key={service.slug}
+                  href={`/${locale}/negligencias-medicas/${service.slug}`}
+                  className="bg-white p-8 rounded-sm shadow-sm hover:shadow-lg transition-all group"
+                >
+                  <div className="text-gold mb-4">
+                    <ServiceIcon name={service.icon} className="w-12 h-12" />
+                  </div>
+                  <h3 className="text-xl font-serif font-bold text-charcoal mb-3 group-hover:text-gold transition-colors">
+                    {tServices(`${translationKey}.title`)}
+                  </h3>
+                  <p className="text-gray-600 mb-4">
+                    {tServices(`${translationKey}.description`)}
+                  </p>
+                  <span className="inline-flex items-center text-gold font-semibold text-sm group-hover:gap-2 transition-all">
+                    {isSpanish ? 'Saber más' : 'Learn more'}
+                    <ArrowRight className="w-4 h-4 ml-1" />
+                  </span>
+                </Link>
+              )
+            })}
           </div>
         </div>
       </section>
