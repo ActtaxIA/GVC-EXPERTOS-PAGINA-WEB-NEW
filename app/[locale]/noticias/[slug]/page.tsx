@@ -50,7 +50,7 @@ export async function generateMetadata({
 }: {
   params: { slug: string; locale: string }
 }): Promise<Metadata> {
-  const item = await getNewsItem(params.slug, params.locale)
+  const item = await getNewsItem(params.slug, params.locale) as any
   const t = await getTranslations({ locale: params.locale, namespace: 'news' })
 
   if (!item) {
@@ -83,7 +83,7 @@ export default async function NoticiaPage({
 }: {
   params: { slug: string; locale: string }
 }) {
-  const item = await getNewsItem(params.slug, params.locale)
+  const item = await getNewsItem(params.slug, params.locale) as any
   const t = await getTranslations({ locale: params.locale, namespace: 'news' })
 
   if (!item) {

@@ -82,7 +82,7 @@ export async function generateMetadata({
 }: {
   params: { slug: string; locale: string }
 }): Promise<Metadata> {
-  const post = await getPost(params.slug, params.locale)
+  const post = await getPost(params.slug, params.locale) as any
   const t = await getTranslations({ locale: params.locale, namespace: 'blog' })
 
   if (!post) {
@@ -106,7 +106,7 @@ export async function generateMetadata({
       title: post.title,
       description: post.excerpt,
       publishedTime: post.published_at,
-      authors: (post.author as any)?.name ? [(post.author as any).name] : undefined,
+      authors: post.author?.name ? [post.author.name] : undefined,
       images: post.featured_image ? [{ url: post.featured_image, width: 1200, height: 630 }] : undefined,
     },
   }
@@ -117,15 +117,15 @@ export default async function BlogPostPage({
 }: {
   params: { slug: string; locale: string }
 }) {
-  const post = await getPost(params.slug, params.locale)
+  const post = await getPost(params.slug, params.locale) as any
   const t = await getTranslations({ locale: params.locale, namespace: 'blog' })
 
   if (!post) {
     notFound()
   }
 
-  const relatedPosts = (post.category as any)?.id 
-    ? await getRelatedPosts((post.category as any).id, post.id, params.locale) 
+  const relatedPosts = post.category?.id 
+    ? await getRelatedPosts(post.category.id, post.id, params.locale) 
     : []
 
   const shareUrl = `${siteConfig.url}/${params.locale}/blog/${post.slug}`
@@ -139,7 +139,7 @@ export default async function BlogPostPage({
         url={shareUrl}
         datePublished={post.published_at}
         dateModified={post.updated_at}
-        author={(post.author as any)?.name || siteConfig.name}
+        author={post.author?.name || siteConfig.name}
       />
       <JsonLdBreadcrumbs
         items={[
@@ -162,7 +162,7 @@ export default async function BlogPostPage({
 
           {post.category && (
             <span className="inline-block px-3 py-1 bg-gold/20 text-gold text-sm font-semibold rounded mb-4">
-              {(post.category as any).name}
+              {post.category.name}
             </span>
           )}
 
@@ -173,16 +173,16 @@ export default async function BlogPostPage({
           <div className="flex flex-wrap items-center gap-6 text-sm text-gray-400">
             {post.author && (
               <div className="flex items-center gap-2">
-                {(post.author as any).photo_url && (
+                {post.author.photo_url && (
                   <Image
-                    src={(post.author as any).photo_url}
-                    alt={(post.author as any).name}
+                    src={post.author.photo_url}
+                    alt={post.author.name}
                     width={32}
                     height={32}
                     className="rounded-full"
                   />
                 )}
-                <span>{(post.author as any).name}</span>
+                <span>{post.author.name}</span>
               </div>
             )}
             <div className="flex items-center gap-2">
@@ -293,10 +293,10 @@ export default async function BlogPostPage({
                     {t('aboutAuthor')}
                   </h3>
                   <div className="flex items-center gap-4 mb-4">
-                    {(post.author as any).photo_url && (
+                    {post.author.photo_url && (
                       <Image
-                        src={(post.author as any).photo_url}
-                        alt={(post.author as any).name}
+                        src={post.author.photo_url}
+                        alt={post.author.name}
                         width={64}
                         height={64}
                         className="rounded-full"
@@ -304,18 +304,18 @@ export default async function BlogPostPage({
                     )}
                     <div>
                       <p className="font-semibold text-charcoal">
-                        {(post.author as any).name}
+                        {post.author.name}
                       </p>
-                      {(post.author as any).position && (
+                      {post.author.position && (
                         <p className="text-sm text-gray-500">
-                          {(post.author as any).position}
+                          {post.author.position}
                         </p>
                       )}
                     </div>
                   </div>
-                  {(post.author as any).bio && (
+                  {post.author.bio && (
                     <p className="text-sm text-gray-600 line-clamp-4">
-                      {(post.author as any).bio}
+                      {post.author.bio}
                     </p>
                   )}
                 </div>
