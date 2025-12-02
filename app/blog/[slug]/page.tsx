@@ -68,7 +68,7 @@ export async function generateMetadata({
       description: post.excerpt,
       type: 'article',
       publishedTime: post.published_at,
-      authors: post.author?.name ? [post.author.name] : undefined,
+      authors: (post.author as any)?.name ? [(post.author as any).name] : undefined,
       images: post.featured_image ? [{ url: post.featured_image }] : undefined,
     },
   }
@@ -85,8 +85,8 @@ export default async function BlogPostPage({
     notFound()
   }
 
-  const relatedPosts = post.category?.id 
-    ? await getRelatedPosts(post.category.id, post.id) 
+  const relatedPosts = (post.category as any)?.id 
+    ? await getRelatedPosts((post.category as any).id, post.id) 
     : []
 
   const shareUrl = `${siteConfig.url}/blog/${post.slug}`
@@ -122,7 +122,7 @@ export default async function BlogPostPage({
 
           {post.category && (
             <span className="inline-block px-3 py-1 bg-gold/20 text-gold text-sm font-semibold rounded mb-4">
-              {post.category.name}
+              {(post.category as any).name}
             </span>
           )}
 
@@ -133,16 +133,16 @@ export default async function BlogPostPage({
           <div className="flex flex-wrap items-center gap-6 text-sm text-gray-400">
             {post.author && (
               <div className="flex items-center gap-2">
-                {post.author.photo_url && (
+                {(post.author as any).photo_url && (
                   <Image
-                    src={post.author.photo_url}
-                    alt={post.author.name}
+                    src={(post.author as any).photo_url}
+                    alt={(post.author as any).name}
                     width={32}
                     height={32}
                     className="rounded-full"
                   />
                 )}
-                <span>{post.author.name}</span>
+                <span>{(post.author as any).name}</span>
               </div>
             )}
             <div className="flex items-center gap-2">
@@ -253,10 +253,10 @@ export default async function BlogPostPage({
                     Sobre el autor
                   </h3>
                   <div className="flex items-center gap-4 mb-4">
-                    {post.author.photo_url && (
+                    {(post.author as any).photo_url && (
                       <Image
-                        src={post.author.photo_url}
-                        alt={post.author.name}
+                        src={(post.author as any).photo_url}
+                        alt={(post.author as any).name}
                         width={64}
                         height={64}
                         className="rounded-full"
@@ -264,18 +264,18 @@ export default async function BlogPostPage({
                     )}
                     <div>
                       <p className="font-semibold text-charcoal">
-                        {post.author.name}
+                        {(post.author as any).name}
                       </p>
-                      {post.author.position && (
+                      {(post.author as any).position && (
                         <p className="text-sm text-gray-500">
-                          {post.author.position}
+                          {(post.author as any).position}
                         </p>
                       )}
                     </div>
                   </div>
-                  {post.author.bio && (
+                  {(post.author as any).bio && (
                     <p className="text-sm text-gray-600 line-clamp-4">
-                      {post.author.bio}
+                      {(post.author as any).bio}
                     </p>
                   )}
                 </div>

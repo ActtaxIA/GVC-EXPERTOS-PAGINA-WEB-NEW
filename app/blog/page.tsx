@@ -130,7 +130,7 @@ export default async function BlogPage() {
                 <div>
                   {featuredPost.category && (
                     <span className="text-gold text-sm font-semibold uppercase tracking-widest">
-                      {featuredPost.category.name}
+                      {(featuredPost.category as any)?.name}
                     </span>
                   )}
                   <h2 className="text-2xl md:text-3xl font-serif font-bold text-charcoal mt-2 mb-4 group-hover:text-gold transition-colors">
@@ -143,7 +143,7 @@ export default async function BlogPage() {
                     {featuredPost.author && (
                       <div className="flex items-center gap-2">
                         <User className="w-4 h-4" />
-                        {featuredPost.author.name}
+                        {(featuredPost.author as any)?.name}
                       </div>
                     )}
                     <div className="flex items-center gap-2">
@@ -191,7 +191,7 @@ export default async function BlogPage() {
                     <div className="p-6">
                       {post.category && (
                         <span className="text-gold text-xs font-semibold uppercase tracking-widest">
-                          {post.category.name}
+                          {(post.category as any)?.name}
                         </span>
                       )}
                       <h3 className="text-lg font-serif font-bold text-charcoal mt-2 mb-3 group-hover:text-gold transition-colors line-clamp-2">
