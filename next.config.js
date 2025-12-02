@@ -5,6 +5,14 @@ const withNextIntl = require('next-intl/plugin')(
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Excluir carpeta scripts del build
+  webpack: (config) => {
+    config.watchOptions = {
+      ...config.watchOptions,
+      ignored: ['**/scripts/**', '**/node_modules/**'],
+    }
+    return config
+  },
   images: {
     remotePatterns: [
       {

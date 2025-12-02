@@ -122,21 +122,42 @@ function convertMarkdownToHTML(markdown: string): string {
 async function importPosts() {
   console.log('📚 Iniciando importación de posts desde CSV...\n')
   
-  // Leer CSV
-  const csvPath = path.join(process.cwd(), 'Table 1-Grid view (5).csv')
-  const fileContent = fs.readFileSync(csvPath, 'utf-8')
+  // Leer CSV (está en el directorio padre)
+  const csvPath = path.join(process.cwd(), '..', 'Table 1-Grid view (5).csv')
+  let fileContent = fs.readFileSync(csvPath, 'utf-8')
+  
+  // Eliminar BOM si existe
+  if (fileContent.charCodeAt(0) === 0xFEFF) {
+    fileContent = fileContent.slice(1)
+  }
+  
+  // También eliminar BOM en UTF-8
+  fileContent = fileContent.replace(/^\uFEFF/, '')
   
   const records = csv.parse(fileContent, {
     columns: true,
     skip_empty_lines: true,
     trim: true,
+    relax_column_count: true,
   })
   
   console.log(`📄 Total de registros en CSV: ${records.length}`)
   
+  // Debug: mostrar las primeras 2 líneas
+  if (records.length > 0) {
+    console.log('\n🔍 Primeras 2 líneas para debug:')
+    records.slice(0, 2).forEach((record: any, index: number) => {
+      console.log(`\n${index + 1}. Titulo: "${record.Titulo}"`)
+      console.log(`   Texto: ${record.Texto ? record.Texto.substring(0, 50) + '...' : 'vacío'}`)
+    })
+    console.log()
+  }
+  
   // Filtrar registros válidos (que tengan título y contenido)
   const validRecords = records.filter((record: any) => {
-    return record.Titulo && record.Titulo.trim() && record.Texto && record.Texto.trim()
+    const hasTitle = record.Titulo && record.Titulo.trim().length > 0
+    const hasContent = record.Texto && record.Texto.trim().length > 10
+    return hasTitle && hasContent
   })
   
   console.log(`✅ Registros válidos: ${validRecords.length}\n`)
