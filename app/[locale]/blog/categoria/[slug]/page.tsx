@@ -9,6 +9,9 @@ import { createClient } from '@supabase/supabase-js'
 import { LocalizedLink } from '@/components/ui/LocalizedLink'
 import { getTranslations } from 'next-intl/server'
 
+// Revalidar cada 60 segundos (ISR)
+export const revalidate = 60
+
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL || '',
   process.env.SUPABASE_SERVICE_ROLE_KEY || ''

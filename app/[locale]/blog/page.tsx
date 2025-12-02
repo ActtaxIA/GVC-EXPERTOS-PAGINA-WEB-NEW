@@ -9,6 +9,9 @@ import { LocalizedLink } from '@/components/ui/LocalizedLink'
 import { useTranslations } from 'next-intl'
 import { getTranslations } from 'next-intl/server'
 
+// Revalidar cada 60 segundos (ISR)
+export const revalidate = 60
+
 export async function generateMetadata({
   params: { locale }
 }: {
