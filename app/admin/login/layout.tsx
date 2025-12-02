@@ -1,8 +1,16 @@
+import '../../globals.css'
+
 export default function AdminLoginLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  // Este layout no usa el sidebar del admin
-  return children
+  // Layout independiente para login (sin sidebar)
+  return (
+    <html lang="es">
+      <body>
+        {children}
+      </body>
+    </html>
+  )
 }

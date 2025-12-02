@@ -13,6 +13,7 @@ import {
   TrendingUp
 } from 'lucide-react'
 import { getSession } from '@/lib/auth'
+import '../globals.css'
 
 export default async function AdminLayout({
   children,
@@ -37,7 +38,9 @@ export default async function AdminLayout({
   ]
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <html lang="es">
+      <body>
+        <div className="min-h-screen bg-gray-100">
       {/* Sidebar */}
       <aside className="fixed inset-y-0 left-0 w-64 bg-charcoal text-white">
         {/* Logo */}
@@ -102,6 +105,8 @@ export default async function AdminLayout({
       <main className="ml-64 min-h-screen">
         {children}
       </main>
-    </div>
+        </div>
+      </body>
+    </html>
   )
 }
