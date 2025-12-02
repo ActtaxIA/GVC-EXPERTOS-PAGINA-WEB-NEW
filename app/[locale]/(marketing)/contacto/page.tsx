@@ -158,17 +158,17 @@ export default async function ContactoPage({
                 </div>
               </div>
 
-              {/* Map placeholder */}
+              {/* Mapa de Murcia - Plaza Fuensanta, 3 */}
               <div className="mt-8 bg-gray-200 rounded-sm aspect-video flex items-center justify-center">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3037.223428!2d-3.7025!3d40.42!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDI1JzEyLjAiTiAzwrA0MicwOS4wIlc!5e0!3m2!1ses!2ses!4v1234567890!5m2!1ses!2ses"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3145.8!2d-1.1307!3d37.9838!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd6381f8d5c8c7c1%3A0x1234567890abcdef!2sPlaza%20Fuensanta%2C%203%2C%2030008%20Murcia!5e0!3m2!1ses!2ses!4v1701500000000!5m2!1ses!2ses"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  title={isSpanish ? 'Ubicación GVC Expertos' : 'GVC Expertos Location'}
+                  title={isSpanish ? 'Ubicación GVC Expertos - Murcia' : 'GVC Expertos Location - Murcia'}
                   className="rounded-sm"
                 />
               </div>
