@@ -53,6 +53,10 @@ export function generateMetadata({
     description,
     alternates: {
       canonical: url,
+      languages: {
+        'es-ES': `${siteConfig.url}/es/${city.slug}`,
+        'en-US': `${siteConfig.url}/en/${city.slug}`,
+      },
     },
     openGraph: {
       title,

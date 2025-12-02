@@ -1,7 +1,7 @@
-import Link from 'next/link'
 import Image from 'next/image'
 import { Phone, Mail, MapPin, Linkedin, Twitter, Facebook } from 'lucide-react'
 import { siteConfig, footerLinks } from '@/config/site'
+import { LocalizedLink } from '@/components/ui/LocalizedLink'
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
@@ -13,7 +13,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand Column */}
           <div className="lg:col-span-1">
-            <Link href="/" className="inline-block mb-6">
+            <LocalizedLink href="/" className="inline-block mb-6">
               <Image
                 src="/images/logo.png"
                 alt={siteConfig.name}
@@ -21,7 +21,7 @@ export function Footer() {
                 height={45}
                 className="h-11 w-auto brightness-0 invert"
               />
-            </Link>
+            </LocalizedLink>
             <p className="text-gray-400 text-sm leading-relaxed mb-6">
               Más de 20 años defendiendo los derechos de las víctimas de
               negligencias médicas en toda España. Primera consulta gratuita y
@@ -67,12 +67,12 @@ export function Footer() {
             <ul className="space-y-3">
               {footerLinks.servicios.map((link) => (
                 <li key={link.href}>
-                  <Link
+                  <LocalizedLink
                     href={link.href}
                     className="text-gray-400 hover:text-white text-sm transition-colors"
                   >
                     {link.label}
-                  </Link>
+                  </LocalizedLink>
                 </li>
               ))}
             </ul>
@@ -86,12 +86,12 @@ export function Footer() {
             <ul className="space-y-3">
               {footerLinks.empresa.map((link) => (
                 <li key={link.href}>
-                  <Link
+                  <LocalizedLink
                     href={link.href}
                     className="text-gray-400 hover:text-white text-sm transition-colors"
                   >
                     {link.label}
-                  </Link>
+                  </LocalizedLink>
                 </li>
               ))}
             </ul>
@@ -152,13 +152,13 @@ export function Footer() {
             </p>
             <div className="flex flex-wrap justify-center gap-6">
               {footerLinks.legal.map((link) => (
-                <Link
+                <LocalizedLink
                   key={link.href}
                   href={link.href}
                   className="text-gray-500 hover:text-white text-sm transition-colors"
                 >
                   {link.label}
-                </Link>
+                </LocalizedLink>
               ))}
             </div>
           </div>

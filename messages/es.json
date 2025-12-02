@@ -154,6 +154,81 @@
   "faq": {
     "title": "Preguntas Frecuentes",
     "subtitle": "Respuestas a las dudas más comunes sobre negligencias médicas"
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Artículos, guías y noticias sobre negligencias médicas, derechos del paciente y actualidad jurídica sanitaria.",
+    "metaTitle": "Blog | Artículos sobre Negligencias Médicas",
+    "metaDescription": "Artículos, guías y noticias sobre negligencias médicas, indemnizaciones, derechos del paciente y actualidad jurídica sanitaria.",
+    "allCategories": "Todos",
+    "featured": "Destacado",
+    "minRead": "min de lectura",
+    "min": "min",
+    "noPosts": "No hay artículos publicados todavía.",
+    "comeBackSoon": "Vuelve pronto para ver nuestro contenido.",
+    "shareArticle": "Compartir artículo",
+    "aboutAuthor": "Sobre el autor",
+    "needHelp": "¿Necesitas ayuda?",
+    "needHelpText": "Consulta gratuita con nuestros abogados especializados.",
+    "contact": "Contactar",
+    "relatedPosts": "Artículos relacionados",
+    "backToBlog": "Volver al blog"
+  },
+  "home": {
+    "hero": {
+      "title": "Abogados Expertos en Negligencias Médicas",
+      "subtitle": "Más de 20 años de experiencia defendiendo tus derechos",
+      "description": "Somos especialistas en reclamaciones por errores médicos. Te ayudamos a obtener la compensación que mereces. Primera consulta gratuita.",
+      "ctaPrimary": "Consulta Gratuita",
+      "ctaSecondary": "Llamar Ahora",
+      "statsYearsExperience": "Años de experiencia",
+      "statsCasesWon": "Casos ganados",
+      "statsCompensation": "Millones recuperados",
+      "statsSuccessRate": "Tasa de éxito"
+    },
+    "intro": {
+      "badge": "¿Por qué elegirnos?",
+      "title": "Expertos en Negligencias Médicas con Más de 20 Años de Experiencia",
+      "description": "Somos un despacho especializado exclusivamente en casos de negligencias médicas. Nuestro equipo de abogados expertos ha conseguido recuperar más de 50 millones de euros para nuestros clientes.",
+      "feature1Title": "Experiencia Probada",
+      "feature1Description": "Más de 20 años defendiendo a víctimas de negligencias médicas",
+      "feature2Title": "Equipo Especializado",
+      "feature2Description": "Abogados expertos dedicados exclusivamente a negligencias médicas",
+      "feature3Title": "95% de Éxito",
+      "feature3Description": "Tasa de éxito del 95% en casos que representamos"
+    },
+    "services": {
+      "badge": "Nuestros Servicios",
+      "title": "Tipos de Negligencias Médicas que Tratamos",
+      "subtitle": "Especializados en todo tipo de errores médicos y mala praxis sanitaria",
+      "viewAllServices": "Ver Todos los Servicios"
+    },
+    "process": {
+      "badge": "Cómo Trabajamos",
+      "title": "Nuestro Proceso de Trabajo",
+      "subtitle": "Un proceso transparente y eficaz para conseguir tu indemnización"
+    },
+    "team": {
+      "badge": "Nuestro Equipo",
+      "title": "Conoce a Nuestros Abogados Expertos",
+      "subtitle": "Un equipo de profesionales con décadas de experiencia en negligencias médicas",
+      "viewProfile": "Ver Perfil Completo"
+    },
+    "cta": {
+      "title": "¿Has Sufrido una Negligencia Médica?",
+      "description": "No esperes más. Contacta con nosotros y te ayudaremos a conseguir la compensación que mereces. Primera consulta gratuita y sin compromiso.",
+      "button": "Solicitar Consulta Gratuita"
+    }
+  },
+  "news": {
+    "title": "Noticias",
+    "subtitle": "Últimas noticias y actualidad sobre negligencias médicas, sentencias judiciales y novedades del sector sanitario.",
+    "metaTitle": "Noticias | Actualidad en Negligencias Médicas",
+    "metaDescription": "Últimas noticias y actualidad sobre negligencias médicas, sentencias judiciales, cambios legislativos y novedades del sector sanitario.",
+    "readMore": "Leer más",
+    "noNews": "No hay noticias publicadas todavía.",
+    "viewOriginalSource": "Ver fuente original",
+    "backToNews": "Volver a noticias"
   }
 }
 

@@ -25,7 +25,23 @@ export async function generateMetadata({
       ? 'Especialistas en todo tipo de negligencias médicas: errores quirúrgicos, diagnósticos incorrectos, negligencia hospitalaria, obstétrica y más. Consulta gratuita.'
       : 'Specialists in all types of medical negligence: surgical errors, incorrect diagnoses, hospital negligence, obstetric and more. Free consultation.',
     alternates: {
-      canonical: `/${locale}/negligencias-medicas`,
+      canonical: `${siteConfig.url}/${locale}/negligencias-medicas`,
+      languages: {
+        'es-ES': `${siteConfig.url}/es/negligencias-medicas`,
+        'en-US': `${siteConfig.url}/en/negligencias-medicas`,
+      },
+    },
+    openGraph: {
+      type: 'website',
+      locale: locale === 'es' ? 'es_ES' : 'en_US',
+      url: `${siteConfig.url}/${locale}/negligencias-medicas`,
+      title: isSpanish
+        ? 'Negligencias Médicas | Tipos de Errores Médicos'
+        : 'Medical Negligence | Types of Medical Errors',
+      description: isSpanish
+        ? 'Especialistas en todo tipo de negligencias médicas'
+        : 'Specialists in all types of medical negligence',
+      siteName: siteConfig.name,
     },
   }
 }

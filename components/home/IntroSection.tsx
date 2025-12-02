@@ -1,49 +1,47 @@
-import { Scale, Shield, Clock, Award } from 'lucide-react'
+'use client'
 
-const features = [
-  {
-    icon: Scale,
-    title: 'Justicia Especializada',
-    description:
-      'Somos uno de los pocos despachos en España dedicados exclusivamente a negligencias médicas.',
-  },
-  {
-    icon: Shield,
-    title: 'Sin Coste Inicial',
-    description:
-      'No cobramos honorarios hasta ganar tu caso. Solo cobramos si tú cobras.',
-  },
-  {
-    icon: Clock,
-    title: 'Respuesta Inmediata',
-    description:
-      'Analizamos tu caso en 24-48 horas y te informamos de las posibilidades reales.',
-  },
-  {
-    icon: Award,
-    title: 'Máxima Indemnización',
-    description:
-      'Luchamos por conseguir la indemnización más alta posible para compensar el daño sufrido.',
-  },
-]
+import { Scale, Shield, Clock, Award } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 export function IntroSection() {
+  const t = useTranslations('home.intro')
+  
+  const features = [
+    {
+      icon: Scale,
+      title: t('feature1Title'),
+      description: t('feature1Description'),
+    },
+    {
+      icon: Shield,
+      title: t('feature2Title'),
+      description: t('feature2Description'),
+    },
+    {
+      icon: Clock,
+      title: t('feature3Title'),
+      description: t('feature3Description'),
+    },
+    {
+      icon: Award,
+      title: 'Máxima Indemnización',
+      description: 'Luchamos por conseguir la indemnización más alta posible',
+    },
+  ]
+
   return (
     <section className="section-padding bg-cream">
       <div className="container-custom">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
           <span className="text-gold text-sm font-semibold uppercase tracking-widest">
-            ¿Por qué elegirnos?
+            {t('badge')}
           </span>
           <h2 className="text-3xl md:text-4xl font-serif font-bold text-charcoal mt-3 mb-5">
-            Defendemos tus Derechos con Experiencia y Dedicación
+            {t('title')}
           </h2>
           <p className="text-gray-600 leading-relaxed">
-            Cuando sufres una negligencia médica, necesitas abogados que
-            entiendan tanto el derecho como la medicina. Nuestro equipo
-            multidisciplinar combina experiencia jurídica con conocimiento
-            médico para garantizar la mejor defensa de tus intereses.
+            {t('description')}
           </p>
         </div>
 

@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, CheckCircle, Phone, Shield, Award, Users, Clock, TrendingUp, FileText, AlertCircle } from 'lucide-react'
 import { services, siteConfig } from '@/config/site'
@@ -9,9 +8,10 @@ import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
 import { Accordion } from '@/components/ui/Accordion'
 import { CtaFinal } from '@/components/home'
 import { JsonLdService, JsonLdFAQ, JsonLdBreadcrumbs } from '@/components/seo/JsonLd'
+import { LocalizedLink } from '@/components/ui/LocalizedLink'
 
-// Contenido detallado de cada servicio
-const serviceContent: Record<string, {
+// Contenido detallado de cada servicio - ESPAÑOL
+const serviceContentEs: Record<string, {
   intro: string
   description: string[]
   symptoms: string[]
@@ -217,32 +217,277 @@ const serviceContent: Record<string, {
   },
 }
 
+// Contenido detallado de cada servicio - INGLÉS
+const serviceContentEn: Record<string, {
+  intro: string
+  description: string[]
+  symptoms: string[]
+  faqs: { id: string; title: string; content: string }[]
+}> = {
+  'errores-quirurgicos': {
+    intro: 'Surgical errors are failures that occur during medical procedures and can have serious consequences for the patient.',
+    description: [
+      'A surgical error occurs when the surgeon or medical team makes a mistake during the operation that causes harm to the patient. These errors can range from operating on the wrong part of the body to leaving surgical instruments inside the patient.',
+      'Liability for surgical errors may fall on the surgeon, medical team, anesthesiologist or healthcare facility, depending on the circumstances of the case.',
+      'It is essential to act quickly if you suspect you have been a victim of a surgical error, as medical documentation and evidence are essential to prove negligence.',
+    ],
+    symptoms: [
+      'Operation on the wrong part of the body',
+      'Instruments or objects left inside',
+      'Organ or nerve injuries during the procedure',
+      'Post-surgical infections due to lack of asepsis',
+      'Avoidable complications due to incorrect technique',
+      'Improperly administered anesthesia',
+    ],
+    faqs: [
+      {
+        id: '1',
+        title: 'How long do I have to claim a surgical error?',
+        content: 'The general period to claim is 1 year from when the damage or its consequences are known. However, this period may vary according to the circumstances, so it is important to consult as soon as possible.',
+      },
+      {
+        id: '2',
+        title: 'What compensation can I receive?',
+        content: 'Compensation depends on the severity of the damage suffered. It includes medical expenses, lost earnings, moral damage and permanent sequelae. Each case is assessed individually according to the accident scale.',
+      },
+      {
+        id: '3',
+        title: 'Do I need an expert report?',
+        content: 'Yes, the medical expert report is essential to prove that there was malpractice and establish the causal relationship with the damage suffered. Our team works with specialized medical experts.',
+      },
+    ],
+  },
+  'errores-diagnostico': {
+    intro: 'Diagnostic errors can delay proper treatment and significantly worsen the patient\'s prognosis.',
+    description: [
+      'A diagnostic error occurs when the doctor does not correctly identify the patient\'s disease, either due to a late, wrong diagnosis or a complete lack of diagnosis.',
+      'These errors are especially serious in diseases such as cancer, where early diagnosis is essential for successful treatment.',
+      'Negligence can occur by not performing necessary tests, misinterpreting results or not referring to the appropriate specialist.',
+    ],
+    symptoms: [
+      'Late diagnosis of cancer or other serious diseases',
+      'Confusion of one disease with another',
+      'Lack of necessary diagnostic tests',
+      'Incorrect interpretation of medical tests',
+      'Failure to refer to appropriate specialist',
+      'Premature discharge without correct diagnosis',
+    ],
+    faqs: [
+      {
+        id: '1',
+        title: 'How do I prove there was a diagnostic error?',
+        content: 'It is required to prove that a competent doctor, under the same circumstances, would have reached the correct diagnosis. Our medical experts analyze the clinical history and tests performed.',
+      },
+      {
+        id: '2',
+        title: 'Can I claim if the late diagnosis worsened my disease?',
+        content: 'Yes, if the delay in diagnosis caused a worsening of your prognosis or deprived you of treatment options, you can claim compensation for the additional damages suffered.',
+      },
+      {
+        id: '3',
+        title: 'What documentation do I need?',
+        content: 'It is important to gather all medical documentation: reports, diagnostic tests, prescriptions and any communication with healthcare professionals. We help you collect all necessary information.',
+      },
+    ],
+  },
+  'negligencia-hospitalaria': {
+    intro: 'Hospital negligence includes all failures in healthcare that occur in hospital facilities.',
+    description: [
+      'Hospitals have an obligation to guarantee safe and quality healthcare. When this obligation is breached, the facility may be liable for damages caused to the patient.',
+      'Hospital negligence can include nosocomial infections, patient falls, pressure ulcers, medication errors or deficiencies in supervision.',
+      'Liability may lie with both healthcare personnel and the hospital facility itself, which must guarantee adequate means for patient care.',
+    ],
+    symptoms: [
+      'Nosocomial (hospital-acquired) infections',
+      'Patient falls due to lack of surveillance',
+      'Pressure ulcers in bedridden patients',
+      'Errors in medication administration',
+      'Lack of adequate personnel or means',
+      'Delay in emergency care',
+    ],
+    faqs: [
+      {
+        id: '1',
+        title: 'Can the hospital be liable in addition to the doctor?',
+        content: 'Yes, the hospital can be liable both for the acts of its staff and for organizational or resource deficiencies. This is known as the facility\'s asset liability.',
+      },
+      {
+        id: '2',
+        title: 'What is a nosocomial infection?',
+        content: 'It is an infection acquired during a hospital stay that was not present or incubating at the time of admission. The hospital may be liable if it did not adopt adequate prevention measures.',
+      },
+      {
+        id: '3',
+        title: 'How do I claim against a public hospital?',
+        content: 'Claims against public hospitals are processed as patrimonial liability of the Administration. The procedure is different from private facilities and has specific deadlines.',
+      },
+    ],
+  },
+  'negligencia-obstetrica': {
+    intro: 'Obstetric negligence can cause irreparable damage to both mother and baby during pregnancy, childbirth or postpartum.',
+    description: [
+      'Pregnancy and childbirth require constant medical monitoring to detect any complications in time. Negligence in this area can have especially serious consequences.',
+      'Among the most frequent negligence are lack of fetal monitoring, delay in performing an emergency cesarean section or inappropriate use of instruments such as forceps or vacuum extractors.',
+      'Sequelae may include infantile cerebral palsy, brachial plexus injuries, neonatal hypoxia or permanent damage to the mother.',
+    ],
+    symptoms: [
+      'Cerebral palsy due to fetal distress',
+      'Injuries from improper use of forceps or vacuum',
+      'Delay in performing emergency cesarean',
+      'Lack of monitoring during childbirth',
+      'Brachial plexus injuries',
+      'Severe tears not properly repaired',
+    ],
+    faqs: [
+      {
+        id: '1',
+        title: 'What compensation corresponds for cerebral palsy?',
+        content: 'Compensation for cerebral palsy is among the highest, as it includes lifetime expenses in care, adaptations, treatments and moral damage. They can exceed several million euros.',
+      },
+      {
+        id: '2',
+        title: 'How long do I have to claim damages to the baby?',
+        content: 'The period to claim damages to a minor does not start counting until they reach the age of majority, although it is advisable to act as soon as possible to preserve evidence.',
+      },
+      {
+        id: '3',
+        title: 'Can the mother claim for her own damages?',
+        content: 'Yes, the mother can claim independently for the physical and psychological damages she has suffered during childbirth, including tears, incontinence or psychological trauma.',
+      },
+    ],
+  },
+  'errores-medicacion': {
+    intro: 'Medication errors can cause serious adverse effects and even patient death.',
+    description: [
+      'A medication error can occur at any stage: prescription, dispensing or administration of the medication. It includes incorrect doses, contraindicated medications or drug confusion.',
+      'Consequences can range from serious allergic reactions to poisoning or worsening of the disease due to inadequate treatment.',
+      'Liability may fall on the prescribing doctor, pharmacy, nursing staff or healthcare facility, depending on where the error occurred.',
+    ],
+    symptoms: [
+      'Administration of incorrect doses',
+      'Medications contraindicated with other treatments',
+      'Allergic reactions due to lack of verification',
+      'Confusion of similar medications',
+      'Errors in the route of administration',
+      'Lack of monitoring of side effects',
+    ],
+    faqs: [
+      {
+        id: '1',
+        title: 'What do I do if I think I was given incorrect medication?',
+        content: 'Keep the medication and its packaging, request a copy of your clinical history and prescriptions, and contact a specialized lawyer to evaluate your case as soon as possible.',
+      },
+      {
+        id: '2',
+        title: 'Can the pharmacy be liable?',
+        content: 'Yes, if the error occurred in the dispensing of the medication, the pharmacy may be liable. Also if it did not warn of obvious contraindications with other medications the patient was taking.',
+      },
+      {
+        id: '3',
+        title: 'How is it proven that the damage was from the medication?',
+        content: 'An expert report is required that establishes the cause-effect relationship between the incorrect medication and the damage suffered, ruling out other possible causes.',
+      },
+    ],
+  },
+  'consentimiento-informado': {
+    intro: 'The patient has the right to be informed and to decide about their treatment. Lack of informed consent is medical negligence.',
+    description: [
+      'Informed consent is a fundamental right of the patient. The doctor must explain the diagnosis, treatment options, risks and alternatives before any intervention.',
+      'Lack of informed consent or flawed consent (incomplete or incomprehensible information) can lead to liability even if the intervention was performed correctly.',
+      'This right is especially protected in surgical interventions, experimental treatments or procedures with significant risks.',
+    ],
+    symptoms: [
+      'Intervention without patient consent',
+      'Incomplete information about risks',
+      'Signing documents without prior explanation',
+      'Failure to inform of treatment alternatives',
+      'Generic consent without specifying risks',
+      'Not respecting the patient\'s refusal',
+    ],
+    faqs: [
+      {
+        id: '1',
+        title: 'Can I claim if I signed the consent but they didn\'t explain the risks?',
+        content: 'Yes, consent must be truly informed. If they did not adequately explain the risks or you did not have time to understand them, the consent may be considered flawed.',
+      },
+      {
+        id: '2',
+        title: 'What happens if I suffered a complication they didn\'t warn me about?',
+        content: 'If the complication was a known risk that should have been communicated and was not, you can claim for the loss of opportunity to have decided not to undergo the treatment.',
+      },
+      {
+        id: '3',
+        title: 'Is verbal consent valid?',
+        content: 'In general, written consent is required for surgical interventions and invasive procedures. Verbal consent may be valid for minor treatments, but prior information must always exist.',
+      },
+    ],
+  },
+}
+
 // Generar rutas estáticas
 export function generateStaticParams() {
-  return services.map((service) => ({
-    servicio: service.slug,
-  }))
+  return services.flatMap((service) => [
+    { locale: 'es', servicio: service.slug },
+    { locale: 'en', servicio: service.slug },
+  ])
 }
 
 // Generar metadata dinámica
-export function generateMetadata({
+export async function generateMetadata({
   params,
 }: {
-  params: { servicio: string }
-}): Metadata {
+  params: { servicio: string; locale: string }
+}): Promise<Metadata> {
   const service = services.find((s) => s.slug === params.servicio)
+  const isSpanish = params.locale === 'es'
   
   if (!service) {
     return {
-      title: 'Servicio no encontrado',
+      title: isSpanish ? 'Servicio no encontrado' : 'Service not found',
     }
   }
 
   return {
-    title: `${service.title} | Abogados Especialistas`,
-    description: `Abogados especializados en ${service.title.toLowerCase()}. ${service.shortDescription} Consulta gratuita.`,
+    title: isSpanish
+      ? `${service.title} | Abogados Especialistas`
+      : `${service.title} | Specialist Lawyers`,
+    description: isSpanish
+      ? `Abogados especializados en ${service.title.toLowerCase()}. ${service.shortDescription} Consulta gratuita.`
+      : `Specialized lawyers in ${service.title.toLowerCase()}. ${service.shortDescription} Free consultation.`,
     alternates: {
-      canonical: `/negligencias-medicas/${service.slug}`,
+      canonical: `${siteConfig.url}/${params.locale}/negligencias-medicas/${service.slug}`,
+      languages: {
+        'es-ES': `${siteConfig.url}/es/negligencias-medicas/${service.slug}`,
+        'en-US': `${siteConfig.url}/en/negligencias-medicas/${service.slug}`,
+      },
+    },
+    openGraph: {
+      type: 'website',
+      locale: params.locale === 'es' ? 'es_ES' : 'en_US',
+      url: `${siteConfig.url}/${params.locale}/negligencias-medicas/${service.slug}`,
+      title: isSpanish
+        ? `${service.title} | Abogados Especialistas`
+        : `${service.title} | Specialist Lawyers`,
+      description: isSpanish
+        ? `Abogados especializados en ${service.title.toLowerCase()}. ${service.shortDescription}`
+        : `Specialized lawyers in ${service.title.toLowerCase()}. ${service.shortDescription}`,
+      siteName: siteConfig.name,
+      images: [{
+        url: `${siteConfig.url}/images/og-image.jpg`,
+        width: 1200,
+        height: 630,
+        alt: service.title,
+      }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: isSpanish
+        ? `${service.title} | Abogados Especialistas`
+        : `${service.title} | Specialist Lawyers`,
+      description: isSpanish
+        ? `Abogados especializados en ${service.title.toLowerCase()}.`
+        : `Specialized lawyers in ${service.title.toLowerCase()}.`,
+      images: [`${siteConfig.url}/images/og-image.jpg`],
     },
   }
 }
@@ -250,29 +495,56 @@ export function generateMetadata({
 export default function ServicioPage({
   params,
 }: {
-  params: { servicio: string }
+  params: { servicio: string; locale: string }
 }) {
   const service = services.find((s) => s.slug === params.servicio)
+  const isSpanish = params.locale === 'es'
   
   if (!service) {
     notFound()
   }
 
+  const serviceContent = isSpanish ? serviceContentEs : serviceContentEn
   const content = serviceContent[params.servicio]
   const otherServices = services.filter((s) => s.slug !== params.servicio).slice(0, 3)
 
   return (
     <>
-      <JsonLdService
-        name={service.title}
-        description={service.shortDescription}
-        url={`${siteConfig.url}/negligencias-medicas/${service.slug}`}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Service',
+            name: service.title,
+            description: service.shortDescription,
+            url: `${siteConfig.url}/${params.locale}/negligencias-medicas/${service.slug}`,
+            inLanguage: params.locale === 'es' ? 'es-ES' : 'en-US',
+            provider: {
+              '@type': 'LegalService',
+              name: siteConfig.name,
+              url: siteConfig.url,
+            },
+            areaServed: {
+              '@type': 'Country',
+              name: params.locale === 'es' ? 'España' : 'Spain',
+            },
+            serviceType: 'Legal Service',
+            category: params.locale === 'es' ? 'Negligencias Médicas' : 'Medical Negligence',
+          })
+        }}
       />
       <JsonLdBreadcrumbs
         items={[
-          { name: 'Inicio', url: siteConfig.url },
-          { name: 'Negligencias Médicas', url: `${siteConfig.url}/negligencias-medicas` },
-          { name: service.title, url: `${siteConfig.url}/negligencias-medicas/${service.slug}` },
+          { name: isSpanish ? 'Inicio' : 'Home', url: siteConfig.url },
+          { 
+            name: isSpanish ? 'Negligencias Médicas' : 'Medical Negligence', 
+            url: `${siteConfig.url}/${params.locale}/negligencias-medicas` 
+          },
+          { 
+            name: service.title, 
+            url: `${siteConfig.url}/${params.locale}/negligencias-medicas/${service.slug}` 
+          },
         ]}
       />
       {content?.faqs && (
@@ -302,7 +574,10 @@ export default function ServicioPage({
         <div className="container-custom relative z-10">
           <Breadcrumbs
             items={[
-              { label: 'Negligencias Médicas', href: '/negligencias-medicas' },
+              { 
+                label: isSpanish ? 'Negligencias Médicas' : 'Medical Negligence', 
+                href: `/${params.locale}/negligencias-medicas` 
+              },
               { label: service.title },
             ]}
             className="mb-6 text-gray-400"
@@ -315,7 +590,7 @@ export default function ServicioPage({
             <div className="flex-1">
               <div className="inline-block bg-gold/20 border border-gold/30 rounded-full px-4 py-2 mb-4">
                 <span className="text-gold text-sm font-semibold uppercase tracking-wider">
-                  Especialistas en el Caso
+                  {isSpanish ? 'Especialistas en el Caso' : 'Case Specialists'}
                 </span>
               </div>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white mb-6">
@@ -332,22 +607,22 @@ export default function ServicioPage({
             <div className="bg-white/10 backdrop-blur-sm border border-white/20 p-5 rounded-lg">
               <TrendingUp className="w-8 h-8 text-gold mb-2" />
               <div className="text-2xl font-serif font-bold text-white">95%</div>
-              <div className="text-sm text-gray-300">Éxito</div>
+              <div className="text-sm text-gray-300">{isSpanish ? 'Éxito' : 'Success'}</div>
             </div>
             <div className="bg-white/10 backdrop-blur-sm border border-white/20 p-5 rounded-lg">
               <Users className="w-8 h-8 text-gold mb-2" />
               <div className="text-2xl font-serif font-bold text-white">+500</div>
-              <div className="text-sm text-gray-300">Casos</div>
+              <div className="text-sm text-gray-300">{isSpanish ? 'Casos' : 'Cases'}</div>
             </div>
             <div className="bg-white/10 backdrop-blur-sm border border-white/20 p-5 rounded-lg">
               <Clock className="w-8 h-8 text-gold mb-2" />
               <div className="text-2xl font-serif font-bold text-white">25+</div>
-              <div className="text-sm text-gray-300">Años</div>
+              <div className="text-sm text-gray-300">{isSpanish ? 'Años' : 'Years'}</div>
             </div>
             <div className="bg-white/10 backdrop-blur-sm border border-white/20 p-5 rounded-lg">
               <Award className="w-8 h-8 text-gold mb-2" />
               <div className="text-2xl font-serif font-bold text-white">+10M€</div>
-              <div className="text-sm text-gray-300">Recuperados</div>
+              <div className="text-sm text-gray-300">{isSpanish ? 'Recuperados' : 'Recovered'}</div>
             </div>
           </div>
         </div>
@@ -372,7 +647,7 @@ export default function ServicioPage({
               {content?.symptoms && (
                 <div className="mb-12">
                   <h2 className="text-2xl font-serif font-bold text-charcoal mb-6">
-                    Casos que atendemos
+                    {isSpanish ? 'Casos que atendemos' : 'Cases we handle'}
                   </h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {content.symptoms.map((symptom, index) => (
@@ -392,7 +667,7 @@ export default function ServicioPage({
               {content?.faqs && (
                 <div>
                   <h2 className="text-2xl font-serif font-bold text-charcoal mb-6">
-                    Preguntas Frecuentes
+                    {isSpanish ? 'Preguntas Frecuentes' : 'Frequently Asked Questions'}
                   </h2>
                   <Accordion items={content.faqs} />
                 </div>
@@ -404,14 +679,16 @@ export default function ServicioPage({
               {/* CTA Card */}
               <div className="bg-charcoal p-8 rounded-sm mb-8 sticky top-24">
                 <h3 className="text-xl font-serif font-bold text-white mb-4">
-                  ¿Necesitas ayuda?
+                  {isSpanish ? '¿Necesitas ayuda?' : 'Need help?'}
                 </h3>
                 <p className="text-gray-400 mb-6">
-                  Analizamos tu caso de forma gratuita y sin compromiso.
+                  {isSpanish
+                    ? 'Analizamos tu caso de forma gratuita y sin compromiso.'
+                    : 'We analyze your case for free with no obligation.'}
                 </p>
-                <Link href="/contacto" className="btn-primary w-full text-center mb-4">
-                  Consulta Gratuita
-                </Link>
+                <LocalizedLink href="/contacto" className="btn-primary w-full text-center mb-4">
+                  {isSpanish ? 'Consulta Gratuita' : 'Free Consultation'}
+                </LocalizedLink>
                 <a
                   href={siteConfig.contact.phoneHref}
                   className="flex items-center justify-center gap-2 text-gold hover:text-gold-light transition-colors"
@@ -424,18 +701,18 @@ export default function ServicioPage({
               {/* Other Services */}
               <div className="bg-cream p-6 rounded-sm">
                 <h4 className="text-lg font-serif font-semibold text-charcoal mb-4">
-                  Otros servicios
+                  {isSpanish ? 'Otros servicios' : 'Other services'}
                 </h4>
                 <div className="space-y-3">
                   {otherServices.map((s) => (
-                    <Link
+                    <LocalizedLink
                       key={s.slug}
                       href={`/negligencias-medicas/${s.slug}`}
                       className="flex items-center gap-3 text-gray-600 hover:text-gold transition-colors group"
                     >
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                       <span>{s.title}</span>
-                    </Link>
+                    </LocalizedLink>
                   ))}
                 </div>
               </div>
@@ -449,14 +726,15 @@ export default function ServicioPage({
         <div className="container-custom">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <span className="text-gold text-sm font-semibold uppercase tracking-widest">
-              Ventajas Competitivas
+              {isSpanish ? 'Ventajas Competitivas' : 'Competitive Advantages'}
             </span>
             <h2 className="text-4xl font-serif font-bold text-charcoal mt-3 mb-6">
-              ¿Por Qué Elegirnos para Tu Caso?
+              {isSpanish ? '¿Por Qué Elegirnos para Tu Caso?' : 'Why Choose Us for Your Case?'}
             </h2>
             <p className="text-gray-600 text-lg">
-              Somos especialistas en {service.title.toLowerCase()} con un equipo 
-              multidisciplinar de abogados y peritos médicos.
+              {isSpanish
+                ? `Somos especialistas en ${service.title.toLowerCase()} con un equipo multidisciplinar de abogados y peritos médicos.`
+                : `We are specialists in ${service.title.toLowerCase()} with a multidisciplinary team of lawyers and medical experts.`}
             </p>
           </div>
 
@@ -467,10 +745,12 @@ export default function ServicioPage({
                 <Award className="w-8 h-8 text-gold group-hover:text-white transition-colors" />
               </div>
               <h3 className="text-xl font-serif font-semibold text-charcoal mb-3">
-                Experiencia Probada
+                {isSpanish ? 'Experiencia Probada' : 'Proven Experience'}
               </h3>
               <p className="text-gray-600 leading-relaxed">
-                Más de 25 años especializados en negligencias médicas con cientos de casos ganados.
+                {isSpanish
+                  ? 'Más de 25 años especializados en negligencias médicas con cientos de casos ganados.'
+                  : 'Over 25 years specialized in medical negligence with hundreds of cases won.'}
               </p>
             </div>
 
@@ -480,10 +760,12 @@ export default function ServicioPage({
                 <Users className="w-8 h-8 text-gold group-hover:text-white transition-colors" />
               </div>
               <h3 className="text-xl font-serif font-semibold text-charcoal mb-3">
-                Equipo Especializado
+                {isSpanish ? 'Equipo Especializado' : 'Specialized Team'}
               </h3>
               <p className="text-gray-600 leading-relaxed">
-                Abogados expertos trabajando junto con peritos médicos de reconocido prestigio.
+                {isSpanish
+                  ? 'Abogados expertos trabajando junto con peritos médicos de reconocido prestigio.'
+                  : 'Expert lawyers working alongside renowned medical experts.'}
               </p>
             </div>
 
@@ -493,10 +775,12 @@ export default function ServicioPage({
                 <TrendingUp className="w-8 h-8 text-gold group-hover:text-white transition-colors" />
               </div>
               <h3 className="text-xl font-serif font-semibold text-charcoal mb-3">
-                95% de Éxito
+                {isSpanish ? '95% de Éxito' : '95% Success Rate'}
               </h3>
               <p className="text-gray-600 leading-relaxed">
-                Nuestra tasa de éxito nos avala. Trabajamos para conseguir la máxima indemnización.
+                {isSpanish
+                  ? 'Nuestra tasa de éxito nos avala. Trabajamos para conseguir la máxima indemnización.'
+                  : 'Our success rate speaks for itself. We work to achieve maximum compensation.'}
               </p>
             </div>
 
@@ -506,10 +790,12 @@ export default function ServicioPage({
                 <Shield className="w-8 h-8 text-gold group-hover:text-white transition-colors" />
               </div>
               <h3 className="text-xl font-serif font-semibold text-charcoal mb-3">
-                Sin Costes Iniciales
+                {isSpanish ? 'Sin Costes Iniciales' : 'No Initial Costs'}
               </h3>
               <p className="text-gray-600 leading-relaxed">
-                Solo cobramos si ganamos tu caso. Primera consulta totalmente gratuita.
+                {isSpanish
+                  ? 'Solo cobramos si ganamos tu caso. Primera consulta totalmente gratuita.'
+                  : 'We only charge if we win your case. First consultation completely free.'}
               </p>
             </div>
 
@@ -519,10 +805,12 @@ export default function ServicioPage({
                 <Clock className="w-8 h-8 text-gold group-hover:text-white transition-colors" />
               </div>
               <h3 className="text-xl font-serif font-semibold text-charcoal mb-3">
-                Actuación Inmediata
+                {isSpanish ? 'Actuación Inmediata' : 'Immediate Action'}
               </h3>
               <p className="text-gray-600 leading-relaxed">
-                Comenzamos a trabajar en tu caso desde el primer momento. El tiempo es crucial.
+                {isSpanish
+                  ? 'Comenzamos a trabajar en tu caso desde el primer momento. El tiempo es crucial.'
+                  : 'We start working on your case from the first moment. Time is crucial.'}
               </p>
             </div>
 
@@ -532,10 +820,12 @@ export default function ServicioPage({
                 <FileText className="w-8 h-8 text-gold group-hover:text-white transition-colors" />
               </div>
               <h3 className="text-xl font-serif font-semibold text-charcoal mb-3">
-                Total Transparencia
+                {isSpanish ? 'Total Transparencia' : 'Complete Transparency'}
               </h3>
               <p className="text-gray-600 leading-relaxed">
-                Te mantenemos informado en cada fase del proceso. Comunicación directa y clara.
+                {isSpanish
+                  ? 'Te mantenemos informado en cada fase del proceso. Comunicación directa y clara.'
+                  : 'We keep you informed at each stage of the process. Direct and clear communication.'}
               </p>
             </div>
           </div>
@@ -551,17 +841,18 @@ export default function ServicioPage({
             </div>
             <div>
               <h3 className="text-2xl font-serif font-bold text-charcoal mb-3">
-                ⏰ El Tiempo es Fundamental
+                ⏰ {isSpanish ? 'El Tiempo es Fundamental' : 'Time is Essential'}
               </h3>
               <p className="text-gray-700 text-lg leading-relaxed mb-4">
-                Los plazos para reclamar una negligencia médica son limitados. Es crucial 
-                actuar con rapidez para preservar las pruebas y garantizar tus derechos.
+                {isSpanish
+                  ? 'Los plazos para reclamar una negligencia médica son limitados. Es crucial actuar con rapidez para preservar las pruebas y garantizar tus derechos.'
+                  : 'Deadlines for claiming medical negligence are limited. It is crucial to act quickly to preserve evidence and guarantee your rights.'}
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/contacto" className="btn-primary inline-flex items-center justify-center">
-                  Evaluación Gratuita
+                <LocalizedLink href="/contacto" className="btn-primary inline-flex items-center justify-center">
+                  {isSpanish ? 'Evaluación Gratuita' : 'Free Evaluation'}
                   <ArrowRight className="w-5 h-5 ml-2" />
-                </Link>
+                </LocalizedLink>
                 <a 
                   href={siteConfig.contact.phoneHref}
                   className="btn-outline inline-flex items-center justify-center"
@@ -579,3 +870,4 @@ export default function ServicioPage({
     </>
   )
 }
+

@@ -1,60 +1,62 @@
-import Link from 'next/link'
+'use client'
+
 import { ArrowRight } from 'lucide-react'
 import { services } from '@/config/site'
 import { ServiceIcon } from '@/components/ui/Icons'
+import { LocalizedLink } from '@/components/ui/LocalizedLink'
+import { useTranslations } from 'next-intl'
 
 export function ServicesSection() {
+  const t = useTranslations('home.services')
+  
   return (
     <section className="section-padding bg-white">
       <div className="container-custom">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
+        <div className="text-center max-w-3xl mx-auto mb-12">
           <span className="text-gold text-sm font-semibold uppercase tracking-widest">
-            Áreas de Especialización
+            {t('badge')}
           </span>
           <h2 className="text-3xl md:text-4xl font-serif font-bold text-charcoal mt-3 mb-5">
-            Tipos de Negligencias Médicas
+            {t('title')}
           </h2>
-          <p className="text-gray-600 leading-relaxed">
-            Estamos especializados en todo tipo de negligencias y errores
-            médicos. Cada caso es único y merece un tratamiento personalizado.
-          </p>
+          <p className="text-gray-600">{t('subtitle')}</p>
         </div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           {services.map((service) => (
-            <Link
+            <LocalizedLink
               key={service.slug}
               href={`/negligencias-medicas/${service.slug}`}
-              className="group bg-cream p-8 rounded-sm hover:bg-charcoal transition-all duration-300"
+              className="group bg-cream p-8 rounded-sm hover:shadow-xl transition-all duration-300 border border-transparent hover:border-gold/20"
             >
-              <div className="text-gold group-hover:text-gold mb-5">
-                <ServiceIcon name={service.icon} className="w-12 h-12" />
+              <div className="w-14 h-14 bg-white rounded-sm flex items-center justify-center mb-5 group-hover:bg-gold transition-colors duration-300 shadow-sm">
+                <ServiceIcon
+                  icon={service.icon}
+                  className="w-7 h-7 text-gold group-hover:text-white transition-colors duration-300"
+                />
               </div>
-              <h3 className="text-xl font-serif font-semibold text-charcoal group-hover:text-white mb-3 transition-colors">
+              <h3 className="text-xl font-serif font-semibold text-charcoal mb-3 group-hover:text-gold transition-colors">
                 {service.title}
               </h3>
-              <p className="text-gray-600 group-hover:text-gray-300 text-sm leading-relaxed mb-4 transition-colors">
+              <p className="text-gray-600 text-sm leading-relaxed mb-4">
                 {service.shortDescription}
               </p>
-              <span className="inline-flex items-center text-gold text-sm font-semibold uppercase tracking-wide">
-                Ver más
-                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-2 transition-transform" />
-              </span>
-            </Link>
+              <div className="flex items-center text-gold text-sm font-medium">
+                Más información
+                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+              </div>
+            </LocalizedLink>
           ))}
         </div>
 
         {/* CTA */}
-        <div className="text-center mt-12">
-          <Link
-            href="/negligencias-medicas"
-            className="btn-outline inline-flex items-center"
-          >
-            Ver todos los servicios
+        <div className="text-center">
+          <LocalizedLink href="/negligencias-medicas" className="btn-secondary">
+            {t('viewAllServices')}
             <ArrowRight className="w-4 h-4 ml-2" />
-          </Link>
+          </LocalizedLink>
         </div>
       </div>
     </section>

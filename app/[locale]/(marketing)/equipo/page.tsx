@@ -1,21 +1,32 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import { Linkedin, Mail } from 'lucide-react'
-import { teamMembers } from '@/config/site'
+import { teamMembers, siteConfig } from '@/config/site'
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
 import { CtaFinal } from '@/components/home'
 
-export const metadata: Metadata = {
-  title: 'Nuestro Equipo | Abogados Especializados',
-  description:
-    'Conoce al equipo de abogados de GVC Expertos: profesionales especializados en negligencias médicas con amplia experiencia en derecho sanitario.',
-  alternates: {
-    canonical: '/equipo',
-  },
+export async function generateMetadata({
+  params: { locale }
+}: {
+  params: { locale: string }
+}): Promise<Metadata> {
+  const isSpanish = locale === 'es'
+  
+  return {
+    title: isSpanish
+      ? 'Nuestro Equipo | Abogados Especializados'
+      : 'Our Team | Specialized Lawyers',
+    description: isSpanish
+      ? 'Conoce al equipo de abogados de GVC Expertos: profesionales especializados en negligencias médicas con amplia experiencia en derecho sanitario.'
+      : 'Meet the GVC Expertos legal team: professionals specialized in medical negligence with extensive experience in health law.',
+    alternates: {
+      canonical: `/${locale}/equipo`,
+    },
+  }
 }
 
-// Bios extendidas para cada miembro
-const teamBios: Record<string, string> = {
+// Bios extendidas para cada miembro - Español
+const teamBiosEs: Record<string, string> = {
   'pedro-alfonso-garcia-valcarcel':
     'Socio fundador de GVC Expertos y referente nacional en derecho sanitario. Licenciado en Derecho por la Universidad Complutense de Madrid, ha dedicado más de 25 años a la defensa de víctimas de negligencias médicas. Autor de numerosas publicaciones especializadas y ponente habitual en congresos de responsabilidad sanitaria.',
   'raquel-garcia-valcarcel':
@@ -28,22 +39,52 @@ const teamBios: Record<string, string> = {
     'Administración del despacho. Graduada en Administración y Dirección de Empresas. Gestiona la coordinación administrativa de expedientes y asegura una atención personalizada a cada cliente. Su organización y eficiencia son clave en el funcionamiento del despacho.',
 }
 
-export default function EquipoPage() {
+// Bios extendidas para cada miembro - Inglés
+const teamBiosEn: Record<string, string> = {
+  'pedro-alfonso-garcia-valcarcel':
+    'Founding partner of GVC Expertos and national reference in health law. Law degree from Complutense University of Madrid, he has dedicated more than 25 years to defending victims of medical negligence. Author of numerous specialized publications and regular speaker at healthcare liability conferences.',
+  'raquel-garcia-valcarcel':
+    'Managing partner and expert in obstetric and gynecological negligence. Law degree from Autonomous University of Madrid. Heads the medical claims department of the firm. Her dedication to birth injury cases has made her one of the leading experts in this specific area.',
+  'miguel-caceres-sanchez':
+    'Partner specializing in diagnostic and treatment errors. Master\'s in Health Law from CEU San Pablo University. He has handled some of the most important medical negligence cases in Spain, obtaining million-dollar compensation for his clients. Extensive experience in hospital litigation.',
+  'olga-martinez-martinez':
+    'Lawyer specialized in surgical and hospital negligence. Law degree from University of Valencia. Coordinator of the client care area. Her meticulousness in analyzing clinical records and her ability to work with medical experts are fundamental to the success of her cases.',
+  'carmen-martinez-ramon':
+    'Firm administration. Graduate in Business Administration and Management. Manages the administrative coordination of files and ensures personalized attention to each client. Her organization and efficiency are key to the firm\'s operation.',
+}
+
+export default function EquipoPage({
+  params: { locale }
+}: {
+  params: { locale: string }
+}) {
+  const isSpanish = locale === 'es'
+  const teamBios = isSpanish ? teamBiosEs : teamBiosEn
+  
   return (
     <>
       {/* Hero */}
       <section className="bg-charcoal pt-32 pb-16">
         <div className="container-custom">
           <Breadcrumbs
-            items={[{ label: 'Equipo' }]}
+            items={[{ label: isSpanish ? 'Equipo' : 'Team' }]}
             className="mb-6 text-gray-400"
           />
           <h1 className="text-4xl md:text-5xl font-serif font-bold text-white mb-6">
-            Nuestro <span className="text-gold">Equipo</span>
+            {isSpanish ? (
+              <>
+                Nuestro <span className="text-gold">Equipo</span>
+              </>
+            ) : (
+              <>
+                Our <span className="text-gold">Team</span>
+              </>
+            )}
           </h1>
           <p className="text-gray-300 text-lg max-w-3xl leading-relaxed">
-            Un equipo de profesionales altamente cualificados y especializados
-            en derecho sanitario, comprometidos con la defensa de tus derechos.
+            {isSpanish
+              ? 'Un equipo de profesionales altamente cualificados y especializados en derecho sanitario, comprometidos con la defensa de tus derechos.'
+              : 'A team of highly qualified professionals specialized in health law, committed to defending your rights.'}
           </p>
         </div>
       </section>
@@ -76,7 +117,9 @@ export default function EquipoPage() {
                     {member.position}
                   </span>
                   <p className="text-gray-600 text-sm leading-relaxed mb-4">
-                    {teamBios[member.slug] || 'Profesional especializado en negligencias médicas.'}
+                    {teamBios[member.slug] || (isSpanish 
+                      ? 'Profesional especializado en negligencias médicas.'
+                      : 'Professional specialized in medical negligence.')}
                   </p>
                   
                   {/* Social */}
@@ -84,14 +127,14 @@ export default function EquipoPage() {
                     <a
                       href="#"
                       className="w-9 h-9 bg-cream rounded-full flex items-center justify-center hover:bg-gold group/icon transition-colors"
-                      aria-label={`LinkedIn de ${member.name}`}
+                      aria-label={`LinkedIn ${isSpanish ? 'de' : 'of'} ${member.name}`}
                     >
                       <Linkedin className="w-4 h-4 text-charcoal group-hover/icon:text-white transition-colors" />
                     </a>
                     <a
                       href="#"
                       className="w-9 h-9 bg-cream rounded-full flex items-center justify-center hover:bg-gold group/icon transition-colors"
-                      aria-label={`Email de ${member.name}`}
+                      aria-label={`Email ${isSpanish ? 'de' : 'of'} ${member.name}`}
                     >
                       <Mail className="w-4 h-4 text-charcoal group-hover/icon:text-white transition-colors" />
                     </a>
@@ -108,15 +151,27 @@ export default function EquipoPage() {
         <div className="container-custom">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl font-serif font-bold text-charcoal mb-6">
-              Únete a Nuestro Equipo
+              {isSpanish ? 'Únete a Nuestro Equipo' : 'Join Our Team'}
             </h2>
             <p className="text-gray-600 leading-relaxed mb-8">
-              Si eres abogado especializado en derecho sanitario y compartes
-              nuestra pasión por defender los derechos de los pacientes, nos
-              encantaría conocerte. Envíanos tu CV a{' '}
-              <a href="mailto:rrhh@gvcexpertos.es" className="text-gold hover:underline">
-                rrhh@gvcexpertos.es
-              </a>
+              {isSpanish ? (
+                <>
+                  Si eres abogado especializado en derecho sanitario y compartes
+                  nuestra pasión por defender los derechos de los pacientes, nos
+                  encantaría conocerte. Envíanos tu CV a{' '}
+                  <a href="mailto:rrhh@gvcexpertos.es" className="text-gold hover:underline">
+                    rrhh@gvcexpertos.es
+                  </a>
+                </>
+              ) : (
+                <>
+                  If you are a lawyer specialized in health law and share
+                  our passion for defending patients' rights, we would love to meet you. Send us your CV to{' '}
+                  <a href="mailto:rrhh@gvcexpertos.es" className="text-gold hover:underline">
+                    rrhh@gvcexpertos.es
+                  </a>
+                </>
+              )}
             </p>
           </div>
         </div>

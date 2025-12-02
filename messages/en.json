@@ -154,6 +154,81 @@
   "faq": {
     "title": "Frequently Asked Questions",
     "subtitle": "Answers to the most common questions about medical negligence"
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Articles, guides and news about medical negligence, patient rights and legal healthcare updates.",
+    "metaTitle": "Blog | Articles on Medical Negligence",
+    "metaDescription": "Articles, guides and news about medical negligence, compensation, patient rights and legal healthcare updates.",
+    "allCategories": "All",
+    "featured": "Featured",
+    "minRead": "min read",
+    "min": "min",
+    "noPosts": "No articles published yet.",
+    "comeBackSoon": "Come back soon to see our content.",
+    "shareArticle": "Share article",
+    "aboutAuthor": "About the author",
+    "needHelp": "Need help?",
+    "needHelpText": "Free consultation with our specialized lawyers.",
+    "contact": "Contact",
+    "relatedPosts": "Related articles",
+    "backToBlog": "Back to blog"
+  },
+  "home": {
+    "hero": {
+      "title": "Expert Lawyers in Medical Negligence",
+      "subtitle": "Over 20 years of experience defending your rights",
+      "description": "We specialize in medical error claims. We help you obtain the compensation you deserve. Free initial consultation.",
+      "ctaPrimary": "Free Consultation",
+      "ctaSecondary": "Call Now",
+      "statsYearsExperience": "Years of experience",
+      "statsCasesWon": "Cases won",
+      "statsCompensation": "Millions recovered",
+      "statsSuccessRate": "Success rate"
+    },
+    "intro": {
+      "badge": "Why choose us?",
+      "title": "Medical Negligence Experts with Over 20 Years of Experience",
+      "description": "We are a law firm specialized exclusively in medical negligence cases. Our team of expert lawyers has recovered over 50 million euros for our clients.",
+      "feature1Title": "Proven Experience",
+      "feature1Description": "Over 20 years defending victims of medical negligence",
+      "feature2Title": "Specialized Team",
+      "feature2Description": "Expert lawyers dedicated exclusively to medical negligence",
+      "feature3Title": "95% Success Rate",
+      "feature3Description": "95% success rate in cases we represent"
+    },
+    "services": {
+      "badge": "Our Services",
+      "title": "Types of Medical Negligence We Handle",
+      "subtitle": "Specialized in all types of medical errors and healthcare malpractice",
+      "viewAllServices": "View All Services"
+    },
+    "process": {
+      "badge": "How We Work",
+      "title": "Our Work Process",
+      "subtitle": "A transparent and effective process to obtain your compensation"
+    },
+    "team": {
+      "badge": "Our Team",
+      "title": "Meet Our Expert Lawyers",
+      "subtitle": "A team of professionals with decades of experience in medical negligence",
+      "viewProfile": "View Full Profile"
+    },
+    "cta": {
+      "title": "Have You Suffered Medical Negligence?",
+      "description": "Don't wait any longer. Contact us and we will help you get the compensation you deserve. Free initial consultation with no obligation.",
+      "button": "Request Free Consultation"
+    }
+  },
+  "news": {
+    "title": "News",
+    "subtitle": "Latest news and updates on medical negligence, court rulings and healthcare sector developments.",
+    "metaTitle": "News | Medical Negligence Updates",
+    "metaDescription": "Latest news and updates on medical negligence, court rulings, legislative changes and healthcare sector developments.",
+    "readMore": "Read more",
+    "noNews": "No news published yet.",
+    "viewOriginalSource": "View original source",
+    "backToNews": "Back to news"
   }
 }
 

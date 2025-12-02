@@ -1,0 +1,45 @@
+# Robots.txt para GVC Expertos
+# https://gvcexpertos.es
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://gvcexpertos.es/sitemap.xml
+
+# Bloquear áreas administrativas
+Disallow: /admin/
+Disallow: /api/
+
+# Bloquear rutas con parámetros (evitar duplicados)
+Disallow: /*?*
+
+# Bloquear archivos específicos
+Disallow: /*.json$
+Disallow: /IMPLEMENTACION_IDIOMA.txt
+Disallow: /MEJORAS_SEO_PENDIENTES.md
+
+# Permitir crawling de recursos
+Allow: /images/
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.png$
+Allow: /*.webp$
+Allow: /*.svg$
+
+# Crawl-delay para ser amigables
+Crawl-delay: 1
+
+# Configuración específica para bots importantes
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /images/
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 2
+
