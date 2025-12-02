@@ -1,6 +1,10 @@
 import { createClient } from '@supabase/supabase-js'
 import fs from 'fs'
 import { parse } from 'csv-parse/sync'
+import { config } from 'dotenv'
+
+// Cargar variables de entorno
+config({ path: '.env.local' })
 
 // Configuración de Supabase
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
@@ -110,7 +114,7 @@ async function importPosts() {
   for (let i = 0; i < records.length; i++) {
     const row = records[i]
     const title = row.Titulo?.trim()
-    let content = row.Texto?.trim()
+    let content = row.Articulo?.trim()
     
     if (!title || !content) {
       continue
