@@ -7,11 +7,11 @@ frontend:
     build:
       commands:
         - echo "=== Verificando Variables de Entorno ==="
-        - echo "NEXT_PUBLIC_SUPABASE_URL:" && if [ -n "$NEXT_PUBLIC_SUPABASE_URL" ]; then echo "SET"; else echo "MISSING!"; fi
-        - echo "SUPABASE_SERVICE_ROLE_KEY:" && if [ -n "$SUPABASE_SERVICE_ROLE_KEY" ]; then echo "SET"; else echo "MISSING!"; fi
+        - 'echo "NEXT_PUBLIC_SUPABASE_URL:" && if [ -n "$NEXT_PUBLIC_SUPABASE_URL" ]; then echo "SET"; else echo "MISSING!"; fi'
+        - 'echo "SUPABASE_SERVICE_ROLE_KEY:" && if [ -n "$SUPABASE_SERVICE_ROLE_KEY" ]; then echo "SET"; else echo "MISSING!"; fi'
         - echo ""
         - echo "=== Verificando Conexiones de API ==="
-        - npm run check:api || echo "Advertencia: Verificación de API falló, pero continuando con el build..."
+        - npm run check:api || echo "Advertencia - Verificacion de API fallo, continuando..."
         - echo ""
         - echo "=== Building Next.js ==="
         - npm run build
