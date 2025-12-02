@@ -1,21 +1,25 @@
-import Image from 'next/image'
+'use client'
 
-const galleryImages = [
-  {
-    src: '/images/abogados_negligencias_medicas_negligencia_hospital.jpg',
-    alt: 'Negligencia hospitalaria',
-  },
-  {
-    src: '/images/abogados_negligencias_medicas_negligencia_2.jpg',
-    alt: 'Abogados negligencias médicas',
-  },
-  {
-    src: '/images/abogados_negligencias_medicas_negligencia_3.jpg',
-    alt: 'Reclamación negligencia médica',
-  },
-]
+import Image from 'next/image'
+import { useTranslations } from 'next-intl'
 
 export function GallerySection() {
+  const t = useTranslations('home.gallery')
+  
+  const galleryImages = [
+    {
+      src: '/images/abogados_negligencias_medicas_negligencia_hospital.jpg',
+      altKey: 'image1',
+    },
+    {
+      src: '/images/abogados_negligencias_medicas_negligencia_2.jpg',
+      altKey: 'image2',
+    },
+    {
+      src: '/images/abogados_negligencias_medicas_negligencia_3.jpg',
+      altKey: 'image3',
+    },
+  ]
   return (
     <section className="py-0">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-0">
@@ -23,7 +27,7 @@ export function GallerySection() {
           <div key={index} className="relative aspect-[4/3] overflow-hidden group">
             <Image
               src={image.src}
-              alt={image.alt}
+              alt={t(image.altKey)}
               fill
               className="object-cover group-hover:scale-110 transition-transform duration-700"
             />

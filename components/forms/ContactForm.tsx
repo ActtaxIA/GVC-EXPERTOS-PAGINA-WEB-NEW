@@ -7,12 +7,18 @@ import { Input } from '@/components/ui/Input'
 import { Textarea } from '@/components/ui/Textarea'
 import { Select } from '@/components/ui/Select'
 import { Button } from '@/components/ui/Button'
+import { useTranslations } from 'next-intl'
+import { LocalizedLink } from '@/components/ui/LocalizedLink'
 
 interface ContactFormProps {
   services: { slug: string; title: string }[]
 }
 
 export function ContactForm({ services }: ContactFormProps) {
+  const t = useTranslations('contact.form')
+  const tCommon = useTranslations('common')
+  const tServices = useTranslations('services')
+  const tLegal = useTranslations('footer')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
   const [errors, setErrors] = useState<Record<string, string>>({})
@@ -34,11 +40,11 @@ export function ContactForm({ services }: ContactFormProps) {
 
     // Validación básica
     const newErrors: Record<string, string> = {}
-    if (!data.name) newErrors.name = 'El nombre es obligatorio'
-    if (!data.email) newErrors.email = 'El email es obligatorio'
-    if (!data.phone) newErrors.phone = 'El teléfono es obligatorio'
-    if (!data.message) newErrors.message = 'Describe tu caso brevemente'
-    if (!data.privacy) newErrors.privacy = 'Debes aceptar la política de privacidad'
+    if (!data.name) newErrors.name = t('nameRequired')
+    if (!data.email) newErrors.email = t('emailRequired')
+    if (!data.phone) newErrors.phone = t('phoneRequired')
+    if (!data.message) newErrors.message = t('messageRequired')
+    if (!data.privacy) newErrors.privacy = t('privacyRequired')
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors)
@@ -51,7 +57,7 @@ export function ContactForm({ services }: ContactFormProps) {
       await new Promise((resolve) => setTimeout(resolve, 1500))
       setIsSuccess(true)
     } catch (error) {
-      setErrors({ submit: 'Error al enviar el formulario. Inténtalo de nuevo.' })
+      setErrors({ submit: t('error') })
     } finally {
       setIsSubmitting(false)
     }
@@ -62,14 +68,13 @@ export function ContactForm({ services }: ContactFormProps) {
       <div className="text-center py-12">
         <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
         <h3 className="text-2xl font-serif font-bold text-charcoal mb-2">
-          ¡Mensaje enviado!
+          {t('successTitle')}
         </h3>
         <p className="text-gray-600 mb-6">
-          Hemos recibido tu consulta. Un abogado de nuestro equipo se pondrá en
-          contacto contigo en las próximas 24 horas.
+          {t('successMessage')}
         </p>
         <Button variant="outline" onClick={() => setIsSuccess(false)}>
-          Enviar otra consulta
+          {t('sendAnother')}
         </Button>
       </div>
     )
@@ -80,15 +85,15 @@ export function ContactForm({ services }: ContactFormProps) {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Input
           name="name"
-          label="Nombre completo *"
-          placeholder="Tu nombre"
+          label={`${t('name')} *`}
+          placeholder={t('namePlaceholder')}
           error={errors.name}
         />
         <Input
           name="email"
           type="email"
-          label="Email *"
-          placeholder="tu@email.com"
+          label={`${t('email')} *`}
+          placeholder={t('emailPlaceholder')}
           error={errors.email}
         />
       </div>
@@ -97,26 +102,38 @@ export function ContactForm({ services }: ContactFormProps) {
         <Input
           name="phone"
           type="tel"
-          label="Teléfono *"
-          placeholder="600 000 000"
+          label={`${t('phone')} *`}
+          placeholder={t('phonePlaceholder')}
           error={errors.phone}
         />
         <Select
           name="service"
-          label="Tipo de negligencia"
-          placeholder="Selecciona una opción"
+          label={t('service')}
+          placeholder={t('selectService')}
           options={[
-            { value: '', label: 'Selecciona una opción' },
-            ...services.map((s) => ({ value: s.slug, label: s.title })),
-            { value: 'otro', label: 'Otro / No estoy seguro' },
+            { value: '', label: t('selectService') },
+            ...services.map((s) => {
+              // Mapear slug a traducción
+              const serviceSlugMap: Record<string, string> = {
+                'errores-quirurgicos': 'surgical-errors',
+                'errores-diagnostico': 'diagnostic-errors',
+                'negligencia-hospitalaria': 'hospital-negligence',
+                'negligencia-obstetrica': 'obstetric-negligence',
+                'errores-medicacion': 'medication-errors',
+                'consentimiento-informado': 'informed-consent',
+              }
+              const translationKey = serviceSlugMap[s.slug] || s.slug
+              return { value: s.slug, label: tServices(`${translationKey}.title`) }
+            }),
+            { value: 'otro', label: t('otherService') },
           ]}
         />
       </div>
 
       <Textarea
         name="message"
-        label="Describe tu caso *"
-        placeholder="Cuéntanos brevemente qué ha ocurrido..."
+        label={`${t('message')} *`}
+        placeholder={t('messagePlaceholder')}
         rows={5}
         error={errors.message}
       />
@@ -129,11 +146,11 @@ export function ContactForm({ services }: ContactFormProps) {
           className="mt-1 w-4 h-4 text-gold border-gray-300 rounded focus:ring-gold"
         />
         <label htmlFor="privacy" className="text-sm text-gray-600">
-          He leído y acepto la{' '}
-          <Link href="/politica-privacidad" className="text-gold hover:underline">
-            política de privacidad
-          </Link>{' '}
-          y el tratamiento de mis datos para gestionar mi consulta. *
+          {t('privacyText')}{' '}
+          <LocalizedLink href="/politica-privacidad" className="text-gold hover:underline">
+            {t('privacyLink')}
+          </LocalizedLink>{' '}
+          {t('privacyAnd')} *
         </label>
       </div>
       {errors.privacy && (
@@ -148,15 +165,15 @@ export function ContactForm({ services }: ContactFormProps) {
         {isSubmitting ? (
           <>
             <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-            Enviando...
+            {t('sending')}
           </>
         ) : (
-          'Enviar Consulta Gratuita'
+          t('submit')
         )}
       </Button>
 
       <p className="text-xs text-gray-500 text-center">
-        🔒 Tus datos están protegidos y tratados con total confidencialidad
+        {t('dataProtected')}
       </p>
     </form>
   )

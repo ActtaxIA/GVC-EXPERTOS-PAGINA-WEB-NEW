@@ -1,10 +1,12 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import Link from 'next/link'
 import { X, Cookie } from 'lucide-react'
+import { useTranslations } from 'next-intl'
+import { LocalizedLink } from './LocalizedLink'
 
 export function CookieBanner() {
+  const t = useTranslations('cookie')
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
@@ -37,11 +39,10 @@ export function CookieBanner() {
             <Cookie className="w-6 h-6 text-gold flex-shrink-0 mt-0.5" />
             <div>
               <p className="text-white text-sm">
-                Utilizamos cookies propias y de terceros para mejorar nuestros servicios 
-                y mostrarle publicidad relacionada con sus preferencias.{' '}
-                <Link href="/politica-cookies" className="text-gold hover:underline">
-                  Más información
-                </Link>
+                {t('message')}{' '}
+                <LocalizedLink href="/politica-cookies" className="text-gold hover:underline">
+                  {t('moreInfo')}
+                </LocalizedLink>
               </p>
             </div>
           </div>
@@ -51,13 +52,13 @@ export function CookieBanner() {
               onClick={rejectCookies}
               className="px-4 py-2 text-sm text-gray-400 hover:text-white transition-colors"
             >
-              Rechazar
+              {t('reject')}
             </button>
             <button
               onClick={acceptCookies}
               className="px-6 py-2 bg-gold hover:bg-gold-dark text-white text-sm font-semibold rounded transition-colors"
             >
-              Aceptar
+              {t('accept')}
             </button>
           </div>
         </div>

@@ -9,6 +9,7 @@ import { useTranslations, useLocale } from 'next-intl'
 import { cn } from '@/lib/utils'
 import { siteConfig } from '@/config/site'
 import { getLocalizedPath, translatePath } from '@/lib/i18n-utils'
+import { getTranslatedRoute, getTranslatedServiceRoute } from '@/lib/routes'
 
 export function Header() {
   const params = useParams()
@@ -26,14 +27,14 @@ export function Header() {
   const spanishPath = pathname ? translatePath(pathname, 'es') : '/es'
   const englishPath = pathname ? translatePath(pathname, 'en') : '/en'
   
-  // Navegación con traducciones
+  // Navegación con rutas traducidas según el locale actual
   const navigationLinks = [
-    { label: t('home'), href: '/' },
-    { label: t('services'), href: '/negligencias-medicas' },
-    { label: t('about'), href: '/sobre-nosotros' },
-    { label: t('team'), href: '/equipo' },
-    { label: t('blog'), href: '/blog' },
-    { label: t('contact'), href: '/contacto' },
+    { label: t('home'), href: getTranslatedRoute('home', locale) },
+    { label: t('services'), href: getTranslatedRoute('services', locale) },
+    { label: t('about'), href: getTranslatedRoute('about', locale) },
+    { label: t('team'), href: getTranslatedRoute('team', locale) },
+    { label: t('blog'), href: getTranslatedRoute('blog', locale) },
+    { label: t('contact'), href: getTranslatedRoute('contact', locale) },
   ]
 
   useEffect(() => {
@@ -94,7 +95,8 @@ export function Header() {
           <nav className="hidden lg:flex items-center gap-8">
             {navigationLinks.map((link) => {
               // Menú especial para Servicios con dropdown
-              if (link.href === '/negligencias-medicas') {
+              const isServicesRoute = link.href === getTranslatedRoute('services', locale)
+              if (isServicesRoute) {
                 return (
                   <div
                     key={link.href}
@@ -103,7 +105,7 @@ export function Header() {
                     onMouseLeave={() => setIsServicesOpen(false)}
                   >
                     <Link
-                      href={getLocalizedPath(link.href, locale as 'es' | 'en')}
+                      href={getLocalizedPath(link.href, locale)}
                       className="text-charcoal hover:text-gold font-medium text-sm uppercase tracking-wide transition-colors flex items-center gap-1"
                     >
                       {link.label}
@@ -123,18 +125,21 @@ export function Header() {
                       )}
                     >
                       <div className="bg-white rounded-sm shadow-xl border border-gray-100 py-3">
-                        {siteConfig.services.map((service) => (
-                          <Link
-                            key={service.slug}
-                            href={getLocalizedPath(`/negligencias-medicas/${service.slug}`, locale as 'es' | 'en')}
-                            className="block px-5 py-3 text-charcoal hover:bg-cream hover:text-gold transition-colors"
-                          >
-                            <div className="font-medium text-sm">{service.title}</div>
-                            <div className="text-xs text-gray-500 mt-1 line-clamp-1">
-                              {service.shortDescription}
-                            </div>
-                          </Link>
-                        ))}
+                        {siteConfig.services.map((service) => {
+                          const servicePath = getTranslatedServiceRoute(service.slug, locale)
+                          return (
+                            <Link
+                              key={service.slug}
+                              href={getLocalizedPath(servicePath, locale)}
+                              className="block px-5 py-3 text-charcoal hover:bg-cream hover:text-gold transition-colors"
+                            >
+                              <div className="font-medium text-sm">{service.title}</div>
+                              <div className="text-xs text-gray-500 mt-1 line-clamp-1">
+                                {service.shortDescription}
+                              </div>
+                            </Link>
+                          )
+                        })}
                       </div>
                     </div>
                   </div>
@@ -145,7 +150,7 @@ export function Header() {
               return (
                 <Link
                   key={link.href}
-                  href={getLocalizedPath(link.href, locale as 'es' | 'en')}
+                  href={getLocalizedPath(link.href, locale)}
                   className="text-charcoal hover:text-gold font-medium text-sm uppercase tracking-wide transition-colors"
                 >
                   {link.label}
@@ -203,7 +208,7 @@ export function Header() {
               <Phone className="w-4 h-4" />
               <span>{siteConfig.contact.phone}</span>
             </a>
-            <Link href={getLocalizedPath('/contacto', locale as 'es' | 'en')} className="btn-primary">
+            <Link href={getLocalizedPath(getTranslatedRoute('contact', locale), locale)} className="btn-primary">
               {tCommon('contactUs')}
             </Link>
           </div>
@@ -243,7 +248,8 @@ export function Header() {
           <nav className="flex flex-col gap-1">
             {navigationLinks.map((link) => {
               // Menú especial para Servicios con dropdown en móvil
-              if (link.href === '/negligencias-medicas') {
+              const isServicesRoute = link.href === getTranslatedRoute('services', locale)
+              if (isServicesRoute) {
                 return (
                   <div key={link.href} className="flex flex-col">
                     <button
@@ -265,19 +271,22 @@ export function Header() {
                       )}
                     >
                       <div className="pl-4 pt-2 pb-2 space-y-1">
-                        {siteConfig.services.map((service) => (
-                          <Link
-                            key={service.slug}
-                            href={getLocalizedPath(`/negligencias-medicas/${service.slug}`, locale as 'es' | 'en')}
-                            onClick={() => {
-                              setIsMenuOpen(false)
-                              setIsMobileServicesOpen(false)
-                            }}
-                            className="block py-2 px-4 text-gray-600 hover:text-gold hover:bg-cream rounded-sm text-sm transition-colors"
-                          >
-                            {service.title}
-                          </Link>
-                        ))}
+                        {siteConfig.services.map((service) => {
+                          const servicePath = getTranslatedServiceRoute(service.slug, locale)
+                          return (
+                            <Link
+                              key={service.slug}
+                              href={getLocalizedPath(servicePath, locale)}
+                              onClick={() => {
+                                setIsMenuOpen(false)
+                                setIsMobileServicesOpen(false)
+                              }}
+                              className="block py-2 px-4 text-gray-600 hover:text-gold hover:bg-cream rounded-sm text-sm transition-colors"
+                            >
+                              {service.title}
+                            </Link>
+                          )
+                        })}
                       </div>
                     </div>
                   </div>
@@ -288,7 +297,7 @@ export function Header() {
               return (
                 <Link
                   key={link.href}
-                  href={getLocalizedPath(link.href, locale as 'es' | 'en')}
+                  href={getLocalizedPath(link.href, locale)}
                   onClick={() => setIsMenuOpen(false)}
                   className="py-3 px-4 text-charcoal hover:text-gold hover:bg-cream rounded-sm font-medium text-lg transition-colors"
                 >
@@ -346,7 +355,7 @@ export function Header() {
               <span>{siteConfig.contact.phone}</span>
             </a>
             <Link
-              href={getLocalizedPath('/contacto', locale as 'es' | 'en')}
+              href={getLocalizedPath(getTranslatedRoute('contact', locale), locale)}
               onClick={() => setIsMenuOpen(false)}
               className="btn-primary w-full text-center"
             >

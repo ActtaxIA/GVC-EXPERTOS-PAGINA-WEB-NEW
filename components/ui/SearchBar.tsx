@@ -2,9 +2,10 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
-import Link from 'next/link'
 import { Search, X, Loader2, FileText } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { useTranslations } from 'next-intl'
+import { LocalizedLink } from './LocalizedLink'
 
 interface SearchResult {
   id: string
@@ -19,8 +20,10 @@ interface SearchBarProps {
   placeholder?: string
 }
 
-export function SearchBar({ className, placeholder = 'Buscar...' }: SearchBarProps) {
+export function SearchBar({ className }: SearchBarProps) {
   const router = useRouter()
+  const t = useTranslations('search')
+  const placeholder = t('placeholder')
   const [query, setQuery] = useState('')
   const [results, setResults] = useState<SearchResult[]>([])
   const [isOpen, setIsOpen] = useState(false)
@@ -117,7 +120,7 @@ export function SearchBar({ className, placeholder = 'Buscar...' }: SearchBarPro
           ) : results.length > 0 ? (
             <div className="py-2">
               {results.map((result) => (
-                <Link
+                <LocalizedLink
                   key={`${result.type}-${result.id}`}
                   href={result.type === 'post' ? `/blog/${result.slug}` : `/noticias/${result.slug}`}
                   onClick={() => setIsOpen(false)}
@@ -132,23 +135,23 @@ export function SearchBar({ className, placeholder = 'Buscar...' }: SearchBarPro
                       {result.excerpt}
                     </p>
                     <span className="text-xs text-gold capitalize">
-                      {result.type === 'post' ? 'Artículo' : 'Noticia'}
+                      {result.type === 'post' ? t('article') : t('news')}
                     </span>
                   </div>
-                </Link>
+                </LocalizedLink>
               ))}
               <div className="px-4 py-2 border-t">
                 <button
                   onClick={handleSubmit}
                   className="text-sm text-gold hover:underline"
                 >
-                  Ver todos los resultados para "{query}"
+                  {t('viewAllResults')} "{query}"
                 </button>
               </div>
             </div>
           ) : (
             <div className="py-8 text-center text-gray-500">
-              <p>No se encontraron resultados para "{query}"</p>
+              <p>{t('noResults')} "{query}"</p>
             </div>
           )}
         </div>

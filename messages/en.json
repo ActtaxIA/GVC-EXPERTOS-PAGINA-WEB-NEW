@@ -22,7 +22,15 @@
     "contactUs": "Contact us",
     "callUs": "Call us",
     "language": "Language",
-    "menu": "Menu"
+    "menu": "Menu",
+    "backToTop": "Back to top"
+  },
+  "search": {
+    "placeholder": "Search...",
+    "article": "Article",
+    "news": "News",
+    "viewAllResults": "View all results for",
+    "noResults": "No results found for"
   },
   "nav": {
     "home": "Home",
@@ -116,7 +124,25 @@
       "submit": "Send Inquiry",
       "sending": "Sending...",
       "success": "Message sent! We will contact you soon.",
-      "error": "Error sending. Please try again."
+      "error": "Error sending. Please try again.",
+      "namePlaceholder": "Your name",
+      "emailPlaceholder": "your@email.com",
+      "phonePlaceholder": "600 000 000",
+      "messagePlaceholder": "Tell us briefly what happened...",
+      "selectService": "Select an option",
+      "otherService": "Other / Not sure",
+      "nameRequired": "Name is required",
+      "emailRequired": "Email is required",
+      "phoneRequired": "Phone is required",
+      "messageRequired": "Please describe your case briefly",
+      "privacyRequired": "You must accept the privacy policy",
+      "successTitle": "Message sent!",
+      "successMessage": "We have received your inquiry. A lawyer from our team will contact you within the next 24 hours.",
+      "sendAnother": "Send another inquiry",
+      "privacyText": "I have read and accept the",
+      "privacyLink": "privacy policy",
+      "privacyAnd": "and the processing of my data to manage my inquiry.",
+      "dataProtected": "🔒 Your data is protected and treated with complete confidentiality"
     },
     "info": {
       "address": "Address",
@@ -126,6 +152,12 @@
       "scheduleValue": "Monday to Friday: 9:00 AM - 7:00 PM",
       "freeCall": "Free call"
     }
+  },
+  "cookie": {
+    "message": "We use our own and third-party cookies to improve our services and show you advertising related to your preferences.",
+    "moreInfo": "More information",
+    "accept": "Accept",
+    "reject": "Reject"
   },
   "footer": {
     "description": "Law firm specialized in medical negligence with over 20 years of experience defending patients' rights.",
@@ -248,6 +280,11 @@
       "title": "Have You Suffered Medical Negligence?",
       "description": "Don't wait any longer. Contact us and we will help you get the compensation you deserve. Free initial consultation with no obligation.",
       "button": "Request Free Consultation"
+    },
+    "gallery": {
+      "image1": "Hospital negligence",
+      "image2": "Medical negligence lawyers",
+      "image3": "Medical negligence claim"
     }
   },
   "news": {

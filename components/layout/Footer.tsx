@@ -2,9 +2,11 @@
 
 import Image from 'next/image'
 import { Phone, Mail, MapPin, Twitter, Facebook } from 'lucide-react'
-import { siteConfig, footerLinks } from '@/config/site'
+import { siteConfig, services } from '@/config/site'
 import { LocalizedLink } from '@/components/ui/LocalizedLink'
 import { useTranslations, useLocale } from 'next-intl'
+import { getTranslatedRoute, getTranslatedServiceRoute, routes } from '@/lib/routes'
+import { getLocalizedPath } from '@/lib/i18n-utils'
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
@@ -12,6 +14,39 @@ export function Footer() {
   const t = useTranslations('footer')
   const tNav = useTranslations('nav')
   const tContact = useTranslations('contact.info')
+  const tServices = useTranslations('services')
+  const tLegal = useTranslations('footer')
+  
+  // Generar links del footer con rutas traducidas
+  const footerServices = services.map((service) => {
+    const serviceSlugMap: Record<string, string> = {
+      'errores-quirurgicos': 'surgical-errors',
+      'errores-diagnostico': 'diagnostic-errors',
+      'negligencia-hospitalaria': 'hospital-negligence',
+      'negligencia-obstetrica': 'obstetric-negligence',
+      'errores-medicacion': 'medication-errors',
+      'consentimiento-informado': 'informed-consent',
+    }
+    const translationKey = locale === 'es' ? service.slug : (serviceSlugMap[service.slug] || service.slug)
+    return {
+      label: tServices(`${translationKey}.title`),
+      href: getTranslatedServiceRoute(service.slug, locale),
+    }
+  })
+  
+  const footerCompany = [
+    { label: tNav('about'), href: getTranslatedRoute('about', locale) },
+    { label: tNav('team'), href: getTranslatedRoute('team', locale) },
+    { label: tNav('blog'), href: getTranslatedRoute('blog', locale) },
+    { label: tNav('contact'), href: getTranslatedRoute('contact', locale) },
+    { label: tNav('faq'), href: getTranslatedRoute('faq', locale) },
+  ]
+  
+  const footerLegal = [
+    { label: tLegal('legalNotice'), href: routes[locale].legal.notice },
+    { label: tLegal('privacy'), href: routes[locale].legal.privacy },
+    { label: tLegal('cookies'), href: routes[locale].legal.cookies },
+  ]
 
   return (
     <footer className="bg-charcoal text-white">
@@ -61,7 +96,7 @@ export function Footer() {
               {t('services')}
             </h4>
             <ul className="space-y-3">
-              {footerLinks.servicios.map((link) => (
+              {footerServices.map((link) => (
                 <li key={link.href}>
                   <LocalizedLink
                     href={link.href}
@@ -80,7 +115,7 @@ export function Footer() {
               {tNav('about')}
             </h4>
             <ul className="space-y-3">
-              {footerLinks.empresa.map((link) => (
+              {footerCompany.map((link) => (
                 <li key={link.href}>
                   <LocalizedLink
                     href={link.href}
@@ -146,7 +181,7 @@ export function Footer() {
               © {currentYear} {siteConfig.legal.company}. {t('copyright')}.
             </p>
             <div className="flex flex-wrap justify-center gap-6">
-              {footerLinks.legal.map((link) => (
+              {footerLegal.map((link) => (
                 <LocalizedLink
                   key={link.href}
                   href={link.href}

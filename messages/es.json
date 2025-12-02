@@ -22,7 +22,15 @@
     "contactUs": "Contáctanos",
     "callUs": "Llámanos",
     "language": "Idioma",
-    "menu": "Menú"
+    "menu": "Menú",
+    "backToTop": "Volver arriba"
+  },
+  "search": {
+    "placeholder": "Buscar...",
+    "article": "Artículo",
+    "news": "Noticia",
+    "viewAllResults": "Ver todos los resultados para",
+    "noResults": "No se encontraron resultados para"
   },
   "nav": {
     "home": "Inicio",
@@ -115,7 +123,25 @@
       "submit": "Enviar Consulta",
       "sending": "Enviando...",
       "success": "¡Mensaje enviado! Te contactaremos pronto.",
-      "error": "Error al enviar. Por favor, inténtalo de nuevo."
+      "error": "Error al enviar. Por favor, inténtalo de nuevo.",
+      "namePlaceholder": "Tu nombre",
+      "emailPlaceholder": "tu@email.com",
+      "phonePlaceholder": "600 000 000",
+      "messagePlaceholder": "Cuéntanos brevemente qué ha ocurrido...",
+      "selectService": "Selecciona una opción",
+      "otherService": "Otro / No estoy seguro",
+      "nameRequired": "El nombre es obligatorio",
+      "emailRequired": "El email es obligatorio",
+      "phoneRequired": "El teléfono es obligatorio",
+      "messageRequired": "Describe tu caso brevemente",
+      "privacyRequired": "Debes aceptar la política de privacidad",
+      "successTitle": "¡Mensaje enviado!",
+      "successMessage": "Hemos recibido tu consulta. Un abogado de nuestro equipo se pondrá en contacto contigo en las próximas 24 horas.",
+      "sendAnother": "Enviar otra consulta",
+      "privacyText": "He leído y acepto la",
+      "privacyLink": "política de privacidad",
+      "privacyAnd": "y el tratamiento de mis datos para gestionar mi consulta.",
+      "dataProtected": "🔒 Tus datos están protegidos y tratados con total confidencialidad"
     },
     "info": {
       "address": "Dirección",
@@ -125,6 +151,12 @@
       "scheduleValue": "Lunes a Viernes: 9:00 - 19:00",
       "freeCall": "Llamada gratuita"
     }
+  },
+  "cookie": {
+    "message": "Utilizamos cookies propias y de terceros para mejorar nuestros servicios y mostrarle publicidad relacionada con sus preferencias.",
+    "moreInfo": "Más información",
+    "accept": "Aceptar",
+    "reject": "Rechazar"
   },
   "footer": {
     "description": "Despacho especializado en negligencias médicas con más de 20 años de experiencia defendiendo los derechos de los pacientes.",
@@ -247,6 +279,11 @@
       "title": "¿Has Sufrido una Negligencia Médica?",
       "description": "No esperes más. Contacta con nosotros y te ayudaremos a conseguir la compensación que mereces. Primera consulta gratuita y sin compromiso.",
       "button": "Solicitar Consulta Gratuita"
+    },
+    "gallery": {
+      "image1": "Negligencia hospitalaria",
+      "image2": "Abogados negligencias médicas",
+      "image3": "Reclamación negligencia médica"
     }
   },
   "news": {

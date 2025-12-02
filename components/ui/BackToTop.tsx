@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { ArrowUp } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { useTranslations } from 'next-intl'
 
 interface BackToTopProps {
   threshold?: number
@@ -10,6 +11,7 @@ interface BackToTopProps {
 }
 
 export function BackToTop({ threshold = 400, className }: BackToTopProps) {
+  const t = useTranslations('common')
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
@@ -36,7 +38,7 @@ export function BackToTop({ threshold = 400, className }: BackToTopProps) {
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none',
         className
       )}
-      aria-label="Volver arriba"
+      aria-label={t('backToTop')}
     >
       <ArrowUp className="w-5 h-5" />
     </button>
