@@ -395,12 +395,39 @@ export function Header() {
             </Link>
           </div>
 
+          {/* Mobile Social Links */}
+          <div className="mt-6 pt-6 border-t border-gray-200">
+            <p className="text-xs text-gray-500 mb-3 uppercase tracking-wider font-medium">
+              {tFooter('followUs')}
+            </p>
+            <div className="flex gap-3">
+              <a
+                href={siteConfig.social.twitter}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gold hover:text-white transition-colors"
+                aria-label="Twitter"
+              >
+                <Twitter className="w-5 h-5" />
+              </a>
+              <a
+                href={siteConfig.social.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gold hover:text-white transition-colors"
+                aria-label="Facebook"
+              >
+                <Facebook className="w-5 h-5" />
+              </a>
+            </div>
+          </div>
+
           {/* Mobile Info */}
-          <div className="mt-8 pt-6 border-t border-gray-200">
-            <p className="text-sm text-gray-600 mb-2">
+          <div className="mt-6 pt-6 border-t border-gray-200">
+            <p className="text-xs text-gray-500 mb-1">
               {siteConfig.contact.schedule}
             </p>
-            <p className="text-sm text-gray-500">{siteConfig.contact.address}</p>
+            <p className="text-xs text-gray-400">{siteConfig.contact.address}</p>
           </div>
         </div>
       </div>
