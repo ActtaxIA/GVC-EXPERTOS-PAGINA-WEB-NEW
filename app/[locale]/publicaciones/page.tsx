@@ -8,26 +8,22 @@ import { LocalizedLink } from '@/components/ui/LocalizedLink'
 import { getTranslations } from 'next-intl/server'
 import { createClient } from '@supabase/supabase-js'
 
-// Forzar renderizado dinámico en cada request (SSR)
-export const dynamic = 'force-dynamic'
-export const revalidate = 0
+// ============================================
+// PÁGINA ESTÁTICA - Se genera durante el build
+// ============================================
 
+// Crear cliente de Supabase para el build
 function getSupabase() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY
-  
-  console.log('🔧 [PUBLICACIONES] Supabase config:', {
-    hasUrl: !!url,
-    hasKey: !!key,
-  })
-  
   if (!url || !key) {
-    console.error('❌ [PUBLICACIONES] Supabase env vars missing')
+    console.error('❌ Supabase credentials missing during build')
     return null
   }
   return createClient(url, key)
 }
 
+// Metadata
 export async function generateMetadata({
   params: { locale }
 }: {
@@ -43,9 +39,15 @@ export async function generateMetadata({
   }
 }
 
+// Obtener todos los posts
 async function getPosts(locale: string) {
   const supabase = getSupabase()
-  if (!supabase) return []
+  if (!supabase) {
+    console.error('❌ No Supabase client available')
+    return []
+  }
+  
+  console.log('📝 [BUILD] Obteniendo posts para página principal...')
   
   const { data: posts, error } = await supabase
     .from('posts')
@@ -63,6 +65,8 @@ async function getPosts(locale: string) {
     return []
   }
 
+  console.log(`✅ [BUILD] ${posts?.length || 0} posts encontrados`)
+
   const isSpanish = locale === 'es'
   return (posts || []).map((post: any) => ({
     ...post,
@@ -75,6 +79,7 @@ async function getPosts(locale: string) {
   }))
 }
 
+// Obtener categorías
 async function getCategories(locale: string) {
   const supabase = getSupabase()
   if (!supabase) return []
@@ -93,6 +98,7 @@ async function getCategories(locale: string) {
   }))
 }
 
+// Componente de la página
 export default async function PublicacionesPage({
   params: { locale }
 }: {
@@ -264,4 +270,3 @@ export default async function PublicacionesPage({
     </>
   )
 }
-

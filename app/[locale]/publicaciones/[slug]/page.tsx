@@ -9,34 +9,73 @@ import { LocalizedLink } from '@/components/ui/LocalizedLink'
 import { getTranslations } from 'next-intl/server'
 import { createClient } from '@supabase/supabase-js'
 
-// Forzar SSR
-export const dynamic = 'force-dynamic'
-export const revalidate = 0
-export const dynamicParams = true
+// ============================================
+// PÁGINAS ESTÁTICAS - Se generan durante el build
+// ============================================
 
+// Crear cliente de Supabase para el build
 function getSupabase() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY
-  if (!url || !key) return null
+  if (!url || !key) {
+    console.error('❌ Supabase credentials missing during build')
+    return null
+  }
   return createClient(url, key)
 }
 
-async function getPost(slug: string, locale: string) {
+// Obtener todos los posts para generar las páginas estáticas
+async function getAllPosts() {
   const supabase = getSupabase()
-  if (!supabase) return null
-  
-  const { data: post, error } = await supabase
+  if (!supabase) return []
+
+  const { data: posts, error } = await supabase
     .from('posts')
     .select(`
-      *,
+      id, slug, title, title_en, excerpt, excerpt_en, content, content_en,
+      featured_image, reading_time, published_at, meta_title, meta_title_en,
+      meta_description, meta_description_en,
       category:post_categories(id, name, name_en, slug),
       author:team_members(name, photo_url, position, bio)
     `)
-    .eq('slug', slug)
     .eq('is_published', true)
-    .single()
 
-  if (error || !post) return null
+  if (error) {
+    console.error('Error fetching all posts:', error)
+    return []
+  }
+
+  return posts || []
+}
+
+// ============================================
+// GENERAR RUTAS ESTÁTICAS - Clave para SSG
+// ============================================
+export async function generateStaticParams() {
+  console.log('🔧 [BUILD] Generando rutas estáticas para publicaciones...')
+  
+  const posts = await getAllPosts()
+  
+  const params: { locale: string; slug: string }[] = []
+  
+  for (const post of posts) {
+    // Generar para español
+    params.push({ locale: 'es', slug: post.slug })
+    // Generar para inglés
+    params.push({ locale: 'en', slug: post.slug })
+  }
+  
+  console.log(`✅ [BUILD] Generadas ${params.length} rutas estáticas (${posts.length} artículos x 2 idiomas)`)
+  
+  return params
+}
+
+// Obtener un post específico
+async function getPost(slug: string, locale: string) {
+  const posts = await getAllPosts()
+  const post = posts.find(p => p.slug === slug)
+  
+  if (!post) return null
 
   const isSpanish = locale === 'es'
   return {
@@ -53,27 +92,22 @@ async function getPost(slug: string, locale: string) {
   }
 }
 
+// Obtener posts relacionados
 async function getRelatedPosts(categoryId: string, currentId: string, locale: string) {
-  const supabase = getSupabase()
-  if (!supabase) return []
+  const posts = await getAllPosts()
   
-  const { data, error } = await supabase
-    .from('posts')
-    .select('id, slug, title, title_en, featured_image')
-    .eq('category_id', categoryId)
-    .eq('is_published', true)
-    .neq('id', currentId)
-    .limit(3)
-
-  if (error) return []
+  const related = posts
+    .filter(p => p.category?.id === categoryId && p.id !== currentId)
+    .slice(0, 3)
 
   const isSpanish = locale === 'es'
-  return (data || []).map((post: any) => ({
+  return related.map(post => ({
     ...post,
     title: isSpanish ? post.title : (post.title_en || post.title),
   }))
 }
 
+// Metadata
 export async function generateMetadata({
   params,
 }: {
@@ -99,6 +133,7 @@ export async function generateMetadata({
   }
 }
 
+// Componente de la página
 export default async function ArticlePage({
   params,
 }: {
@@ -251,4 +286,3 @@ export default async function ArticlePage({
     </>
   )
 }
-
