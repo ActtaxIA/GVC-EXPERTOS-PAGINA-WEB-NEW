@@ -1,99 +1,95 @@
 # 🏛️ GVC Expertos - Abogados Negligencias Médicas
 
-Sitio web profesional completo para despacho de abogados especializado en negligencias médicas. Totalmente **bilingüe (Español/Inglés)**, incluye SEO local avanzado (105 ciudades), panel de administración con traducción IA, blog, noticias, casos de éxito, PWA y más.
+Sitio web profesional para despacho de abogados especializado en negligencias médicas. **100% bilingüe (Español/Inglés)**, desplegado en **AWS Amplify** con páginas estáticas (SSG) para máximo rendimiento.
 
 ![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=next.js)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue?logo=typescript)
 ![Supabase](https://img.shields.io/badge/Supabase-Database-green?logo=supabase)
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.3-38bdf8?logo=tailwindcss)
-![Playwright](https://img.shields.io/badge/Playwright-E2E-2EAD33?logo=playwright)
-![OpenAI](https://img.shields.io/badge/OpenAI-Translation-412991?logo=openai)
+![AWS Amplify](https://img.shields.io/badge/AWS-Amplify-FF9900?logo=aws-amplify)
+
+**🌐 Producción:** https://main.dsa1glcthysbo.amplifyapp.com
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Arquitectura
 
-```bash
-# 1. Clonar e instalar dependencias
-git clone [repo]
-cd gvc-expertos
-npm install
+### Páginas Estáticas (SSG)
+El sitio usa **Static Site Generation** para compatibilidad total con AWS Amplify:
 
-# 2. Configurar variables de entorno
-cp .env.example .env.local
-# Editar .env.local con tus credenciales (Supabase, OpenAI, Google Places, Resend, etc.)
+| Tipo de Página | Generación | Datos |
+|----------------|------------|-------|
+| Home, Servicios, Legal | Build time | Estático |
+| 105 Ciudades | Build time | `generateStaticParams()` |
+| Blog/Publicaciones | Build time | Supabase → SSG |
+| Noticias | Build time | Supabase → SSG |
+| Casos de Éxito | Build time | Supabase → SSG |
 
-# 3. Ejecutar migraciones en Supabase Dashboard (SQL Editor):
-#    - supabase/migrations/001_initial_schema.sql
-#    - supabase/migrations/002_seed_data.sql
-#    - supabase/migrations/003_hospitals_and_admin.sql
-#    - supabase/migrations/004_news_and_cases.sql
-#    - supabase/migrations/005_add_translation_columns.sql (Soporte bilingüe)
+**⚠️ Importante:** Para nuevo contenido (artículos, noticias), se necesita un nuevo deploy en AWS Amplify.
 
-# 4. Crear bucket "images" en Supabase Storage
-#    Dashboard > Storage > New bucket > Name: "images" > Public: Yes
-#    Crear carpetas: blog, news, cases, team, general
-
-# 5. Crear usuario administrador
-npm run create-admin
-
-# 6. Iniciar servidor de desarrollo
-npm run dev
-
-# 7. Abrir http://localhost:3000
+### Webhook de Rebuild Automático
+Endpoint disponible para disparar rebuilds automáticos:
 ```
+POST /api/webhook/rebuild
+```
+Configurar en Supabase Database Webhooks para auto-deploy cuando se crea contenido.
 
 ---
 
-## ✨ Características Principales
+## 🌍 Internacionalización (i18n)
 
-### 🌍 Internacionalización (i18n)
-- **Bilingüe Completo**: Español (Default) e Inglés.
-- **Rutas Localizadas**: `/es/...` y `/en/...`.
-- **Detección Automática**: Middleware inteligente basado en `Accept-Language`.
-- **SEO Internacional**: Etiquetas `hreflang`, sitemap bilingüe, canonicals correctos.
-- **Traducción IA**: Panel de administración integrado con OpenAI para traducir contenido automáticamente.
+### URLs Traducidas
+| Español | Inglés |
+|---------|--------|
+| `/es/publicaciones` | `/en/posts` |
+| `/es/sobre-nosotros` | `/en/about-us` |
+| `/es/equipo` | `/en/team` |
+| `/es/contacto` | `/en/contact` |
+| `/es/negligencias-medicas` | `/en/medical-negligence` |
+| `/es/preguntas-frecuentes` | `/en/faq` |
+
+### Sistema de Traducciones
+- **Archivos centralizados:** `messages/es.json`, `messages/en.json`
+- **Traducciones inline:** `isSpanish ? 'texto ES' : 'texto EN'`
+- **Categorías del blog:** Fallback con mapeo hardcodeado
+
+---
+
+## ✨ Características
 
 ### 🌐 Frontend Público
 | Sección | Descripción |
 |---------|-------------|
-| **Home** | 8 secciones optimizadas: Hero, Intro, Servicios, CTA, Equipo, Proceso, Galería, CTA Final |
-| **6 Servicios** | Errores diagnóstico, quirúrgicos, ginecología, urgencias, infecciones, consentimiento |
-| **105 Landings Locales** | SEO optimizado por ciudad con FAQs, hospitales y JSON-LD |
-| **Blog** | Artículos dinámicos con categorías, autor, fechas. Contenido traducible. |
-| **Noticias** | Agregador de noticias del sector. Contenido traducible. |
-| **Casos de Éxito** | Resultados con montos de indemnización. |
-| **Institucionales** | Sobre nosotros, Equipo, FAQs, Contacto. |
-| **Legales** | Privacidad, Aviso legal, Cookies (con banner GDPR). |
+| **Home** | Hero, Intro, Servicios, CTA, Equipo, Proceso, Galería |
+| **6 Servicios** | Errores quirúrgicos, diagnóstico, hospitalaria, obstétrica, medicación, consentimiento |
+| **105 Landings Locales** | SEO por ciudad con hospitales y FAQs |
+| **Publicaciones** | Blog con filtros por categoría |
+| **Noticias** | Agregador de noticias del sector |
+| **Casos de Éxito** | Resultados con indemnizaciones |
+| **Institucionales** | Sobre nosotros, Equipo, FAQs, Contacto |
+| **Legales** | Privacidad, Aviso legal, Cookies |
 
 ### 🔐 Panel de Administración
-| Módulo | Funcionalidades |
-|--------|-----------------|
-| **Dashboard** | Estadísticas generales, accesos rápidos |
-| **Analytics** | Gráficos con Recharts: líneas, barras, pie charts |
-| **Blog & Noticias** | CRUD completo, editor WYSIWYG TipTap, **Panel de Traducción IA** |
-| **Casos de Éxito** | Gestión de casos con montos y servicios |
-| **Hospitales** | Búsqueda Google Places API, gestión por ciudad |
-| **Contactos** | CRM de leads, filtros por estado y servicio |
-| **Traducción** | Herramientas para gestionar contenido bilingüe |
+- Dashboard con estadísticas
+- CRUD de Blog, Noticias, Casos
+- Editor WYSIWYG (TipTap)
+- Gestión de hospitales (Google Places API)
+- CRM de contactos/leads
 
-### 🔍 SEO Completo
-| Tipo | Implementación |
-|------|----------------|
-| **Meta Tags** | Title, description únicos por página e idioma |
-| **Open Graph** | og:title, og:description, og:image, og:url, og:locale |
-| **Hreflang** | Implementación correcta para ES/EN |
-| **JSON-LD** | 12 schemas diferentes (Organization, Service, Article, FAQ, etc.) |
-| **Sitemap** | Dinámico con ~240 URLs (todas las variantes de idioma) |
-| **Robots.txt** | Configuración optimizada |
+### 🔍 SEO
+- Meta tags únicos por página e idioma
+- Open Graph completo
+- Hreflang ES/EN
+- JSON-LD (Organization, Service, Article, FAQ, etc.)
+- Sitemap dinámico (~240 URLs)
+- Robots.txt optimizado
 
-### ⚡ Características Técnicas
-- **PWA**: Service Worker, manifest.json, modo offline.
-- **Email**: Resend con templates HTML responsive.
-- **Buscador**: API de búsqueda con debounce.
-- **Tests E2E**: Playwright (60+ tests).
-- **Base de Datos**: Supabase con tipos TypeScript generados.
-- **Validación**: Zod schemas.
+### ⚡ Técnico
+- PWA con Service Worker
+- Email con Resend
+- Buscador con debounce
+- Back to Top button
+- Menú móvil off-canvas (z-index: 9999)
 
 ---
 
@@ -101,84 +97,53 @@ npm run dev
 
 ```
 gvc-expertos/
-├── 📂 app/
-│   ├── 📂 [locale]/                # Rutas localizadas (es/en)
-│   │   ├── 📂 (legal)/             # Páginas legales
-│   │   ├── 📂 (marketing)/         # Páginas institucionales
-│   │   ├── 📂 blog/
-│   │   ├── 📂 noticias/
-│   │   ├── 📂 [ciudad]/            # 105 landings dinámicas
-│   │   └── page.tsx                # Home
-│   ├── 📂 admin/                   # Panel administración (sin locale)
-│   ├── 📂 api/                     # API Routes
-│   │   └── admin/
-│   │       └── translate/          # Endpoint traducción IA
-│   └── offline/                    # Página offline PWA
+├── app/
+│   ├── [locale]/                 # Rutas localizadas (es/en)
+│   │   ├── publicaciones/        # Blog (SSG)
+│   │   ├── noticias/             # Noticias (SSG)
+│   │   ├── casos-exito/          # Casos (SSG)
+│   │   ├── negligencias-medicas/ # Servicios
+│   │   ├── [ciudad]/             # 105 landings (SSG)
+│   │   ├── (legal)/              # Páginas legales
+│   │   ├── (marketing)/          # Institucionales
+│   │   └── page.tsx              # Home
+│   ├── admin/                    # Panel admin
+│   └── api/                      # API Routes
+│       └── webhook/rebuild/      # Webhook para auto-deploy
 │
-├── 📂 components/
-│   ├── 📂 admin/
-│   │   ├── TranslateButton.tsx     # UI Traducción
-│   │   └── TranslationPanel.tsx
-│   ├── 📂 home/
-│   ├── 📂 ui/
-│   │   └── LocalizedLink.tsx       # Link compatible con i18n
-│   └── ...
+├── components/
+│   ├── blog/PostsGrid.tsx        # Grid con filtros (client)
+│   ├── layout/                   # Header, Footer
+│   ├── home/                     # Secciones home
+│   └── ui/                       # Componentes UI
 │
-├── 📂 lib/
-│   ├── translation-utils.ts        # Helpers i18n
-│   └── ...
+├── messages/                     # Traducciones JSON
+│   ├── es.json
+│   └── en.json
 │
-├── 📂 messages/                    # Archivos de traducción JSON
-│   ├── en.json
-│   └── es.json
-│
-├── 📂 supabase/
-│   └── migrations/                 # SQL Migrations
-│
-├── i18n.ts                         # Config next-intl
-├── middleware.ts                   # Middleware i18n
-└── ...
+├── config/site.ts                # Configuración del sitio
+├── lib/routes.ts                 # Rutas traducidas
+└── amplify.yml                   # Config AWS Amplify
 ```
 
 ---
 
 ## 🔧 Variables de Entorno
 
+### Requeridas (AWS Amplify)
 ```env
-# SUPABASE
 NEXT_PUBLIC_SUPABASE_URL=https://xxxxx.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=...
-SUPABASE_SERVICE_ROLE_KEY=...
-
-# GOOGLE APIS
-GOOGLE_PLACES_API_KEY=...
-
-# OPENAI (Para traducciones)
-OPENAI_API_KEY=sk-...
-
-# AUTENTICACIÓN
-JWT_SECRET=...
-
-# EMAIL (RESEND)
-RESEND_API_KEY=re_...
-EMAIL_FROM=...
-EMAIL_TO=...
-
-# SITE
-NEXT_PUBLIC_SITE_URL=https://gvcexpertos.es
-
-# ANALYTICS
-NEXT_PUBLIC_GA_ID=...
+SUPABASE_SERVICE_ROLE_KEY=eyJ...
 ```
 
----
-
-## 🧪 Testing
-
-```bash
-npx playwright install
-npm run test        # Ejecutar todos los tests
-npm run test:ui     # UI interactiva
+### Opcionales
+```env
+NEXT_PUBLIC_SUPABASE_ANON_KEY=...
+OPENAI_API_KEY=sk-...              # Traducciones IA
+GOOGLE_PLACES_API_KEY=...          # Hospitales
+RESEND_API_KEY=re_...              # Emails
+AMPLIFY_WEBHOOK_URL=...            # Auto-rebuild
+WEBHOOK_SECRET=...                 # Seguridad webhook
 ```
 
 ---
@@ -186,15 +151,63 @@ npm run test:ui     # UI interactiva
 ## 📝 Scripts
 
 ```bash
-npm run dev          # Desarrollo
+npm run dev          # Desarrollo (PROHIBIDO en producción)
 npm run build        # Build producción
 npm run start        # Servidor producción
 npm run lint         # Linter
+npm run check:api    # Verificar conexiones API
 npm run create-admin # Crear usuario admin
 ```
+
+---
+
+## 🚀 Deploy en AWS Amplify
+
+1. Conectar repositorio GitHub
+2. Configurar variables de entorno en Amplify Console
+3. El build se ejecuta automáticamente con cada push a `main`
+
+### Verificación de Build
+El script `check:api` se ejecuta durante el build para verificar:
+- ✅ Variables de entorno
+- ✅ Conexión a Supabase
+- ✅ Tablas accesibles (posts, categories, team, services)
+
+---
+
+## 📋 Flujo de Contenido
+
+```
+1. Crear artículo en Supabase (tabla posts)
+2. Push a main O trigger webhook
+3. AWS Amplify reconstruye el sitio
+4. Nuevas páginas estáticas generadas
+5. Contenido visible en producción
+```
+
+---
+
+## 🐛 Troubleshooting
+
+### Blog no muestra artículos
+- Verificar `is_published = true` en Supabase
+- Verificar variables de entorno en AWS Amplify
+- Revisar logs del build en Amplify Console
+
+### Traducciones no funcionan
+- Verificar que existe la clave en `messages/es.json` y `messages/en.json`
+- No duplicar claves en los archivos JSON
+- Usar `serviceSlugMap` para servicios
+
+### Menú móvil no se ve
+- El z-index debe ser 9999 (ya corregido)
 
 ---
 
 ## 📄 Licencia
 
 Proyecto privado. Todos los derechos reservados.
+
+---
+
+**Última actualización:** Diciembre 2024

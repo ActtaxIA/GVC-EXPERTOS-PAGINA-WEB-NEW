@@ -1,96 +1,84 @@
 # Changelog
 
-Todos los cambios notables de este proyecto serán documentados en este archivo.
+Todos los cambios notables del proyecto GVC Expertos.
 
-El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
-y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+## [2.0.0] - 2024-12-02
 
-## [1.0.1] - 2025-12-02
+### 🚀 Cambio Mayor: Migración a Páginas Estáticas (SSG)
 
-### 🐛 Bug Fixes
+**Problema:** Las páginas dinámicas no funcionaban correctamente en AWS Amplify debido a problemas de conexión con Supabase en runtime.
 
-- **Estilos**: Corregida clase `hover:bg-charcoal-light` a `hover:bg-charcoal-700` en `globals.css` y `Button.tsx`.
-- **TypeScript**: Corregidos errores de tipado en objetos complejos de Supabase con relaciones (`posts`, `news`, `success_cases`) usando `as any` en `app/[locale]/blog/[slug]/page.tsx`, `app/[locale]/noticias/[slug]/page.tsx` y `app/[locale]/blog/page.tsx`.
-- **Componentes**: Corregida prop `icon` a `name` en `ServiceIcon` dentro de `ServicesSection.tsx`.
-- **Utilidades**: Corregido error de indexación genérica en `lib/translation-utils.ts`.
-- **Runtime**: Convertido `app/offline/page.tsx` a Client Component (`'use client'`) para permitir interactividad (`onClick`).
+**Solución:** Convertir todas las páginas de contenido dinámico a **Static Site Generation (SSG)**:
+- Blog/Publicaciones
+- Noticias
+- Casos de Éxito
 
-## [1.0.0] - 2024-12-02
+Ahora los datos se obtienen de Supabase **durante el build**, no en runtime.
 
-### 🎉 Release Inicial
+### ✨ Nuevas Características
 
-Primera versión completa del sitio web GVC Expertos.
+#### Blog/Publicaciones
+- Nueva URL: `/es/publicaciones` y `/en/posts`
+- Filtros de categoría funcionales (client-side)
+- Limpieza automática de HTML en excerpts
+- Traducciones de categorías (Guías→Guides, etc.)
 
-### Añadido
+#### Webhook de Rebuild
+- Endpoint `/api/webhook/rebuild` para auto-deploy
+- Integración con Supabase Database Webhooks
+- Seguridad con `WEBHOOK_SECRET`
 
-#### Frontend Público
-- Home con 8 secciones optimizadas
-- 6 páginas de servicios de negligencias médicas
-- 105 landings locales con SEO optimizado
-- Blog dinámico con categorías
-- Sistema de noticias con fuentes externas
-- Página de casos de éxito
-- Páginas institucionales (Sobre nosotros, Equipo, FAQs, Contacto)
-- Páginas legales (Privacidad, Aviso legal, Cookies)
-- Página 404 mejorada con sugerencias
-- Página offline para PWA
+#### UI/UX
+- Botón "Back to Top" en todas las páginas
+- Menú móvil con z-index máximo (9999)
+- Grid responsive del equipo (2 columnas en móvil)
 
-#### Panel de Administración
-- Dashboard con estadísticas
-- Analytics con gráficos (Recharts)
-- Gestión de Blog con editor WYSIWYG (TipTap)
-- Gestión de Noticias
-- Gestión de Hospitales con Google Places API
-- Gestión de Contactos/Leads
-- Sistema de autenticación JWT
-- Subida de imágenes a Supabase Storage
+### 🐛 Correcciones
+
+#### Traducciones
+- Servicios en páginas de ciudades ahora traducidos
+- Servicios en `/negligencias-medicas` ahora traducidos
+- Categorías del blog traducidas en inglés
+- Eliminados duplicados en archivos de traducción JSON
+
+#### Mapa de Contacto
+- Corregida ubicación: Murcia en vez de Madrid
+- Dirección: Plaza Fuensanta, 3 - 6ºB, 30008 Murcia
 
 #### SEO
-- Meta tags dinámicos por página
-- Open Graph completo
-- Twitter Cards
-- JSON-LD (12 schemas diferentes)
-- Sitemap dinámico (~130 URLs)
-- robots.txt optimizado
-- Canonical URLs
-- Breadcrumbs estructurados
+- URLs de blog actualizadas en sitemap
+- Canonical URLs corregidas
+- Open Graph images verificadas
 
-#### Técnico
-- PWA completa (Service Worker, manifest, offline)
-- Email transaccional con Resend
-- Tests E2E con Playwright (60+ tests)
-- Buscador integrado con debounce
-- Cookie Banner GDPR
-- Back to Top
-- Headers de seguridad
-- Optimización de imágenes (WebP, AVIF)
-- Loading skeletons
+### 🔧 Técnico
 
-#### Base de Datos
-- 17 tablas en Supabase
-- 4 migraciones SQL
-- Datos seed iniciales
-- RLS (Row Level Security)
+#### AWS Amplify
+- `amplify.yml` actualizado para SSG
+- Script `check:api` en preBuild
+- Variables de entorno verificadas durante build
 
-### Stack Tecnológico
-- Next.js 14
-- TypeScript 5.3
-- TailwindCSS 3.3
-- Supabase
-- TipTap
-- Recharts
-- Playwright
+#### Código
+- `generateStaticParams()` para todas las páginas dinámicas
+- Tipos corregidos para relaciones de Supabase
+- Componente `PostsGrid` separado (client component)
 
 ---
 
-## [Próximas Versiones]
+## [1.5.0] - 2024-11-XX
 
-### Planificado
-- [ ] Admin: Edición de noticias individuales
-- [ ] Admin: Gestión de casos de éxito
-- [ ] Admin: Página de configuración
-- [ ] Integración Google Analytics 4
-- [ ] Newsletter con Resend
-- [ ] Chat en vivo
-- [ ] Área de clientes
-- [ ] Multiidioma (Catalán, Gallego, Euskera)
+### Características
+- Panel de administración completo
+- Editor WYSIWYG con TipTap
+- Traducción automática con OpenAI
+- 105 landings de ciudades
+- PWA con Service Worker
+
+---
+
+## [1.0.0] - 2024-XX-XX
+
+### Lanzamiento Inicial
+- Sitio web completo bilingüe
+- 6 servicios de negligencias médicas
+- Sistema de contacto con Resend
+- SEO completo con JSON-LD

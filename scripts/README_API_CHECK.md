@@ -37,16 +37,40 @@ El script muestra un resumen con:
 
 ## Ejecución en AWS Amplify
 
-Este script se ejecuta automáticamente durante el build en AWS Amplify para verificar que todas las conexiones estén correctas antes de desplegar.
+Este script se ejecuta automáticamente durante el **preBuild** en AWS Amplify:
 
-Si alguna verificación crítica falla, se muestra una advertencia pero el build continúa.
+```yaml
+# amplify.yml
+preBuild:
+  commands:
+    - npm run check:api
+```
 
-## Variables de Entorno Requeridas
+### ¿Por qué es importante?
 
-Para que el proyecto funcione correctamente en AWS Amplify, asegúrate de configurar en **AWS Amplify Console → Environment Variables**:
+Con páginas **SSG (Static Site Generation)**, los datos se obtienen de Supabase **durante el build**, no en runtime. Por eso es crítico verificar las conexiones antes de construir.
 
-1. `NEXT_PUBLIC_SUPABASE_URL`
-2. `SUPABASE_SERVICE_ROLE_KEY`
+Si las variables de entorno no están configuradas, el build generará páginas vacías.
 
-Sin estas variables, las páginas dinámicas (publicaciones, noticias) no funcionarán.
+## Variables de Entorno en AWS Amplify
 
+Configurar en **AWS Amplify Console → App settings → Environment variables**:
+
+| Variable | Requerida | Descripción |
+|----------|-----------|-------------|
+| `NEXT_PUBLIC_SUPABASE_URL` | ✅ Sí | URL del proyecto Supabase |
+| `SUPABASE_SERVICE_ROLE_KEY` | ✅ Sí | Service Role Key (no anon key) |
+| `OPENAI_API_KEY` | ❌ No | Para traducciones automáticas |
+| `AMPLIFY_WEBHOOK_URL` | ❌ No | Para auto-rebuild |
+| `WEBHOOK_SECRET` | ❌ No | Seguridad del webhook |
+
+## Troubleshooting
+
+### "Supabase credentials missing"
+Las variables de entorno no están configuradas en AWS Amplify.
+
+### "Error al consultar posts"
+La tabla `posts` no existe o no tiene permisos. Ejecutar migraciones SQL.
+
+### "column services.title_es does not exist"
+La tabla `services` tiene estructura diferente. No es crítico.
