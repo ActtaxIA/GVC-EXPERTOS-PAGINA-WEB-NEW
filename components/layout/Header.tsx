@@ -225,10 +225,10 @@ export function Header() {
             </Link>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button - z-index alto para estar siempre accesible */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden relative z-50 p-2 text-charcoal hover:text-gold transition-colors"
+            className="lg:hidden relative z-[9999] p-2 text-charcoal hover:text-gold transition-colors"
             aria-label={isMenuOpen ? tCommon('close') : tCommon('menu')}
           >
             {isMenuOpen ? (
@@ -240,19 +240,19 @@ export function Header() {
         </div>
       </div>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu Overlay - z-index muy alto para estar por encima de todo */}
       <div
         className={cn(
-          'fixed inset-0 bg-black/50 lg:hidden transition-opacity duration-300 z-[60]',
+          'fixed inset-0 bg-black/50 lg:hidden transition-opacity duration-300 z-[9998]',
           isMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
         )}
         onClick={() => setIsMenuOpen(false)}
       />
 
-      {/* Mobile Menu Panel */}
+      {/* Mobile Menu Panel - z-index máximo para estar siempre en top */}
       <div
         className={cn(
-          'fixed top-0 right-0 h-full w-full max-w-sm bg-white lg:hidden transition-transform duration-300 ease-in-out z-[70] overflow-y-auto shadow-2xl',
+          'fixed top-0 right-0 h-full w-full max-w-sm bg-white lg:hidden transition-transform duration-300 ease-in-out z-[9999] overflow-y-auto shadow-2xl',
           isMenuOpen ? 'translate-x-0' : 'translate-x-full'
         )}
       >
