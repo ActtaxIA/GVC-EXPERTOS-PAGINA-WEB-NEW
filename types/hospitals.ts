@@ -1,13 +1,26 @@
-import { Database } from './database'
+// Tipos base para hospitales (temporales hasta regenerar types/database.ts)
+export interface Hospital {
+  id: string
+  google_place_id?: string | null
+  name: string
+  address?: string | null
+  city?: string | null
+  province?: string | null
+  postal_code?: string | null
+  coordinates?: any
+  phone?: string | null
+  website?: string | null
+  rating?: number | null
+  total_reviews?: number | null
+  google_maps_url?: string | null
+  photo_url?: string | null
+  is_active: boolean
+  created_at: string
+  updated_at: string
+}
 
-// Tipos base de Supabase
-export type Hospital = Database['public']['Tables']['hospitals']['Row']
-export type HospitalInsert = Database['public']['Tables']['hospitals']['Insert']
-export type HospitalUpdate = Database['public']['Tables']['hospitals']['Update']
-
-export type CityContent = Database['public']['Tables']['city_content']['Row']
-export type ServiceContent = Database['public']['Tables']['service_content']['Row']
-export type AdminUser = Database['public']['Tables']['admin_users']['Row']
+export type HospitalInsert = Omit<Hospital, 'id' | 'created_at' | 'updated_at'>
+export type HospitalUpdate = Partial<HospitalInsert>
 
 // Tipos extendidos para hospitales
 export interface HospitalWithDistance extends Hospital {
