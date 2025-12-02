@@ -52,7 +52,7 @@ export default function AvisoLegalPage() {
                 <strong>Teléfono:</strong> {siteConfig.contact.phone}
               </li>
               <li>
-                <strong>Inscripción:</strong> {siteConfig.legal.registro}
+                <strong>Inscripción:</strong> {siteConfig.legal.registroMercantil}
               </li>
             </ul>
 
