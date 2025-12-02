@@ -19,6 +19,40 @@ function getSupabase() {
   return createClient(url, key)
 }
 
+// Permitir rutas dinámicas que no estén pre-generadas
+export const dynamicParams = true
+
+// Generar rutas estáticas para AWS Amplify
+export async function generateStaticParams() {
+  try {
+    const supabase = getSupabase()
+    if (!supabase) {
+      console.log('⚠️ Supabase not available during build, skipping static params')
+      return []
+    }
+
+    const { data: categories, error } = await supabase
+      .from('post_categories')
+      .select('slug')
+
+    if (error || !categories) {
+      console.log('⚠️ Could not fetch categories for static params:', error?.message)
+      return []
+    }
+
+    const params: { locale: string; category: string }[] = []
+    for (const cat of categories) {
+      params.push({ locale: 'es', category: cat.slug })
+      params.push({ locale: 'en', category: cat.slug })
+    }
+    console.log(`✅ Generated ${params.length} static params for categories`)
+    return params
+  } catch (e) {
+    console.log('⚠️ Error generating static params:', e)
+    return []
+  }
+}
+
 async function getCategory(slug: string, locale: string) {
   const supabase = getSupabase()
   if (!supabase) return null

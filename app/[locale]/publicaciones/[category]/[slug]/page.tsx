@@ -74,6 +74,43 @@ async function getRelatedPosts(categoryId: string, currentId: string, locale: st
   }))
 }
 
+// Permitir rutas dinámicas que no estén pre-generadas
+export const dynamicParams = true
+
+// Generar rutas estáticas para AWS Amplify
+export async function generateStaticParams() {
+  try {
+    const supabase = getSupabase()
+    if (!supabase) {
+      console.log('⚠️ Supabase not available during build, skipping static params')
+      return []
+    }
+
+    const { data: posts, error } = await supabase
+      .from('posts')
+      .select('slug, category:post_categories(slug)')
+      .eq('is_published', true)
+
+    if (error || !posts) {
+      console.log('⚠️ Could not fetch posts for static params:', error?.message)
+      return []
+    }
+
+    const params: { locale: string; category: string; slug: string }[] = []
+    for (const post of posts) {
+      if (post.category?.slug) {
+        params.push({ locale: 'es', category: post.category.slug, slug: post.slug })
+        params.push({ locale: 'en', category: post.category.slug, slug: post.slug })
+      }
+    }
+    console.log(`✅ Generated ${params.length} static params for articles`)
+    return params
+  } catch (e) {
+    console.log('⚠️ Error generating static params:', e)
+    return []
+  }
+}
+
 export async function generateMetadata({
   params,
 }: {
