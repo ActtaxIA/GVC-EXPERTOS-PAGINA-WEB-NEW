@@ -36,14 +36,14 @@ async function getPost(slug: string, locale: string) {
     if (!post) return null
 
     // Usar versión en inglés si existe y el locale es 'en'
-    if (!isSpanish && post.title_en) {
+    if (!isSpanish && 'title_en' in post && post.title_en) {
       return {
         ...post,
         title: post.title_en || post.title,
-        excerpt: post.excerpt_en || post.excerpt,
-        content: post.content_en || post.content,
-        meta_title: post.meta_title_en || post.meta_title,
-        meta_description: post.meta_description_en || post.meta_description,
+        excerpt: ('excerpt_en' in post ? post.excerpt_en : null) || post.excerpt,
+        content: ('content_en' in post ? post.content_en : null) || post.content,
+        meta_title: ('meta_title_en' in post ? post.meta_title_en : null) || post.meta_title,
+        meta_description: ('meta_description_en' in post ? post.meta_description_en : null) || post.meta_description,
       }
     }
 
