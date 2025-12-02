@@ -17,6 +17,15 @@ function getSupabase() {
   return createClient(url, key)
 }
 
+// Mapeo de traducciones de categorías (fallback si no hay name_en en BD)
+const categoryTranslations: Record<string, string> = {
+  'guias': 'Guides',
+  'legal': 'Legal',
+  'conceptos': 'Concepts',
+  'indemnizaciones': 'Compensations',
+  'actualidad': 'News',
+}
+
 // Metadata
 export async function generateMetadata({
   params: { locale }
@@ -73,7 +82,9 @@ async function getPosts(locale: string) {
       author: post.author,
       category: cat ? {
         slug: cat.slug,
-        name: isSpanish ? cat.name : (cat.name_en || cat.name)
+        name: isSpanish 
+          ? cat.name 
+          : (cat.name_en || categoryTranslations[cat.slug] || cat.name)
       } : null
     }
   })
@@ -95,7 +106,9 @@ async function getCategories(locale: string) {
   return (categories || []).map((cat: any) => ({
     id: cat.id,
     slug: cat.slug,
-    name: isSpanish ? cat.name : (cat.name_en || cat.name)
+    name: isSpanish 
+      ? cat.name 
+      : (cat.name_en || categoryTranslations[cat.slug] || cat.name)
   }))
 }
 
