@@ -306,3 +306,4 @@ BEGIN
   RAISE NOTICE '  4. Migrar páginas de blog/noticias a [locale]';
 END $$;
 
+

@@ -17,3 +17,4 @@ export function LocalizedLink({ href, ...props }: LocalizedLinkProps) {
   return <Link href={localizedHref} {...props} />
 }
 
+

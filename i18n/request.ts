@@ -7,12 +7,13 @@ type Locale = typeof locales[number]
 
 export default getRequestConfig(async ({ locale }) => {
   // Validar que el locale entrante es válido
-  if (!locales.includes(locale as Locale)) {
-    notFound()
-  }
+  // Si no hay locale o no es válido, usar el default 'es'
+  const validLocale = locale && locales.includes(locale as Locale) 
+    ? (locale as Locale) 
+    : 'es'
 
   return {
-    locale: locale as Locale,
-    messages: (await import(`../messages/${locale}.json`)).default
+    locale: validLocale,
+    messages: (await import(`../messages/${validLocale}.json`)).default
   }
 })

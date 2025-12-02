@@ -1,4 +1,3 @@
-import '../globals.css'
 import { Inter, Playfair_Display } from 'next/font/google'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
@@ -124,14 +123,12 @@ export default async function LocaleLayout({
   const messages = await getMessages()
 
   return (
-    <html lang={locale} className={`${inter.variable} ${playfair.variable}`}>
-      <body className="min-h-screen bg-white antialiased flex flex-col">
-        <NextIntlClientProvider messages={messages}>
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Footer />
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <div className={`${inter.variable} ${playfair.variable} min-h-screen bg-white antialiased flex flex-col`}>
+      <NextIntlClientProvider messages={messages}>
+        <Header />
+        <main className="flex-1">{children}</main>
+        <Footer />
+      </NextIntlClientProvider>
+    </div>
   )
 }

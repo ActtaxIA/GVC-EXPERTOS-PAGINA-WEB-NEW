@@ -1,5 +1,5 @@
 const withNextIntl = require('next-intl/plugin')(
-  // Especificar el archivo de configuración i18n
+  // Ruta correcta al archivo de configuración i18n
   './i18n/request.ts'
 )
 

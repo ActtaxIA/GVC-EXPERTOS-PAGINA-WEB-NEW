@@ -21,8 +21,9 @@ export const config = {
   // - Archivos en public (imágenes, fonts, etc)
   // - Rutas de admin (mantenemos sin i18n por ahora)
   matcher: [
-    '/',
-    '/(es|en)/:path*',
-    '/((?!api|admin|_next/static|_next/image|images|favicon.ico|sw.js|manifest.json|robots.txt).*)'
+    // Match all pathnames except for
+    // - … if they start with `/api`, `/_next` or `/_vercel`
+    // - … the ones containing a dot (e.g. `favicon.ico`)
+    '/((?!api|admin|_next|_vercel|.*\\..*).*)'
   ]
 }

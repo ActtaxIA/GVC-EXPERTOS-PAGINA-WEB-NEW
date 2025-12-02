@@ -180,3 +180,4 @@ export type TranslateContent = (
   contentType: 'title' | 'excerpt' | 'content' | 'meta_description'
 ) => Promise<string>
 
+
