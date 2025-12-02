@@ -4,10 +4,9 @@ import { Calendar, Clock, User, ArrowRight } from 'lucide-react'
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
 import { CtaDark } from '@/components/home'
 import { siteConfig } from '@/config/site'
-import { createClient } from '@supabase/supabase-js'
 import { LocalizedLink } from '@/components/ui/LocalizedLink'
-import { useTranslations } from 'next-intl'
 import { getTranslations } from 'next-intl/server'
+import { getSupabaseAdmin } from '@/lib/supabase/server'
 
 // Revalidar cada 60 segundos (ISR)
 export const revalidate = 60
@@ -40,14 +39,15 @@ export async function generateMetadata({
   }
 }
 
-// Cliente Supabase
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL || '',
-  process.env.SUPABASE_SERVICE_ROLE_KEY || ''
-)
-
 async function getPosts(locale: string) {
   try {
+    let supabase
+    try {
+      supabase = getSupabaseAdmin()
+    } catch (configError: any) {
+      console.error('❌ Error de configuración Supabase:', configError.message)
+      return []
+    }
     const isSpanish = locale === 'es'
     
     const { data: posts, error } = await supabase
@@ -96,6 +96,13 @@ async function getPosts(locale: string) {
 
 async function getCategories(locale: string) {
   try {
+    let supabase
+    try {
+      supabase = getSupabaseAdmin()
+    } catch (configError: any) {
+      console.error('❌ Error de configuración Supabase:', configError.message)
+      return []
+    }
     const isSpanish = locale === 'es'
     
     const { data: categories, error } = await supabase

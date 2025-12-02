@@ -6,20 +6,22 @@ import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
 import { CtaDark } from '@/components/home'
 import { JsonLdArticle, JsonLdBreadcrumbs } from '@/components/seo/JsonLd'
 import { siteConfig } from '@/config/site'
-import { createClient } from '@supabase/supabase-js'
 import { LocalizedLink } from '@/components/ui/LocalizedLink'
 import { getTranslations } from 'next-intl/server'
+import { getSupabaseAdmin } from '@/lib/supabase/server'
 
 // Revalidar cada 60 segundos (ISR)
 export const revalidate = 60
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL || '',
-  process.env.SUPABASE_SERVICE_ROLE_KEY || ''
-)
-
 async function getPost(slug: string, locale: string) {
   try {
+    let supabase
+    try {
+      supabase = getSupabaseAdmin()
+    } catch (configError: any) {
+      console.error('❌ Error de configuración Supabase:', configError.message)
+      return null
+    }
     const isSpanish = locale === 'es'
     
     const { data: post, error } = await supabase
@@ -66,6 +68,13 @@ async function getPost(slug: string, locale: string) {
 
 async function getRelatedPosts(categoryId: string, currentId: string, locale: string) {
   try {
+    let supabase
+    try {
+      supabase = getSupabaseAdmin()
+    } catch (configError: any) {
+      console.error('❌ Error de configuración Supabase:', configError.message)
+      return []
+    }
     const isSpanish = locale === 'es'
     
     const { data: posts, error } = await supabase
