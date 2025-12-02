@@ -21,18 +21,27 @@ async function getCategory(slug: string, locale: string) {
   try {
     const isSpanish = locale === 'es'
     
-    const { data: category } = await supabase
+    const { data: category, error } = await supabase
       .from('post_categories')
       .select(`
         id,
         slug,
-        ${isSpanish ? 'name' : 'COALESCE(name_en, name) as name'},
-        ${isSpanish ? 'description' : 'COALESCE(description_en, description) as description'}
+        name,
+        name_en,
+        description,
+        description_en
       `)
       .eq('slug', slug)
       .single()
 
-    return category
+    if (error || !category) return null
+
+    // Mapear campos según idioma
+    return {
+      ...category,
+      name: isSpanish ? category.name : (category.name_en || category.name),
+      description: isSpanish ? category.description : (category.description_en || category.description)
+    }
   } catch (error) {
     console.error('Error fetching category:', error)
     return null
@@ -43,19 +52,22 @@ async function getPostsByCategory(categoryId: string, locale: string) {
   try {
     const isSpanish = locale === 'es'
     
-    const { data: posts } = await supabase
+    const { data: posts, error } = await supabase
       .from('posts')
       .select(`
         id,
         slug,
-        ${isSpanish ? 'title' : 'COALESCE(title_en, title) as title'},
-        ${isSpanish ? 'excerpt' : 'COALESCE(excerpt_en, excerpt) as excerpt'},
+        title,
+        title_en,
+        excerpt,
+        excerpt_en,
         featured_image,
         reading_time,
         published_at,
         is_featured,
         category:post_categories(
-          ${isSpanish ? 'name' : 'COALESCE(name_en, name) as name'},
+          name,
+          name_en,
           slug
         )
       `)
@@ -63,7 +75,18 @@ async function getPostsByCategory(categoryId: string, locale: string) {
       .eq('is_published', true)
       .order('published_at', { ascending: false })
 
-    return posts || []
+    if (error) return []
+
+    // Mapear campos según idioma
+    return (posts || []).map((post: any) => ({
+      ...post,
+      title: isSpanish ? post.title : (post.title_en || post.title),
+      excerpt: isSpanish ? post.excerpt : (post.excerpt_en || post.excerpt),
+      category: post.category ? {
+        ...post.category,
+        name: isSpanish ? post.category.name : (post.category.name_en || post.category.name)
+      } : null
+    }))
   } catch (error) {
     console.error('Error fetching posts:', error)
     return []
@@ -74,16 +97,23 @@ async function getAllCategories(locale: string) {
   try {
     const isSpanish = locale === 'es'
     
-    const { data: categories } = await supabase
+    const { data: categories, error } = await supabase
       .from('post_categories')
       .select(`
         id,
         slug,
-        ${isSpanish ? 'name' : 'COALESCE(name_en, name) as name'}
+        name,
+        name_en
       `)
       .order('order', { ascending: true })
 
-    return categories || []
+    if (error) return []
+
+    // Mapear campos según idioma
+    return (categories || []).map((cat: any) => ({
+      ...cat,
+      name: isSpanish ? cat.name : (cat.name_en || cat.name)
+    }))
   } catch (error) {
     console.error('Error fetching categories:', error)
     return []

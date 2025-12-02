@@ -129,15 +129,25 @@ export function Header() {
                       <div className="bg-white rounded-sm shadow-xl border border-gray-100 py-3">
                         {siteConfig.services.map((service) => {
                           const servicePath = getTranslatedServiceRoute(service.slug, locale)
+                          // Las claves de traducción siempre están en inglés
+                          const serviceSlugMap: Record<string, string> = {
+                            'errores-quirurgicos': 'surgical-errors',
+                            'errores-diagnostico': 'diagnostic-errors',
+                            'negligencia-hospitalaria': 'hospital-negligence',
+                            'negligencia-obstetrica': 'obstetric-negligence',
+                            'errores-medicacion': 'medication-errors',
+                            'consentimiento-informado': 'informed-consent',
+                          }
+                          const translationKey = serviceSlugMap[service.slug] || service.slug
                           return (
                             <Link
                               key={service.slug}
                               href={getLocalizedPath(servicePath, locale)}
                               className="block px-5 py-3 text-charcoal hover:bg-cream hover:text-gold transition-colors"
                             >
-                              <div className="font-medium text-sm">{service.title}</div>
+                              <div className="font-medium text-sm">{tServices(`${translationKey}.title`)}</div>
                               <div className="text-xs text-gray-500 mt-1 line-clamp-1">
-                                {service.shortDescription}
+                                {tServices(`${translationKey}.description`)}
                               </div>
                             </Link>
                           )
@@ -295,6 +305,7 @@ export function Header() {
                       <div className="pl-4 pt-1 pb-1 space-y-0.5">
                         {siteConfig.services.map((service) => {
                           const servicePath = getTranslatedServiceRoute(service.slug, locale)
+                          // Las claves de traducción siempre están en inglés
                           const serviceSlugMap: Record<string, string> = {
                             'errores-quirurgicos': 'surgical-errors',
                             'errores-diagnostico': 'diagnostic-errors',
@@ -303,7 +314,7 @@ export function Header() {
                             'errores-medicacion': 'medication-errors',
                             'consentimiento-informado': 'informed-consent',
                           }
-                          const translationKey = locale === 'es' ? service.slug : (serviceSlugMap[service.slug] || service.slug)
+                          const translationKey = serviceSlugMap[service.slug] || service.slug
                           return (
                             <Link
                               key={service.slug}

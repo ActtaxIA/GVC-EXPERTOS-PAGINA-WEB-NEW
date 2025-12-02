@@ -22,12 +22,13 @@ async function getPost(slug: string, locale: string) {
   try {
     const isSpanish = locale === 'es'
     
-    const { data: post } = await supabase
+    const { data: post, error } = await supabase
       .from('posts')
       .select(`
         *,
         category:post_categories(
-          ${isSpanish ? 'name' : 'COALESCE(name_en, name) as name'},
+          name,
+          name_en,
           slug
         ),
         author:team_members(name, photo_url, position, bio)
@@ -36,21 +37,27 @@ async function getPost(slug: string, locale: string) {
       .eq('is_published', true)
       .single()
 
-    if (!post) return null
+    if (error || !post) return null
 
+    const postAny = post as any
+    
     // Usar versión en inglés si existe y el locale es 'en'
     if (!isSpanish) {
-      const postAny = post as any
-      if (postAny.title_en) {
-        postAny.title = postAny.title_en || postAny.title
-        postAny.excerpt = postAny.excerpt_en || postAny.excerpt
-        postAny.content = postAny.content_en || postAny.content
-        postAny.meta_title = postAny.meta_title_en || postAny.meta_title
-        postAny.meta_description = postAny.meta_description_en || postAny.meta_description
-      }
+      postAny.title = postAny.title_en || postAny.title
+      postAny.excerpt = postAny.excerpt_en || postAny.excerpt
+      postAny.content = postAny.content_en || postAny.content
+      postAny.meta_title = postAny.meta_title_en || postAny.meta_title
+      postAny.meta_description = postAny.meta_description_en || postAny.meta_description
+    }
+    
+    // Mapear nombre de categoría según idioma
+    if (postAny.category) {
+      postAny.category.name = isSpanish 
+        ? postAny.category.name 
+        : (postAny.category.name_en || postAny.category.name)
     }
 
-    return post
+    return postAny
   } catch (error) {
     console.error('Error fetching post:', error)
     return null
@@ -61,12 +68,13 @@ async function getRelatedPosts(categoryId: string, currentId: string, locale: st
   try {
     const isSpanish = locale === 'es'
     
-    const { data: posts } = await supabase
+    const { data: posts, error } = await supabase
       .from('posts')
       .select(`
         id,
         slug,
-        ${isSpanish ? 'title' : 'COALESCE(title_en, title) as title'},
+        title,
+        title_en,
         featured_image
       `)
       .eq('category_id', categoryId)
@@ -74,7 +82,13 @@ async function getRelatedPosts(categoryId: string, currentId: string, locale: st
       .neq('id', currentId)
       .limit(3)
 
-    return posts || []
+    if (error) return []
+
+    // Mapear título según idioma
+    return (posts || []).map((post: any) => ({
+      ...post,
+      title: isSpanish ? post.title : (post.title_en || post.title)
+    }))
   } catch {
     return []
   }
