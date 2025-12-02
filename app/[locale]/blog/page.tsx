@@ -175,7 +175,7 @@ export default async function BlogPage({
               {categories.map((cat: any) => (
                 <LocalizedLink
                   key={cat.id}
-                  href={`/blog/categoria/${cat.slug}`}
+                  href={`/blog/${cat.slug}`}
                   className="px-4 py-2 bg-white text-gray-600 text-sm font-medium rounded-full hover:bg-gold hover:text-white transition-colors"
                 >
                   {cat.name}
@@ -190,7 +190,7 @@ export default async function BlogPage({
       {featuredPost && (
         <section className="section-padding bg-cream">
           <div className="container-custom">
-            <LocalizedLink href={`/blog/${featuredPost.slug}`} className="group">
+            <LocalizedLink href={`/blog/${featuredPost.category?.slug || 'articulos'}/${featuredPost.slug}`} className="group">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                 <div className="relative aspect-video lg:aspect-[4/3] overflow-hidden rounded-sm">
                   <Image
@@ -254,7 +254,7 @@ export default async function BlogPage({
               {regularPosts.map((post: any) => (
                 <LocalizedLink
                   key={post.id}
-                  href={`/blog/${post.slug}`}
+                  href={`/blog/${post.category?.slug || 'articulos'}/${post.slug}`}
                   className="group"
                 >
                   <article className="bg-cream rounded-sm overflow-hidden hover:shadow-lg transition-shadow">

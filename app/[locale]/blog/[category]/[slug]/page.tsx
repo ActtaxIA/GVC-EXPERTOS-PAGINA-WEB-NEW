@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
-import { Calendar, Clock, User, ArrowLeft, Linkedin, Twitter, Facebook } from 'lucide-react'
+import { Calendar, Clock, ArrowLeft, Linkedin, Twitter, Facebook } from 'lucide-react'
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
 import { CtaDark } from '@/components/home'
 import { JsonLdArticle, JsonLdBreadcrumbs } from '@/components/seo/JsonLd'
@@ -13,7 +13,7 @@ import { getSupabaseAdmin } from '@/lib/supabase/server'
 // Revalidar cada 60 segundos (ISR)
 export const revalidate = 60
 
-async function getPost(slug: string, locale: string) {
+async function getPost(slug: string, categorySlug: string, locale: string) {
   try {
     let supabase
     try {
@@ -29,6 +29,7 @@ async function getPost(slug: string, locale: string) {
       .select(`
         *,
         category:post_categories(
+          id,
           name,
           name_en,
           slug
@@ -41,7 +42,11 @@ async function getPost(slug: string, locale: string) {
 
     if (error || !post) return null
 
+    // Verificar que la categoría coincide con la URL
     const postAny = post as any
+    if (!postAny.category || postAny.category.slug !== categorySlug) {
+      return null
+    }
     
     // Usar versión en inglés si existe y el locale es 'en'
     if (!isSpanish) {
@@ -66,7 +71,7 @@ async function getPost(slug: string, locale: string) {
   }
 }
 
-async function getRelatedPosts(categoryId: string, currentId: string, locale: string) {
+async function getRelatedPosts(categoryId: string, currentId: string, locale: string, categorySlug: string) {
   try {
     let supabase
     try {
@@ -93,10 +98,11 @@ async function getRelatedPosts(categoryId: string, currentId: string, locale: st
 
     if (error) return []
 
-    // Mapear título según idioma
+    // Mapear título según idioma y añadir categorySlug
     return (posts || []).map((post: any) => ({
       ...post,
-      title: isSpanish ? post.title : (post.title_en || post.title)
+      title: isSpanish ? post.title : (post.title_en || post.title),
+      categorySlug
     }))
   } catch {
     return []
@@ -106,29 +112,31 @@ async function getRelatedPosts(categoryId: string, currentId: string, locale: st
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string; locale: string }
+  params: { slug: string; category: string; locale: string }
 }): Promise<Metadata> {
-  const post = await getPost(params.slug, params.locale) as any
+  const post = await getPost(params.slug, params.category, params.locale) as any
   const t = await getTranslations({ locale: params.locale, namespace: 'blog' })
 
   if (!post) {
     return { title: t('metaTitle') }
   }
 
+  const articleUrl = `${siteConfig.url}/${params.locale}/blog/${params.category}/${post.slug}`
+
   return {
     title: post.meta_title || post.title,
     description: post.meta_description || post.excerpt,
     alternates: {
-      canonical: `${siteConfig.url}/${params.locale}/blog/${post.slug}`,
+      canonical: articleUrl,
       languages: {
-        'es-ES': `${siteConfig.url}/es/blog/${post.slug}`,
-        'en-US': `${siteConfig.url}/en/blog/${post.slug}`,
+        'es-ES': `${siteConfig.url}/es/blog/${params.category}/${post.slug}`,
+        'en-US': `${siteConfig.url}/en/blog/${params.category}/${post.slug}`,
       },
     },
     openGraph: {
       type: 'article',
       locale: params.locale === 'es' ? 'es_ES' : 'en_US',
-      url: `${siteConfig.url}/${params.locale}/blog/${post.slug}`,
+      url: articleUrl,
       title: post.title,
       description: post.excerpt,
       publishedTime: post.published_at,
@@ -141,9 +149,9 @@ export async function generateMetadata({
 export default async function BlogPostPage({
   params,
 }: {
-  params: { slug: string; locale: string }
+  params: { slug: string; category: string; locale: string }
 }) {
-  const post = await getPost(params.slug, params.locale) as any
+  const post = await getPost(params.slug, params.category, params.locale) as any
   const t = await getTranslations({ locale: params.locale, namespace: 'blog' })
 
   if (!post) {
@@ -151,10 +159,10 @@ export default async function BlogPostPage({
   }
 
   const relatedPosts = post.category?.id 
-    ? await getRelatedPosts(post.category.id, post.id, params.locale) 
+    ? await getRelatedPosts(post.category.id, post.id, params.locale, params.category) 
     : []
 
-  const shareUrl = `${siteConfig.url}/${params.locale}/blog/${post.slug}`
+  const shareUrl = `${siteConfig.url}/${params.locale}/blog/${params.category}/${post.slug}`
 
   return (
     <>
@@ -171,6 +179,7 @@ export default async function BlogPostPage({
         items={[
           { name: params.locale === 'es' ? 'Inicio' : 'Home', url: `${siteConfig.url}/${params.locale}` },
           { name: 'Blog', url: `${siteConfig.url}/${params.locale}/blog` },
+          { name: post.category?.name || params.category, url: `${siteConfig.url}/${params.locale}/blog/${params.category}` },
           { name: post.title, url: shareUrl },
         ]}
       />
@@ -181,15 +190,19 @@ export default async function BlogPostPage({
           <Breadcrumbs
             items={[
               { label: 'Blog', href: '/blog' },
+              { label: post.category?.name || params.category, href: `/blog/${params.category}` },
               { label: post.title },
             ]}
             className="mb-6 text-gray-400"
           />
 
           {post.category && (
-            <span className="inline-block px-3 py-1 bg-gold/20 text-gold text-sm font-semibold rounded mb-4">
+            <LocalizedLink 
+              href={`/blog/${params.category}`}
+              className="inline-block px-3 py-1 bg-gold/20 text-gold text-sm font-semibold rounded mb-4 hover:bg-gold/30 transition-colors"
+            >
               {post.category.name}
-            </span>
+            </LocalizedLink>
           )}
 
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-white mb-6 max-w-4xl">
@@ -370,7 +383,7 @@ export default async function BlogPostPage({
                     {relatedPosts.map((relPost: any) => (
                       <LocalizedLink
                         key={relPost.id}
-                        href={`/blog/${relPost.slug}`}
+                        href={`/blog/${relPost.categorySlug}/${relPost.slug}`}
                         className="flex gap-3 group"
                       >
                         {relPost.featured_image && (
