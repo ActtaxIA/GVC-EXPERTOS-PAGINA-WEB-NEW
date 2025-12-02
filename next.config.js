@@ -114,6 +114,62 @@ const nextConfig = {
     ]
   },
 
+  // Rewrites para URLs traducidas en inglés
+  async rewrites() {
+    // Mapeo de slugs de servicios en inglés a español
+    const serviceSlugMap = {
+      'surgical-errors': 'errores-quirurgicos',
+      'diagnostic-errors': 'errores-diagnostico',
+      'hospital-negligence': 'negligencia-hospitalaria',
+      'obstetric-negligence': 'negligencia-obstetrica',
+      'medication-errors': 'errores-medicacion',
+      'informed-consent': 'consentimiento-informado',
+    }
+
+    const serviceRewrites = Object.entries(serviceSlugMap).map(([enSlug, esSlug]) => ({
+      source: `/en/medical-negligence/${enSlug}`,
+      destination: `/en/negligencias-medicas/${esSlug}`,
+    }))
+
+    return [
+      // Mapear rutas en inglés a sus equivalentes en español
+      {
+        source: '/en/about-us',
+        destination: '/en/sobre-nosotros',
+      },
+      {
+        source: '/en/team',
+        destination: '/en/equipo',
+      },
+      {
+        source: '/en/contact',
+        destination: '/en/contacto',
+      },
+      {
+        source: '/en/faq',
+        destination: '/en/preguntas-frecuentes',
+      },
+      {
+        source: '/en/medical-negligence',
+        destination: '/en/negligencias-medicas',
+      },
+      {
+        source: '/en/legal-notice',
+        destination: '/en/aviso-legal',
+      },
+      {
+        source: '/en/privacy-policy',
+        destination: '/en/politica-privacidad',
+      },
+      {
+        source: '/en/cookie-policy',
+        destination: '/en/politica-cookies',
+      },
+      // Rewrites para servicios individuales
+      ...serviceRewrites,
+    ]
+  },
+
   // Redirecciones
   async redirects() {
     return [
