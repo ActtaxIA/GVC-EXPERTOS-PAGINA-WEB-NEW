@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GVC Expertos | Abogados Negligencias Médicas</title>
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #b8860b;
+            --gold-dark: #996f09;
+            --gold-light: #d4a84b;
+            --charcoal: #1a1a1a;
+            --charcoal-light: #2d2d2d;
+            --warm-gray: #f5f3f0;
+            --white: #ffffff;
+            --text: #333333;
+            --text-light: #666666;
+            --border: #e5e5e5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans 3', sans-serif;
+            background: var(--white);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 500;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: var(--white);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+        }
+
+        .header-top {
+            background: var(--charcoal);
+            padding: 8px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-top-left {
+            display: flex;
+            gap: 25px;
+        }
+
+        .header-top a, .header-top span {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .header-top a:hover {
+            color: var(--gold);
+        }
+
+        .header-main {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            height: 55px;
+            width: auto;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-text h2 {
+            font-size: 24px;
+            color: var(--charcoal);
+            letter-spacing: 0.5px;
+        }
+
+        .logo-text span {
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 11px;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-top: 2px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--gold);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .btn-gold {
+            background: var(--gold);
+            color: var(--white);
+            border: 2px solid var(--gold);
+        }
+
+        .btn-gold:hover {
+            background: transparent;
+            color: var(--gold);
+        }
+
+        .btn-dark {
+            background: var(--charcoal);
+            color: var(--white);
+            border: 2px solid var(--charcoal);
+        }
+
+        .btn-dark:hover {
+            background: transparent;
+            color: var(--charcoal);
+        }
+
+        .btn-white {
+            background: var(--white);
+            color: var(--charcoal);
+            border: 2px solid var(--white);
+        }
+
+        .btn-white:hover {
+            background: transparent;
+            color: var(--white);
+        }
+
+        /* Hero - Reducido */
+        .hero {
+            padding-top: 120px;
+            background: var(--warm-gray);
+            position: relative;
+        }
+
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 520px;
+        }
+
+        .hero-content {
+            padding: 50px 60px 50px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .hero h1 {
+            font-size: 50px;
+            line-height: 1.1;
+            color: var(--charcoal);
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            display: block;
+        }
+
+        .hero-subtitle {
+            font-size: 17px;
+            font-style: italic;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 16px;
+            color: var(--text-light);
+            margin-bottom: 30px;
+            line-height: 1.8;
+            max-width: 480px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .hero-right {
+            position: relative;
+            background: var(--charcoal);
+            background-image: url('images/error-medico-1408x704.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-image-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(26,26,26,0.92) 0%, rgba(26,26,26,0.75) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 50px;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .stat-box {
+            border-left: 3px solid var(--gold);
+            padding-left: 18px;
+        }
+
+        .stat-box h3 {
+            font-size: 38px;
+            color: var(--white);
+            margin-bottom: 5px;
+        }
+
+        .stat-box p {
+            font-size: 12px;
+            color: rgba(255,255,255,0.6);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Intro */
+        .intro {
+            padding: 80px 40px;
+            background: var(--white);
+        }
+
+        .intro-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .intro h2 {
+            font-size: 36px;
+            color: var(--charcoal);
+            margin-bottom: 25px;
+            line-height: 1.3;
+        }
+
+        .intro h2 em {
+            font-style: italic;
+            color: var(--gold);
+        }
+
+        .intro p {
+            font-size: 18px;
+            color: var(--text-light);
+            line-height: 1.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Dark CTA */
+        .cta-dark {
+            background: var(--charcoal);
+            padding: 80px 40px;
+        }
+
+        .cta-dark-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .cta-dark-content h3 {
+            font-size: 16px;
+            color: var(--gold);
+            margin-bottom: 20px;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        .cta-dark-content h2 {
+            font-size: 38px;
+            color: var(--white);
+            margin-bottom: 25px;
+            line-height: 1.3;
+        }
+
+        .cta-dark-content p {
+            font-size: 16px;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .cta-quote {
+            background: var(--charcoal-light);
+            padding: 40px;
+            border-left: 4px solid var(--gold);
+        }
+
+        .cta-quote blockquote {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-style: italic;
+            color: var(--white);
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .cta-quote cite {
+            font-size: 14px;
+            color: var(--gold);
+            font-style: normal;
+        }
+
+        /* Team - Nueva sección con tarjetas individuales */
+        .team {
+            padding: 100px 40px;
+            background: var(--warm-gray);
+        }
+
+        .team-container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+        }
+
+        .section-header h2 {
+            font-size: 40px;
+            color: var(--charcoal);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 25px;
+        }
+
+        .team-card {
+            background: var(--white);
+            text-align: center;
+            transition: all 0.4s;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .team-photo {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 1/1;
+        }
+
+        .team-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .team-card:hover .team-photo img {
+            transform: scale(1.05);
+        }
+
+        .team-photo::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gold);
+            transform: scaleX(0);
+            transition: transform 0.4s;
+        }
+
+        .team-card:hover .team-photo::after {
+            transform: scaleX(1);
+        }
+
+        .team-info {
+            padding: 25px 15px;
+        }
+
+        .team-info h3 {
+            font-size: 17px;
+            color: var(--charcoal);
+            margin-bottom: 5px;
+            line-height: 1.3;
+        }
+
+        .team-info span {
+            font-size: 12px;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Process */
+        .process {
+            padding: 100px 40px;
+            background: var(--white);
+        }
+
+        .process-container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+            margin-top: 60px;
+        }
+
+        .process-step {
+            padding: 50px 40px;
+            border: 1px solid var(--border);
+            margin: -1px 0 0 -1px;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .process-step:hover {
+            background: var(--warm-gray);
+            z-index: 1;
+        }
+
+        .step-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            color: var(--gold);
+            margin-bottom: 20px;
+            line-height: 1;
+        }
+
+        .process-step h4 {
+            font-size: 20px;
+            color: var(--charcoal);
+            margin-bottom: 15px;
+        }
+
+        .process-step p {
+            font-size: 14px;
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        /* Services - Negligencias */
+        .services {
+            padding: 100px 40px;
+            background: var(--charcoal);
+            color: var(--white);
+        }
+
+        .services-container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .services .section-header h2 {
+            color: var(--white);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 60px;
+        }
+
+        .service-card {
+            background: var(--charcoal-light);
+            padding: 40px 30px;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .service-card:hover {
+            border-bottom-color: var(--gold);
+            transform: translateY(-5px);
+        }
+
+        .service-icon {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 25px;
+        }
+
+        .service-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: var(--gold);
+        }
+
+        .service-card h3 {
+            font-size: 20px;
+            color: var(--white);
+            margin-bottom: 12px;
+        }
+
+        .service-card p {
+            font-size: 14px;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.7;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            padding: 80px 40px;
+            background: var(--warm-gray);
+        }
+
+        .gallery-container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .gallery-item {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* CTA Final */
+        .cta-final {
+            padding: 100px 40px;
+            background: var(--gold);
+            text-align: center;
+        }
+
+        .cta-final h2 {
+            font-size: 40px;
+            color: var(--white);
+            margin-bottom: 20px;
+        }
+
+        .cta-final p {
+            font-size: 18px;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 35px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-final .btn {
+            background: var(--charcoal);
+            color: var(--white);
+            border-color: var(--charcoal);
+        }
+
+        .cta-final .btn:hover {
+            background: var(--white);
+            color: var(--charcoal);
+            border-color: var(--white);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--charcoal);
+            color: var(--white);
+            padding: 70px 40px 40px;
+        }
+
+        .footer-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 50px;
+            padding-bottom: 50px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .footer-logo {
+            height: 50px;
+            width: auto;
+        }
+
+        .footer-brand p {
+            font-size: 14px;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.7;
+        }
+
+        .footer-col h4 {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+            color: var(--gold);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .footer-col a:hover {
+            color: var(--gold);
+        }
+
+        .footer-col li:not(:has(a)) {
+            color: rgba(255,255,255,0.6);
+            font-size: 14px;
+        }
+
+        .footer-bottom {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding-top: 30px;
+            text-align: center;
+            font-size: 13px;
+            color: rgba(255,255,255,0.4);
+        }
+
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .mobile-menu-btn span {
+            display: block;
+            width: 25px;
+            height: 2px;
+            background: var(--charcoal);
+            margin: 5px 0;
+            transition: all 0.3s;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .team-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .hero-container { grid-template-columns: 1fr; }
+            .hero-right { min-height: 400px; }
+            .cta-dark-container { grid-template-columns: 1fr; }
+            .process-grid { grid-template-columns: 1fr 1fr; }
+            .services-grid { grid-template-columns: 1fr 1fr; }
+            .footer-container { grid-template-columns: 1fr 1fr; }
+            .gallery-grid { grid-template-columns: 1fr 1fr; }
+            .team-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .header-main { 
+                padding: 15px 20px;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            }
+
+            nav.active {
+                display: flex;
+            }
+
+            .header-top { 
+                flex-direction: column; 
+                gap: 8px; 
+                text-align: center;
+                padding: 10px 20px;
+            }
+
+            .hero h1 { font-size: 36px; }
+            .hero-content { padding: 40px 20px; }
+            .hero-stats { grid-template-columns: 1fr 1fr; gap: 20px; }
+            .stat-box h3 { font-size: 30px; }
+            .hero-image-overlay { padding: 35px 25px; }
+
+            .intro { padding: 60px 20px; }
+            .intro h2 { font-size: 28px; }
+
+            .cta-dark { padding: 60px 20px; }
+            .cta-dark-content h2 { font-size: 28px; }
+            .cta-quote { padding: 30px; }
+            .cta-quote blockquote { font-size: 18px; }
+
+            .team { padding: 60px 20px; }
+            .section-header h2 { font-size: 30px; }
+            .team-grid { grid-template-columns: 1fr 1fr; gap: 15px; }
+            .team-info { padding: 20px 10px; }
+            .team-info h3 { font-size: 15px; }
+
+            .process { padding: 60px 20px; }
+            .process-grid { grid-template-columns: 1fr; }
+            .process-step { padding: 35px 25px; }
+
+            .services { padding: 60px 20px; }
+            .services-grid { grid-template-columns: 1fr; }
+
+            .gallery { padding: 60px 20px; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .gallery-item img { height: 200px; }
+
+            .cta-final { padding: 60px 20px; }
+            .cta-final h2 { font-size: 30px; }
+
+            footer { padding: 50px 20px 30px; }
+            .footer-container { grid-template-columns: 1fr; gap: 40px; }
+        }
+
+        @media (max-width: 480px) {
+            .team-grid { grid-template-columns: 1fr; max-width: 280px; margin: 0 auto; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-top">
+            <div class="header-top-left">
+                <a href="tel:900123456">📞 900 123 456</a>
+                <a href="mailto:info@gvcexpertos.es">✉️ info@gvcexpertos.es</a>
+            </div>
+            <span>Lunes - Viernes: 9:00 - 19:00</span>
+        </div>
+        <div class="header-main">
+            <a href="#" class="logo">
+                <img src="images/logo.png" alt="GVC Expertos" class="logo-img">
+                <div class="logo-text">
+                    <h2>GVC Expertos</h2>
+                    <span>Abogados</span>
+                </div>
+            </a>
+            <button class="mobile-menu-btn" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav id="mainNav">
+                <a href="#inicio">Inicio</a>
+                <a href="#nosotros">Sobre Nosotros</a>
+                <a href="#servicios">Negligencias Médicas</a>
+                <a href="#noticias">Noticias</a>
+                <a href="#contacto">Contacto</a>
+                <a href="#contacto" class="btn btn-gold">Contáctanos</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" id="inicio">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>
+                    <span>Abogados</span>
+                    <span>Negligencias</span>
+                    <span>Médicas</span>
+                </h1>
+                <p class="hero-subtitle">Frente a una negligencia médica, damos voz a las víctimas</p>
+                <p>Nuestro despacho cuenta con un equipo multidisciplinar de abogados, juristas y peritos especializados en defender al paciente ante cualquier tipo de error o negligencia médica.</p>
+                <div class="hero-buttons">
+                    <a href="#contacto" class="btn btn-gold">Contáctanos</a>
+                    <a href="#servicios" class="btn btn-dark">Nuestros Servicios</a>
+                </div>
+            </div>
+            <div class="hero-right">
+                <div class="hero-image-overlay">
+                    <div class="hero-stats">
+                        <div class="stat-box">
+                            <h3>95%</h3>
+                            <p>Tasa de éxito</p>
+                        </div>
+                        <div class="stat-box">
+                            <h3>+2.500</h3>
+                            <p>Casos ganados</p>
+                        </div>
+                        <div class="stat-box">
+                            <h3>+50M€</h3>
+                            <p>Indemnizaciones</p>
+                        </div>
+                        <div class="stat-box">
+                            <h3>20+</h3>
+                            <p>Años experiencia</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="intro">
+        <div class="intro-container">
+            <h2>García-Valcárcel & Cáceres Abogados<br>Tu despacho especializado en <em>negligencias médicas</em></h2>
+            <p>Expertos en reclamar ante todo tipo de errores y negligencias médicas. Nuestro compromiso es defender sus derechos con la máxima profesionalidad y dedicación.</p>
+        </div>
+    </section>
+
+    <section class="cta-dark">
+        <div class="cta-dark-container">
+            <div class="cta-dark-content">
+                <h3>¿Has sido víctima de una posible negligencia o error médico?</h3>
+                <h2>Frente a una negligencia médica, no tengas miedo a reclamar</h2>
+                <p>Al terrible choque que sufre una familia cuando uno de sus miembros sufre un daño en su integridad física se le añade la incertidumbre de si ha sido víctima o no de una negligencia médica.</p>
+                <a href="#contacto" class="btn btn-gold">Contáctanos</a>
+            </div>
+            <div class="cta-quote">
+                <blockquote>"Es de especial importancia que la víctima, cuanto antes, se ponga en mano de los mejores profesionales y no ceje en el empeño de defender, hasta la última instancia, sus derechos."</blockquote>
+                <cite>— P.A. García-Valcárcel, Fundador de la Firma</cite>
+            </div>
+        </div>
+    </section>
+
+    <section class="team" id="nosotros">
+        <div class="team-container">
+            <div class="section-header">
+                <p class="section-label">Nuestro Equipo</p>
+                <h2>Profesionales a tu servicio</h2>
+            </div>
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-photo">
+                        <img src="images/equipo/garcia_valcarcel_caceres_abogados_negligencias_medicas_pedro_alfonso_garcia_valcarcel_vf.png" alt="Pedro Alfonso García-Valcárcel">
+                    </div>
+                    <div class="team-info">
+                        <h3>Pedro A. García-Valcárcel</h3>
+                        <span>Socio Fundador</span>
+                    </div>
+                </div>
+                <div class="team-card">
+                    <div class="team-photo">
+                        <img src="images/equipo/garcia_valcarcel_caceres_abogados_negligencias_medicas_miguel_caceres_sanchez_vf.png" alt="Miguel Cáceres Sánchez">
+                    </div>
+                    <div class="team-info">
+                        <h3>Miguel Cáceres Sánchez</h3>
+                        <span>Socio Director</span>
+                    </div>
+                </div>
+                <div class="team-card">
+                    <div class="team-photo">
+                        <img src="images/equipo/garcia_valcarcel_caceres_abogados_negligencias_medicas_raquel_garcia_valcarcel_vf.png" alt="Raquel García-Valcárcel">
+                    </div>
+                    <div class="team-info">
+                        <h3>Raquel García-Valcárcel</h3>
+                        <span>Abogada Senior</span>
+                    </div>
+                </div>
+                <div class="team-card">
+                    <div class="team-photo">
+                        <img src="images/equipo/garcia_valcarcel_caceres_abogados_negligencias_medicas_olga_martinez_martinez_vf.png" alt="Olga Martínez Martínez">
+                    </div>
+                    <div class="team-info">
+                        <h3>Olga Martínez Martínez</h3>
+                        <span>Abogada</span>
+                    </div>
+                </div>
+                <div class="team-card">
+                    <div class="team-photo">
+                        <img src="images/equipo/garcia_valcarcel_caceres_abogados_negligencias_medicas_carmen_martinez_ramon_vf.png" alt="Carmen Martínez Ramón">
+                    </div>
+                    <div class="team-info">
+                        <h3>Carmen Martínez Ramón</h3>
+                        <span>Abogada</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="process">
+        <div class="process-container">
+            <div class="section-header">
+                <p class="section-label">Nuestro Proceso</p>
+                <h2>¿Cómo defenderemos tu caso?</h2>
+            </div>
+            <div class="process-grid">
+                <div class="process-step">
+                    <div class="step-num">01</div>
+                    <h4>Concertaremos una primera cita</h4>
+                    <p>Para que podamos conocer en profundidad todos los detalles de tu caso.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-num">02</div>
+                    <h4>Estudiaremos la viabilidad</h4>
+                    <p>Solo te propondremos seguir adelante si existen opciones de éxito.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-num">03</div>
+                    <h4>Realizaremos informe pericial</h4>
+                    <p>Colaboramos con expertos peritos médicos especialistas en distintas áreas.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-num">04</div>
+                    <h4>Analizaremos las vías</h4>
+                    <p>Analizaremos las posibles vías de reclamación para lograr el mejor resultado.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-num">05</div>
+                    <h4>Consensuaremos la estrategia</h4>
+                    <p>Te informaremos y consultaremos contigo acerca de cada hito importante.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-num">06</div>
+                    <h4>Elaboraremos la demanda</h4>
+                    <p>Nos encargaremos de todos los trámites procesales para lograr sentencia favorable.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services" id="servicios">
+        <div class="services-container">
+            <div class="section-header">
+                <p class="section-label">Áreas de Práctica</p>
+                <h2>Negligencia médica (error o mala praxis)</h2>
+            </div>
+            <div class="services-grid">
+                <!-- Errores Quirúrgicos - Bisturí -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M52 8c-2.2 0-4 1.8-4 4v4c0 1.1-.9 2-2 2h-4c-1.1 0-2 .9-2 2v6c0 1.1.9 2 2 2h2l-20 24c-1.6 1.9-1.3 4.8.6 6.4 1.9 1.6 4.8 1.3 6.4-.6L49 33v2c0 1.1.9 2 2 2h6c1.1 0 2-.9 2-2V20c0-1.1-.9-2-2-2h-4c-1.1 0-2-.9-2-2v-4c0-2.2-1.8-4-4-4h3z"/>
+                        </svg>
+                    </div>
+                    <h3>Errores Quirúrgicos</h3>
+                    <p>Intervenciones fallidas, instrumentos olvidados y complicaciones evitables.</p>
+                </div>
+                
+                <!-- Errores de Diagnóstico - Lupa con cruz -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="26" cy="26" r="18" fill="none" stroke="currentColor" stroke-width="5" style="stroke: #b8860b;"/>
+                            <line x1="40" y1="40" x2="56" y2="56" stroke="currentColor" stroke-width="6" stroke-linecap="round" style="stroke: #b8860b;"/>
+                            <line x1="20" y1="26" x2="32" y2="26" stroke="currentColor" stroke-width="4" stroke-linecap="round" style="stroke: #b8860b;"/>
+                            <line x1="26" y1="20" x2="26" y2="32" stroke="currentColor" stroke-width="4" stroke-linecap="round" style="stroke: #b8860b;"/>
+                        </svg>
+                    </div>
+                    <h3>Errores de Diagnóstico</h3>
+                    <p>Diagnósticos tardíos, incorrectos o fallidos que causan perjuicios.</p>
+                </div>
+                
+                <!-- Negligencia Hospitalaria - Hospital/Edificio con cruz -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="12" y="16" width="40" height="40" rx="2" fill="none" stroke="currentColor" stroke-width="4" style="stroke: #b8860b;"/>
+                            <rect x="8" y="12" width="48" height="8" rx="1" style="fill: #b8860b;"/>
+                            <line x1="26" y1="28" x2="38" y2="28" stroke="currentColor" stroke-width="4" stroke-linecap="round" style="stroke: #b8860b;"/>
+                            <line x1="32" y1="22" x2="32" y2="34" stroke="currentColor" stroke-width="4" stroke-linecap="round" style="stroke: #b8860b;"/>
+                            <rect x="28" y="42" width="8" height="14" style="fill: #b8860b;"/>
+                        </svg>
+                    </div>
+                    <h3>Negligencia Hospitalaria</h3>
+                    <p>Infecciones nosocomiales y fallos en la atención de centros médicos.</p>
+                </div>
+                
+                <!-- Negligencia Obstétrica - Bebé/Cuna -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                            <ellipse cx="32" cy="20" rx="10" ry="12" fill="none" stroke="currentColor" stroke-width="4" style="stroke: #b8860b;"/>
+                            <path d="M18 36c0-4 6-8 14-8s14 4 14 8v4c0 2-1 4-3 4H21c-2 0-3-2-3-4v-4z" fill="none" stroke="currentColor" stroke-width="4" style="stroke: #b8860b;"/>
+                            <circle cx="28" cy="18" r="2" style="fill: #b8860b;"/>
+                            <circle cx="36" cy="18" r="2" style="fill: #b8860b;"/>
+                            <path d="M10 52h44c2 0 4 2 4 4v2H6v-2c0-2 2-4 4-4z" style="fill: #b8860b;"/>
+                        </svg>
+                    </div>
+                    <h3>Negligencia Obstétrica</h3>
+                    <p>Lesiones durante el parto, parálisis cerebral y daños perinatales.</p>
+                </div>
+                
+                <!-- Errores de Medicación - Pastillas -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="8" y="24" width="48" height="24" rx="12" fill="none" stroke="currentColor" stroke-width="4" style="stroke: #b8860b;"/>
+                            <line x1="32" y1="24" x2="32" y2="48" stroke="currentColor" stroke-width="4" style="stroke: #b8860b;"/>
+                            <rect x="8" y="24" width="24" height="24" rx="12" style="fill: #b8860b;"/>
+                            <circle cx="48" cy="14" r="8" fill="none" stroke="currentColor" stroke-width="3" style="stroke: #b8860b;"/>
+                            <line x1="44" y1="14" x2="52" y2="14" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="stroke: #b8860b;"/>
+                            <line x1="48" y1="10" x2="48" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="stroke: #b8860b;"/>
+                        </svg>
+                    </div>
+                    <h3>Errores de Medicación</h3>
+                    <p>Prescripciones incorrectas e interacciones peligrosas.</p>
+                </div>
+                
+                <!-- Consentimiento Informado - Documento con check -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="12" y="6" width="40" height="52" rx="2" fill="none" stroke="currentColor" stroke-width="4" style="stroke: #b8860b;"/>
+                            <line x1="20" y1="18" x2="44" y2="18" stroke="currentColor" stroke-width="3" stroke-linecap="round" style="stroke: #b8860b;"/>
+                            <line x1="20" y1="28" x2="44" y2="28" stroke="currentColor" stroke-width="3" stroke-linecap="round" style="stroke: #b8860b;"/>
+                            <line x1="20" y1="38" x2="36" y2="38" stroke="currentColor" stroke-width="3" stroke-linecap="round" style="stroke: #b8860b;"/>
+                            <polyline points="38,44 44,50 54,36" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" style="stroke: #b8860b;"/>
+                        </svg>
+                    </div>
+                    <h3>Consentimiento Informado</h3>
+                    <p>Falta de información sobre riesgos y alternativas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="gallery">
+        <div class="gallery-container">
+            <div class="section-header">
+                <p class="section-label">Casos Reales</p>
+                <h2>Defendemos tus derechos</h2>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="images/abogados_negligencias_medicas_negligencia_hospital.jpg" alt="Negligencia hospitalaria">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/abogados_negligencias_medicas_negligencia_2.jpg" alt="Caso de negligencia médica">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/abogados_negligencias_medicas_negligencia_3.jpg" alt="Defensa del paciente">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-final">
+        <h2>¿Necesitas asesoramiento legal?</h2>
+        <p>Contáctanos para una primera consulta gratuita. Estudiaremos tu caso sin compromiso.</p>
+        <a href="#contacto" class="btn">Solicitar Consulta Gratuita</a>
+    </section>
+
+    <footer id="contacto">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <img src="images/logo.png" alt="GVC Expertos" class="footer-logo">
+                <p>Abogados especialistas en negligencias médicas con más de 20 años de experiencia defendiendo los derechos de los pacientes.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Servicios</h4>
+                <ul>
+                    <li><a href="#servicios">Errores Quirúrgicos</a></li>
+                    <li><a href="#servicios">Errores de Diagnóstico</a></li>
+                    <li><a href="#servicios">Negligencia Obstétrica</a></li>
+                    <li><a href="#servicios">Mala Praxis Dental</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Despacho</h4>
+                <ul>
+                    <li><a href="#nosotros">Sobre Nosotros</a></li>
+                    <li><a href="#nosotros">Equipo</a></li>
+                    <li><a href="#">Casos de Éxito</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contacto</h4>
+                <ul>
+                    <li>C/ Gran Vía, 28</li>
+                    <li>28013 Madrid</li>
+                    <li><a href="tel:900123456">900 123 456</a></li>
+                    <li><a href="mailto:info@gvcexpertos.es">info@gvcexpertos.es</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2024 GVC Expertos Abogados. Todos los derechos reservados.
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const nav = document.getElementById('mainNav');
+            nav.classList.toggle('active');
+        }
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    document.getElementById('mainNav').classList.remove('active');
+                }
+            });
+        });
+
+        // Header shadow on scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 4px 30px rgba(0,0,0,0.1)';
+            } else {
+                header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.06)';
+            }
+        });
+    </script>
+</body>
+</html>

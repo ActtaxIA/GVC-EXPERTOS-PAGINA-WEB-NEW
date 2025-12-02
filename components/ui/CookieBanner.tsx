@@ -1,0 +1,67 @@
+'use client'
+
+import { useState, useEffect } from 'react'
+import Link from 'next/link'
+import { X, Cookie } from 'lucide-react'
+
+export function CookieBanner() {
+  const [isVisible, setIsVisible] = useState(false)
+
+  useEffect(() => {
+    // Verificar si ya aceptó las cookies
+    const consent = localStorage.getItem('cookie_consent')
+    if (!consent) {
+      // Mostrar después de 1 segundo
+      const timer = setTimeout(() => setIsVisible(true), 1000)
+      return () => clearTimeout(timer)
+    }
+  }, [])
+
+  const acceptCookies = () => {
+    localStorage.setItem('cookie_consent', 'accepted')
+    setIsVisible(false)
+  }
+
+  const rejectCookies = () => {
+    localStorage.setItem('cookie_consent', 'rejected')
+    setIsVisible(false)
+  }
+
+  if (!isVisible) return null
+
+  return (
+    <div className="fixed bottom-0 left-0 right-0 z-50 p-4 bg-charcoal border-t border-white/10 shadow-lg animate-slide-up">
+      <div className="container-custom">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div className="flex items-start gap-3 flex-1">
+            <Cookie className="w-6 h-6 text-gold flex-shrink-0 mt-0.5" />
+            <div>
+              <p className="text-white text-sm">
+                Utilizamos cookies propias y de terceros para mejorar nuestros servicios 
+                y mostrarle publicidad relacionada con sus preferencias.{' '}
+                <Link href="/politica-cookies" className="text-gold hover:underline">
+                  Más información
+                </Link>
+              </p>
+            </div>
+          </div>
+          
+          <div className="flex items-center gap-3 flex-shrink-0">
+            <button
+              onClick={rejectCookies}
+              className="px-4 py-2 text-sm text-gray-400 hover:text-white transition-colors"
+            >
+              Rechazar
+            </button>
+            <button
+              onClick={acceptCookies}
+              className="px-6 py-2 bg-gold hover:bg-gold-dark text-white text-sm font-semibold rounded transition-colors"
+            >
+              Aceptar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}

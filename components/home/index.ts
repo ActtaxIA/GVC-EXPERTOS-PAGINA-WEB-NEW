@@ -1,0 +1,8 @@
+export { Hero } from './Hero'
+export { IntroSection } from './IntroSection'
+export { ServicesSection } from './ServicesSection'
+export { CtaDark } from './CtaDark'
+export { TeamSection } from './TeamSection'
+export { ProcessSection } from './ProcessSection'
+export { GallerySection } from './GallerySection'
+export { CtaFinal } from './CtaFinal'
