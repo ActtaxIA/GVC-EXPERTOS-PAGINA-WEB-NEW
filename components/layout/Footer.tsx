@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { Phone, Mail, MapPin, Linkedin, Twitter, Facebook } from 'lucide-react'
+import { Phone, Mail, MapPin, Twitter, Facebook } from 'lucide-react'
 import { siteConfig, footerLinks } from '@/config/site'
 import { LocalizedLink } from '@/components/ui/LocalizedLink'
 
@@ -15,11 +15,11 @@ export function Footer() {
           <div className="lg:col-span-1">
             <LocalizedLink href="/" className="inline-block mb-6">
               <Image
-                src="/images/logo.png"
+                src="/images/gvcabogados_murcia_logo_leon_blanco.png"
                 alt={siteConfig.name}
                 width={160}
                 height={45}
-                className="h-11 w-auto brightness-0 invert"
+                className="h-11 w-auto"
               />
             </LocalizedLink>
             <p className="text-gray-400 text-sm leading-relaxed mb-6">
@@ -29,15 +29,6 @@ export function Footer() {
             </p>
             {/* Social Links */}
             <div className="flex gap-4">
-              <a
-                href={siteConfig.social.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-gold transition-colors"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="w-4 h-4" />
-              </a>
               <a
                 href={siteConfig.social.twitter}
                 target="_blank"
