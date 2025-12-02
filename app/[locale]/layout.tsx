@@ -120,11 +120,11 @@ export default async function LocaleLayout({
   children: React.ReactNode
   params: { locale: string }
 }) {
-  const messages = await getMessages()
+  const messages = await getMessages({ locale })
 
   return (
     <div className={`${inter.variable} ${playfair.variable} min-h-screen bg-white antialiased flex flex-col`}>
-      <NextIntlClientProvider messages={messages}>
+      <NextIntlClientProvider locale={locale} messages={messages}>
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

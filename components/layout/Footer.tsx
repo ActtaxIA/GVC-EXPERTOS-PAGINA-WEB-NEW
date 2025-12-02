@@ -4,10 +4,11 @@ import Image from 'next/image'
 import { Phone, Mail, MapPin, Twitter, Facebook } from 'lucide-react'
 import { siteConfig, footerLinks } from '@/config/site'
 import { LocalizedLink } from '@/components/ui/LocalizedLink'
-import { useTranslations } from 'next-intl'
+import { useTranslations, useLocale } from 'next-intl'
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
+  const locale = useLocale() as 'es' | 'en'
   const t = useTranslations('footer')
   const tNav = useTranslations('nav')
   const tContact = useTranslations('contact.info')

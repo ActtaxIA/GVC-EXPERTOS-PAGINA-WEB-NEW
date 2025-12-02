@@ -5,15 +5,15 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useParams, usePathname } from 'next/navigation'
 import { Menu, X, Phone, ChevronDown, Languages } from 'lucide-react'
-import { useTranslations } from 'next-intl'
+import { useTranslations, useLocale } from 'next-intl'
 import { cn } from '@/lib/utils'
 import { siteConfig } from '@/config/site'
-import { getLocalizedPath } from '@/lib/i18n-utils'
+import { getLocalizedPath, translatePath } from '@/lib/i18n-utils'
 
 export function Header() {
   const params = useParams()
   const pathname = usePathname()
-  const locale = (params?.locale as string) || 'es'
+  const locale = useLocale() as 'es' | 'en'
   const t = useTranslations('nav')
   const tCommon = useTranslations('common')
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -22,8 +22,9 @@ export function Header() {
   const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false)
   const [isLangOpen, setIsLangOpen] = useState(false)
   
-  // Obtener path sin locale para cambiar idioma manteniendo la página
-  const pathWithoutLocale = pathname?.replace(/^\/(es|en)/, '') || '/'
+  // Obtener rutas traducidas para el switcher de idiomas
+  const spanishPath = pathname ? translatePath(pathname, 'es') : '/es'
+  const englishPath = pathname ? translatePath(pathname, 'en') : '/en'
   
   // Navegación con traducciones
   const navigationLinks = [
@@ -172,7 +173,7 @@ export function Header() {
               )}>
                 <div className="py-1">
                   <Link
-                    href={`/es${pathWithoutLocale}`}
+                    href={spanishPath}
                     onClick={() => setIsLangOpen(false)}
                     className={cn(
                       "block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 transition-colors",
@@ -182,7 +183,7 @@ export function Header() {
                     🇪🇸 Español
                   </Link>
                   <Link
-                    href={`/en${pathWithoutLocale}`}
+                    href={englishPath}
                     onClick={() => setIsLangOpen(false)}
                     className={cn(
                       "block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 transition-colors",
@@ -307,7 +308,7 @@ export function Header() {
             </div>
             <div className="pl-4 space-y-1">
               <Link
-                href={`/es${pathWithoutLocale}`}
+                href={spanishPath}
                 onClick={() => setIsMenuOpen(false)}
                 className={cn(
                   "block py-2 px-4 rounded-sm text-sm transition-colors",
@@ -319,7 +320,7 @@ export function Header() {
                 🇪🇸 Español
               </Link>
               <Link
-                href={`/en${pathWithoutLocale}`}
+                href={englishPath}
                 onClick={() => setIsMenuOpen(false)}
                 className={cn(
                   "block py-2 px-4 rounded-sm text-sm transition-colors",
