@@ -18,6 +18,7 @@ export function Header() {
   const t = useTranslations('nav')
   const tCommon = useTranslations('common')
   const tFooter = useTranslations('footer')
+  const tServices = useTranslations('services')
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [isServicesOpen, setIsServicesOpen] = useState(false)
@@ -303,7 +304,6 @@ export function Header() {
                             'consentimiento-informado': 'informed-consent',
                           }
                           const translationKey = locale === 'es' ? service.slug : (serviceSlugMap[service.slug] || service.slug)
-                          const tServices = useTranslations('services')
                           return (
                             <Link
                               key={service.slug}
