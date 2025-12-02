@@ -3,15 +3,24 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Menu, X, Phone, ChevronDown } from 'lucide-react'
+import { useParams, usePathname } from 'next/navigation'
+import { Menu, X, Phone, ChevronDown, Languages } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { siteConfig, navigationLinks } from '@/config/site'
+import { getLocalizedPath } from '@/lib/i18n-utils'
 
 export function Header() {
+  const params = useParams()
+  const pathname = usePathname()
+  const locale = (params?.locale as string) || 'es'
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [isServicesOpen, setIsServicesOpen] = useState(false)
   const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false)
+  const [isLangOpen, setIsLangOpen] = useState(false)
+  
+  // Obtener path sin locale para cambiar idioma manteniendo la página
+  const pathWithoutLocale = pathname?.replace(/^\/(es|en)/, '') || '/'
 
   useEffect(() => {
     const handleScroll = () => {
@@ -56,7 +65,7 @@ export function Header() {
       <div className="container-custom">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="relative z-50 flex-shrink-0">
+          <Link href={`/${locale}`} className="relative z-50 flex-shrink-0">
             <Image
               src="/images/logo.png"
               alt={siteConfig.name}
@@ -80,7 +89,7 @@ export function Header() {
                     onMouseLeave={() => setIsServicesOpen(false)}
                   >
                     <Link
-                      href={link.href}
+                      href={getLocalizedPath(link.href, locale as 'es' | 'en')}
                       className="text-charcoal hover:text-gold font-medium text-sm uppercase tracking-wide transition-colors flex items-center gap-1"
                     >
                       {link.label}
@@ -103,7 +112,7 @@ export function Header() {
                         {siteConfig.services.map((service) => (
                           <Link
                             key={service.slug}
-                            href={`/negligencias-medicas/${service.slug}`}
+                            href={getLocalizedPath(`/negligencias-medicas/${service.slug}`, locale as 'es' | 'en')}
                             className="block px-5 py-3 text-charcoal hover:bg-cream hover:text-gold transition-colors"
                           >
                             <div className="font-medium text-sm">{service.title}</div>
@@ -122,7 +131,7 @@ export function Header() {
               return (
                 <Link
                   key={link.href}
-                  href={link.href}
+                  href={getLocalizedPath(link.href, locale as 'es' | 'en')}
                   className="text-charcoal hover:text-gold font-medium text-sm uppercase tracking-wide transition-colors"
                 >
                   {link.label}
@@ -133,6 +142,46 @@ export function Header() {
 
           {/* Desktop CTA */}
           <div className="hidden lg:flex items-center gap-4">
+            {/* Language Selector */}
+            <div className="relative group">
+              <button
+                onClick={() => setIsLangOpen(!isLangOpen)}
+                className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-charcoal hover:text-gold transition-colors"
+                aria-label="Select language"
+              >
+                <Languages className="w-4 h-4" />
+                <span className="uppercase">{locale}</span>
+              </button>
+              
+              <div className={cn(
+                "absolute right-0 mt-2 w-32 bg-white rounded-md shadow-lg transition-all duration-200 z-50",
+                isLangOpen ? "opacity-100 visible" : "opacity-0 invisible"
+              )}>
+                <div className="py-1">
+                  <Link
+                    href={`/es${pathWithoutLocale}`}
+                    onClick={() => setIsLangOpen(false)}
+                    className={cn(
+                      "block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 transition-colors",
+                      locale === 'es' ? 'text-gold font-semibold' : 'text-gray-700'
+                    )}
+                  >
+                    🇪🇸 Español
+                  </Link>
+                  <Link
+                    href={`/en${pathWithoutLocale}`}
+                    onClick={() => setIsLangOpen(false)}
+                    className={cn(
+                      "block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 transition-colors",
+                      locale === 'en' ? 'text-gold font-semibold' : 'text-gray-700'
+                    )}
+                  >
+                    🇬🇧 English
+                  </Link>
+                </div>
+              </div>
+            </div>
+            
             <a
               href={siteConfig.contact.phoneHref}
               className="flex items-center gap-2 text-gold font-semibold hover:text-gold-dark transition-colors"
@@ -140,8 +189,8 @@ export function Header() {
               <Phone className="w-4 h-4" />
               <span>{siteConfig.contact.phone}</span>
             </a>
-            <Link href="/contacto" className="btn-primary">
-              Consulta Gratis
+            <Link href={getLocalizedPath('/contacto', locale as 'es' | 'en')} className="btn-primary">
+              {locale === 'es' ? 'Consulta Gratis' : 'Free Consultation'}
             </Link>
           </div>
 
@@ -205,7 +254,7 @@ export function Header() {
                         {siteConfig.services.map((service) => (
                           <Link
                             key={service.slug}
-                            href={`/negligencias-medicas/${service.slug}`}
+                            href={getLocalizedPath(`/negligencias-medicas/${service.slug}`, locale as 'es' | 'en')}
                             onClick={() => {
                               setIsMenuOpen(false)
                               setIsMobileServicesOpen(false)
@@ -225,7 +274,7 @@ export function Header() {
               return (
                 <Link
                   key={link.href}
-                  href={link.href}
+                  href={getLocalizedPath(link.href, locale as 'es' | 'en')}
                   onClick={() => setIsMenuOpen(false)}
                   className="py-3 px-4 text-charcoal hover:text-gold hover:bg-cream rounded-sm font-medium text-lg transition-colors"
                 >
@@ -234,6 +283,42 @@ export function Header() {
               )
             })}
           </nav>
+
+          <hr className="my-6 border-gray-200" />
+
+          {/* Mobile Language Selector */}
+          <div className="mb-4">
+            <div className="flex items-center gap-2 px-4 py-2 text-gray-600">
+              <Languages className="w-5 h-5" />
+              <span className="font-medium">{locale === 'es' ? 'Idioma' : 'Language'}</span>
+            </div>
+            <div className="pl-4 space-y-1">
+              <Link
+                href={`/es${pathWithoutLocale}`}
+                onClick={() => setIsMenuOpen(false)}
+                className={cn(
+                  "block py-2 px-4 rounded-sm text-sm transition-colors",
+                  locale === 'es' 
+                    ? 'text-gold font-semibold bg-cream' 
+                    : 'text-gray-600 hover:bg-cream'
+                )}
+              >
+                🇪🇸 Español
+              </Link>
+              <Link
+                href={`/en${pathWithoutLocale}`}
+                onClick={() => setIsMenuOpen(false)}
+                className={cn(
+                  "block py-2 px-4 rounded-sm text-sm transition-colors",
+                  locale === 'en' 
+                    ? 'text-gold font-semibold bg-cream' 
+                    : 'text-gray-600 hover:bg-cream'
+                )}
+              >
+                🇬🇧 English
+              </Link>
+            </div>
+          </div>
 
           <hr className="my-6 border-gray-200" />
 
@@ -247,11 +332,11 @@ export function Header() {
               <span>{siteConfig.contact.phone}</span>
             </a>
             <Link
-              href="/contacto"
+              href={getLocalizedPath('/contacto', locale as 'es' | 'en')}
               onClick={() => setIsMenuOpen(false)}
               className="btn-primary w-full text-center"
             >
-              Consulta Gratuita
+              {locale === 'es' ? 'Consulta Gratuita' : 'Free Consultation'}
             </Link>
           </div>
 
