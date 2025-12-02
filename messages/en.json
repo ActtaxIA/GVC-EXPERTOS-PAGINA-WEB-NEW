@@ -1,0 +1,159 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "An error has occurred",
+    "tryAgain": "Try again",
+    "close": "Close",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "view": "View",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "yes": "Yes",
+    "no": "No",
+    "readMore": "Read more",
+    "learnMore": "Learn more",
+    "contactUs": "Contact us",
+    "callUs": "Call us"
+  },
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "about": "About Us",
+    "team": "Team",
+    "blog": "Blog",
+    "contact": "Contact",
+    "faq": "FAQ",
+    "cases": "Success Cases",
+    "news": "News",
+    "medical-negligence": "Medical Negligence"
+  },
+  "hero": {
+    "title": "Medical Negligence Specialist Lawyers",
+    "subtitle": "Defending your rights when healthcare fails",
+    "description": "Over 20 years of experience obtaining maximum compensation for medical, surgical and hospital errors.",
+    "cta": "Free Consultation",
+    "ctaSecondary": "View Services",
+    "stats": {
+      "experience": "Years of Experience",
+      "casesWon": "Cases Won",
+      "compensation": "Million Recovered",
+      "satisfaction": "Client Satisfaction"
+    }
+  },
+  "services": {
+    "title": "Types of Medical Negligence",
+    "subtitle": "Specialization in all areas of medical malpractice",
+    "surgical-errors": {
+      "title": "Surgical Errors",
+      "description": "Negligence during procedures: forgotten instruments, wrong-site surgery, nerve injuries."
+    },
+    "diagnostic-errors": {
+      "title": "Diagnostic Errors",
+      "description": "Late, incorrect or missed diagnoses that cause treatment delays."
+    },
+    "hospital-negligence": {
+      "title": "Hospital Negligence",
+      "description": "Nosocomial infections, falls, pressure ulcers, protocol failures."
+    },
+    "obstetric-negligence": {
+      "title": "Obstetric Negligence",
+      "description": "Birth injuries: cerebral palsy, brachial plexus injuries, hypoxia."
+    },
+    "medication-errors": {
+      "title": "Medication Errors",
+      "description": "Incorrect doses, contraindicated medications, preventable adverse reactions."
+    },
+    "informed-consent": {
+      "title": "Informed Consent",
+      "description": "Lack of information about risks, unauthorized procedures."
+    }
+  },
+  "process": {
+    "title": "How We Work",
+    "subtitle": "A clear and transparent process from first contact",
+    "step1": {
+      "title": "Free Initial Consultation",
+      "description": "We analyze your case without obligation. We explain your legal options and the viability of the claim."
+    },
+    "step2": {
+      "title": "Expert Analysis",
+      "description": "We review all medical documentation with specialist experts who will determine if there was negligence."
+    },
+    "step3": {
+      "title": "Out-of-Court Claim",
+      "description": "We try to resolve the case through direct negotiation with the insurer or healthcare center."
+    },
+    "step4": {
+      "title": "Judicial Procedure",
+      "description": "If necessary, we take your case to trial with a specialized and experienced legal team."
+    }
+  },
+  "team": {
+    "title": "Our Team",
+    "subtitle": "Specialized lawyers with over 20 years defending victims of medical negligence",
+    "viewProfile": "View Full Profile"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "First free consultation. We respond within 24 hours.",
+    "form": {
+      "name": "Full name",
+      "email": "Email",
+      "phone": "Phone",
+      "city": "City",
+      "service": "Type of negligence",
+      "message": "Tell us about your case",
+      "submit": "Send Inquiry",
+      "sending": "Sending...",
+      "success": "Message sent! We will contact you soon.",
+      "error": "Error sending. Please try again."
+    },
+    "info": {
+      "address": "Address",
+      "phone": "Phone",
+      "email": "Email",
+      "schedule": "Schedule",
+      "scheduleValue": "Monday to Friday: 9:00 AM - 7:00 PM"
+    }
+  },
+  "footer": {
+    "description": "Law firm specialized in medical negligence with over 20 years of experience defending patients' rights.",
+    "quickLinks": "Quick Links",
+    "services": "Services",
+    "legal": "Legal",
+    "followUs": "Follow Us",
+    "copyright": "All rights reserved",
+    "legalNotice": "Legal Notice",
+    "privacy": "Privacy Policy",
+    "cookies": "Cookie Policy"
+  },
+  "cta": {
+    "title": "Have You Suffered Medical Negligence?",
+    "description": "You are not alone. Our team of specialized lawyers is here to help you get the compensation you deserve.",
+    "button": "Free Consultation",
+    "phone": "Or call us now"
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Articles and guides on medical negligence",
+    "readMore": "Read Article",
+    "categories": "Categories",
+    "recent": "Recent Articles",
+    "featured": "Featured",
+    "by": "By",
+    "on": "on",
+    "minRead": "min read"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Answers to the most common questions about medical negligence"
+  }
+}
+

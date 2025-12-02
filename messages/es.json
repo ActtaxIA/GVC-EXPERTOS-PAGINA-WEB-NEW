@@ -1,0 +1,159 @@
+{
+  "common": {
+    "loading": "Cargando...",
+    "error": "Ha ocurrido un error",
+    "tryAgain": "Intentar de nuevo",
+    "close": "Cerrar",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "view": "Ver",
+    "back": "Volver",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "sort": "Ordenar",
+    "yes": "Sí",
+    "no": "No",
+    "readMore": "Leer más",
+    "learnMore": "Saber más",
+    "contactUs": "Contáctanos",
+    "callUs": "Llámanos"
+  },
+  "nav": {
+    "home": "Inicio",
+    "services": "Servicios",
+    "about": "Sobre Nosotros",
+    "team": "Equipo",
+    "blog": "Blog",
+    "contact": "Contacto",
+    "faq": "Preguntas Frecuentes",
+    "cases": "Casos de Éxito",
+    "news": "Noticias",
+    "medical-negligence": "Negligencias Médicas"
+  },
+  "hero": {
+    "title": "Abogados Especialistas en Negligencias Médicas",
+    "subtitle": "Defendemos tus derechos cuando la atención sanitaria falla",
+    "description": "Más de 20 años de experiencia consiguiendo las máximas indemnizaciones por errores médicos, quirúrgicos y hospitalarios.",
+    "cta": "Consulta Gratuita",
+    "ctaSecondary": "Ver Servicios",
+    "stats": {
+      "experience": "Años de Experiencia",
+      "casesWon": "Casos Ganados",
+      "compensation": "Millones Recuperados",
+      "satisfaction": "Satisfacción del Cliente"
+    }
+  },
+  "services": {
+    "title": "Tipos de Negligencias Médicas",
+    "subtitle": "Especialización en todas las áreas de la mala praxis sanitaria",
+    "surgical-errors": {
+      "title": "Errores Quirúrgicos",
+      "description": "Negligencias durante intervenciones: instrumentos olvidados, cirugía en zona incorrecta, lesiones nerviosas."
+    },
+    "diagnostic-errors": {
+      "title": "Errores de Diagnóstico",
+      "description": "Diagnósticos tardíos, incorrectos o perdidos que causan retraso en el tratamiento."
+    },
+    "hospital-negligence": {
+      "title": "Negligencia Hospitalaria",
+      "description": "Infecciones nosocomiales, caídas, úlceras por presión, fallos en protocolos."
+    },
+    "obstetric-negligence": {
+      "title": "Negligencia Obstétrica",
+      "description": "Lesiones durante el parto: parálisis cerebral, lesiones del plexo braquial, hipoxia."
+    },
+    "medication-errors": {
+      "title": "Errores de Medicación",
+      "description": "Dosis incorrectas, medicamentos contraindicados, reacciones adversas evitables."
+    },
+    "informed-consent": {
+      "title": "Consentimiento Informado",
+      "description": "Falta de información sobre riesgos, procedimientos no autorizados."
+    }
+  },
+  "process": {
+    "title": "Cómo Trabajamos",
+    "subtitle": "Un proceso claro y transparente desde el primer contacto",
+    "step1": {
+      "title": "Consulta Inicial Gratuita",
+      "description": "Analizamos tu caso sin compromiso. Te explicamos tus opciones legales y la viabilidad de la reclamación."
+    },
+    "step2": {
+      "title": "Análisis Pericial",
+      "description": "Revisamos toda la documentación médica con expertos especialistas que determinarán si hubo negligencia."
+    },
+    "step3": {
+      "title": "Reclamación Extrajudicial",
+      "description": "Intentamos resolver el caso mediante negociación directa con la aseguradora o el centro sanitario."
+    },
+    "step4": {
+      "title": "Procedimiento Judicial",
+      "description": "Si es necesario, llevamos tu caso a juicio con un equipo legal especializado y experimentado."
+    }
+  },
+  "team": {
+    "title": "Nuestro Equipo",
+    "subtitle": "Abogados especializados con más de 20 años defendiendo a víctimas de negligencias médicas",
+    "viewProfile": "Ver Perfil Completo"
+  },
+  "contact": {
+    "title": "Contacta con Nosotros",
+    "subtitle": "Primera consulta gratuita. Te respondemos en menos de 24 horas.",
+    "form": {
+      "name": "Nombre completo",
+      "email": "Email",
+      "phone": "Teléfono",
+      "city": "Ciudad",
+      "service": "Tipo de negligencia",
+      "message": "Cuéntanos tu caso",
+      "submit": "Enviar Consulta",
+      "sending": "Enviando...",
+      "success": "¡Mensaje enviado! Te contactaremos pronto.",
+      "error": "Error al enviar. Por favor, inténtalo de nuevo."
+    },
+    "info": {
+      "address": "Dirección",
+      "phone": "Teléfono",
+      "email": "Email",
+      "schedule": "Horario",
+      "scheduleValue": "Lunes a Viernes: 9:00 - 19:00"
+    }
+  },
+  "footer": {
+    "description": "Despacho especializado en negligencias médicas con más de 20 años de experiencia defendiendo los derechos de los pacientes.",
+    "quickLinks": "Enlaces Rápidos",
+    "services": "Servicios",
+    "legal": "Legal",
+    "followUs": "Síguenos",
+    "copyright": "Todos los derechos reservados",
+    "legalNotice": "Aviso Legal",
+    "privacy": "Política de Privacidad",
+    "cookies": "Política de Cookies"
+  },
+  "cta": {
+    "title": "¿Has Sufrido una Negligencia Médica?",
+    "description": "No estás solo. Nuestro equipo de abogados especializados está aquí para ayudarte a conseguir la compensación que mereces.",
+    "button": "Consulta Gratuita",
+    "phone": "O llámanos ahora"
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Artículos y guías sobre negligencias médicas",
+    "readMore": "Leer Artículo",
+    "categories": "Categorías",
+    "recent": "Artículos Recientes",
+    "featured": "Destacado",
+    "by": "Por",
+    "on": "el",
+    "minRead": "min de lectura"
+  },
+  "faq": {
+    "title": "Preguntas Frecuentes",
+    "subtitle": "Respuestas a las dudas más comunes sobre negligencias médicas"
+  }
+}
+

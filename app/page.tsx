@@ -1,38 +1,6 @@
-import {
-  Hero,
-  IntroSection,
-  ServicesSection,
-  CtaDark,
-  TeamSection,
-  ProcessSection,
-  GallerySection,
-  CtaFinal,
-} from '@/components/home'
-import { 
-  JsonLdOrganization, 
-  JsonLdLocalBusiness,
-  JsonLdWebsite,
-  JsonLdProfessionalService 
-} from '@/components/seo/JsonLd'
+import { redirect } from 'next/navigation'
 
-export default function HomePage() {
-  return (
-    <>
-      {/* Schema.org JSON-LD para SEO */}
-      <JsonLdOrganization />
-      <JsonLdLocalBusiness />
-      <JsonLdWebsite />
-      <JsonLdProfessionalService />
-      
-      {/* Contenido */}
-      <Hero />
-      <IntroSection />
-      <ServicesSection />
-      <CtaDark />
-      <TeamSection />
-      <ProcessSection />
-      <GallerySection />
-      <CtaFinal />
-    </>
-  )
+export default function RootPage() {
+  // Redirigir automáticamente a /es (español por defecto)
+  redirect('/es')
 }
