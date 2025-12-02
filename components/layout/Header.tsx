@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useParams, usePathname } from 'next/navigation'
-import { Menu, X, Phone, ChevronDown, Languages } from 'lucide-react'
+import { Menu, X, Phone, ChevronDown, Languages, Twitter, Facebook } from 'lucide-react'
 import { useTranslations, useLocale } from 'next-intl'
 import { cn } from '@/lib/utils'
 import { siteConfig } from '@/config/site'
@@ -17,6 +17,8 @@ export function Header() {
   const locale = useLocale() as 'es' | 'en'
   const t = useTranslations('nav')
   const tCommon = useTranslations('common')
+  const tFooter = useTranslations('footer')
+  const tFooter = useTranslations('footer')
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [isServicesOpen, setIsServicesOpen] = useState(false)
@@ -231,7 +233,7 @@ export function Header() {
       {/* Mobile Menu Overlay */}
       <div
         className={cn(
-          'fixed inset-0 bg-black/50 lg:hidden transition-opacity duration-300 z-40',
+          'fixed inset-0 bg-black/50 lg:hidden transition-opacity duration-300 z-[60]',
           isMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
         )}
         onClick={() => setIsMenuOpen(false)}
@@ -240,12 +242,32 @@ export function Header() {
       {/* Mobile Menu Panel */}
       <div
         className={cn(
-          'fixed top-0 right-0 h-full w-full max-w-sm bg-white lg:hidden transition-transform duration-300 ease-in-out z-40 overflow-y-auto',
+          'fixed top-0 right-0 h-full w-full max-w-sm bg-white lg:hidden transition-transform duration-300 ease-in-out z-[70] overflow-y-auto shadow-2xl',
           isMenuOpen ? 'translate-x-0' : 'translate-x-full'
         )}
       >
-        <div className="pt-24 pb-8 px-6">
-          <nav className="flex flex-col gap-1">
+        {/* Header del menú móvil con logo y botón cerrar */}
+        <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between z-10">
+          <Link href={`/${locale}`} className="flex items-center gap-2" onClick={() => setIsMenuOpen(false)}>
+            <Image
+              src="/images/logo.png"
+              alt={siteConfig.name}
+              width={140}
+              height={40}
+              className="h-10 w-auto"
+            />
+          </Link>
+          <button
+            onClick={() => setIsMenuOpen(false)}
+            className="p-2 text-charcoal hover:text-gold transition-colors"
+            aria-label={tCommon('close')}
+          >
+            <X className="w-6 h-6" />
+          </button>
+        </div>
+
+        <div className="px-4 py-4">
+          <nav className="flex flex-col gap-0.5">
             {navigationLinks.map((link) => {
               // Menú especial para Servicios con dropdown en móvil
               const isServicesRoute = link.href === getTranslatedRoute('services', locale)
@@ -254,11 +276,11 @@ export function Header() {
                   <div key={link.href} className="flex flex-col">
                     <button
                       onClick={() => setIsMobileServicesOpen(!isMobileServicesOpen)}
-                      className="py-3 px-4 text-charcoal hover:text-gold hover:bg-cream rounded-sm font-medium text-lg transition-colors flex items-center justify-between w-full text-left"
+                      className="py-2.5 px-4 text-charcoal hover:text-gold hover:bg-cream rounded-md font-medium text-base transition-colors flex items-center justify-between w-full text-left"
                     >
                       {link.label}
                       <ChevronDown className={cn(
-                        "w-5 h-5 transition-transform duration-200",
+                        "w-4 h-4 transition-transform duration-200",
                         isMobileServicesOpen && "rotate-180"
                       )} />
                     </button>
@@ -267,12 +289,22 @@ export function Header() {
                     <div
                       className={cn(
                         "overflow-hidden transition-all duration-300",
-                        isMobileServicesOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+                        isMobileServicesOpen ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0"
                       )}
                     >
-                      <div className="pl-4 pt-2 pb-2 space-y-1">
+                      <div className="pl-4 pt-1 pb-1 space-y-0.5">
                         {siteConfig.services.map((service) => {
                           const servicePath = getTranslatedServiceRoute(service.slug, locale)
+                          const serviceSlugMap: Record<string, string> = {
+                            'errores-quirurgicos': 'surgical-errors',
+                            'errores-diagnostico': 'diagnostic-errors',
+                            'negligencia-hospitalaria': 'hospital-negligence',
+                            'negligencia-obstetrica': 'obstetric-negligence',
+                            'errores-medicacion': 'medication-errors',
+                            'consentimiento-informado': 'informed-consent',
+                          }
+                          const translationKey = locale === 'es' ? service.slug : (serviceSlugMap[service.slug] || service.slug)
+                          const tServices = useTranslations('services')
                           return (
                             <Link
                               key={service.slug}
@@ -281,9 +313,9 @@ export function Header() {
                                 setIsMenuOpen(false)
                                 setIsMobileServicesOpen(false)
                               }}
-                              className="block py-2 px-4 text-gray-600 hover:text-gold hover:bg-cream rounded-sm text-sm transition-colors"
+                              className="block py-2 px-4 text-gray-600 hover:text-gold hover:bg-cream rounded-md text-sm transition-colors"
                             >
-                              {service.title}
+                              {tServices(`${translationKey}.title`)}
                             </Link>
                           )
                         })}
@@ -299,7 +331,7 @@ export function Header() {
                   key={link.href}
                   href={getLocalizedPath(link.href, locale)}
                   onClick={() => setIsMenuOpen(false)}
-                  className="py-3 px-4 text-charcoal hover:text-gold hover:bg-cream rounded-sm font-medium text-lg transition-colors"
+                  className="py-2.5 px-4 text-charcoal hover:text-gold hover:bg-cream rounded-md font-medium text-base transition-colors"
                 >
                   {link.label}
                 </Link>
@@ -307,23 +339,23 @@ export function Header() {
             })}
           </nav>
 
-          <hr className="my-6 border-gray-200" />
+          <div className="my-4 border-t border-gray-200" />
 
           {/* Mobile Language Selector */}
           <div className="mb-4">
-            <div className="flex items-center gap-2 px-4 py-2 text-gray-600">
-              <Languages className="w-5 h-5" />
-              <span className="font-medium">{tCommon('language')}</span>
+            <div className="flex items-center gap-2 px-4 py-1.5 mb-2">
+              <Languages className="w-4 h-4 text-gray-500" />
+              <span className="text-sm font-medium text-gray-700">{tCommon('language')}</span>
             </div>
-            <div className="pl-4 space-y-1">
+            <div className="pl-4 space-y-0.5">
               <Link
                 href={spanishPath}
                 onClick={() => setIsMenuOpen(false)}
                 className={cn(
-                  "block py-2 px-4 rounded-sm text-sm transition-colors",
+                  "block py-2 px-4 rounded-md text-sm transition-colors",
                   locale === 'es' 
                     ? 'text-gold font-semibold bg-cream' 
-                    : 'text-gray-600 hover:bg-cream'
+                    : 'text-gray-600 hover:bg-gray-50'
                 )}
               >
                 🇪🇸 Español
@@ -332,10 +364,10 @@ export function Header() {
                 href={englishPath}
                 onClick={() => setIsMenuOpen(false)}
                 className={cn(
-                  "block py-2 px-4 rounded-sm text-sm transition-colors",
+                  "block py-2 px-4 rounded-md text-sm transition-colors",
                   locale === 'en' 
                     ? 'text-gold font-semibold bg-cream' 
-                    : 'text-gray-600 hover:bg-cream'
+                    : 'text-gray-600 hover:bg-gray-50'
                 )}
               >
                 🇬🇧 English
@@ -343,21 +375,21 @@ export function Header() {
             </div>
           </div>
 
-          <hr className="my-6 border-gray-200" />
+          <div className="my-4 border-t border-gray-200" />
 
           {/* Mobile Contact */}
-          <div className="space-y-4">
+          <div className="space-y-3">
             <a
               href={siteConfig.contact.phoneHref}
-              className="flex items-center gap-3 py-3 px-4 text-gold font-semibold text-lg hover:bg-cream rounded-sm transition-colors"
+              className="flex items-center gap-3 py-2.5 px-4 text-gold font-semibold text-base hover:bg-cream rounded-md transition-colors"
             >
-              <Phone className="w-5 h-5" />
+              <Phone className="w-4 h-4" />
               <span>{siteConfig.contact.phone}</span>
             </a>
             <Link
               href={getLocalizedPath(getTranslatedRoute('contact', locale), locale)}
               onClick={() => setIsMenuOpen(false)}
-              className="btn-primary w-full text-center"
+              className="btn-primary w-full text-center text-sm py-2.5"
             >
               {tCommon('contactUs')}
             </Link>
