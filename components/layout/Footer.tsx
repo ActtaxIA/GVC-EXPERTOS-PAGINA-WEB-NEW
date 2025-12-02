@@ -46,6 +46,7 @@ export function Footer() {
     { label: tLegal('legalNotice'), href: routes[locale].legal.notice },
     { label: tLegal('privacy'), href: routes[locale].legal.privacy },
     { label: tLegal('cookies'), href: routes[locale].legal.cookies },
+    { label: tLegal('sitemap'), href: routes[locale].legal.sitemap },
   ]
 
   return (

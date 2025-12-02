@@ -16,6 +16,7 @@ export const routes = {
       notice: '/aviso-legal',
       privacy: '/politica-privacidad',
       cookies: '/politica-cookies',
+      sitemap: '/sitemap',
     },
     servicesList: {
       'errores-quirurgicos': '/negligencias-medicas/errores-quirurgicos',
@@ -38,6 +39,7 @@ export const routes = {
       notice: '/legal-notice',
       privacy: '/privacy-policy',
       cookies: '/cookie-policy',
+      sitemap: '/sitemap',
     },
     servicesList: {
       'errores-quirurgicos': '/medical-negligence/surgical-errors',

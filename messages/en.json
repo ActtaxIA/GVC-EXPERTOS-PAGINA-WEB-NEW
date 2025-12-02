@@ -168,7 +168,17 @@
     "copyright": "All rights reserved",
     "legalNotice": "Legal Notice",
     "privacy": "Privacy Policy",
-    "cookies": "Cookie Policy"
+    "cookies": "Cookie Policy",
+    "sitemap": "Sitemap"
+  },
+  "sitemap": {
+    "mainPages": "Main Pages",
+    "services": "Services",
+    "cities": "Cities",
+    "blogPosts": "Blog Posts",
+    "news": "News",
+    "legalPages": "Legal Pages",
+    "sitemap": "Sitemap"
   },
   "cta": {
     "title": "Have You Suffered Medical Negligence?",
