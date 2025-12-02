@@ -42,13 +42,14 @@ async function getCategory(slug: string, locale: string) {
     }
 
     // Mapear campos según idioma
+    const cat = category as { id: string; slug: string; name: string; name_en: string | null; description: string | null; description_en: string | null }
     return {
-      id: category.id,
-      slug: category.slug,
-      name: isSpanish ? category.name : (category.name_en || category.name),
-      description: isSpanish ? category.description : (category.description_en || category.description),
-      name_en: category.name_en,
-      description_en: category.description_en
+      id: cat.id,
+      slug: cat.slug,
+      name: isSpanish ? cat.name : (cat.name_en || cat.name),
+      description: isSpanish ? cat.description : (cat.description_en || cat.description),
+      name_en: cat.name_en,
+      description_en: cat.description_en
     }
   } catch (error) {
     console.error('Error fetching category:', error)
