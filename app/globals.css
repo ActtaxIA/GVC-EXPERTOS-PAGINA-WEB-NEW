@@ -54,7 +54,7 @@
   }
 
   .btn-secondary {
-    @apply btn bg-charcoal text-white hover:bg-charcoal-light;
+    @apply btn bg-charcoal text-white hover:bg-charcoal-700;
   }
 
   .btn-outline {
