@@ -165,6 +165,15 @@ const nextConfig = {
         source: '/en/cookie-policy',
         destination: '/en/politica-cookies',
       },
+      // Posts/Publicaciones
+      {
+        source: '/en/posts',
+        destination: '/en/publicaciones',
+      },
+      {
+        source: '/en/posts/:slug',
+        destination: '/en/publicaciones/:slug',
+      },
       // Rewrites para servicios individuales
       ...serviceRewrites,
     ]

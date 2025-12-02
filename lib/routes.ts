@@ -32,7 +32,7 @@ export const routes = {
     services: '/medical-negligence',
     about: '/about-us',
     team: '/team',
-    blog: '/publicaciones',
+    blog: '/posts',
     contact: '/contact',
     faq: '/faq',
     legal: {
