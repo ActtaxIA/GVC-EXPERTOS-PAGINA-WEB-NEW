@@ -192,7 +192,8 @@ export default async function SitemapPage({
               </h2>
               <ul className="space-y-2">
                 {services.map((service) => {
-                  const translationKey = locale === 'es' ? service.slug : (serviceSlugMap[service.slug] || service.slug)
+                  // Las claves de traducción siempre están en inglés
+                  const translationKey = serviceSlugMap[service.slug] || service.slug
                   const servicePath = getTranslatedServiceRoute(service.slug, locale as 'es' | 'en')
                   return (
                     <li key={service.slug}>
