@@ -13,7 +13,6 @@ import { createClient } from '@supabase/supabase-js'
 // PÁGINAS ESTÁTICAS - Se generan durante el build
 // ============================================
 
-// Crear cliente de Supabase para el build
 function getSupabase() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY
@@ -34,7 +33,7 @@ async function getAllPosts() {
     .select(`
       id, slug, title, title_en, excerpt, excerpt_en, content, content_en,
       featured_image, reading_time, published_at, meta_title, meta_title_en,
-      meta_description, meta_description_en,
+      meta_description, meta_description_en, category_id,
       category:post_categories(id, name, name_en, slug),
       author:team_members(name, photo_url, position, bio)
     `)
@@ -59,9 +58,7 @@ export async function generateStaticParams() {
   const params: { locale: string; slug: string }[] = []
   
   for (const post of posts) {
-    // Generar para español
     params.push({ locale: 'es', slug: post.slug })
-    // Generar para inglés
     params.push({ locale: 'en', slug: post.slug })
   }
   
@@ -73,11 +70,15 @@ export async function generateStaticParams() {
 // Obtener un post específico
 async function getPost(slug: string, locale: string) {
   const posts = await getAllPosts()
-  const post = posts.find(p => p.slug === slug)
+  const post = posts.find((p: any) => p.slug === slug) as any
   
   if (!post) return null
 
   const isSpanish = locale === 'es'
+  
+  // Supabase devuelve category como objeto, no array
+  const cat = post.category as any
+  
   return {
     ...post,
     title: isSpanish ? post.title : (post.title_en || post.title),
@@ -85,9 +86,10 @@ async function getPost(slug: string, locale: string) {
     content: isSpanish ? post.content : (post.content_en || post.content),
     meta_title: isSpanish ? post.meta_title : (post.meta_title_en || post.meta_title),
     meta_description: isSpanish ? post.meta_description : (post.meta_description_en || post.meta_description),
-    category: post.category ? {
-      ...post.category,
-      name: isSpanish ? post.category.name : (post.category.name_en || post.category.name)
+    category: cat ? {
+      id: cat.id,
+      slug: cat.slug,
+      name: isSpanish ? cat.name : (cat.name_en || cat.name)
     } : null
   }
 }
@@ -97,13 +99,15 @@ async function getRelatedPosts(categoryId: string, currentId: string, locale: st
   const posts = await getAllPosts()
   
   const related = posts
-    .filter(p => p.category?.id === categoryId && p.id !== currentId)
+    .filter((p: any) => p.category_id === categoryId && p.id !== currentId)
     .slice(0, 3)
 
   const isSpanish = locale === 'es'
-  return related.map(post => ({
-    ...post,
+  return related.map((post: any) => ({
+    id: post.id,
+    slug: post.slug,
     title: isSpanish ? post.title : (post.title_en || post.title),
+    featured_image: post.featured_image,
   }))
 }
 

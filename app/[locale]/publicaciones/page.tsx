@@ -12,14 +12,10 @@ import { createClient } from '@supabase/supabase-js'
 // PÁGINA ESTÁTICA - Se genera durante el build
 // ============================================
 
-// Crear cliente de Supabase para el build
 function getSupabase() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY
-  if (!url || !key) {
-    console.error('❌ Supabase credentials missing during build')
-    return null
-  }
+  if (!url || !key) return null
   return createClient(url, key)
 }
 
@@ -42,10 +38,7 @@ export async function generateMetadata({
 // Obtener todos los posts
 async function getPosts(locale: string) {
   const supabase = getSupabase()
-  if (!supabase) {
-    console.error('❌ No Supabase client available')
-    return []
-  }
+  if (!supabase) return []
   
   console.log('📝 [BUILD] Obteniendo posts para página principal...')
   
@@ -68,15 +61,24 @@ async function getPosts(locale: string) {
   console.log(`✅ [BUILD] ${posts?.length || 0} posts encontrados`)
 
   const isSpanish = locale === 'es'
-  return (posts || []).map((post: any) => ({
-    ...post,
-    title: isSpanish ? post.title : (post.title_en || post.title),
-    excerpt: isSpanish ? post.excerpt : (post.excerpt_en || post.excerpt),
-    category: post.category ? {
-      ...post.category,
-      name: isSpanish ? post.category.name : (post.category.name_en || post.category.name)
-    } : null
-  }))
+  return (posts || []).map((post: any) => {
+    const cat = post.category as any
+    return {
+      id: post.id,
+      slug: post.slug,
+      title: isSpanish ? post.title : (post.title_en || post.title),
+      excerpt: isSpanish ? post.excerpt : (post.excerpt_en || post.excerpt),
+      featured_image: post.featured_image,
+      reading_time: post.reading_time,
+      published_at: post.published_at,
+      is_featured: post.is_featured,
+      author: post.author,
+      category: cat ? {
+        slug: cat.slug,
+        name: isSpanish ? cat.name : (cat.name_en || cat.name)
+      } : null
+    }
+  })
 }
 
 // Obtener categorías
@@ -93,7 +95,8 @@ async function getCategories(locale: string) {
 
   const isSpanish = locale === 'es'
   return (categories || []).map((cat: any) => ({
-    ...cat,
+    id: cat.id,
+    slug: cat.slug,
     name: isSpanish ? cat.name : (cat.name_en || cat.name)
   }))
 }

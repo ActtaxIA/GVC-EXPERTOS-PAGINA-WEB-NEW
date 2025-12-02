@@ -9,39 +9,63 @@ import { createClient } from '@supabase/supabase-js'
 import { LocalizedLink } from '@/components/ui/LocalizedLink'
 import { getTranslations } from 'next-intl/server'
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL || '',
-  process.env.SUPABASE_SERVICE_ROLE_KEY || ''
-)
+// ============================================
+// PÁGINA ESTÁTICA - Se genera durante el build
+// ============================================
+
+function getSupabase() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY
+  if (!url || !key) return null
+  return createClient(url, key)
+}
+
+// Obtener todas las noticias para generar rutas estáticas
+async function getAllNews() {
+  const supabase = getSupabase()
+  if (!supabase) return []
+
+  const { data: news, error } = await supabase
+    .from('news')
+    .select('*')
+    .eq('is_published', true)
+
+  if (error) return []
+  return news || []
+}
+
+// Generar rutas estáticas
+export async function generateStaticParams() {
+  console.log('🔧 [BUILD] Generando rutas estáticas para noticias...')
+  
+  const news = await getAllNews()
+  
+  const params: { locale: string; slug: string }[] = []
+  
+  for (const item of news) {
+    params.push({ locale: 'es', slug: item.slug })
+    params.push({ locale: 'en', slug: item.slug })
+  }
+  
+  console.log(`✅ [BUILD] Generadas ${params.length} rutas de noticias`)
+  
+  return params
+}
 
 async function getNewsItem(slug: string, locale: string) {
-  try {
-    const isSpanish = locale === 'es'
-    
-    const { data: item } = await supabase
-      .from('news')
-      .select('*')
-      .eq('slug', slug)
-      .eq('is_published', true)
-      .single()
+  const news = await getAllNews()
+  const item = news.find(n => n.slug === slug)
+  
+  if (!item) return null
 
-    if (!item) return null
-
-    // Usar versión en inglés si existe
-    if (!isSpanish) {
-      const itemAny = item as any
-      if (itemAny.title_en) {
-        itemAny.title = itemAny.title_en || itemAny.title
-        itemAny.excerpt = itemAny.excerpt_en || itemAny.excerpt
-        itemAny.content = itemAny.content_en || itemAny.content
-        itemAny.meta_title = itemAny.meta_title_en || itemAny.meta_title
-        itemAny.meta_description = itemAny.meta_description_en || itemAny.meta_description
-      }
-    }
-
-    return item
-  } catch {
-    return null
+  const isSpanish = locale === 'es'
+  return {
+    ...item,
+    title: isSpanish ? item.title : (item.title_en || item.title),
+    excerpt: isSpanish ? item.excerpt : (item.excerpt_en || item.excerpt),
+    content: isSpanish ? item.content : (item.content_en || item.content),
+    meta_title: isSpanish ? item.meta_title : (item.meta_title_en || item.meta_title),
+    meta_description: isSpanish ? item.meta_description : (item.meta_description_en || item.meta_description),
   }
 }
 
@@ -50,49 +74,38 @@ export async function generateMetadata({
 }: {
   params: { slug: string; locale: string }
 }): Promise<Metadata> {
-  const item = await getNewsItem(params.slug, params.locale) as any
+  const item = await getNewsItem(params.slug, params.locale)
   const t = await getTranslations({ locale: params.locale, namespace: 'news' })
 
-  if (!item) {
-    return { title: t('metaTitle') }
-  }
+  if (!item) return { title: t('title') }
 
   return {
     title: item.meta_title || item.title,
     description: item.meta_description || item.excerpt,
     alternates: {
       canonical: `${siteConfig.url}/${params.locale}/noticias/${item.slug}`,
-      languages: {
-        'es-ES': `${siteConfig.url}/es/noticias/${item.slug}`,
-        'en-US': `${siteConfig.url}/en/noticias/${item.slug}`,
-      },
     },
     openGraph: {
       type: 'article',
-      locale: params.locale === 'es' ? 'es_ES' : 'en_US',
-      url: `${siteConfig.url}/${params.locale}/noticias/${item.slug}`,
       title: item.title,
       description: item.excerpt,
-      images: item.featured_image ? [{ url: item.featured_image, width: 1200, height: 630 }] : undefined,
+      images: item.featured_image ? [{ url: item.featured_image }] : undefined,
     },
   }
 }
 
-export default async function NoticiaPage({
+export default async function NewsItemPage({
   params,
 }: {
   params: { slug: string; locale: string }
 }) {
-  const item = await getNewsItem(params.slug, params.locale) as any
+  const item = await getNewsItem(params.slug, params.locale)
   const t = await getTranslations({ locale: params.locale, namespace: 'news' })
 
-  if (!item) {
-    notFound()
-  }
+  if (!item) notFound()
 
   return (
     <>
-      {/* Hero */}
       <section className="bg-charcoal pt-32 pb-16">
         <div className="container-custom">
           <Breadcrumbs
@@ -103,39 +116,29 @@ export default async function NoticiaPage({
             className="mb-6 text-gray-400"
           />
 
-          <h1 className="text-3xl md:text-4xl font-serif font-bold text-white mb-6 max-w-4xl">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-white mb-6 max-w-4xl">
             {item.title}
           </h1>
 
           <div className="flex flex-wrap items-center gap-6 text-sm text-gray-400">
             <div className="flex items-center gap-2">
               <Calendar className="w-4 h-4" />
-              {new Date(item.published_at).toLocaleDateString(params.locale === 'es' ? 'es-ES' : 'en-US', {
-                day: 'numeric',
-                month: 'long',
-                year: 'numeric',
-              })}
+              {new Date(item.published_at).toLocaleDateString(
+                params.locale === 'es' ? 'es-ES' : 'en-US',
+                { day: 'numeric', month: 'long', year: 'numeric' }
+              )}
             </div>
-            {item.source_url && (
-              <a
-                href={item.source_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-gold hover:underline"
-              >
-                <ExternalLink className="w-4 h-4" />
-                {t('viewOriginalSource')}
-              </a>
+            {item.source_name && (
+              <span className="text-gold">{item.source_name}</span>
             )}
           </div>
         </div>
       </section>
 
-      {/* Featured Image */}
       {item.featured_image && (
         <section className="bg-cream">
           <div className="container-custom py-8">
-            <div className="relative aspect-video max-h-[400px] overflow-hidden rounded-sm">
+            <div className="relative aspect-video max-h-[500px] overflow-hidden rounded-sm">
               <Image
                 src={item.featured_image}
                 alt={item.title}
@@ -148,20 +151,15 @@ export default async function NoticiaPage({
         </section>
       )}
 
-      {/* Content */}
       <section className="section-padding bg-cream">
         <div className="container-custom">
           <div className="max-w-3xl mx-auto">
-            <article
-              className="prose prose-lg max-w-none
-                prose-headings:font-serif prose-headings:text-charcoal
-                prose-p:text-gray-600
-                prose-a:text-gold prose-a:no-underline hover:prose-a:underline"
+            <div
+              className="blog-content"
               dangerouslySetInnerHTML={{ __html: item.content }}
             />
 
-            {/* Back */}
-            <div className="mt-12 pt-8 border-t">
+            <div className="mt-12 pt-8 border-t flex flex-wrap items-center justify-between gap-4">
               <LocalizedLink
                 href="/noticias"
                 className="inline-flex items-center gap-2 text-gold hover:underline"
@@ -169,6 +167,18 @@ export default async function NoticiaPage({
                 <ArrowLeft className="w-4 h-4" />
                 {t('backToNews')}
               </LocalizedLink>
+
+              {item.source_url && (
+                <a
+                  href={item.source_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-gray-600 hover:text-gold transition-colors"
+                >
+                  {t('viewOriginalSource')}
+                  <ExternalLink className="w-4 h-4" />
+                </a>
+              )}
             </div>
           </div>
         </div>
@@ -178,4 +188,3 @@ export default async function NoticiaPage({
     </>
   )
 }
-

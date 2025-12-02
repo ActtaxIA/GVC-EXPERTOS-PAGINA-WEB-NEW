@@ -8,6 +8,17 @@ import { LocalizedLink } from '@/components/ui/LocalizedLink'
 import { siteConfig } from '@/config/site'
 import { getTranslations } from 'next-intl/server'
 
+// ============================================
+// PÁGINA ESTÁTICA - Se genera durante el build
+// ============================================
+
+function getSupabase() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY
+  if (!url || !key) return null
+  return createClient(url, key)
+}
+
 export async function generateMetadata({
   params: { locale }
 }: {
@@ -36,12 +47,10 @@ export async function generateMetadata({
   }
 }
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL || '',
-  process.env.SUPABASE_SERVICE_ROLE_KEY || ''
-)
-
 async function getNews(locale: string) {
+  const supabase = getSupabase()
+  if (!supabase) return []
+
   try {
     const isSpanish = locale === 'es'
     
@@ -50,16 +59,25 @@ async function getNews(locale: string) {
       .select(`
         id,
         slug,
-        ${isSpanish ? 'title' : 'COALESCE(title_en, title) as title'},
-        ${isSpanish ? 'excerpt' : 'COALESCE(excerpt_en, excerpt) as excerpt'},
+        title,
+        title_en,
+        excerpt,
+        excerpt_en,
         featured_image,
-        source_url,
-        published_at
+        published_at,
+        source_name,
+        source_url
       `)
       .eq('is_published', true)
       .order('published_at', { ascending: false })
 
-    return news || []
+    if (!news) return []
+
+    return news.map((item: any) => ({
+      ...item,
+      title: isSpanish ? item.title : (item.title_en || item.title),
+      excerpt: isSpanish ? item.excerpt : (item.excerpt_en || item.excerpt),
+    }))
   } catch {
     return []
   }
@@ -75,7 +93,6 @@ export default async function NoticiasPage({
 
   return (
     <>
-      {/* Hero */}
       <section className="bg-charcoal pt-32 pb-16">
         <div className="container-custom">
           <Breadcrumbs
@@ -91,7 +108,6 @@ export default async function NoticiasPage({
         </div>
       </section>
 
-      {/* News Grid */}
       <section className="section-padding bg-cream">
         <div className="container-custom">
           {news.length > 0 ? (
@@ -99,7 +115,7 @@ export default async function NoticiasPage({
               {news.map((item: any) => (
                 <article
                   key={item.id}
-                  className="bg-white rounded-sm overflow-hidden shadow-sm hover:shadow-lg transition-shadow"
+                  className="bg-white rounded-sm shadow-md overflow-hidden hover:shadow-lg transition-shadow group"
                 >
                   {item.featured_image && (
                     <div className="relative aspect-video overflow-hidden">
@@ -107,20 +123,24 @@ export default async function NoticiasPage({
                         src={item.featured_image}
                         alt={item.title}
                         fill
-                        className="object-cover"
+                        className="object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                     </div>
                   )}
                   <div className="p-6">
-                    <div className="flex items-center gap-2 text-xs text-gray-500 mb-3">
-                      <Calendar className="w-3 h-3" />
-                      {new Date(item.published_at).toLocaleDateString(locale === 'es' ? 'es-ES' : 'en-US', {
-                        day: 'numeric',
-                        month: 'long',
-                        year: 'numeric',
-                      })}
+                    <div className="flex items-center gap-4 text-xs text-gray-500 mb-3">
+                      <div className="flex items-center gap-1">
+                        <Calendar className="w-4 h-4" />
+                        {new Date(item.published_at).toLocaleDateString(
+                          locale === 'es' ? 'es-ES' : 'en-US',
+                          { day: 'numeric', month: 'short', year: 'numeric' }
+                        )}
+                      </div>
+                      {item.source_name && (
+                        <span className="text-gold">{item.source_name}</span>
+                      )}
                     </div>
-                    <h2 className="text-lg font-serif font-bold text-charcoal mb-3 line-clamp-2">
+                    <h2 className="text-lg font-serif font-semibold text-charcoal mb-3 line-clamp-2 group-hover:text-gold transition-colors">
                       {item.title}
                     </h2>
                     <p className="text-gray-600 text-sm mb-4 line-clamp-3">
@@ -129,7 +149,7 @@ export default async function NoticiasPage({
                     <div className="flex items-center justify-between">
                       <LocalizedLink
                         href={`/noticias/${item.slug}`}
-                        className="text-gold font-medium text-sm hover:underline flex items-center gap-1"
+                        className="text-gold text-sm font-medium flex items-center gap-1 hover:underline"
                       >
                         {t('readMore')}
                         <ArrowRight className="w-4 h-4" />
@@ -139,8 +159,8 @@ export default async function NoticiasPage({
                           href={item.source_url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-gray-400 hover:text-gray-600"
-                          title={t('viewOriginalSource')}
+                          className="text-gray-400 hover:text-gold transition-colors"
+                          title="Ver fuente"
                         >
                           <ExternalLink className="w-4 h-4" />
                         </a>
@@ -151,8 +171,8 @@ export default async function NoticiasPage({
               ))}
             </div>
           ) : (
-            <div className="text-center py-12">
-              <p className="text-gray-500">{t('noNews')}</p>
+            <div className="text-center py-16">
+              <p className="text-gray-600 text-lg">{t('noNews')}</p>
             </div>
           )}
         </div>
@@ -162,6 +182,3 @@ export default async function NoticiasPage({
     </>
   )
 }
-
-
-
