@@ -96,7 +96,7 @@ export function prepareTranslationData<T extends Record<string, any>>(
   translatedFields.forEach((field) => {
     const enField = `${field}_en`
     if (enField in prepared && !prepared[enField]) {
-      prepared[enField] = null
+      (prepared as any)[enField] = null
     }
   })
 
