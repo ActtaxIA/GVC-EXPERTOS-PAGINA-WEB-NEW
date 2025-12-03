@@ -1,9 +1,7 @@
 import type { Metadata } from 'next'
-import { getTranslations } from 'next-intl/server'
 import { Phone, Mail, MapPin, Clock } from 'lucide-react'
-import { siteConfig, services } from '@/config/site'
+import { siteConfig } from '@/config/site'
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
-import { ContactForm } from '@/components/forms/ContactForm'
 import { JsonLdContactPage, JsonLdBreadcrumbs } from '@/components/seo/JsonLd'
 
 export async function generateMetadata({
@@ -11,15 +9,14 @@ export async function generateMetadata({
 }: {
   params: { locale: string }
 }): Promise<Metadata> {
-  const t = await getTranslations({ locale, namespace: 'contact' })
   const isSpanish = locale === 'es'
   
   const title = isSpanish
     ? 'Contacto | Consulta Gratuita con Abogados Negligencias Médicas'
     : 'Contact | Free Consultation with Medical Negligence Lawyers'
   const description = isSpanish
-    ? 'Contacta con nuestros abogados especializados en negligencias médicas. Primera consulta gratuita y sin compromiso. Llámanos al 900 123 456. Respuesta en 24h.'
-    : 'Contact our specialized medical negligence lawyers. Free first consultation with no obligation. Call us at 900 123 456. Response within 24h.'
+    ? 'Contacta con nuestros abogados especializados en negligencias médicas. Primera consulta gratuita y sin compromiso. Llámanos al 968 241 025.'
+    : 'Contact our specialized medical negligence lawyers. Free first consultation with no obligation. Call us at 968 241 025.'
   
   return {
     title,
@@ -48,8 +45,13 @@ export default async function ContactoPage({
 }: {
   params: { locale: string }
 }) {
-  const t = await getTranslations({ locale, namespace: 'contact' })
   const isSpanish = locale === 'es'
+  
+  // Mailto con asunto predefinido
+  const mailtoSubject = isSpanish 
+    ? 'Solicitud de información legal - Negligencia médica'
+    : 'Legal information request - Medical negligence'
+  const mailtoHref = `mailto:${siteConfig.contact.email}?subject=${encodeURIComponent(mailtoSubject)}`
   
   return (
     <>
@@ -74,92 +76,103 @@ export default async function ContactoPage({
           </h1>
           <p className="text-gray-300 text-lg max-w-3xl leading-relaxed">
             {isSpanish
-              ? 'Cuéntanos tu caso sin compromiso. Te responderemos en menos de 24 horas con una valoración inicial gratuita.'
-              : 'Tell us about your case without obligation. We will respond within 24 hours with a free initial assessment.'}
+              ? 'Estamos aquí para ayudarte. Llámanos o escríbenos y te atenderemos de forma personalizada.'
+              : 'We are here to help you. Call us or write to us and we will assist you personally.'}
           </p>
         </div>
       </section>
 
-      {/* Contact Section */}
+      {/* Contact Section - Info izquierda, Mapa derecha */}
       <section className="section-padding bg-cream">
         <div className="container-custom">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-            {/* Contact Info */}
-            <div className="lg:col-span-1">
-              <h2 className="text-2xl font-serif font-bold text-charcoal mb-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Contact Info - Izquierda */}
+            <div>
+              <h2 className="text-2xl font-serif font-bold text-charcoal mb-8">
                 {isSpanish ? 'Información de Contacto' : 'Contact Information'}
               </h2>
 
-              <div className="space-y-6">
+              <div className="space-y-8">
                 {/* Phone */}
                 <a
                   href={siteConfig.contact.phoneHref}
-                  className="flex items-start gap-4 group"
+                  className="flex items-start gap-4 group p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow"
                 >
-                  <div className="w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-gold transition-colors">
-                    <Phone className="w-5 h-5 text-gold group-hover:text-white transition-colors" />
+                  <div className="w-14 h-14 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-gold transition-colors">
+                    <Phone className="w-6 h-6 text-gold group-hover:text-white transition-colors" />
                   </div>
                   <div>
-                    <span className="block text-sm text-gray-500">
-                      {isSpanish ? 'Llámanos gratis' : 'Call us free'}
+                    <span className="block text-sm text-gray-500 mb-1">
+                      {isSpanish ? 'Llámanos' : 'Call us'}
                     </span>
-                    <span className="block text-xl font-semibold text-charcoal group-hover:text-gold transition-colors">
+                    <span className="block text-2xl font-bold text-charcoal group-hover:text-gold transition-colors">
                       {siteConfig.contact.phone}
+                    </span>
+                    <span className="block text-sm text-gray-500 mt-1">
+                      {isSpanish ? 'Primera consulta gratuita' : 'Free first consultation'}
                     </span>
                   </div>
                 </a>
 
                 {/* Email */}
                 <a
-                  href={siteConfig.contact.emailHref}
-                  className="flex items-start gap-4 group"
+                  href={mailtoHref}
+                  className="flex items-start gap-4 group p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow"
                 >
-                  <div className="w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-gold transition-colors">
-                    <Mail className="w-5 h-5 text-gold group-hover:text-white transition-colors" />
+                  <div className="w-14 h-14 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-gold transition-colors">
+                    <Mail className="w-6 h-6 text-gold group-hover:text-white transition-colors" />
                   </div>
                   <div>
-                    <span className="block text-sm text-gray-500">
+                    <span className="block text-sm text-gray-500 mb-1">
                       {isSpanish ? 'Escríbenos' : 'Write to us'}
                     </span>
-                    <span className="block text-lg font-semibold text-charcoal group-hover:text-gold transition-colors">
+                    <span className="block text-xl font-bold text-charcoal group-hover:text-gold transition-colors">
                       {siteConfig.contact.email}
+                    </span>
+                    <span className="block text-sm text-gray-500 mt-1">
+                      {isSpanish ? 'Te respondemos en 24h' : 'We respond within 24h'}
                     </span>
                   </div>
                 </a>
 
                 {/* Address */}
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0">
-                    <MapPin className="w-5 h-5 text-gold" />
+                <div className="flex items-start gap-4 p-4 bg-white rounded-lg shadow-sm">
+                  <div className="w-14 h-14 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0">
+                    <MapPin className="w-6 h-6 text-gold" />
                   </div>
                   <div>
-                    <span className="block text-sm text-gray-500">
+                    <span className="block text-sm text-gray-500 mb-1">
                       {isSpanish ? 'Visítanos' : 'Visit us'}
                     </span>
-                    <span className="block text-lg font-semibold text-charcoal">
+                    <span className="block text-lg font-bold text-charcoal">
                       {siteConfig.contact.address}
                     </span>
                   </div>
                 </div>
 
                 {/* Schedule */}
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0">
-                    <Clock className="w-5 h-5 text-gold" />
+                <div className="flex items-start gap-4 p-4 bg-white rounded-lg shadow-sm">
+                  <div className="w-14 h-14 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0">
+                    <Clock className="w-6 h-6 text-gold" />
                   </div>
                   <div>
-                    <span className="block text-sm text-gray-500">
-                      {isSpanish ? 'Horario' : 'Schedule'}
+                    <span className="block text-sm text-gray-500 mb-1">
+                      {isSpanish ? 'Horario de atención' : 'Office hours'}
                     </span>
-                    <span className="block text-lg font-semibold text-charcoal">
+                    <span className="block text-lg font-bold text-charcoal">
                       {siteConfig.contact.schedule}
                     </span>
                   </div>
                 </div>
               </div>
+            </div>
 
-              {/* Mapa de Murcia - Plaza Fuensanta, 3 */}
-              <div className="mt-8 bg-gray-200 rounded-sm aspect-video flex items-center justify-center">
+            {/* Mapa - Derecha */}
+            <div>
+              <h2 className="text-2xl font-serif font-bold text-charcoal mb-8">
+                {isSpanish ? 'Nuestra Ubicación' : 'Our Location'}
+              </h2>
+              <div className="bg-white rounded-lg shadow-sm overflow-hidden h-[500px]">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3145.8!2d-1.1307!3d37.9838!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd6381f8d5c8c7c1%3A0x1234567890abcdef!2sPlaza%20Fuensanta%2C%203%2C%2030008%20Murcia!5e0!3m2!1ses!2ses!4v1701500000000!5m2!1ses!2ses"
                   width="100%"
@@ -169,24 +182,7 @@ export default async function ContactoPage({
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
                   title={isSpanish ? 'Ubicación GVC Expertos - Murcia' : 'GVC Expertos Location - Murcia'}
-                  className="rounded-sm"
                 />
-              </div>
-            </div>
-
-            {/* Contact Form */}
-            <div className="lg:col-span-2">
-              <div className="bg-white p-8 md:p-10 rounded-sm shadow-lg">
-                <h2 className="text-2xl font-serif font-bold text-charcoal mb-2">
-                  {isSpanish ? 'Cuéntanos tu caso' : 'Tell us about your case'}
-                </h2>
-                <p className="text-gray-600 mb-8">
-                  {isSpanish
-                    ? 'Completa el formulario y un abogado especializado se pondrá en contacto contigo en menos de 24 horas.'
-                    : 'Complete the form and a specialized lawyer will contact you within 24 hours.'}
-                </p>
-
-                <ContactForm services={services} />
               </div>
             </div>
           </div>
