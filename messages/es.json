@@ -47,15 +47,15 @@
   },
   "hero": {
     "title": "Abogados Especialistas en Negligencias Médicas",
-    "subtitle": "Defendemos tus derechos cuando la atención sanitaria falla",
-    "description": "Más de 20 años de experiencia consiguiendo las máximas indemnizaciones por errores médicos, quirúrgicos y hospitalarios.",
-    "cta": "Contáctanos",
-    "ctaSecondary": "Ver Servicios",
+    "subtitle": "Defendemos los derechos del paciente desde 1968",
+    "description": "Más de 55 años de experiencia en derecho sanitario. Te escuchamos, analizamos tu caso y te acompañamos durante todo el proceso.",
+    "cta": "Consultar",
+    "ctaSecondary": "Conocer más",
     "stats": {
       "experience": "Años de Experiencia",
-      "casesWon": "Casos Ganados",
-      "compensation": "Millones Recuperados",
-      "satisfaction": "Satisfacción del Cliente"
+      "casesWon": "Pacientes Atendidos",
+      "compensation": "Años de Trayectoria",
+      "satisfaction": "Compromiso Total"
     }
   },
   "services": {
@@ -108,8 +108,8 @@
   },
   "team": {
     "title": "Nuestro Equipo",
-    "subtitle": "Abogados especializados con más de 20 años defendiendo a víctimas de negligencias médicas",
-    "viewProfile": "Ver Perfil Completo"
+    "subtitle": "Profesionales dedicados al derecho sanitario con vocación y compromiso con el paciente",
+    "viewProfile": "Conocer más"
   },
   "contact": {
     "title": "Contacta con Nosotros",
@@ -161,7 +161,7 @@
     "reject": "Rechazar"
   },
   "footer": {
-    "description": "Despacho especializado en negligencias médicas con más de 20 años de experiencia defendiendo los derechos de los pacientes.",
+    "description": "Despacho especializado en derecho sanitario desde 1968. Acompañamos y asesoramos a pacientes y familias con rigor, cercanía y profesionalidad.",
     "quickLinks": "Enlaces Rápidos",
     "services": "Servicios",
     "legal": "Legal",
@@ -182,10 +182,10 @@
     "sitemap": "Mapa del Sitio"
   },
   "cta": {
-    "title": "¿Has Sufrido una Negligencia Médica?",
-    "description": "No estás solo. Nuestro equipo de abogados especializados está aquí para ayudarte a conseguir la compensación que mereces.",
-    "button": "Contáctanos",
-    "phone": "O llámanos ahora"
+    "title": "¿Crees Que Has Sufrido una Negligencia Médica?",
+    "description": "No estás solo. Te escuchamos, analizamos tu caso y te orientamos con honestidad sobre las opciones disponibles.",
+    "button": "Consultar",
+    "phone": "O llámanos"
   },
   "blog": {
     "title": "Blog",
@@ -217,74 +217,73 @@
   },
   "home": {
     "hero": {
-      "title": "Abogados Expertos en Negligencias Médicas",
-      "subtitle": "Más de 20 años de experiencia defendiendo tus derechos",
-      "description": "Somos especialistas en reclamaciones por errores médicos. Te ayudamos a obtener la compensación que mereces.",
-      "ctaPrimary": "Contáctanos",
-      "ctaSecondary": "Llamar Ahora",
-      "statsYearsExperience": "Años de experiencia",
-      "statsCasesWon": "Casos ganados",
-      "statsCompensation": "Millones recuperados",
-      "statsSuccessRate": "Tasa de éxito"
+      "badge": "Desde 1968 · Derecho Sanitario",
+      "title": "Abogados Especialistas en Derecho Sanitario",
+      "subtitle": "Defendiendo los derechos del paciente desde 1968",
+      "description": "Somos un despacho con historia, dedicado exclusivamente al derecho sanitario. Te escuchamos, analizamos tu situación y te orientamos con honestidad y rigor profesional.",
+      "ctaPrimary": "Consultar",
+      "ctaSecondary": "Llamar",
+      "statsYears": "años de experiencia",
+      "statsSince": "año de fundación"
     },
     "intro": {
-      "badge": "¿Por qué elegirnos?",
-      "title": "Expertos en Negligencias Médicas con Más de 20 Años de Experiencia",
-      "description": "Somos un despacho especializado exclusivamente en casos de negligencias médicas. Nuestro equipo de abogados expertos ha conseguido recuperar más de 50 millones de euros para nuestros clientes.",
-      "feature1Title": "Experiencia Probada",
-      "feature1Description": "Más de 20 años defendiendo a víctimas de negligencias médicas",
-      "feature2Title": "Equipo Especializado",
-      "feature2Description": "Abogados expertos dedicados exclusivamente a negligencias médicas",
-      "feature3Title": "95% de Éxito",
-      "feature3Description": "Tasa de éxito del 95% en casos que representamos",
-      "feature4Title": "Máxima Indemnización",
-      "feature4Description": "Luchamos por conseguir la indemnización más alta posible"
+      "badge": "Nuestro compromiso",
+      "title": "Un Despacho con Historia, Dedicado al Paciente",
+      "description": "Desde 1968, nuestro despacho se ha especializado exclusivamente en derecho sanitario. Entendemos que detrás de cada caso hay una persona que merece ser escuchada, comprendida y defendida con rigor profesional.",
+      "feature1Title": "Trayectoria Consolidada",
+      "feature1Description": "Décadas de dedicación exclusiva al derecho sanitario y la defensa del paciente",
+      "feature2Title": "Atención Personalizada",
+      "feature2Description": "Cada caso es único. Te escuchamos y analizamos tu situación con detenimiento",
+      "feature3Title": "Rigor Profesional",
+      "feature3Description": "Análisis exhaustivo con peritos médicos especializados en cada área",
+      "feature4Title": "Acompañamiento Integral",
+      "feature4Description": "Te guiamos durante todo el proceso, manteniéndote informado en cada paso"
     },
     "services": {
-      "badge": "Nuestros Servicios",
-      "title": "Tipos de Negligencias Médicas que Tratamos",
-      "subtitle": "Especializados en todo tipo de errores médicos y mala praxis sanitaria",
-      "viewAllServices": "Ver Todos los Servicios"
+      "badge": "Áreas de especialización",
+      "title": "Tipos de Negligencias Médicas",
+      "subtitle": "Conocimiento especializado en todas las áreas del derecho sanitario",
+      "viewAllServices": "Conocer más"
     },
     "process": {
-      "badge": "Cómo Trabajamos",
-      "title": "Nuestro Proceso de Trabajo",
-      "subtitle": "Un proceso transparente y eficaz para conseguir tu indemnización",
+      "badge": "Cómo trabajamos",
+      "title": "Un Proceso Transparente y Cercano",
+      "subtitle": "Te acompañamos en cada etapa, con claridad y honestidad",
       "step1": {
-        "title": "Consulta Inicial",
-        "description": "Analizamos tu caso. Te explicamos tus derechos y posibilidades de éxito."
+        "title": "Te Escuchamos",
+        "description": "En una primera consulta, escuchamos tu caso con atención. Entendemos lo que has vivido y analizamos la situación."
       },
       "step2": {
-        "title": "Recopilación de Pruebas",
-        "description": "Solicitamos historiales médicos, informes periciales y toda la documentación necesaria."
+        "title": "Análisis Riguroso",
+        "description": "Estudiamos la documentación médica con peritos especializados para determinar si existió mala praxis."
       },
       "step3": {
-        "title": "Reclamación Extrajudicial",
-        "description": "Intentamos un acuerdo con el centro médico o aseguradora antes de ir a juicio."
+        "title": "Valoración Honesta",
+        "description": "Te explicamos con claridad las opciones, viabilidad del caso y posibles vías de actuación."
       },
       "step4": {
-        "title": "Demanda Judicial",
-        "description": "Si no hay acuerdo, presentamos demanda y defendemos tu caso ante los tribunales."
+        "title": "Negociación",
+        "description": "Buscamos una solución extrajudicial cuando es posible, evitándote un proceso largo."
       },
       "step5": {
-        "title": "Indemnización",
-        "description": "Luchamos por conseguir la máxima indemnización que te corresponde por los daños sufridos."
+        "title": "Defensa Judicial",
+        "description": "Si es necesario, defendemos tu caso ante los tribunales con la máxima profesionalidad."
       },
       "step6": {
-        "title": "Seguimiento",
-        "description": "Te acompañamos durante todo el proceso y te mantenemos informado en cada fase."
+        "title": "Acompañamiento",
+        "description": "Estamos contigo durante todo el proceso, manteniéndote informado y resolviendo tus dudas."
       }
     },
     "team": {
-      "badge": "Nuestro Equipo",
-      "title": "Conoce a Nuestros Abogados Expertos",
-      "subtitle": "Un equipo de profesionales con décadas de experiencia en negligencias médicas",
-      "viewProfile": "Ver Perfil Completo"
+      "badge": "Nuestro equipo",
+      "title": "Profesionales Comprometidos con el Paciente",
+      "subtitle": "Un equipo con vocación, experiencia y dedicación exclusiva al derecho sanitario",
+      "viewProfile": "Conocer más"
     },
     "cta": {
-      "title": "¿Has Sufrido una Negligencia Médica?",
-      "description": "No esperes más. Contacta con nosotros y te ayudaremos a conseguir la compensación que mereces.",
-      "button": "Solicitar Consulta"
+      "title": "¿Necesitas Orientación Sobre Tu Caso?",
+      "description": "Estamos aquí para escucharte. Cuéntanos tu situación y te daremos una valoración honesta, sin compromiso.",
+      "button": "Consultar"
     },
     "gallery": {
       "image1": "Negligencia hospitalaria",
@@ -303,17 +302,17 @@
     "backToNews": "Volver a noticias"
   },
   "cases": {
-    "title": "Casos de Éxito",
-    "subtitle": "Conoce algunos de nuestros casos de éxito en negligencias médicas. Estos son resultados reales conseguidos para nuestros clientes.",
-    "metaTitle": "Casos de Éxito | Indemnizaciones Conseguidas",
-    "metaDescription": "Conoce algunos de nuestros casos de éxito en negligencias médicas. Indemnizaciones reales conseguidas para nuestros clientes.",
-    "casesPublished": "Casos publicados",
-    "totalRecovered": "Total recuperado",
-    "averagePerCase": "Media por caso",
-    "viewCase": "Ver caso",
-    "comingSoon": "Próximamente publicaremos casos de éxito.",
+    "title": "Casos Representativos",
+    "subtitle": "Algunos de los casos que hemos defendido. Cada historia es única y merece ser contada con el respeto que merecen nuestros clientes.",
+    "metaTitle": "Casos Representativos | Experiencia en Negligencias Médicas",
+    "metaDescription": "Conoce algunos de los casos que hemos defendido en negligencias médicas. Experiencia real en derecho sanitario.",
+    "casesPublished": "Casos documentados",
+    "totalRecovered": "Experiencia acumulada",
+    "averagePerCase": "Casos por área",
+    "viewCase": "Conocer caso",
+    "comingSoon": "Próximamente compartiremos casos representativos.",
     "note": "Nota",
-    "disclaimer": "Los casos presentados son reales pero han sido anonimizados para proteger la privacidad de nuestros clientes. Los resultados pasados no garantizan resultados futuros, ya que cada caso es único y depende de sus circunstancias específicas."
+    "disclaimer": "Los casos presentados son reales pero han sido anonimizados para proteger la privacidad de nuestros clientes. Cada caso es único y los resultados dependen de sus circunstancias específicas."
   }
 }
 

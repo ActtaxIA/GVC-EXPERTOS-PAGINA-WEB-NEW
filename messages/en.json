@@ -47,15 +47,15 @@
   },
   "hero": {
     "title": "Medical Negligence Specialist Lawyers",
-    "subtitle": "Defending your rights when healthcare fails",
-    "description": "Over 20 years of experience obtaining maximum compensation for medical, surgical and hospital errors.",
-    "cta": "Contact Us",
-    "ctaSecondary": "View Services",
+    "subtitle": "Defending patient rights since 1968",
+    "description": "Over 55 years of experience in healthcare law. We listen to you, analyze your case and guide you through the entire process.",
+    "cta": "Consult",
+    "ctaSecondary": "Learn more",
     "stats": {
       "experience": "Years of Experience",
-      "casesWon": "Cases Won",
-      "compensation": "Million Recovered",
-      "satisfaction": "Client Satisfaction"
+      "casesWon": "Patients Assisted",
+      "compensation": "Years of Practice",
+      "satisfaction": "Full Commitment"
     }
   },
   "services": {
@@ -108,8 +108,8 @@
   },
   "team": {
     "title": "Our Team",
-    "subtitle": "Specialized lawyers with over 20 years defending victims of medical negligence",
-    "viewProfile": "View Full Profile"
+    "subtitle": "Professionals dedicated to healthcare law with vocation and commitment to the patient",
+    "viewProfile": "Learn more"
   },
   "contact": {
     "title": "Contact Us",
@@ -161,7 +161,7 @@
     "reject": "Reject"
   },
   "footer": {
-    "description": "Law firm specialized in medical negligence with over 20 years of experience defending patients' rights.",
+    "description": "Law firm specialized in healthcare law since 1968. We accompany and advise patients and families with rigor, closeness and professionalism.",
     "quickLinks": "Quick Links",
     "services": "Services",
     "legal": "Legal",
@@ -182,10 +182,10 @@
     "sitemap": "Sitemap"
   },
   "cta": {
-    "title": "Have You Suffered Medical Negligence?",
-    "description": "You are not alone. Our team of specialized lawyers is here to help you get the compensation you deserve.",
-    "button": "Contact Us",
-    "phone": "Or call us now"
+    "title": "Do You Think You Have Suffered Medical Negligence?",
+    "description": "You are not alone. We listen to you, analyze your case and guide you honestly about the available options.",
+    "button": "Consult",
+    "phone": "Or call us"
   },
   "blog": {
     "title": "Blog",
@@ -217,74 +217,73 @@
   },
   "home": {
     "hero": {
-      "title": "Expert Lawyers in Medical Negligence",
-      "subtitle": "Over 20 years of experience defending your rights",
-      "description": "We specialize in medical error claims. We help you obtain the compensation you deserve.",
-      "ctaPrimary": "Contact Us",
-      "ctaSecondary": "Call Now",
-      "statsYearsExperience": "Years of experience",
-      "statsCasesWon": "Cases won",
-      "statsCompensation": "Millions recovered",
-      "statsSuccessRate": "Success rate"
+      "badge": "Since 1968 · Healthcare Law",
+      "title": "Lawyers Specialized in Healthcare Law",
+      "subtitle": "Defending patient rights since 1968",
+      "description": "We are a law firm with history, dedicated exclusively to healthcare law. We listen to you, analyze your situation and guide you with honesty and professional rigor.",
+      "ctaPrimary": "Consult",
+      "ctaSecondary": "Call",
+      "statsYears": "years of experience",
+      "statsSince": "year founded"
     },
     "intro": {
-      "badge": "Why choose us?",
-      "title": "Medical Negligence Experts with Over 20 Years of Experience",
-      "description": "We are a law firm specialized exclusively in medical negligence cases. Our team of expert lawyers has recovered over 50 million euros for our clients.",
-      "feature1Title": "Proven Experience",
-      "feature1Description": "Over 20 years defending victims of medical negligence",
-      "feature2Title": "Specialized Team",
-      "feature2Description": "Expert lawyers dedicated exclusively to medical negligence",
-      "feature3Title": "95% Success Rate",
-      "feature3Description": "95% success rate in cases we represent",
-      "feature4Title": "Maximum Compensation",
-      "feature4Description": "We fight to obtain the highest possible compensation"
+      "badge": "Our commitment",
+      "title": "A Law Firm with History, Dedicated to the Patient",
+      "description": "Since 1968, our firm has specialized exclusively in healthcare law. We understand that behind every case there is a person who deserves to be heard, understood and defended with professional rigor.",
+      "feature1Title": "Consolidated Track Record",
+      "feature1Description": "Decades of exclusive dedication to healthcare law and patient defense",
+      "feature2Title": "Personalized Attention",
+      "feature2Description": "Every case is unique. We listen to you and analyze your situation carefully",
+      "feature3Title": "Professional Rigor",
+      "feature3Description": "Thorough analysis with specialized medical experts in each area",
+      "feature4Title": "Comprehensive Support",
+      "feature4Description": "We guide you throughout the entire process, keeping you informed at every step"
     },
     "services": {
-      "badge": "Our Services",
-      "title": "Types of Medical Negligence We Handle",
-      "subtitle": "Specialized in all types of medical errors and healthcare malpractice",
-      "viewAllServices": "View All Services"
+      "badge": "Areas of Specialization",
+      "title": "Types of Medical Negligence",
+      "subtitle": "Specialized knowledge in all areas of healthcare law",
+      "viewAllServices": "Learn More"
     },
     "process": {
       "badge": "How We Work",
-      "title": "Our Work Process",
-      "subtitle": "A transparent and effective process to obtain your compensation",
+      "title": "A Transparent and Close Process",
+      "subtitle": "We accompany you at every stage, with clarity and honesty",
       "step1": {
-        "title": "Initial Consultation",
-        "description": "We analyze your case. We explain your rights and chances of success."
+        "title": "We Listen to You",
+        "description": "In a first consultation, we listen to your case carefully. We understand what you have experienced and analyze the situation."
       },
       "step2": {
-        "title": "Evidence Collection",
-        "description": "We request medical records, expert reports and all necessary documentation."
+        "title": "Rigorous Analysis",
+        "description": "We study the medical documentation with specialized experts to determine if there was malpractice."
       },
       "step3": {
-        "title": "Out-of-Court Claim",
-        "description": "We try to reach an agreement with the medical center or insurer before going to court."
+        "title": "Honest Assessment",
+        "description": "We clearly explain your options, case viability and possible courses of action."
       },
       "step4": {
-        "title": "Legal Action",
-        "description": "If no agreement is reached, we file a lawsuit and defend your case in court."
+        "title": "Negotiation",
+        "description": "We seek an out-of-court solution when possible, avoiding a lengthy process."
       },
       "step5": {
-        "title": "Compensation",
-        "description": "We fight to obtain the maximum compensation you deserve for the damages suffered."
+        "title": "Legal Defense",
+        "description": "If necessary, we defend your case in court with the utmost professionalism."
       },
       "step6": {
-        "title": "Follow-up",
-        "description": "We accompany you throughout the entire process and keep you informed at every stage."
+        "title": "Support",
+        "description": "We are with you throughout the process, keeping you informed and answering your questions."
       }
     },
     "team": {
       "badge": "Our Team",
-      "title": "Meet Our Expert Lawyers",
-      "subtitle": "A team of professionals with decades of experience in medical negligence",
-      "viewProfile": "View Full Profile"
+      "title": "Professionals Committed to the Patient",
+      "subtitle": "A team with vocation, experience and exclusive dedication to healthcare law",
+      "viewProfile": "Learn More"
     },
     "cta": {
-      "title": "Have You Suffered Medical Negligence?",
-      "description": "Don't wait any longer. Contact us and we will help you get the compensation you deserve.",
-      "button": "Request Consultation"
+      "title": "Need Guidance on Your Case?",
+      "description": "We are here to listen to you. Tell us your situation and we will give you an honest assessment, without obligation.",
+      "button": "Consult"
     },
     "gallery": {
       "image1": "Hospital negligence",
@@ -303,17 +302,17 @@
     "backToNews": "Back to news"
   },
   "cases": {
-    "title": "Success Cases",
-    "subtitle": "Discover some of our success stories in medical negligence. These are real results achieved for our clients.",
-    "metaTitle": "Success Cases | Compensation Achieved",
-    "metaDescription": "Discover some of our success stories in medical negligence. Real compensation achieved for our clients.",
-    "casesPublished": "Published cases",
-    "totalRecovered": "Total recovered",
-    "averagePerCase": "Average per case",
-    "viewCase": "View case",
-    "comingSoon": "Success cases coming soon.",
+    "title": "Representative Cases",
+    "subtitle": "Some of the cases we have defended. Each story is unique and deserves to be told with the respect our clients deserve.",
+    "metaTitle": "Representative Cases | Experience in Medical Negligence",
+    "metaDescription": "Learn about some of the cases we have defended in medical negligence. Real experience in healthcare law.",
+    "casesPublished": "Documented cases",
+    "totalRecovered": "Accumulated experience",
+    "averagePerCase": "Cases by area",
+    "viewCase": "Learn about case",
+    "comingSoon": "Representative cases coming soon.",
     "note": "Note",
-    "disclaimer": "The cases presented are real but have been anonymized to protect our clients' privacy. Past results do not guarantee future results, as each case is unique and depends on its specific circumstances."
+    "disclaimer": "The cases presented are real but have been anonymized to protect our clients' privacy. Each case is unique and results depend on its specific circumstances."
   }
 }
 

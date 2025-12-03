@@ -290,25 +290,16 @@ export const teamMembers = [
 ]
 
 /**
- * Estadísticas del despacho
- */
-export const stats = [
-  { label: 'Años de experiencia', value: '20+' },
-  { label: 'Casos resueltos', value: '+2.500' },
-  { label: 'Tasa de éxito', value: '95%' },
-  { label: 'Millones recuperados', value: '+50M€' },
-]
-
-/**
  * Configuración principal del sitio
  */
 export const siteConfig = {
   name: 'GVC Expertos',
   legalName: 'GVC Expertos Abogados S.L.P.',
   description:
-    'Despacho de abogados especializado en negligencias médicas. Más de 20 años de experiencia. 95% de casos ganados. Primera consulta gratuita.',
+    'Despacho de abogados especializado en derecho sanitario desde 1968. Acompañamos y asesoramos a pacientes y familias afectados por negligencias médicas.',
   url: 'https://www.gvcexpertos.com',
   ogImage: '/images/og-image.jpg',
+  foundedYear: 1968,
   contact: {
     phone: '968 241 025',
     phoneHref: 'tel:+34968241025',
@@ -325,15 +316,7 @@ export const siteConfig = {
   legal: {
     company: 'GVC Expertos Abogados S.L.P.',
     cif: 'B-12345678',
-    registroMercantil: 'Registro Mercantil de Madrid, Tomo XXXXX, Folio XXX',
-  },
-  stats: {
-    successRate: '95%',
-    yearsExperience: '20+',
-    casesSolved: '+2.500',
-    casesWon: '+2.500',
-    millionsRecovered: '+50M€',
-    compensation: '+50M€',
+    registroMercantil: 'Registro Mercantil de Murcia',
   },
   services,
   cities,

@@ -8,6 +8,7 @@ import { useTranslations } from 'next-intl'
 
 export function Hero() {
   const t = useTranslations('home.hero')
+  const yearsOfExperience = new Date().getFullYear() - siteConfig.foundedYear
   
   return (
     <section className="relative min-h-[520px] flex items-center pt-20">
@@ -26,11 +27,10 @@ export function Hero() {
       {/* Content */}
       <div className="container-custom relative z-10 py-12">
         <div className="max-w-3xl">
-          {/* Badge */}
+          {/* Badge - Año de fundación */}
           <div className="inline-flex items-center gap-2 bg-gold/20 border border-gold/30 rounded-full px-4 py-2 mb-6">
-            <span className="w-2 h-2 bg-gold rounded-full animate-pulse" />
             <span className="text-gold text-sm font-medium">
-              {t('ctaPrimary')}
+              {t('badge')}
             </span>
           </div>
 
@@ -59,39 +59,15 @@ export function Hero() {
             </a>
           </div>
 
-          {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div className="text-center md:text-left">
-              <p className="text-3xl md:text-[38px] font-serif font-bold text-gold">
-                {siteConfig.stats.successRate}
-              </p>
-              <p className="text-xs md:text-[12px] text-gray-400 uppercase tracking-wider mt-1">
-                {t('statsSuccessRate')}
-              </p>
+          {/* Credenciales reales - sin promesas */}
+          <div className="flex flex-wrap gap-8 text-gray-300">
+            <div className="flex items-center gap-3">
+              <span className="text-3xl md:text-4xl font-serif font-bold text-gold">{yearsOfExperience}+</span>
+              <span className="text-sm uppercase tracking-wider">{t('statsYears')}</span>
             </div>
-            <div className="text-center md:text-left">
-              <p className="text-3xl md:text-[38px] font-serif font-bold text-gold">
-                {siteConfig.stats.casesWon}
-              </p>
-              <p className="text-xs md:text-[12px] text-gray-400 uppercase tracking-wider mt-1">
-                {t('statsCasesWon')}
-              </p>
-            </div>
-            <div className="text-center md:text-left">
-              <p className="text-3xl md:text-[38px] font-serif font-bold text-gold">
-                {siteConfig.stats.compensation}
-              </p>
-              <p className="text-xs md:text-[12px] text-gray-400 uppercase tracking-wider mt-1">
-                {t('statsCompensation')}
-              </p>
-            </div>
-            <div className="text-center md:text-left">
-              <p className="text-3xl md:text-[38px] font-serif font-bold text-gold">
-                {siteConfig.stats.yearsExperience}+
-              </p>
-              <p className="text-xs md:text-[12px] text-gray-400 uppercase tracking-wider mt-1">
-                {t('statsYearsExperience')}
-              </p>
+            <div className="flex items-center gap-3">
+              <span className="text-3xl md:text-4xl font-serif font-bold text-gold">{siteConfig.foundedYear}</span>
+              <span className="text-sm uppercase tracking-wider">{t('statsSince')}</span>
             </div>
           </div>
         </div>
