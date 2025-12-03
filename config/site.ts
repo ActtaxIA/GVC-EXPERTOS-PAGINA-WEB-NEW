@@ -307,7 +307,7 @@ export const siteConfig = {
   legalName: 'GVC Expertos Abogados S.L.P.',
   description:
     'Despacho de abogados especializado en negligencias médicas. Más de 20 años de experiencia. 95% de casos ganados. Primera consulta gratuita.',
-  url: 'https://gvcexpertos.es',
+  url: 'https://www.gvcexpertos.com',
   ogImage: '/images/og-image.jpg',
   contact: {
     phone: '968 241 025',
