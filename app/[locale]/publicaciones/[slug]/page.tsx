@@ -119,6 +119,8 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const post = await getPost(params.slug, params.locale)
   const t = await getTranslations({ locale: params.locale, namespace: 'blog' })
+  const isSpanish = params.locale === 'es'
+  const pageUrl = `${siteConfig.url}/${params.locale}/publicaciones/${params.slug}`
 
   if (!post) return { title: t('metaTitle') }
 
@@ -126,13 +128,37 @@ export async function generateMetadata({
     title: post.meta_title || post.title,
     description: post.meta_description || post.excerpt,
     alternates: {
-      canonical: `${siteConfig.url}/${params.locale}/publicaciones/${post.slug}`,
+      canonical: pageUrl,
+      languages: {
+        'es-ES': `${siteConfig.url}/es/publicaciones/${params.slug}`,
+        'en-US': `${siteConfig.url}/en/publicaciones/${params.slug}`,
+      },
     },
     openGraph: {
       type: 'article',
+      url: pageUrl,
       title: post.title,
       description: post.excerpt,
-      images: post.featured_image ? [{ url: post.featured_image }] : undefined,
+      siteName: siteConfig.name,
+      locale: isSpanish ? 'es_ES' : 'en_US',
+      images: post.featured_image ? [{
+        url: post.featured_image,
+        width: 1200,
+        height: 630,
+        alt: post.title,
+      }] : [{
+        url: `${siteConfig.url}/images/og-image.jpg`,
+        width: 1200,
+        height: 630,
+        alt: siteConfig.name,
+      }],
+      publishedTime: post.published_at,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.excerpt,
+      images: post.featured_image ? [post.featured_image] : [`${siteConfig.url}/images/og-image.jpg`],
     },
   }
 }

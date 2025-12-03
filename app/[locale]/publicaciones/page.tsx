@@ -33,11 +33,38 @@ export async function generateMetadata({
   params: { locale: string }
 }): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: 'blog' })
+  const isSpanish = locale === 'es'
+  const pageUrl = `${siteConfig.url}/${locale}/publicaciones`
+  
   return {
     title: t('metaTitle'),
     description: t('metaDescription'),
     alternates: {
-      canonical: `${siteConfig.url}/${locale}/publicaciones`,
+      canonical: pageUrl,
+      languages: {
+        'es-ES': `${siteConfig.url}/es/publicaciones`,
+        'en-US': `${siteConfig.url}/en/publicaciones`,
+      },
+    },
+    openGraph: {
+      type: 'website',
+      url: pageUrl,
+      title: t('metaTitle'),
+      description: t('metaDescription'),
+      siteName: siteConfig.name,
+      locale: isSpanish ? 'es_ES' : 'en_US',
+      images: [{
+        url: `${siteConfig.url}/images/og-image.jpg`,
+        width: 1200,
+        height: 630,
+        alt: siteConfig.name,
+      }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: t('metaTitle'),
+      description: t('metaDescription'),
+      images: [`${siteConfig.url}/images/og-image.jpg`],
     },
   }
 }
