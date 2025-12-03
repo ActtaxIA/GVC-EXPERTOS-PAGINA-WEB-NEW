@@ -89,9 +89,9 @@ const faqCategoriesEs = [
       },
       {
         id: 'q9',
-        title: '¿Cuánto cuesta contratar vuestros servicios?',
+        title: '¿Cuánto cuesta consultar con vosotros?',
         content:
-          'La primera consulta es completamente gratuita. Solo cobramos honorarios si ganamos tu caso, mediante un porcentaje sobre la indemnización obtenida. Si no cobramos, no pagas nada.',
+          'La consulta inicial es completamente gratuita y sin compromiso. Te escuchamos, analizamos tu caso y te orientamos con honestidad sobre las opciones disponibles y la viabilidad de tu reclamación.',
       },
       {
         id: 'q10',
@@ -190,9 +190,9 @@ const faqCategoriesEn = [
       },
       {
         id: 'q9',
-        title: 'How much does it cost to hire your services?',
+        title: 'How much does it cost to consult with you?',
         content:
-          'The first consultation is completely free. We only charge fees if we win your case, through a percentage of the compensation obtained. If we don\'t charge, you don\'t pay anything.',
+          'The initial consultation is completely free and without obligation. We listen to you, analyze your case and guide you honestly about the available options and the viability of your claim.',
       },
       {
         id: 'q10',

@@ -162,18 +162,18 @@ export default async function NegligenciasMedicasPage({
                 <div>
                   <Shield className="w-8 h-8 text-gold mb-3" />
                   <h3 className="font-semibold text-charcoal mb-2">
-                    {isSpanish ? 'Experiencia' : 'Experience'}
+                    {isSpanish ? 'Trayectoria' : 'Track Record'}
                   </h3>
                   <p className="text-sm text-gray-600">
-                    {isSpanish ? '+20 años' : '+20 years'}
+                    {isSpanish ? 'Desde 1946' : 'Since 1946'}
                   </p>
                 </div>
                 <div>
                   <Scale className="w-8 h-8 text-gold mb-3" />
                   <h3 className="font-semibold text-charcoal mb-2">
-                    {isSpanish ? 'Casos Ganados' : 'Cases Won'}
+                    {isSpanish ? 'Nobleza' : 'Nobility'}
                   </h3>
-                  <p className="text-sm text-gray-600">95%</p>
+                  <p className="text-sm text-gray-600">{isSpanish ? 'En el servicio' : 'In service'}</p>
                 </div>
               </div>
             </div>

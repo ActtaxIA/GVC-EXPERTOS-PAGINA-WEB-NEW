@@ -637,27 +637,22 @@ export default async function ServicioPage({
             </div>
           </div>
 
-          {/* Quick Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12">
+          {/* Credenciales */}
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-12">
             <div className="bg-white/10 backdrop-blur-sm border border-white/20 p-5 rounded-lg">
-              <TrendingUp className="w-8 h-8 text-gold mb-2" />
-              <div className="text-2xl font-serif font-bold text-white">95%</div>
-              <div className="text-sm text-gray-300">{isSpanish ? 'Éxito' : 'Success'}</div>
+              <Clock className="w-8 h-8 text-gold mb-2" />
+              <div className="text-2xl font-serif font-bold text-white">1946</div>
+              <div className="text-sm text-gray-300">{isSpanish ? 'Desde' : 'Since'}</div>
             </div>
             <div className="bg-white/10 backdrop-blur-sm border border-white/20 p-5 rounded-lg">
               <Users className="w-8 h-8 text-gold mb-2" />
-              <div className="text-2xl font-serif font-bold text-white">+500</div>
-              <div className="text-sm text-gray-300">{isSpanish ? 'Casos' : 'Cases'}</div>
-            </div>
-            <div className="bg-white/10 backdrop-blur-sm border border-white/20 p-5 rounded-lg">
-              <Clock className="w-8 h-8 text-gold mb-2" />
-              <div className="text-2xl font-serif font-bold text-white">25+</div>
-              <div className="text-sm text-gray-300">{isSpanish ? 'Años' : 'Years'}</div>
+              <div className="text-2xl font-serif font-bold text-white">{isSpanish ? 'Rigor' : 'Rigor'}</div>
+              <div className="text-sm text-gray-300">{isSpanish ? 'Profesional' : 'Professional'}</div>
             </div>
             <div className="bg-white/10 backdrop-blur-sm border border-white/20 p-5 rounded-lg">
               <Award className="w-8 h-8 text-gold mb-2" />
-              <div className="text-2xl font-serif font-bold text-white">+10M€</div>
-              <div className="text-sm text-gray-300">{isSpanish ? 'Recuperados' : 'Recovered'}</div>
+              <div className="text-2xl font-serif font-bold text-white">{isSpanish ? 'Nobleza' : 'Nobility'}</div>
+              <div className="text-sm text-gray-300">{isSpanish ? 'En el servicio' : 'In service'}</div>
             </div>
           </div>
         </div>
@@ -774,18 +769,18 @@ export default async function ServicioPage({
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Experiencia */}
+            {/* Trayectoria */}
             <div className="group bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
               <div className="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center mb-6 group-hover:bg-gold transition-colors">
                 <Award className="w-8 h-8 text-gold group-hover:text-white transition-colors" />
               </div>
               <h3 className="text-xl font-serif font-semibold text-charcoal mb-3">
-                {isSpanish ? 'Experiencia Probada' : 'Proven Experience'}
+                {isSpanish ? 'Trayectoria desde 1946' : 'Track Record Since 1946'}
               </h3>
               <p className="text-gray-600 leading-relaxed">
                 {isSpanish
-                  ? 'Más de 25 años especializados en negligencias médicas con cientos de casos ganados.'
-                  : 'Over 25 years specialized in medical negligence with hundreds of cases won.'}
+                  ? 'Un bufete con historia y experiencia acumulada en el análisis y defensa de casos de negligencias médicas.'
+                  : 'A law firm with history and accumulated experience in analyzing and defending medical negligence cases.'}
               </p>
             </div>
 
@@ -795,72 +790,72 @@ export default async function ServicioPage({
                 <Users className="w-8 h-8 text-gold group-hover:text-white transition-colors" />
               </div>
               <h3 className="text-xl font-serif font-semibold text-charcoal mb-3">
-                {isSpanish ? 'Equipo Especializado' : 'Specialized Team'}
+                {isSpanish ? 'Colaboración con Peritos' : 'Expert Collaboration'}
               </h3>
               <p className="text-gray-600 leading-relaxed">
                 {isSpanish
-                  ? 'Abogados expertos trabajando junto con peritos médicos de reconocido prestigio.'
-                  : 'Expert lawyers working alongside renowned medical experts.'}
+                  ? 'Trabajamos con peritos médicos especializados para analizar cada caso con rigor profesional.'
+                  : 'We work with specialized medical experts to analyze each case with professional rigor.'}
               </p>
             </div>
 
-            {/* Resultados */}
+            {/* Honestidad */}
             <div className="group bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
               <div className="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center mb-6 group-hover:bg-gold transition-colors">
                 <TrendingUp className="w-8 h-8 text-gold group-hover:text-white transition-colors" />
               </div>
               <h3 className="text-xl font-serif font-semibold text-charcoal mb-3">
-                {isSpanish ? '95% de Éxito' : '95% Success Rate'}
+                {isSpanish ? 'Valoración Honesta' : 'Honest Assessment'}
               </h3>
               <p className="text-gray-600 leading-relaxed">
                 {isSpanish
-                  ? 'Nuestra tasa de éxito nos avala. Trabajamos para conseguir la máxima indemnización.'
-                  : 'Our success rate speaks for itself. We work to achieve maximum compensation.'}
+                  ? 'Te orientamos con transparencia sobre la viabilidad de tu caso y las opciones disponibles.'
+                  : 'We guide you transparently about the viability of your case and the available options.'}
               </p>
             </div>
 
-            {/* Sin Costes */}
+            {/* Consulta Gratuita */}
             <div className="group bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
               <div className="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center mb-6 group-hover:bg-gold transition-colors">
                 <Shield className="w-8 h-8 text-gold group-hover:text-white transition-colors" />
               </div>
               <h3 className="text-xl font-serif font-semibold text-charcoal mb-3">
-                {isSpanish ? 'Sin Costes Iniciales' : 'No Initial Costs'}
+                {isSpanish ? 'Consulta Inicial Gratuita' : 'Free Initial Consultation'}
               </h3>
               <p className="text-gray-600 leading-relaxed">
                 {isSpanish
-                  ? 'Solo cobramos si ganamos tu caso. Primera consulta totalmente gratuita.'
-                  : 'We only charge if we win your case. First consultation completely free.'}
+                  ? 'Analizamos tu caso sin compromiso. Te explicamos con claridad tu situación y las posibilidades.'
+                  : 'We analyze your case with no obligation. We clearly explain your situation and possibilities.'}
               </p>
             </div>
 
-            {/* Rapidez */}
+            {/* Acompañamiento */}
             <div className="group bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
               <div className="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center mb-6 group-hover:bg-gold transition-colors">
                 <Clock className="w-8 h-8 text-gold group-hover:text-white transition-colors" />
               </div>
               <h3 className="text-xl font-serif font-semibold text-charcoal mb-3">
-                {isSpanish ? 'Actuación Inmediata' : 'Immediate Action'}
+                {isSpanish ? 'Acompañamiento' : 'Support'}
               </h3>
               <p className="text-gray-600 leading-relaxed">
                 {isSpanish
-                  ? 'Comenzamos a trabajar en tu caso desde el primer momento. El tiempo es crucial.'
-                  : 'We start working on your case from the first moment. Time is crucial.'}
+                  ? 'Te acompañamos durante todo el proceso, resolviendo tus dudas y manteniéndote informado.'
+                  : 'We accompany you throughout the process, answering your questions and keeping you informed.'}
               </p>
             </div>
 
-            {/* Transparencia */}
+            {/* Nobleza */}
             <div className="group bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
               <div className="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center mb-6 group-hover:bg-gold transition-colors">
                 <FileText className="w-8 h-8 text-gold group-hover:text-white transition-colors" />
               </div>
               <h3 className="text-xl font-serif font-semibold text-charcoal mb-3">
-                {isSpanish ? 'Total Transparencia' : 'Complete Transparency'}
+                {isSpanish ? 'Nobleza Profesional' : 'Professional Nobility'}
               </h3>
               <p className="text-gray-600 leading-relaxed">
                 {isSpanish
-                  ? 'Te mantenemos informado en cada fase del proceso. Comunicación directa y clara.'
-                  : 'We keep you informed at each stage of the process. Direct and clear communication.'}
+                  ? 'El león, símbolo de nuestro bufete, representa nuestra forma de trabajar: con nobleza, rigor y honra.'
+                  : 'The lion, symbol of our firm, represents our way of working: with nobility, rigor and honor.'}
               </p>
             </div>
           </div>

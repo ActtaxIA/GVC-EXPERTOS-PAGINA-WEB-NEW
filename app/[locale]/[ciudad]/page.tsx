@@ -53,8 +53,8 @@ export function generateMetadata({
     ? `Abogados Negligencias Médicas ${city.name} | ${siteConfig.name}`
     : `Medical Negligence Lawyers ${city.name} | ${siteConfig.name}`
   const description = isSpanish
-    ? `Despacho de abogados especializado en negligencias médicas en ${city.name}, ${city.province}. ✓ Más de 20 años de experiencia ✓ 95% de casos ganados ✓ Primera consulta gratuita ☎ ${siteConfig.contact.phone}`
-    : `Law firm specialized in medical negligence in ${city.name}, ${city.province}. ✓ Over 20 years of experience ✓ 95% success rate ✓ Free first consultation ☎ ${siteConfig.contact.phone}`
+    ? `Abogados especializados en negligencias médicas en ${city.name}, ${city.province}. Bufete con trayectoria desde 1946. Consulta inicial gratuita ☎ ${siteConfig.contact.phone}`
+    : `Lawyers specialized in medical negligence in ${city.name}, ${city.province}. Law firm with track record since 1946. Free initial consultation ☎ ${siteConfig.contact.phone}`
   const url = `${siteConfig.url}/${params.locale}/${city.slug}`
 
   return {
@@ -157,19 +157,19 @@ export default async function CiudadPage({
   
   const benefits = isSpanish
     ? [
-        `Especialistas en negligencias médicas en ${city.name}`,
-        'Primera consulta gratuita y sin compromiso',
-        'Solo cobramos si ganamos tu caso',
-        'Más de 20 años de experiencia',
-        'Tasa de éxito del 95%',
+        `Abogados especializados en negligencias médicas en ${city.name}`,
+        'Bufete con trayectoria desde 1946',
+        'Consulta inicial gratuita y sin compromiso',
+        'Análisis riguroso con peritos médicos',
+        'Te acompañamos durante todo el proceso',
         `Atención personalizada en toda ${city.province}`,
       ]
     : [
-        `Medical negligence specialists in ${city.name}`,
-        'Free first consultation with no obligation',
-        'We only charge if we win your case',
-        'Over 20 years of experience',
-        '95% success rate',
+        `Lawyers specialized in medical negligence in ${city.name}`,
+        'Law firm with track record since 1946',
+        'Free initial consultation with no obligation',
+        'Rigorous analysis with medical experts',
+        'We accompany you throughout the process',
         `Personalized attention throughout ${city.province}`,
       ]
 
@@ -177,12 +177,12 @@ export default async function CiudadPage({
   const cityFaqs = isSpanish
     ? [
         {
-          question: `¿Cuánto cuesta un abogado de negligencias médicas en ${city.name}?`,
-          answer: `En GVC Expertos la primera consulta es totalmente gratuita. Además, trabajamos con honorarios a éxito, lo que significa que solo cobramos si ganamos tu caso. No tienes que adelantar ningún dinero.`,
+          question: `¿Cómo puedo consultar con un abogado de negligencias médicas en ${city.name}?`,
+          answer: `En GVC Expertos ofrecemos una consulta inicial gratuita donde analizamos tu caso y te orientamos con honestidad sobre las opciones disponibles. Puedes contactarnos por teléfono o email.`,
         },
         {
           question: `¿Cómo sé si tengo un caso de negligencia médica en ${city.name}?`,
-          answer: `Si has sufrido un daño debido a un error médico, diagnóstico tardío o tratamiento inadecuado en ${city.name}, podrías tener un caso. Solicita una consulta gratuita y nuestros abogados especializados evaluarán tu situación sin compromiso.`,
+          answer: `Si has sufrido un daño debido a un error médico, diagnóstico tardío o tratamiento inadecuado en ${city.name}, podrías tener un caso. Solicita una consulta gratuita y analizaremos tu situación con rigor profesional.`,
         },
         {
           question: `¿Cuánto tiempo tengo para reclamar por negligencia médica en ${city.name}?`,
@@ -190,17 +190,17 @@ export default async function CiudadPage({
         },
         {
           question: `¿Qué hospitales de ${city.name} atendéis?`,
-          answer: `Atendemos casos de negligencias médicas ocurridas en todos los hospitales de ${city.name}, tanto públicos como privados. Tenemos experiencia con el sistema sanitario de ${city.province} y conocemos los protocolos y procedimientos locales.`,
+          answer: `Atendemos casos de negligencias médicas ocurridas en todos los hospitales de ${city.name}, tanto públicos como privados. Trabajamos con peritos médicos especializados para analizar cada caso.`,
         },
       ]
     : [
         {
-          question: `How much does a medical negligence lawyer cost in ${city.name}?`,
-          answer: `At GVC Expertos the first consultation is completely free. In addition, we work on a success fee basis, which means we only charge if we win your case. You don't have to advance any money.`,
+          question: `How can I consult with a medical negligence lawyer in ${city.name}?`,
+          answer: `At GVC Expertos we offer a free initial consultation where we analyze your case and guide you honestly about the available options. You can contact us by phone or email.`,
         },
         {
           question: `How do I know if I have a medical negligence case in ${city.name}?`,
-          answer: `If you have suffered harm due to a medical error, late diagnosis or inadequate treatment in ${city.name}, you could have a case. Request a free consultation and our specialized lawyers will evaluate your situation without obligation.`,
+          answer: `If you have suffered harm due to a medical error, late diagnosis or inadequate treatment in ${city.name}, you could have a case. Request a free consultation and we will analyze your situation with professional rigor.`,
         },
         {
           question: `How long do I have to claim for medical negligence in ${city.name}?`,
@@ -208,7 +208,7 @@ export default async function CiudadPage({
         },
         {
           question: `Which hospitals in ${city.name} do you cover?`,
-          answer: `We handle medical negligence cases that occur in all hospitals in ${city.name}, both public and private. We have experience with the healthcare system in ${city.province} and we know the local protocols and procedures.`,
+          answer: `We handle medical negligence cases that occur in all hospitals in ${city.name}, both public and private. We work with specialized medical experts to analyze each case.`,
         },
       ]
 
@@ -217,44 +217,44 @@ export default async function CiudadPage({
         {
           icon: Shield,
           title: 'Especialización',
-          description: `Somos expertos en negligencias médicas con profundo conocimiento del sistema sanitario de ${city.province}.`,
+          description: `Abogados especializados en negligencias médicas con conocimiento del sistema sanitario de ${city.province}.`,
         },
         {
           icon: Award,
-          title: '95% de Éxito',
-          description: 'Ganamos 95 de cada 100 casos que aceptamos, garantizando resultados para nuestros clientes.',
+          title: 'Desde 1946',
+          description: 'Un bufete con trayectoria y experiencia acumulada en la defensa de los derechos del paciente.',
         },
         {
           icon: Users,
           title: 'Atención Personalizada',
-          description: `Cada caso es único. Te asignamos un abogado especializado que conoce ${city.name} y su entorno sanitario.`,
+          description: `Cada caso es único. Te escuchamos y analizamos tu situación con rigor y cercanía.`,
         },
         {
           icon: FileCheck,
-          title: 'Sin Riesgos',
-          description: 'Solo cobramos si ganamos. La consulta inicial es gratuita y sin compromiso.',
+          title: 'Consulta Gratuita',
+          description: 'Analizamos tu caso sin compromiso y te orientamos con honestidad sobre las opciones disponibles.',
         },
       ]
     : [
         {
           icon: Shield,
           title: 'Specialization',
-          description: `We are experts in medical negligence with deep knowledge of the healthcare system in ${city.province}.`,
+          description: `Lawyers specialized in medical negligence with knowledge of the healthcare system in ${city.province}.`,
         },
         {
           icon: Award,
-          title: '95% Success',
-          description: 'We win 95 out of every 100 cases we accept, guaranteeing results for our clients.',
+          title: 'Since 1946',
+          description: 'A law firm with track record and accumulated experience in defending patient rights.',
         },
         {
           icon: Users,
           title: 'Personalized Attention',
-          description: `Each case is unique. We assign you a specialized lawyer who knows ${city.name} and its healthcare environment.`,
+          description: `Each case is unique. We listen to you and analyze your situation with rigor and closeness.`,
         },
         {
           icon: FileCheck,
-          title: 'No Risk',
-          description: 'We only charge if we win. The initial consultation is free and without obligation.',
+          title: 'Free Consultation',
+          description: 'We analyze your case with no obligation and guide you honestly about the available options.',
         },
       ]
 
@@ -262,55 +262,55 @@ export default async function CiudadPage({
     ? [
         {
           number: '01',
-          title: 'Consulta Gratuita',
-          description: 'Analizamos tu caso sin coste. Evaluamos la viabilidad y te explicamos tus opciones.',
+          title: 'Te Escuchamos',
+          description: 'En una consulta inicial gratuita, analizamos tu caso y te orientamos con honestidad.',
         },
         {
           number: '02',
-          title: 'Recopilación de Pruebas',
-          description: `Solicitamos historiales médicos de hospitales de ${city.name} e informes periciales necesarios.`,
+          title: 'Análisis Pericial',
+          description: `Estudiamos la documentación médica con peritos especializados para valorar tu caso.`,
         },
         {
           number: '03',
-          title: 'Negociación',
-          description: 'Intentamos llegar a un acuerdo extrajudicial con el centro médico o aseguradora.',
+          title: 'Valoración',
+          description: 'Te explicamos con claridad las opciones y la viabilidad de tu reclamación.',
         },
         {
           number: '04',
-          title: 'Demanda Judicial',
-          description: `Si es necesario, presentamos demanda ante los tribunales de ${city.province}.`,
+          title: 'Defensa',
+          description: `Si procede, defendemos tu caso ante los tribunales de ${city.province} con rigor profesional.`,
         },
         {
           number: '05',
-          title: 'Indemnización',
-          description: 'Conseguimos la máxima compensación económica por los daños sufridos.',
+          title: 'Acompañamiento',
+          description: 'Te acompañamos durante todo el proceso, manteniéndote informado en cada paso.',
         },
       ]
     : [
         {
           number: '01',
-          title: 'Free Consultation',
-          description: 'We analyze your case at no cost. We evaluate viability and explain your options.',
+          title: 'We Listen to You',
+          description: 'In a free initial consultation, we analyze your case and guide you honestly.',
         },
         {
           number: '02',
-          title: 'Evidence Gathering',
-          description: `We request medical records from ${city.name} hospitals and necessary expert reports.`,
+          title: 'Expert Analysis',
+          description: `We study the medical documentation with specialized experts to assess your case.`,
         },
         {
           number: '03',
-          title: 'Negotiation',
-          description: 'We try to reach an out-of-court agreement with the medical center or insurer.',
+          title: 'Assessment',
+          description: 'We clearly explain the options and viability of your claim.',
         },
         {
           number: '04',
-          title: 'Lawsuit',
-          description: `If necessary, we file a lawsuit in the courts of ${city.province}.`,
+          title: 'Defense',
+          description: `If appropriate, we defend your case in the courts of ${city.province} with professional rigor.`,
         },
         {
           number: '05',
-          title: 'Compensation',
-          description: 'We obtain maximum financial compensation for the damages suffered.',
+          title: 'Support',
+          description: 'We accompany you throughout the process, keeping you informed at every step.',
         },
       ]
 
@@ -384,8 +384,8 @@ export default async function CiudadPage({
 
             <p className="text-xl text-gray-300 leading-relaxed mb-8">
               {isSpanish
-                ? `Despacho de referencia en ${city.name} para casos de negligencias médicas. Con más de 20 años de experiencia y una tasa de éxito del 95%, luchamos por conseguir la indemnización que mereces.`
-                : `Reference law firm in ${city.name} for medical negligence cases. With over 20 years of experience and a 95% success rate, we fight to get you the compensation you deserve.`}
+                ? `Bufete de abogados con trayectoria desde 1946, especializado en negligencias médicas en ${city.name}. Te escuchamos, analizamos tu caso y te orientamos con rigor y honestidad.`
+                : `Law firm with a track record since 1946, specialized in medical negligence in ${city.name}. We listen to you, analyze your case and guide you with rigor and honesty.`}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-10">
@@ -402,30 +402,24 @@ export default async function CiudadPage({
               </a>
             </div>
 
-            {/* Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {/* Credenciales */}
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
               <div>
-                <p className="text-3xl md:text-4xl font-serif font-bold text-gold">95%</p>
+                <p className="text-3xl md:text-4xl font-serif font-bold text-gold">1946</p>
                 <p className="text-xs text-gray-400 uppercase tracking-wider">
-                  {isSpanish ? 'Éxito' : 'Success'}
+                  {isSpanish ? 'Desde' : 'Since'}
                 </p>
               </div>
               <div>
-                <p className="text-3xl md:text-4xl font-serif font-bold text-gold">+2.500</p>
+                <p className="text-3xl md:text-4xl font-serif font-bold text-gold">{isSpanish ? 'Rigor' : 'Rigor'}</p>
                 <p className="text-xs text-gray-400 uppercase tracking-wider">
-                  {isSpanish ? 'Casos' : 'Cases'}
+                  {isSpanish ? 'Profesional' : 'Professional'}
                 </p>
               </div>
               <div>
-                <p className="text-3xl md:text-4xl font-serif font-bold text-gold">+50M€</p>
+                <p className="text-3xl md:text-4xl font-serif font-bold text-gold">{isSpanish ? 'Nobleza' : 'Nobility'}</p>
                 <p className="text-xs text-gray-400 uppercase tracking-wider">
-                  {isSpanish ? 'Recuperados' : 'Recovered'}
-                </p>
-              </div>
-              <div>
-                <p className="text-3xl md:text-4xl font-serif font-bold text-gold">20+</p>
-                <p className="text-xs text-gray-400 uppercase tracking-wider">
-                  {isSpanish ? 'Años' : 'Years'}
+                  {isSpanish ? 'En el servicio' : 'In service'}
                 </p>
               </div>
             </div>
