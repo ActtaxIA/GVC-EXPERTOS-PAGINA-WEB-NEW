@@ -19,35 +19,35 @@ const serviceContentEs: Record<string, {
   faqs: { id: string; title: string; content: string }[]
 }> = {
   'errores-quirurgicos': {
-    intro: 'Los errores quirúrgicos son fallos que ocurren durante una intervención médica y que pueden tener consecuencias graves para el paciente.',
+    intro: 'Un error quirúrgico se produce cuando la actuación del cirujano o del equipo asistencial se aparta de la lex artis ad hoc. No todo resultado adverso implica negligencia: la valoración pericial es esencial para diferenciar entre complicación y mala praxis.',
     description: [
-      'Un error quirúrgico se produce cuando el cirujano o el equipo médico comete un fallo durante la operación que causa un daño al paciente. Estos errores pueden incluir desde operar la zona incorrecta del cuerpo hasta dejar instrumentos quirúrgicos dentro del paciente.',
-      'La responsabilidad por errores quirúrgicos puede recaer en el cirujano, el equipo médico, el anestesista o el centro sanitario, dependiendo de las circunstancias del caso.',
-      'Es fundamental actuar con rapidez si sospechas que has sido víctima de un error quirúrgico, ya que la documentación médica y las pruebas son esenciales para demostrar la negligencia.',
+      'Un error quirúrgico implica una actuación contraria a la lex artis durante el acto operatorio. Para que exista responsabilidad, es necesario que dicho apartamiento sea causa directa del daño sufrido por el paciente. Algunas complicaciones son inherentes al propio acto quirúrgico aun cuando se realice correctamente.',
+      'La responsabilidad puede recaer en el cirujano o equipo médico (por ejecución deficiente), el anestesista (errores en evaluación preanestésica, administración de fármacos o monitorización), el centro sanitario (fallos organizativos o incumplimiento de protocolos) o la aseguradora (acción directa conforme al art. 76 LCS).',
+      'Si existe sospecha de error quirúrgico, es recomendable recabar de inmediato toda la documentación clínica: historia completa, informes operatorios, registros anestésicos y pruebas complementarias. Una revisión pericial temprana permite identificar omisiones, fallos de técnica y vínculos causales.',
     ],
     symptoms: [
-      'Operación en la zona incorrecta del cuerpo',
-      'Instrumentos u objetos olvidados en el interior',
-      'Lesiones de órganos o nervios durante la intervención',
-      'Infecciones postquirúrgicas por falta de asepsia',
-      'Complicaciones evitables por técnica incorrecta',
-      'Anestesia mal administrada',
+      'Intervención en zona anatómica incorrecta',
+      'Retención de instrumentos o materiales quirúrgicos',
+      'Lesiones de órganos o nervios atribuibles a técnica inadecuada',
+      'Infecciones postquirúrgicas asociadas a fallos de asepsia o ruptura de protocolo',
+      'Complicaciones evitables por defectos técnicos o de planificación operatoria',
+      'Errores en anestesia: dosificación incorrecta, monitorización insuficiente o mala valoración preoperatoria',
     ],
     faqs: [
       {
         id: '1',
         title: '¿Cuánto tiempo tengo para reclamar un error quirúrgico?',
-        content: 'El plazo general para reclamar es de 1 año desde que se conoce el daño o sus consecuencias. Sin embargo, este plazo puede variar según las circunstancias, por lo que es importante consultar lo antes posible.',
+        content: 'Los plazos varían según la vía: responsabilidad patrimonial sanitaria (1 año), vía civil contractual (5 años), vía civil extracontractual (1 año desde la estabilización de secuelas). Es fundamental consultar cuanto antes para preservar pruebas y no perder plazos.',
       },
       {
         id: '2',
-        title: '¿Qué indemnización puedo recibir?',
-        content: 'La indemnización depende de la gravedad del daño sufrido. Incluye gastos médicos, lucro cesante, daño moral y secuelas permanentes. Cada caso se valora individualmente según el baremo de accidentes.',
+        title: '¿Cómo se diferencia un error de una complicación?',
+        content: 'No todo resultado adverso implica negligencia. La diferencia radica en si la actuación médica se ajustó a la lex artis ad hoc. Un perito médico analiza si existió apartamiento de los estándares exigibles y si ese apartamiento causó el daño.',
       },
       {
         id: '3',
         title: '¿Necesito un informe pericial?',
-        content: 'Sí, el informe pericial médico es fundamental para demostrar que existió una mala praxis y establecer la relación de causalidad con el daño sufrido. Nuestro equipo trabaja con peritos médicos especializados.',
+        content: 'Sí, el informe pericial médico es fundamental para establecer si existió apartamiento de la lex artis y la relación de causalidad con el daño. Cada caso se analiza conforme a la documentación clínica, estándares quirúrgicos aplicables y criterios periciales.',
       },
     ],
   },
@@ -226,35 +226,35 @@ const serviceContentEn: Record<string, {
   faqs: { id: string; title: string; content: string }[]
 }> = {
   'errores-quirurgicos': {
-    intro: 'Surgical errors are failures that occur during medical procedures and can have serious consequences for the patient.',
+    intro: 'A surgical error occurs when the actions of the surgeon or medical team deviate from the lex artis ad hoc. Not every adverse outcome implies negligence: expert assessment is essential to differentiate between complication and malpractice.',
     description: [
-      'A surgical error occurs when the surgeon or medical team makes a mistake during the operation that causes harm to the patient. These errors can range from operating on the wrong part of the body to leaving surgical instruments inside the patient.',
-      'Liability for surgical errors may fall on the surgeon, medical team, anesthesiologist or healthcare facility, depending on the circumstances of the case.',
-      'It is essential to act quickly if you suspect you have been a victim of a surgical error, as medical documentation and evidence are essential to prove negligence.',
+      'A surgical error implies an action contrary to the lex artis during the surgical procedure. For liability to exist, the deviation must be a direct cause of the harm suffered by the patient. Some complications are inherent to the surgical procedure even when performed correctly.',
+      'Liability may fall on the surgeon or medical team (deficient execution), the anesthesiologist (errors in pre-anesthetic evaluation, drug administration or monitoring), the healthcare facility (organizational failures or protocol breaches), or the insurer (direct action under art. 76 LCS).',
+      'If a surgical error is suspected, it is advisable to immediately gather all clinical documentation: complete medical history, operative reports, anesthetic records and complementary tests. Early expert review helps identify omissions, technical failures and causal links.',
     ],
     symptoms: [
-      'Operation on the wrong part of the body',
-      'Instruments or objects left inside',
-      'Organ or nerve injuries during the procedure',
-      'Post-surgical infections due to lack of asepsis',
-      'Avoidable complications due to incorrect technique',
-      'Improperly administered anesthesia',
+      'Intervention in incorrect anatomical area',
+      'Retention of surgical instruments or materials',
+      'Organ or nerve injuries attributable to inadequate technique',
+      'Post-surgical infections associated with asepsis failures or protocol breach',
+      'Avoidable complications due to technical or operative planning defects',
+      'Anesthesia errors: incorrect dosage, insufficient monitoring or poor preoperative assessment',
     ],
     faqs: [
       {
         id: '1',
         title: 'How long do I have to claim a surgical error?',
-        content: 'The general period to claim is 1 year from when the damage or its consequences are known. However, this period may vary according to the circumstances, so it is important to consult as soon as possible.',
+        content: 'Time limits vary by legal avenue: healthcare liability (1 year), contractual civil action (5 years), non-contractual civil action (1 year from stabilization of sequelae). It is essential to consult as soon as possible to preserve evidence and meet deadlines.',
       },
       {
         id: '2',
-        title: 'What compensation can I receive?',
-        content: 'Compensation depends on the severity of the damage suffered. It includes medical expenses, lost earnings, moral damage and permanent sequelae. Each case is assessed individually according to the accident scale.',
+        title: 'How is an error differentiated from a complication?',
+        content: 'Not every adverse outcome implies negligence. The difference lies in whether the medical action conformed to the lex artis ad hoc. A medical expert analyzes whether there was deviation from required standards and whether that deviation caused the harm.',
       },
       {
         id: '3',
         title: 'Do I need an expert report?',
-        content: 'Yes, the medical expert report is essential to prove that there was malpractice and establish the causal relationship with the damage suffered. Our team works with specialized medical experts.',
+        content: 'Yes, the medical expert report is essential to establish whether there was deviation from the lex artis and the causal relationship with the harm. Each case is analyzed according to clinical documentation, applicable surgical standards and expert causation criteria.',
       },
     ],
   },
