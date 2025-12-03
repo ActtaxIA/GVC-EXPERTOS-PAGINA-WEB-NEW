@@ -105,3 +105,7 @@
 - [ ] Verificar con Facebook Debugger
 - [ ] Verificar con Twitter Card Validator
 
+
+
+
+

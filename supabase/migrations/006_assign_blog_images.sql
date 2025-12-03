@@ -171,3 +171,7 @@ WHERE slug = 'la-relacion-entre-la-sobrecarga-laboral-y-las-negligencias-medicas
 -- =====================================================
 -- SELECT slug, title, featured_image FROM posts WHERE featured_image IS NULL OR featured_image = '';
 
+
+
+
+

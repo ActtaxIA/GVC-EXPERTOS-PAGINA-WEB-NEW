@@ -94,3 +94,7 @@ Variables disponibles: { hasUrl: false, hasKey: false }
 
 El 99% de estos casos se resuelven configurando correctamente las variables de entorno en AWS Amplify. El código funciona igual en ambos entornos, pero necesita acceso a las credenciales de Supabase.
 
+
+
+
+
