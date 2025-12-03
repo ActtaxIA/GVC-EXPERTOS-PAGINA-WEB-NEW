@@ -1,7 +1,16 @@
-# 🔍 Diagnóstico: Por qué funciona en local pero no en AWS Amplify
+# 🔍 Troubleshooting: AWS Amplify + Next.js
 
-## Problema
-Las páginas de categorías del blog (`/es/blog/categoria/conceptos`, etc.) funcionan perfectamente en local pero dan error **500 Internal Server Error** en AWS Amplify.
+**🌐 Producción:** https://www.gvcexpertos.com
+
+## ✅ Estado Actual (Diciembre 2024)
+
+El sitio está funcionando correctamente en producción con **SSG (Static Site Generation)**. 
+Todas las páginas se generan en build time, eliminando problemas de conexión runtime.
+
+---
+
+## Problema Original (RESUELTO)
+Las páginas dinámicas del blog funcionaban en local pero daban error **500** en AWS Amplify.
 
 ## Causas más probables
 
@@ -90,9 +99,32 @@ Variables disponibles: { hasUrl: false, hasKey: false }
 
 ---
 
+## 🎯 Solución Definitiva: SSG
+
+El problema se resolvió migrando de **ISR/SSR a SSG**:
+
+```typescript
+// Antes (problemático)
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
+// Después (funciona perfecto)
+export async function generateStaticParams() {
+  const posts = await getAllPosts()
+  return posts.map(post => ({ slug: post.slug }))
+}
+```
+
+Con SSG:
+- ✅ Datos se obtienen de Supabase durante BUILD
+- ✅ No hay conexiones runtime a Supabase
+- ✅ Páginas son HTML estático (ultra rápido)
+- ⚠️ Nuevo contenido requiere rebuild (webhook configurado)
+
 ## 🎯 Conclusión
 
-El 99% de estos casos se resuelven configurando correctamente las variables de entorno en AWS Amplify. El código funciona igual en ambos entornos, pero necesita acceso a las credenciales de Supabase.
+El sitio ahora funciona perfectamente en https://www.gvcexpertos.com usando SSG.
+Las variables de entorno son necesarias solo durante el BUILD, no en runtime.
 
 
 

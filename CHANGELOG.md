@@ -2,6 +2,38 @@
 
 Todos los cambios notables del proyecto GVC Expertos.
 
+**🌐 Producción:** https://www.gvcexpertos.com
+
+---
+
+## [2.1.0] - 2024-12-03
+
+### 🚀 Lanzamiento en Producción
+
+**Dominio:** www.gvcexpertos.com configurado en OVH con DNS apuntando a AWS Amplify.
+
+### ✨ Nuevas Características
+
+#### Analytics y SEO
+- Google Analytics (G-D23DZMB7SG) integrado con `next/script`
+- Sitemap actualizado con dominio www.gvcexpertos.com
+- Open Graph corregido para compartir en redes sociales
+- Facebook Debugger verificado
+
+#### DNS y Dominio
+- CNAME configurado para www.gvcexpertos.com → AWS Amplify
+- SSL automático de AWS Amplify
+- Redirección gvcexpertos.com → www.gvcexpertos.com
+
+### 🐛 Correcciones
+
+- `siteConfig.url` actualizado a https://www.gvcexpertos.com
+- Sitemap genera URLs con www correctamente
+- Header sticky funciona en móvil (iOS/Android)
+- Menú off-canvas con React Portal (z-index correcto)
+
+---
+
 ## [2.0.0] - 2024-12-02
 
 ### 🚀 Cambio Mayor: Migración a Páginas Estáticas (SSG)

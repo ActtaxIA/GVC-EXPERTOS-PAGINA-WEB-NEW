@@ -8,7 +8,7 @@ Sitio web profesional para despacho de abogados especializado en negligencias m�
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.3-38bdf8?logo=tailwindcss)
 ![AWS Amplify](https://img.shields.io/badge/AWS-Amplify-FF9900?logo=aws-amplify)
 
-**🌐 Producción:** https://main.dsa1glcthysbo.amplifyapp.com
+**🌐 Producción:** https://www.gvcexpertos.com
 
 ---
 
@@ -210,4 +210,4 @@ Proyecto privado. Todos los derechos reservados.
 
 ---
 
-**Última actualización:** Diciembre 2024
+**Última actualización:** 3 Diciembre 2024 - Lanzamiento en producción www.gvcexpertos.com
