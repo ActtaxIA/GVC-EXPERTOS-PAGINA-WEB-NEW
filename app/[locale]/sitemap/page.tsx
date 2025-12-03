@@ -224,7 +224,7 @@ export default async function SitemapPage({
                 {t('cities')} ({cities.length})
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
-                {cities.map((city) => (
+                {[...cities].sort((a, b) => a.name.localeCompare(b.name, 'es')).map((city) => (
                   <LocalizedLink
                     key={city.slug}
                     href={`/${locale}/${city.slug}`}
