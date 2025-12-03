@@ -26,9 +26,14 @@ export async function generateMetadata({
 
 const valuesEs = [
   {
+    icon: Award,
+    title: 'Nobleza',
+    description: 'El león, símbolo de nuestro bufete, encarna la nobleza: ser preclaro, ilustre, generoso, honroso y estimable.',
+  },
+  {
     icon: Scale,
-    title: 'Justicia',
-    description: 'Luchamos incansablemente para que cada víctima obtenga la compensación justa que merece.',
+    title: 'Rigor',
+    description: 'Analizamos cada caso con la profundidad y el conocimiento que solo da la experiencia acumulada.',
   },
   {
     icon: Users,
@@ -36,22 +41,22 @@ const valuesEs = [
     description: 'Tratamos cada caso con la atención y empatía que requiere, entendiendo el momento difícil que atraviesas.',
   },
   {
-    icon: Award,
-    title: 'Excelencia',
-    description: 'Nos formamos continuamente para ofrecer la mejor defensa posible con los últimos conocimientos jurídicos.',
-  },
-  {
     icon: Target,
-    title: 'Compromiso',
-    description: 'No cobramos hasta ganar tu caso. Tu éxito es nuestro éxito.',
+    title: 'Honestidad',
+    description: 'Te orientamos con transparencia sobre las opciones disponibles y la viabilidad de tu caso.',
   },
 ]
 
 const valuesEn = [
   {
+    icon: Award,
+    title: 'Nobility',
+    description: 'The lion, symbol of our firm, embodies nobility: being illustrious, generous, honorable and estimable.',
+  },
+  {
     icon: Scale,
-    title: 'Justice',
-    description: 'We fight tirelessly so that each victim obtains the fair compensation they deserve.',
+    title: 'Rigor',
+    description: 'We analyze each case with the depth and knowledge that only accumulated experience provides.',
   },
   {
     icon: Users,
@@ -59,14 +64,9 @@ const valuesEn = [
     description: 'We treat each case with the attention and empathy it requires, understanding the difficult moment you are going through.',
   },
   {
-    icon: Award,
-    title: 'Excellence',
-    description: 'We continuously train to offer the best possible defense with the latest legal knowledge.',
-  },
-  {
     icon: Target,
-    title: 'Commitment',
-    description: 'We don\'t charge until we win your case. Your success is our success.',
+    title: 'Honesty',
+    description: 'We guide you transparently about the available options and the viability of your case.',
   },
 ]
 
@@ -100,8 +100,8 @@ export default function SobreNosotrosPage({
           </h1>
           <p className="text-gray-300 text-lg max-w-3xl leading-relaxed">
             {isSpanish
-              ? 'Más de dos décadas dedicados exclusivamente a la defensa de víctimas de negligencias médicas nos avalan como referentes en España.'
-              : 'More than two decades dedicated exclusively to defending victims of medical negligence make us a reference in Spain.'}
+              ? 'Un despacho con amplia trayectoria y especialización en la defensa de los derechos del paciente.'
+              : 'A law firm with extensive experience and specialization in defending patient rights.'}
           </p>
         </div>
       </section>
@@ -121,38 +121,36 @@ export default function SobreNosotrosPage({
                 {isSpanish ? (
                   <>
                     <p>
-                      GVC Expertos nació en 2003 de la mano de Pedro García-Valcárcel
-                      y Miguel Cáceres, dos abogados que detectaron una necesidad
-                      crucial: las víctimas de negligencias médicas necesitaban
-                      representación especializada.
+                      Este bufete fue fundado por D. Pedro-Alfonso García-Valcárcel y Escribano 
+                      junto a su tío D. Blas García-Valcárcel, quien ejercía como abogado 
+                      desde el 6 de noviembre de 1946.
                     </p>
                     <p>
-                      Desde entonces, nos hemos dedicado exclusivamente a este área
-                      del derecho, convirtiéndonos en uno de los despachos más
-                      reconocidos de España en materia de responsabilidad sanitaria.
+                      Somos un despacho multidisciplinar que trabaja tanto en el ámbito del 
+                      derecho privado como público, adaptando nuestros conocimientos y equipo 
+                      de expertos a las necesidades de cada cliente.
                     </p>
                     <p>
-                      Nuestra experiencia acumulada en más de 2.500 casos nos permite
-                      abordar cada nueva situación con el conocimiento y la seguridad
-                      que solo da la especialización.
+                      A lo largo de nuestra trayectoria, hemos desarrollado una sólida 
+                      especialización en negligencias médicas, ofreciendo un servicio 
+                      diferencial centrado en la defensa del paciente.
                     </p>
                   </>
                 ) : (
                   <>
                     <p>
-                      GVC Expertos was born in 2003 at the hands of Pedro García-Valcárcel
-                      and Miguel Cáceres, two lawyers who detected a crucial need:
-                      victims of medical negligence needed specialized representation.
+                      This firm was founded by Pedro-Alfonso García-Valcárcel y Escribano 
+                      together with his uncle Blas García-Valcárcel, who practiced law 
+                      since November 6, 1946.
                     </p>
                     <p>
-                      Since then, we have dedicated ourselves exclusively to this area
-                      of law, becoming one of the most recognized law firms in Spain
-                      in healthcare liability.
+                      We are a multidisciplinary firm that works in both private and public 
+                      law, adapting our knowledge and team of experts to the needs of each client.
                     </p>
                     <p>
-                      Our accumulated experience in more than 2,500 cases allows us to
-                      approach each new situation with the knowledge and security that
-                      only specialization provides.
+                      Throughout our history, we have developed a strong specialization 
+                      in medical negligence, offering a differential service focused 
+                      on patient defense.
                     </p>
                   </>
                 )}
@@ -169,9 +167,9 @@ export default function SobreNosotrosPage({
               </div>
               {/* Floating stat */}
               <div className="absolute -bottom-6 -left-6 bg-gold text-white p-6 rounded-sm shadow-lg">
-                <p className="text-4xl font-serif font-bold">20+</p>
+                <p className="text-4xl font-serif font-bold">1946</p>
                 <p className="text-sm uppercase tracking-wide">
-                  {isSpanish ? 'Años de experiencia' : 'Years of experience'}
+                  {isSpanish ? 'Desde' : 'Since'}
                 </p>
               </div>
             </div>
@@ -235,12 +233,12 @@ export default function SobreNosotrosPage({
                 <>
                   <div className="border-l-4 border-gold pl-6">
                     <h3 className="text-xl font-serif font-semibold text-charcoal mb-3">
-                      Especialización Exclusiva
+                      Especialización Reconocida
                     </h3>
                     <p className="text-gray-600">
-                      No somos generalistas. Nos dedicamos única y exclusivamente a
-                      negligencias médicas, lo que nos permite conocer cada detalle
-                      de esta área del derecho.
+                      Décadas de experiencia en derecho sanitario nos permiten 
+                      abordar cada caso con un conocimiento profundo de esta 
+                      área del derecho.
                     </p>
                   </div>
                   <div className="border-l-4 border-gold pl-6">
@@ -255,20 +253,21 @@ export default function SobreNosotrosPage({
                   </div>
                   <div className="border-l-4 border-gold pl-6">
                     <h3 className="text-xl font-serif font-semibold text-charcoal mb-3">
-                      Sin Coste Inicial
+                      Consulta Inicial Gratuita
                     </h3>
                     <p className="text-gray-600">
-                      Creemos en nuestro trabajo. Por eso no cobramos honorarios
-                      hasta que ganamos tu caso. Si no cobramos, tú no pagas.
+                      Analizamos tu caso sin compromiso. Te orientamos con 
+                      honestidad sobre las opciones disponibles y la viabilidad 
+                      de tu reclamación.
                     </p>
                   </div>
                   <div className="border-l-4 border-gold pl-6">
                     <h3 className="text-xl font-serif font-semibold text-charcoal mb-3">
-                      Resultados Probados
+                      Atención Personalizada
                     </h3>
                     <p className="text-gray-600">
-                      Con una tasa de éxito del 95% y más de 50 millones de euros
-                      recuperados, nuestros resultados hablan por sí solos.
+                      Cada caso es único. Te escuchamos, te acompañamos y te 
+                      mantenemos informado durante todo el proceso.
                     </p>
                   </div>
                 </>
@@ -276,12 +275,12 @@ export default function SobreNosotrosPage({
                 <>
                   <div className="border-l-4 border-gold pl-6">
                     <h3 className="text-xl font-serif font-semibold text-charcoal mb-3">
-                      Exclusive Specialization
+                      Recognized Specialization
                     </h3>
                     <p className="text-gray-600">
-                      We are not generalists. We dedicate ourselves exclusively to
-                      medical negligence, which allows us to know every detail of
-                      this area of law.
+                      Decades of experience in healthcare law allow us to 
+                      approach each case with deep knowledge of this 
+                      area of law.
                     </p>
                   </div>
                   <div className="border-l-4 border-gold pl-6">
@@ -296,20 +295,21 @@ export default function SobreNosotrosPage({
                   </div>
                   <div className="border-l-4 border-gold pl-6">
                     <h3 className="text-xl font-serif font-semibold text-charcoal mb-3">
-                      No Initial Cost
+                      Free Initial Consultation
                     </h3>
                     <p className="text-gray-600">
-                      We believe in our work. That's why we don't charge fees until
-                      we win your case. If we don't charge, you don't pay.
+                      We analyze your case without obligation. We guide you 
+                      honestly about the available options and the viability 
+                      of your claim.
                     </p>
                   </div>
                   <div className="border-l-4 border-gold pl-6">
                     <h3 className="text-xl font-serif font-semibold text-charcoal mb-3">
-                      Proven Results
+                      Personalized Attention
                     </h3>
                     <p className="text-gray-600">
-                      With a 95% success rate and more than 50 million euros
-                      recovered, our results speak for themselves.
+                      Every case is unique. We listen to you, accompany you and 
+                      keep you informed throughout the entire process.
                     </p>
                   </div>
                 </>

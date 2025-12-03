@@ -296,10 +296,10 @@ export const siteConfig = {
   name: 'GVC Expertos',
   legalName: 'GVC Expertos Abogados S.L.P.',
   description:
-    'Despacho de abogados especializado en derecho sanitario desde 1968. Acompañamos y asesoramos a pacientes y familias afectados por negligencias médicas.',
+    'Bufete de abogados en Murcia con trayectoria desde 1946. Despacho multidisciplinar especializado en negligencias médicas y derecho sanitario.',
   url: 'https://www.gvcexpertos.com',
   ogImage: '/images/og-image.jpg',
-  foundedYear: 1968,
+  foundedYear: 1946,
   contact: {
     phone: '968 241 025',
     phoneHref: 'tel:+34968241025',

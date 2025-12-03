@@ -108,19 +108,19 @@ const faqCategoriesEs = [
         id: 'q11',
         title: '¿Por qué elegir GVC Expertos?',
         content:
-          'Somos uno de los pocos despachos en España dedicados exclusivamente a negligencias médicas. Con más de 20 años de experiencia y un 95% de casos ganados, contamos con el conocimiento especializado y los peritos médicos necesarios para defender tu caso con éxito.',
+          'Somos un bufete con raíces desde 1946, un despacho multidisciplinar con sólida especialización en negligencias médicas. Colaboramos con peritos médicos para analizar cada caso con rigor y nobleza profesional.',
       },
       {
         id: 'q12',
         title: '¿Trabajáis en toda España?',
         content:
-          'Sí, atendemos casos en toda España. Tenemos sede en Madrid pero contamos con colaboradores en las principales ciudades y podemos gestionar tu caso independientemente de dónde te encuentres.',
+          'Sí, atendemos casos en toda España. Tenemos sede en Murcia y podemos gestionar tu caso independientemente de dónde te encuentres.',
       },
       {
         id: 'q13',
         title: '¿Cómo puedo contactar con vosotros?',
         content:
-          'Puedes llamarnos al 900 123 456 (llamada gratuita), enviarnos un email a info@gvcexpertos.es o completar el formulario de contacto de nuestra web. Te responderemos en menos de 24 horas.',
+          'Puedes llamarnos al 968 241 025, enviarnos un email a contacto@gvcabogados.com o visitar nuestras oficinas en Plaza Fuensanta, 3 - 6ºB, 30008 Murcia. Te atenderemos de forma personalizada.',
       },
     ],
   },
@@ -209,19 +209,19 @@ const faqCategoriesEn = [
         id: 'q11',
         title: 'Why choose GVC Expertos?',
         content:
-          'We are one of the few law firms in Spain dedicated exclusively to medical negligence. With more than 20 years of experience and a 95% success rate, we have the specialized knowledge and medical experts necessary to successfully defend your case.',
+          'We are a law firm with roots since 1946, a multidisciplinary firm with solid specialization in medical negligence. We collaborate with medical experts to analyze each case with rigor and professional nobility.',
       },
       {
         id: 'q12',
         title: 'Do you work throughout Spain?',
         content:
-          'Yes, we handle cases throughout Spain. We have offices in Madrid but we have collaborators in the main cities and we can manage your case regardless of where you are.',
+          'Yes, we handle cases throughout Spain. We have offices in Murcia and we can manage your case regardless of where you are.',
       },
       {
         id: 'q13',
         title: 'How can I contact you?',
         content:
-          'You can call us at 900 123 456 (free call), send us an email to info@gvcexpertos.es or complete the contact form on our website. We will respond within 24 hours.',
+          'You can call us at 968 241 025, send us an email to contacto@gvcabogados.com or visit our offices at Plaza Fuensanta, 3 - 6ºB, 30008 Murcia. We will attend you personally.',
       },
     ],
   },

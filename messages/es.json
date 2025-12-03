@@ -161,7 +161,7 @@
     "reject": "Rechazar"
   },
   "footer": {
-    "description": "Despacho especializado en derecho sanitario desde 1968. Acompañamos y asesoramos a pacientes y familias con rigor, cercanía y profesionalidad.",
+    "description": "Bufete de abogados con trayectoria desde 1946. Despacho multidisciplinar especializado en negligencias médicas, al servicio del paciente.",
     "quickLinks": "Enlaces Rápidos",
     "services": "Servicios",
     "legal": "Legal",
@@ -217,10 +217,10 @@
   },
   "home": {
     "hero": {
-      "badge": "Desde 1968 · Derecho Sanitario",
-      "title": "Abogados Especialistas en Derecho Sanitario",
-      "subtitle": "Defendiendo los derechos del paciente desde 1968",
-      "description": "Somos un despacho con historia, dedicado exclusivamente al derecho sanitario. Te escuchamos, analizamos tu situación y te orientamos con honestidad y rigor profesional.",
+      "badge": "Desde 1946 · Bufete de Abogados",
+      "title": "Abogados Especialistas en Negligencias Médicas",
+      "subtitle": "Un bufete con historia, al servicio del paciente",
+      "description": "Somos un despacho multidisciplinar con trayectoria desde 1946, especializados en negligencias médicas. Te escuchamos, analizamos tu situación y te orientamos con honestidad y rigor profesional.",
       "ctaPrimary": "Consultar",
       "ctaSecondary": "Llamar",
       "statsYears": "años de experiencia",
@@ -229,9 +229,9 @@
     "intro": {
       "badge": "Nuestro compromiso",
       "title": "Un Despacho con Historia, Dedicado al Paciente",
-      "description": "Desde 1968, nuestro despacho se ha especializado exclusivamente en derecho sanitario. Entendemos que detrás de cada caso hay una persona que merece ser escuchada, comprendida y defendida con rigor profesional.",
+      "description": "Con raíces que se remontan a 1946, nuestro bufete ha desarrollado una sólida especialización en negligencias médicas. Entendemos que detrás de cada caso hay una persona que merece ser escuchada, comprendida y defendida con rigor y nobleza profesional.",
       "feature1Title": "Trayectoria Consolidada",
-      "feature1Description": "Décadas de dedicación exclusiva al derecho sanitario y la defensa del paciente",
+      "feature1Description": "Décadas de experiencia en derecho sanitario y la defensa del paciente",
       "feature2Title": "Atención Personalizada",
       "feature2Description": "Cada caso es único. Te escuchamos y analizamos tu situación con detenimiento",
       "feature3Title": "Rigor Profesional",
@@ -277,7 +277,7 @@
     "team": {
       "badge": "Nuestro equipo",
       "title": "Profesionales Comprometidos con el Paciente",
-      "subtitle": "Un equipo con vocación, experiencia y dedicación exclusiva al derecho sanitario",
+      "subtitle": "Un equipo con vocación y amplia experiencia en derecho sanitario",
       "viewProfile": "Conocer más"
     },
     "cta": {

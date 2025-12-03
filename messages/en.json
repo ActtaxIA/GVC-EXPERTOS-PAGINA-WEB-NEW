@@ -161,7 +161,7 @@
     "reject": "Reject"
   },
   "footer": {
-    "description": "Law firm specialized in healthcare law since 1968. We accompany and advise patients and families with rigor, closeness and professionalism.",
+    "description": "Law firm with a track record since 1946. Multidisciplinary firm specialized in medical negligence, serving the patient.",
     "quickLinks": "Quick Links",
     "services": "Services",
     "legal": "Legal",
@@ -217,10 +217,10 @@
   },
   "home": {
     "hero": {
-      "badge": "Since 1968 · Healthcare Law",
-      "title": "Lawyers Specialized in Healthcare Law",
-      "subtitle": "Defending patient rights since 1968",
-      "description": "We are a law firm with history, dedicated exclusively to healthcare law. We listen to you, analyze your situation and guide you with honesty and professional rigor.",
+      "badge": "Since 1946 · Law Firm",
+      "title": "Lawyers Specialized in Medical Negligence",
+      "subtitle": "A law firm with history, serving the patient",
+      "description": "We are a multidisciplinary firm with a track record since 1946, specialized in medical negligence. We listen to you, analyze your situation and guide you with honesty and professional rigor.",
       "ctaPrimary": "Consult",
       "ctaSecondary": "Call",
       "statsYears": "years of experience",
@@ -229,9 +229,9 @@
     "intro": {
       "badge": "Our commitment",
       "title": "A Law Firm with History, Dedicated to the Patient",
-      "description": "Since 1968, our firm has specialized exclusively in healthcare law. We understand that behind every case there is a person who deserves to be heard, understood and defended with professional rigor.",
+      "description": "With roots dating back to 1946, our firm has developed a strong specialization in medical negligence. We understand that behind every case there is a person who deserves to be heard, understood and defended with rigor and professional nobility.",
       "feature1Title": "Consolidated Track Record",
-      "feature1Description": "Decades of exclusive dedication to healthcare law and patient defense",
+      "feature1Description": "Decades of experience in healthcare law and patient defense",
       "feature2Title": "Personalized Attention",
       "feature2Description": "Every case is unique. We listen to you and analyze your situation carefully",
       "feature3Title": "Professional Rigor",
@@ -277,7 +277,7 @@
     "team": {
       "badge": "Our Team",
       "title": "Professionals Committed to the Patient",
-      "subtitle": "A team with vocation, experience and exclusive dedication to healthcare law",
+      "subtitle": "A team with vocation and extensive experience in healthcare law",
       "viewProfile": "Learn More"
     },
     "cta": {
