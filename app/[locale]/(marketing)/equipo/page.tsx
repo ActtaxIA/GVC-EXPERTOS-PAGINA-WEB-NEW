@@ -159,16 +159,16 @@ export default function EquipoPage({
                   Si eres abogado especializado en derecho sanitario y compartes
                   nuestra pasión por defender los derechos de los pacientes, nos
                   encantaría conocerte. Envíanos tu CV a{' '}
-                  <a href="mailto:rrhh@gvcexpertos.es" className="text-gold hover:underline">
-                    rrhh@gvcexpertos.es
+                  <a href="mailto:contacto@gvcabogados.com" className="text-gold hover:underline">
+                    contacto@gvcabogados.com
                   </a>
                 </>
               ) : (
                 <>
                   If you are a lawyer specialized in health law and share
                   our passion for defending patients' rights, we would love to meet you. Send us your CV to{' '}
-                  <a href="mailto:rrhh@gvcexpertos.es" className="text-gold hover:underline">
-                    rrhh@gvcexpertos.es
+                  <a href="mailto:contacto@gvcabogados.com" className="text-gold hover:underline">
+                    contacto@gvcabogados.com
                   </a>
                 </>
               )}
