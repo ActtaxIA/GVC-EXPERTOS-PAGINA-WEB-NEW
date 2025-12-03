@@ -159,17 +159,17 @@ export default async function CiudadPage({
     ? [
         `Abogados especializados en negligencias médicas en ${city.name}`,
         'Bufete con trayectoria desde 1946',
-        'Consulta inicial gratuita y sin compromiso',
-        'Análisis riguroso con peritos médicos',
-        'Te acompañamos durante todo el proceso',
+        'Te escuchamos y analizamos tu caso',
+        'Colaboración con peritos médicos especializados',
+        'Acompañamiento durante todo el proceso',
         `Atención personalizada en toda ${city.province}`,
       ]
     : [
         `Lawyers specialized in medical negligence in ${city.name}`,
         'Law firm with track record since 1946',
-        'Free initial consultation with no obligation',
-        'Rigorous analysis with medical experts',
-        'We accompany you throughout the process',
+        'We listen and analyze your case',
+        'Collaboration with specialized medical experts',
+        'Support throughout the process',
         `Personalized attention throughout ${city.province}`,
       ]
 
@@ -182,7 +182,7 @@ export default async function CiudadPage({
         },
         {
           question: `¿Cómo sé si tengo un caso de negligencia médica en ${city.name}?`,
-          answer: `Si has sufrido un daño debido a un error médico, diagnóstico tardío o tratamiento inadecuado en ${city.name}, podrías tener un caso. Solicita una consulta gratuita y analizaremos tu situación con rigor profesional.`,
+          answer: `Si has sufrido un daño debido a un error médico, diagnóstico tardío o tratamiento inadecuado en ${city.name}, podrías tener un caso. Contacta con nosotros y analizaremos tu situación con rigor profesional.`,
         },
         {
           question: `¿Cuánto tiempo tengo para reclamar por negligencia médica en ${city.name}?`,
@@ -200,7 +200,7 @@ export default async function CiudadPage({
         },
         {
           question: `How do I know if I have a medical negligence case in ${city.name}?`,
-          answer: `If you have suffered harm due to a medical error, late diagnosis or inadequate treatment in ${city.name}, you could have a case. Request a free consultation and we will analyze your situation with professional rigor.`,
+          answer: `If you have suffered harm due to a medical error, late diagnosis or inadequate treatment in ${city.name}, you could have a case. Contact us and we will analyze your situation with professional rigor.`,
         },
         {
           question: `How long do I have to claim for medical negligence in ${city.name}?`,
@@ -231,8 +231,8 @@ export default async function CiudadPage({
         },
         {
           icon: FileCheck,
-          title: 'Consulta Gratuita',
-          description: 'Analizamos tu caso sin compromiso y te orientamos con honestidad sobre las opciones disponibles.',
+          title: 'Honestidad',
+          description: 'Te orientamos con transparencia sobre la viabilidad de tu caso y las opciones disponibles.',
         },
       ]
     : [
@@ -253,8 +253,8 @@ export default async function CiudadPage({
         },
         {
           icon: FileCheck,
-          title: 'Free Consultation',
-          description: 'We analyze your case with no obligation and guide you honestly about the available options.',
+          title: 'Honesty',
+          description: 'We guide you transparently about the viability of your case and available options.',
         },
       ]
 
@@ -390,7 +390,7 @@ export default async function CiudadPage({
 
             <div className="flex flex-col sm:flex-row gap-4 mb-10">
               <Link href={`/${params.locale}/contacto`} className="btn-primary text-center">
-                {isSpanish ? 'Consulta Gratuita' : 'Free Consultation'}
+                {isSpanish ? 'Háblanos de Tu Caso' : 'Tell Us About Your Case'}
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Link>
               <a

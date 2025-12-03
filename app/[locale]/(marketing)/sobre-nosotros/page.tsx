@@ -13,11 +13,11 @@ export async function generateMetadata({
   
   return {
     title: isSpanish
-      ? 'Sobre Nosotros | Historia y Valores'
-      : 'About Us | History and Values',
+      ? 'Sobre Nosotros | Un Bufete con Historia desde 1946'
+      : 'About Us | A Law Firm with History Since 1946',
     description: isSpanish
-      ? 'Conoce la historia de GVC Expertos: más de 20 años especializados en negligencias médicas, defendiendo los derechos de las víctimas de errores médicos.'
-      : 'Learn about GVC Expertos history: more than 20 years specialized in medical negligence, defending the rights of victims of medical errors.',
+      ? 'Fundado en 1946 por Blas García-Valcárcel. Un despacho multidisciplinar que encarna la nobleza profesional: ser preclaro, ilustre, generoso y honroso.'
+      : 'Founded in 1946 by Blas García-Valcárcel. A multidisciplinary firm embodying professional nobility: being illustrious, generous and honorable.',
     alternates: {
       canonical: `/${locale}/sobre-nosotros`,
     },

@@ -469,8 +469,8 @@ export async function generateMetadata({
       ? `${serviceTitle} | Abogados Especialistas`
       : `${serviceTitle} | Specialist Lawyers`,
     description: isSpanish
-      ? `Abogados especializados en ${serviceTitle.toLowerCase()}. ${serviceDescription} Consulta gratuita.`
-      : `Specialized lawyers in ${serviceTitle.toLowerCase()}. ${serviceDescription} Free consultation.`,
+      ? `Abogados especializados en ${serviceTitle.toLowerCase()}. ${serviceDescription} Bufete desde 1946.`
+      : `Lawyers specialized in ${serviceTitle.toLowerCase()}. ${serviceDescription} Law firm since 1946.`,
     alternates: {
       canonical: `${siteConfig.url}/${params.locale}/negligencias-medicas/${service.slug}`,
       languages: {
@@ -713,11 +713,11 @@ export default async function ServicioPage({
                 </h3>
                 <p className="text-gray-400 mb-6">
                   {isSpanish
-                    ? 'Analizamos tu caso de forma gratuita y sin compromiso.'
-                    : 'We analyze your case for free with no obligation.'}
+                    ? 'Te escuchamos y analizamos tu situación con rigor y honestidad.'
+                    : 'We listen and analyze your situation with rigor and honesty.'}
                 </p>
                 <LocalizedLink href="/contacto" className="btn-primary w-full text-center mb-4">
-                  {isSpanish ? 'Consulta Gratuita' : 'Free Consultation'}
+                  {isSpanish ? 'Háblanos de Tu Caso' : 'Tell Us About Your Case'}
                 </LocalizedLink>
                 <a
                   href={siteConfig.contact.phoneHref}
@@ -814,17 +814,17 @@ export default async function ServicioPage({
               </p>
             </div>
 
-            {/* Consulta Gratuita */}
+            {/* Te Escuchamos */}
             <div className="group bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
               <div className="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center mb-6 group-hover:bg-gold transition-colors">
                 <Shield className="w-8 h-8 text-gold group-hover:text-white transition-colors" />
               </div>
               <h3 className="text-xl font-serif font-semibold text-charcoal mb-3">
-                {isSpanish ? 'Consulta Inicial Gratuita' : 'Free Initial Consultation'}
+                {isSpanish ? 'Te Escuchamos' : 'We Listen to You'}
               </h3>
               <p className="text-gray-600 leading-relaxed">
                 {isSpanish
-                  ? 'Analizamos tu caso sin compromiso. Te explicamos con claridad tu situación y las posibilidades.'
+                  ? 'Analizamos tu caso con rigor. Te explicamos con claridad tu situación y las posibilidades.'
                   : 'We analyze your case with no obligation. We clearly explain your situation and possibilities.'}
               </p>
             </div>
@@ -880,7 +880,7 @@ export default async function ServicioPage({
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <LocalizedLink href="/contacto" className="btn-primary inline-flex items-center justify-center">
-                  {isSpanish ? 'Evaluación Gratuita' : 'Free Evaluation'}
+                  {isSpanish ? 'Cuéntanos Tu Caso' : 'Tell Us Your Case'}
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </LocalizedLink>
                 <a 

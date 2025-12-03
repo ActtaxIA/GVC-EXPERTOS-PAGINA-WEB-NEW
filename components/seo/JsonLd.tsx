@@ -257,7 +257,7 @@ export function JsonLdService({
           '@type': 'Offer',
           itemOffered: {
             '@type': 'Service',
-            name: 'Consulta gratuita inicial',
+            name: 'Consulta inicial',
           },
         },
         {
@@ -447,7 +447,7 @@ export function JsonLdLocalBusinessCity({
     url: `${siteConfig.url}/${citySlug}`,
     telephone: siteConfig.contact.phone,
     email: siteConfig.contact.email,
-    description: `Abogados especializados en negligencias médicas en ${cityName}, ${province}. Más de 20 años de experiencia. Consulta gratuita.`,
+    description: `Abogados especializados en negligencias médicas en ${cityName}, ${province}. Bufete con trayectoria desde 1946.`,
     address: {
       '@type': 'PostalAddress',
       addressLocality: cityName,
@@ -533,7 +533,7 @@ export function JsonLdContactPage() {
     '@context': 'https://schema.org',
     '@type': 'ContactPage',
     name: 'Contacto - GVC Expertos',
-    description: 'Contacta con nuestros abogados especializados en negligencias médicas. Consulta gratuita y sin compromiso.',
+    description: 'Contacta con nuestros abogados especializados en negligencias médicas. Te escuchamos y analizamos tu caso.',
     url: `${siteConfig.url}/contacto`,
     mainEntity: {
       '@type': 'LegalService',

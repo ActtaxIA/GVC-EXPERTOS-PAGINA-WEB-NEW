@@ -35,21 +35,21 @@ export async function generateMetadata({
     },
     description: isSpanish 
       ? siteConfig.description
-      : 'Specialized lawyers in medical negligence and medical errors. Over 20 years of experience. Free consultation.',
+      : 'Multidisciplinary law firm since 1946, specialized in medical negligence. Rigor, closeness and honesty in patient defense.',
     keywords: isSpanish
       ? [
           'abogados negligencias médicas',
           'errores médicos',
           'mala praxis médica',
-          'indemnización negligencia médica',
-          'abogados salud',
+          'defensa del paciente',
+          'derecho sanitario',
         ]
       : [
           'medical negligence lawyers',
           'medical errors',
           'medical malpractice',
-          'medical negligence compensation',
-          'health lawyers',
+          'patient defense',
+          'health law',
         ],
     authors: [{ name: siteConfig.name }],
     creator: siteConfig.name,

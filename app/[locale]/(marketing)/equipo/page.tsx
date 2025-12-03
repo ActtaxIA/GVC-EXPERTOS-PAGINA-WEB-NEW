@@ -14,11 +14,11 @@ export async function generateMetadata({
   
   return {
     title: isSpanish
-      ? 'Nuestro Equipo | Abogados Especializados'
-      : 'Our Team | Specialized Lawyers',
+      ? 'Nuestro Equipo | Los Profesionales de GVC Expertos'
+      : 'Our Team | The Professionals at GVC Expertos',
     description: isSpanish
-      ? 'Conoce al equipo de abogados de GVC Expertos: profesionales especializados en negligencias médicas con amplia experiencia en derecho sanitario.'
-      : 'Meet the GVC Expertos legal team: professionals specialized in medical negligence with extensive experience in health law.',
+      ? 'Pedro Alfonso García-Valcárcel, fundador en 1968, lidera un equipo de abogados comprometidos con el rigor, la cercanía y la defensa del paciente.'
+      : 'Pedro Alfonso García-Valcárcel, founder in 1968, leads a team of lawyers committed to rigor, closeness and patient defense.',
     alternates: {
       canonical: `/${locale}/equipo`,
     },

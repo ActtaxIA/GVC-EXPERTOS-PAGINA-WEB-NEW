@@ -12,11 +12,11 @@ export async function generateMetadata({
   const isSpanish = locale === 'es'
   
   const title = isSpanish
-    ? 'Contacto | Consulta Gratuita con Abogados Negligencias Médicas'
-    : 'Contact | Free Consultation with Medical Negligence Lawyers'
+    ? 'Contacto | Hablemos de Tu Caso'
+    : 'Contact | Let\'s Talk About Your Case'
   const description = isSpanish
-    ? 'Contacta con nuestros abogados especializados en negligencias médicas. Primera consulta gratuita y sin compromiso. Llámanos al 968 241 025.'
-    : 'Contact our specialized medical negligence lawyers. Free first consultation with no obligation. Call us at 968 241 025.'
+    ? 'Escríbenos o llámanos al 968 241 025. Te escuchamos, analizamos tu situación y te orientamos con honestidad. Estamos en Murcia, Plaza Fuensanta 3.'
+    : 'Write to us or call 968 241 025. We listen, analyze your situation and guide you honestly. Located in Murcia, Plaza Fuensanta 3.'
   
   return {
     title,
@@ -109,7 +109,7 @@ export default async function ContactoPage({
                       {siteConfig.contact.phone}
                     </span>
                     <span className="block text-sm text-gray-500 mt-1">
-                      {isSpanish ? 'Primera consulta gratuita' : 'Free first consultation'}
+                      {isSpanish ? 'Te escuchamos' : 'We listen to you'}
                     </span>
                   </div>
                 </a>
