@@ -28,29 +28,29 @@ export async function generateMetadata({
 // Bios extendidas para cada miembro - Español
 const teamBiosEs: Record<string, string> = {
   'pedro-alfonso-garcia-valcarcel':
-    'Socio fundador de GVC Expertos y referente nacional en derecho sanitario. Licenciado en Derecho por la Universidad Complutense de Madrid, ha dedicado más de 25 años a la defensa de víctimas de negligencias médicas. Autor de numerosas publicaciones especializadas y ponente habitual en congresos de responsabilidad sanitaria.',
+    'Abogado y fundador del bufete. Licenciado en Derecho por la Universidad de Murcia en el año 1968. Con más de 55 años de experiencia en el ejercicio de la abogacía, es un referente en derecho sanitario y defensa de víctimas de negligencias médicas.',
   'raquel-garcia-valcarcel':
-    'Socia directora y experta en negligencias obstétricas y ginecológicas. Licenciada en Derecho por la Universidad Autónoma de Madrid. Dirige el departamento de reclamaciones médicas del despacho. Su dedicación a los casos de daños durante el parto la ha convertido en una de las mayores expertas en esta área específica.',
+    'Abogada. Licenciada en Derecho por la Universidad Nacional de Educación a Distancia (UNED) en el año 1999. Especializada en negligencias obstétricas y ginecológicas, dirige el departamento de reclamaciones médicas del despacho.',
   'miguel-caceres-sanchez':
-    'Socio especialista en errores de diagnóstico y tratamiento. Máster en Derecho Sanitario por la Universidad CEU San Pablo. Ha llevado algunos de los casos más importantes de negligencia médica en España, obteniendo indemnizaciones millonarias para sus clientes. Amplia experiencia en litigios contra hospitales.',
+    'Abogado. Licenciado en Derecho por la Universidad de Almería en el año 2000. Especialista en errores de diagnóstico y tratamiento, con amplia experiencia en litigios contra hospitales y centros sanitarios.',
   'olga-martinez-martinez':
-    'Abogada especializada en negligencias quirúrgicas y hospitalarias. Grado en Derecho por la Universidad de Valencia. Coordinadora del área de atención al cliente. Su meticulosidad en el análisis de historiales clínicos y su capacidad para trabajar con peritos médicos son fundamentales en el éxito de sus casos.',
+    'Abogada. Licenciada en Derecho por la Universidad de Murcia en el año 2001 y doctorando en Derecho Civil. Especializada en negligencias quirúrgicas y hospitalarias, destaca por su meticulosidad en el análisis de historiales clínicos.',
   'carmen-martinez-ramon':
-    'Administración del despacho. Graduada en Administración y Dirección de Empresas. Gestiona la coordinación administrativa de expedientes y asegura una atención personalizada a cada cliente. Su organización y eficiencia son clave en el funcionamiento del despacho.',
+    'Secretaria de Dirección. Titulada por el Instituto Politécnico F.P. de Albacete en 1996. Gestiona la coordinación administrativa de expedientes y asegura una atención personalizada a cada cliente.',
 }
 
 // Bios extendidas para cada miembro - Inglés
 const teamBiosEn: Record<string, string> = {
   'pedro-alfonso-garcia-valcarcel':
-    'Founding partner of GVC Expertos and national reference in health law. Law degree from Complutense University of Madrid, he has dedicated more than 25 years to defending victims of medical negligence. Author of numerous specialized publications and regular speaker at healthcare liability conferences.',
+    'Lawyer and founder of the firm. Law degree from the University of Murcia in 1968. With over 55 years of experience in legal practice, he is a reference in health law and defense of victims of medical negligence.',
   'raquel-garcia-valcarcel':
-    'Managing partner and expert in obstetric and gynecological negligence. Law degree from Autonomous University of Madrid. Heads the medical claims department of the firm. Her dedication to birth injury cases has made her one of the leading experts in this specific area.',
+    'Lawyer. Law degree from the National University of Distance Education (UNED) in 1999. Specialized in obstetric and gynecological negligence, she heads the medical claims department of the firm.',
   'miguel-caceres-sanchez':
-    'Partner specializing in diagnostic and treatment errors. Master\'s in Health Law from CEU San Pablo University. He has handled some of the most important medical negligence cases in Spain, obtaining million-dollar compensation for his clients. Extensive experience in hospital litigation.',
+    'Lawyer. Law degree from the University of Almería in 2000. Specialist in diagnostic and treatment errors, with extensive experience in litigation against hospitals and healthcare centers.',
   'olga-martinez-martinez':
-    'Lawyer specialized in surgical and hospital negligence. Law degree from University of Valencia. Coordinator of the client care area. Her meticulousness in analyzing clinical records and her ability to work with medical experts are fundamental to the success of her cases.',
+    'Lawyer. Law degree from the University of Murcia in 2001 and PhD candidate in Civil Law. Specialized in surgical and hospital negligence, she stands out for her meticulousness in analyzing clinical records.',
   'carmen-martinez-ramon':
-    'Firm administration. Graduate in Business Administration and Management. Manages the administrative coordination of files and ensures personalized attention to each client. Her organization and efficiency are key to the firm\'s operation.',
+    'Executive Secretary. Graduate from the Instituto Politécnico F.P. of Albacete in 1996. Manages the administrative coordination of files and ensures personalized attention to each client.',
 }
 
 export default function EquipoPage({
