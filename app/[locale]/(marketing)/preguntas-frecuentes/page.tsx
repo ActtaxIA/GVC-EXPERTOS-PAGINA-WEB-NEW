@@ -39,7 +39,7 @@ const faqCategoriesEs = [
         id: 'q2',
         title: '¿Cómo sé si he sufrido una negligencia médica?',
         content:
-          'Para determinar si has sufrido una negligencia médica es necesario analizar si la actuación del profesional sanitario se ajustó a los protocolos establecidos. Te recomendamos solicitar una valoración gratuita de tu caso por nuestros abogados especializados.',
+          'Para determinar si has sufrido una negligencia médica es necesario analizar si la actuación del profesional sanitario se ajustó a los protocolos establecidos. Te recomendamos contactar con nuestros abogados especializados para una valoración de tu caso.',
       },
       {
         id: 'q3',
@@ -91,7 +91,7 @@ const faqCategoriesEs = [
         id: 'q9',
         title: '¿Cuánto cuesta consultar con vosotros?',
         content:
-          'La consulta inicial es completamente gratuita y sin compromiso. Te escuchamos, analizamos tu caso y te orientamos con honestidad sobre las opciones disponibles y la viabilidad de tu reclamación.',
+          'Te escuchamos, analizamos tu caso y te orientamos con honestidad sobre las opciones disponibles y la viabilidad de tu reclamación.',
       },
       {
         id: 'q10',
@@ -140,7 +140,7 @@ const faqCategoriesEn = [
         id: 'q2',
         title: 'How do I know if I have suffered medical negligence?',
         content:
-          'To determine if you have suffered medical negligence, it is necessary to analyze whether the healthcare professional\'s actions complied with established protocols. We recommend requesting a free assessment of your case by our specialized lawyers.',
+          'To determine if you have suffered medical negligence, it is necessary to analyze whether the healthcare professional\'s actions complied with established protocols. We recommend contacting our specialized lawyers for an assessment of your case.',
       },
       {
         id: 'q3',
@@ -192,7 +192,7 @@ const faqCategoriesEn = [
         id: 'q9',
         title: 'How much does it cost to consult with you?',
         content:
-          'The initial consultation is completely free and without obligation. We listen to you, analyze your case and guide you honestly about the available options and the viability of your claim.',
+          'We listen to you, analyze your case and guide you honestly about the available options and the viability of your claim.',
       },
       {
         id: 'q10',

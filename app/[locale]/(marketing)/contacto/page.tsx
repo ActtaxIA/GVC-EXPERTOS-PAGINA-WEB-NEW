@@ -217,8 +217,8 @@ export default async function ContactoPage({
             </p>
             <p className="text-gray-500 text-sm">
               {isSpanish
-                ? 'La primera consulta es completamente gratuita y confidencial.'
-                : 'The first consultation is completely free and confidential.'}
+                ? 'Tu consulta será tratada con total confidencialidad.'
+                : 'Your consultation will be treated with complete confidentiality.'}
             </p>
           </div>
         </div>

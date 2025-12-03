@@ -45,8 +45,8 @@ export default function OfflinePage() {
 
         <p className="mt-8 text-sm text-gray-500">
           {locale === 'es'
-            ? 'También puedes llamarnos directamente para una consulta gratuita.'
-            : 'You can also call us directly for a free consultation.'
+            ? 'También puedes llamarnos directamente. Te escuchamos.'
+            : 'You can also call us directly. We listen to you.'
           }
         </p>
       </div>

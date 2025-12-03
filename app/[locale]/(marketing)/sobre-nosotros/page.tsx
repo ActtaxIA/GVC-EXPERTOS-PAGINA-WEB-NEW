@@ -253,10 +253,10 @@ export default function SobreNosotrosPage({
                   </div>
                   <div className="border-l-4 border-gold pl-6">
                     <h3 className="text-xl font-serif font-semibold text-charcoal mb-3">
-                      Consulta Inicial Gratuita
+                      Te Escuchamos
                     </h3>
                     <p className="text-gray-600">
-                      Analizamos tu caso sin compromiso. Te orientamos con 
+                      Analizamos tu caso con rigor. Te orientamos con 
                       honestidad sobre las opciones disponibles y la viabilidad 
                       de tu reclamación.
                     </p>
@@ -295,10 +295,10 @@ export default function SobreNosotrosPage({
                   </div>
                   <div className="border-l-4 border-gold pl-6">
                     <h3 className="text-xl font-serif font-semibold text-charcoal mb-3">
-                      Free Initial Consultation
+                      We Listen to You
                     </h3>
                     <p className="text-gray-600">
-                      We analyze your case without obligation. We guide you 
+                      We analyze your case with rigor. We guide you 
                       honestly about the available options and the viability 
                       of your claim.
                     </p>

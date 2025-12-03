@@ -53,8 +53,8 @@ export function generateMetadata({
     ? `Abogados Negligencias Médicas ${city.name} | ${siteConfig.name}`
     : `Medical Negligence Lawyers ${city.name} | ${siteConfig.name}`
   const description = isSpanish
-    ? `Abogados especializados en negligencias médicas en ${city.name}, ${city.province}. Bufete con trayectoria desde 1946. Consulta inicial gratuita ☎ ${siteConfig.contact.phone}`
-    : `Lawyers specialized in medical negligence in ${city.name}, ${city.province}. Law firm with track record since 1946. Free initial consultation ☎ ${siteConfig.contact.phone}`
+    ? `Abogados especializados en negligencias médicas en ${city.name}, ${city.province}. Bufete con trayectoria desde 1946. ☎ ${siteConfig.contact.phone}`
+    : `Lawyers specialized in medical negligence in ${city.name}, ${city.province}. Law firm with track record since 1946. ☎ ${siteConfig.contact.phone}`
   const url = `${siteConfig.url}/${params.locale}/${city.slug}`
 
   return {
@@ -178,7 +178,7 @@ export default async function CiudadPage({
     ? [
         {
           question: `¿Cómo puedo consultar con un abogado de negligencias médicas en ${city.name}?`,
-          answer: `En GVC Expertos ofrecemos una consulta inicial gratuita donde analizamos tu caso y te orientamos con honestidad sobre las opciones disponibles. Puedes contactarnos por teléfono o email.`,
+          answer: `En GVC Expertos te escuchamos y analizamos tu caso con rigor, orientándote con honestidad sobre las opciones disponibles. Puedes contactarnos por teléfono o email.`,
         },
         {
           question: `¿Cómo sé si tengo un caso de negligencia médica en ${city.name}?`,
@@ -196,7 +196,7 @@ export default async function CiudadPage({
     : [
         {
           question: `How can I consult with a medical negligence lawyer in ${city.name}?`,
-          answer: `At GVC Expertos we offer a free initial consultation where we analyze your case and guide you honestly about the available options. You can contact us by phone or email.`,
+          answer: `At GVC Expertos we listen to you and analyze your case with rigor, guiding you honestly about the available options. You can contact us by phone or email.`,
         },
         {
           question: `How do I know if I have a medical negligence case in ${city.name}?`,
@@ -263,7 +263,7 @@ export default async function CiudadPage({
         {
           number: '01',
           title: 'Te Escuchamos',
-          description: 'En una consulta inicial gratuita, analizamos tu caso y te orientamos con honestidad.',
+          description: 'Te escuchamos, analizamos tu caso y te orientamos con honestidad.',
         },
         {
           number: '02',
@@ -290,7 +290,7 @@ export default async function CiudadPage({
         {
           number: '01',
           title: 'We Listen to You',
-          description: 'In a free initial consultation, we analyze your case and guide you honestly.',
+          description: 'We listen, analyze your case and guide you honestly.',
         },
         {
           number: '02',

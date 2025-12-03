@@ -85,7 +85,7 @@ export default function NotFound() {
             {siteConfig.contact.phone}
           </a>
           <p className="text-gray-400 text-xs mt-2">
-            {locale === 'es' ? 'Llamada gratuita' : 'Free call'}
+            {locale === 'es' ? 'Llámanos' : 'Call us'}
           </p>
         </div>
       </div>
