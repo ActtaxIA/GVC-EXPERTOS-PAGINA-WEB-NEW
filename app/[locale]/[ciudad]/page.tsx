@@ -581,7 +581,7 @@ export default async function CiudadPage({
             </div>
             <div className="relative">
               <Image
-                src="/images/imagen-error-medico-quirofano-1344x896.jpg"
+                src="/images/abogados_negligencias_medicas_negligencia_hospital.jpg"
                 alt={isSpanish ? `Negligencias médicas ${city.name}` : `Medical negligence ${city.name}`}
                 width={672}
                 height={448}
